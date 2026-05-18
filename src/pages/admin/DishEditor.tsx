@@ -1,177 +1,157 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useMenu } from '../../hooks/useMenu'
+import { callEdgeFunction } from '../../lib/supabase'
+import { uploadImage } from '../../lib/cloudinary'
+import type { Dish, Category } from '../../lib/types'
 
-export default function DishEditor() {
+interface DishEditorProps {
+  dish?: Dish
+  categories: Category[]
+  onClose: () => void
+}
+
+export default function DishEditor({ dish, categories, onClose }: DishEditorProps) {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const { id } = useParams<{ id: string }>()
-  const { categories, dishes } = useMenu()
-
-  const existing = useMemo(() => (id && id !== 'new' ? dishes.find((d) => d.id === id) : null), [id, dishes])
-
+  const isNew = !dish
+  const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
-    nameHe: existing?.nameHe ?? '',
-    nameEn: existing?.nameEn ?? '',
-    nameTh: existing?.nameTh ?? '',
-    descriptionHe: existing?.descriptionHe ?? '',
-    descriptionEn: existing?.descriptionEn ?? '',
-    price: existing?.price ?? 0,
-    categoryId: existing?.categoryId ?? categories[0]?.id ?? '',
-    kosher: existing?.kosher ?? false,
-    spicy: existing?.spicy ?? false,
-    vegetarian: existing?.vegetarian ?? false,
-    imageUrl: existing?.imageUrl ?? '',
+    name_he: dish?.name_he || '',
+    name_en: dish?.name_en || '',
+    name_th: dish?.name_th || '',
+    description_he: dish?.description_he || '',
+    description_en: dish?.description_en || '',
+    description_th: dish?.description_th || '',
+    price: dish?.price || 0,
+    category_id: dish?.category_id || categories[0]?.id || '',
+    image_url: dish?.image_url || '',
+    is_kosher: dish?.is_kosher || false,
+    is_spicy: dish?.is_spicy || false,
+    is_vegetarian: dish?.is_vegetarian || false,
+    is_available: dish?.is_available ?? true,
   })
 
-  const update = (key: string, value: string | number | boolean) =>
-    setForm((prev) => ({ ...prev, [key]: value }))
-
-  const handleSave = () => {
-    navigate('/admin/menu')
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    try {
+      const url = await uploadImage(file)
+      setForm((f) => ({ ...f, image_url: url }))
+    } catch (err) {
+      console.error(err)
+    }
   }
 
+  const handleSave = async () => {
+    setSaving(true)
+    try {
+      await callEdgeFunction('admin-dishes', {
+        action: isNew ? 'create' : 'update',
+        id: dish?.id,
+        data: form,
+      })
+      onClose()
+      window.location.reload()
+    } catch (err) {
+      console.error(err)
+    }
+    setSaving(false)
+  }
+
+  const update = (key: string, value: any) => setForm((f) => ({ ...f, [key]: value }))
+
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl text-[#c9a84c] font-bold">
-          {existing ? t('menuManage.editDish') : t('menuManage.addDish')}
-        </h1>
-        <button
-          onClick={() => navigate('/admin/menu')}
-          className="text-gray-400 hover:text-white text-sm"
-        >
-          {t('common.back')}
-        </button>
-      </div>
+    <div className="max-w-lg mx-auto">
+      <h2 className="text-xl text-[#c9a84c] mb-6">
+        {isNew ? t('menuManage.addDish') : t('menuManage.editDish')}
+      </h2>
 
-      <div className="max-w-2xl space-y-6">
-        <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4 space-y-4">
-          <h2 className="text-sm text-gray-400 font-medium uppercase">{t('menuManage.dishName')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div>
-              <label className="text-xs text-gray-500 mb-1 block">עברית</label>
-              <input
-                value={form.nameHe}
-                onChange={(e) => update('nameHe', e.target.value)}
-                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c]"
-              />
-            </div>
-            <div>
-              <label className="text-xs text-gray-500 mb-1 block">English</label>
-              <input
-                value={form.nameEn}
-                onChange={(e) => update('nameEn', e.target.value)}
-                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c]"
-              />
-            </div>
-            <div>
-              <label className="text-xs text-gray-500 mb-1 block">ไทย</label>
-              <input
-                value={form.nameTh}
-                onChange={(e) => update('nameTh', e.target.value)}
-                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c]"
-              />
-            </div>
+      <div className="space-y-4">
+        {['he', 'en', 'th'].map((lang) => (
+          <div key={lang}>
+            <label className="text-xs text-gray-400 uppercase">{t('menuManage.dishName')} ({lang})</label>
+            <input
+              type="text"
+              value={(form as any)[`name_${lang}`]}
+              onChange={(e) => update(`name_${lang}`, e.target.value)}
+              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+            />
           </div>
-        </div>
+        ))}
 
-        <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4 space-y-4">
-          <h2 className="text-sm text-gray-400 font-medium uppercase">{t('menuManage.description')}</h2>
-          <div>
-            <label className="text-xs text-gray-500 mb-1 block">עברית</label>
+        {['he', 'en', 'th'].map((lang) => (
+          <div key={`desc-${lang}`}>
+            <label className="text-xs text-gray-400 uppercase">{t('menuManage.description')} ({lang})</label>
             <textarea
-              value={form.descriptionHe}
-              onChange={(e) => update('descriptionHe', e.target.value)}
+              value={(form as any)[`description_${lang}`]}
+              onChange={(e) => update(`description_${lang}`, e.target.value)}
               rows={2}
-              className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c] resize-none"
+              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none resize-none"
+            />
+          </div>
+        ))}
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-xs text-gray-400">{t('menuManage.price')}</label>
+            <input
+              type="number"
+              value={form.price}
+              onChange={(e) => update('price', parseFloat(e.target.value) || 0)}
+              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-xs text-gray-500 mb-1 block">English</label>
-            <textarea
-              value={form.descriptionEn}
-              onChange={(e) => update('descriptionEn', e.target.value)}
-              rows={2}
-              className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c] resize-none"
-            />
+            <label className="text-xs text-gray-400">{t('menuManage.category')}</label>
+            <select
+              value={form.category_id}
+              onChange={(e) => update('category_id', e.target.value)}
+              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+            >
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.name_he}</option>
+              ))}
+            </select>
           </div>
         </div>
 
-        <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4 space-y-4">
-          <h2 className="text-sm text-gray-400 font-medium uppercase">{t('menuManage.price')} & {t('menuManage.category')}</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-gray-500 mb-1 block">{t('menuManage.price')} (฿)</label>
+        <div>
+          <label className="text-xs text-gray-400">{t('menuManage.image')}</label>
+          <input type="file" accept="image/*" onChange={handleImageUpload} className="mt-1 text-sm text-gray-400" />
+          {form.image_url && <img src={form.image_url} alt="" className="mt-2 w-20 h-20 rounded-lg object-cover" />}
+        </div>
+
+        <div className="flex gap-4">
+          {[
+            { key: 'is_kosher', label: t('menuManage.kosher') },
+            { key: 'is_spicy', label: t('menuManage.spicy') },
+            { key: 'is_vegetarian', label: t('menuManage.vegetarian') },
+          ].map(({ key, label }) => (
+            <label key={key} className="flex items-center gap-2 text-sm text-gray-300">
               <input
-                type="number"
-                value={form.price}
-                onChange={(e) => update('price', Number(e.target.value))}
-                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c]"
+                type="checkbox"
+                checked={(form as any)[key]}
+                onChange={(e) => update(key, e.target.checked)}
+                className="accent-[#c9a84c]"
               />
-            </div>
-            <div>
-              <label className="text-xs text-gray-500 mb-1 block">{t('menuManage.category')}</label>
-              <select
-                value={form.categoryId}
-                onChange={(e) => update('categoryId', e.target.value)}
-                className="w-full bg-[#121212] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c]"
-              >
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.id}>{cat.nameHe}</option>
-                ))}
-              </select>
-            </div>
-          </div>
+              {label}
+            </label>
+          ))}
         </div>
 
-        <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4 space-y-4">
-          <h2 className="text-sm text-gray-400 font-medium uppercase">{t('menuManage.image')}</h2>
-          {form.imageUrl && (
-            <img src={form.imageUrl} alt="" className="w-full max-w-xs rounded-xl object-cover aspect-[4/3]" />
-          )}
-          <div className="border-2 border-dashed border-white/10 rounded-xl p-6 text-center">
-            <p className="text-gray-500 text-sm">Cloudinary upload — {t('menu.comingSoon')}</p>
-          </div>
-        </div>
-
-        <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4">
-          <div className="flex flex-wrap gap-6">
-            {(['kosher', 'spicy', 'vegetarian'] as const).map((flag) => (
-              <label key={flag} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form[flag]}
-                  onChange={(e) => update(flag, e.target.checked)}
-                  className="w-4 h-4 rounded bg-[#121212] border-white/10 accent-[#c9a84c]"
-                />
-                <span className="text-sm text-white">{t(`menuManage.${flag}`)}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-3">
+        <div className="flex gap-3 pt-4">
           <button
-            onClick={handleSave}
-            className="bg-[#c9a84c] text-black px-6 py-2.5 rounded-lg font-bold text-sm hover:bg-[#d4b96a] transition-colors"
-          >
-            {t('menuManage.save')}
-          </button>
-          <button
-            onClick={() => navigate('/admin/menu')}
-            className="bg-[#1a1a1a] text-gray-400 px-6 py-2.5 rounded-lg text-sm hover:text-white transition-colors"
+            onClick={onClose}
+            className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 transition-colors"
           >
             {t('common.cancel')}
           </button>
-          {existing && (
-            <button
-              className="ms-auto text-red-400 hover:text-red-300 text-sm"
-            >
-              {t('menuManage.delete')}
-            </button>
-          )}
+          <button
+            onClick={handleSave}
+            disabled={saving || !form.name_he}
+            className="flex-1 py-2 bg-[#c9a84c] text-black rounded-lg font-medium hover:bg-[#d4b96a] disabled:opacity-50 transition-colors"
+          >
+            {saving ? t('common.loading') : t('common.save')}
+          </button>
         </div>
       </div>
     </div>
