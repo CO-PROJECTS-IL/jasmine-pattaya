@@ -20,7 +20,7 @@ export default defineConfig({
         background_color: '#080808',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/#/menu',
+        start_url: '/#/',
         icons: [
           {
             src: 'favicon.svg',
