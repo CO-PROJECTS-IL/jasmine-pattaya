@@ -1,71 +1,58 @@
-import { useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { supabase, isSupabaseConfigured } from '../lib/supabase'
+import type { Category, Dish } from '../lib/types'
 import menuRaw from '../data/menu-raw.json'
-import type { Category, Dish } from '../lib/constants'
 
-interface RawDish {
-  category: string
-  category_slug: string
-  name_he: string
-  name_en: string
-  name_th?: string
-  price: number
-  description_he: string
-  description_en: string
-  image_url: string
-  image_file: string
-  is_kosher?: boolean
+async function fetchCategories(): Promise<Category[]> {
+  if (!isSupabaseConfigured) {
+    return (menuRaw as any).categories.map((c: any, i: number) => ({
+      id: c.id, name_he: c.name_he, name_en: c.name_en,
+      name_th: c.name_th || '', sort_order: i,
+    }))
+  }
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .order('sort_order')
+  if (error) throw error
+  return data
 }
 
-interface RawCategory {
-  id: string
-  name_he: string
-  name_en: string
-  name_th: string
-  slug: string
+async function fetchDishes(): Promise<Dish[]> {
+  if (!isSupabaseConfigured) {
+    return (menuRaw as any).dishes.map((d: any, i: number) => ({
+      id: `dish-${i}`, category_id: '', name_he: d.name_he,
+      name_en: d.name_en, name_th: d.name_th || d.name_en,
+      description_he: d.description_he, description_en: d.description_en,
+      description_th: '', price: d.price, image_url: d.image_url || null,
+      is_kosher: d.is_kosher || false, is_spicy: false, is_vegetarian: false,
+      is_available: true, sort_order: i,
+    }))
+  }
+  const { data, error } = await supabase
+    .from('dishes')
+    .select('*')
+    .eq('is_available', true)
+    .order('sort_order')
+  if (error) throw error
+  return data
 }
 
 export function useMenu() {
-  const { categories, dishes } = useMemo(() => {
-    const raw = menuRaw as {
-      categories: RawCategory[]
-      dishes: RawDish[]
-    }
+  const { data: categories = [], isLoading: catsLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+    staleTime: 5 * 60 * 1000,
+  })
 
-    const cats: Category[] = raw.categories.map((c, i) => ({
-      id: c.id,
-      slug: c.slug as Category['slug'],
-      nameHe: c.name_he,
-      nameEn: c.name_en,
-      nameTh: c.name_th,
-      sortOrder: i,
-    }))
-
-    const items: Dish[] = raw.dishes.map((d, i) => {
-      const cat = raw.categories.find((c) => c.slug === d.category_slug)
-      return {
-        id: `dish-${i}`,
-        categoryId: cat?.id ?? '',
-        nameHe: d.name_he,
-        nameEn: d.name_en,
-        nameTh: d.name_th ?? d.name_en,
-        descriptionHe: d.description_he,
-        descriptionEn: d.description_en,
-        descriptionTh: '',
-        price: d.price,
-        imageUrl: d.image_url || null,
-        available: true,
-        kosher: d.is_kosher ?? false,
-        spicy: false,
-        vegetarian: false,
-        sortOrder: i,
-      }
-    })
-
-    return { categories: cats, dishes: items }
-  }, [])
+  const { data: dishes = [], isLoading: dishesLoading } = useQuery({
+    queryKey: ['dishes'],
+    queryFn: fetchDishes,
+    staleTime: 5 * 60 * 1000,
+  })
 
   const getDishesByCategory = (categoryId: string) =>
-    dishes.filter((d) => d.categoryId === categoryId)
+    dishes.filter((d) => d.category_id === categoryId)
 
-  return { categories, dishes, getDishesByCategory, isLoading: false }
+  return { categories, dishes, getDishesByCategory, isLoading: catsLoading || dishesLoading }
 }
