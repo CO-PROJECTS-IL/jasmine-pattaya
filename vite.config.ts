@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: './',
+  base: '/jasmine-pattaya/',
   build: {
     chunkSizeWarningLimit: 700,
   },
