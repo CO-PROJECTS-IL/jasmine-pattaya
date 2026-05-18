@@ -27,7 +27,7 @@
   "table": {
     "title": "Jasmine",
     "subtitle": "Israeli Restaurant in Pattaya",
-    "enterTable": "Enter table number",
+    "enterTable": "Enter table number or scan QR code",
     "placeholder": "Table number",
     "submit": "View Menu",
     "invalid": "Invalid table number (1-30)"
