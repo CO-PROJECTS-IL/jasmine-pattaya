@@ -18,10 +18,6 @@
   },
   "nav": {
     "menu": "Menu",
-    "history": "History",
-    "loyalty": "Club",
-    "events": "Events",
-    "kitchen": "Kitchen",
     "admin": "Admin"
   },
   "table": {
@@ -30,7 +26,7 @@
     "enterTable": "Enter table number or scan QR code",
     "placeholder": "Table number",
     "submit": "View Menu",
-    "invalid": "Invalid table number (1-30)"
+    "invalid": "Invalid table number"
   },
   "menu": {
     "title": "Menu",
@@ -43,7 +39,7 @@
     "noImage": "No image",
     "askPrice": "Ask price",
     "emptyCategory": "No dishes in this category",
-    "comingSoon": "Coming soon..."
+    "fridayMenuActive": "Friday Menu"
   },
   "cart": {
     "title": "My Order",
@@ -52,7 +48,6 @@
     "notes": "Notes",
     "notesPlaceholder": "Special notes...",
     "total": "Total",
-    "discount": "Discount",
     "submit": "Submit Order",
     "clear": "Clear Order",
     "removeItem": "Remove item",
@@ -62,67 +57,65 @@
     "confirmation": "Order Confirmation",
     "orderNumber": "Order Number",
     "thankYou": "Thank you for your order!",
+    "total": "Total",
+    "excludingService": "Excluding service",
+    "newOrder": "New Order"
+  },
+  "staff": {
+    "title": "Staff Login",
+    "adminLogin": "Admin Login",
+    "employeeLogin": "Employee Login",
+    "enterPin": "Enter 4-digit PIN",
+    "invalidPin": "Invalid PIN",
+    "tooManyAttempts": "Too many attempts, try again later"
+  },
+  "employee": {
+    "title": "Employee Screen",
+    "checkIn": "Start Shift",
+    "checkOut": "End Shift",
+    "shiftTimer": "Shift Duration",
+    "salary": "Monthly Earnings",
     "newOrder": "New Order",
-    "viewHistory": "View History"
+    "selectTable": "Select Table",
+    "outOfRange": "You are outside the restaurant area",
+    "locationRequired": "Location access required",
+    "schedule": "Work Schedule",
+    "myShifts": "My Shifts"
   },
-  "history": {
-    "title": "Order History",
-    "enterPhone": "Enter phone number",
-    "phonePlaceholder": "Phone number",
-    "noOrders": "No orders found",
-    "orderDate": "Date",
-    "orderTotal": "Total",
-    "orderStatus": "Status"
+  "friday": {
+    "title": "Friday Dinner",
+    "bookTitle": "Book Friday Dinner",
+    "guestName": "Full Name",
+    "guestPhone": "Phone",
+    "numGuests": "Number of Guests",
+    "selectDishes": "Select Dishes",
+    "totalPrice": "Total",
+    "submitBooking": "Submit Booking",
+    "bookingConfirmed": "Booking confirmed!",
+    "cancelled": "Friday dinner cancelled this week",
+    "noMenu": "No Friday menu available",
+    "fridayMenu": "Friday Menu"
   },
-  "loyalty": {
-    "title": "Loyalty Club",
-    "joinClub": "Join the Club",
-    "name": "Full Name",
-    "phone": "Phone",
-    "email": "Email",
-    "submit": "Join",
-    "alreadyMember": "Already a member?",
-    "welcome": "Welcome to the club!",
-    "discount": "Club member discount"
-  },
-  "events": {
-    "title": "Events",
-    "noEvents": "No upcoming events",
-    "bookNow": "Book Now",
-    "guests": "Number of Guests",
-    "date": "Date",
-    "time": "Time",
-    "pricePerPerson": "Price per Person",
-    "book": "Book",
-    "bookingConfirmed": "Booking confirmed!"
-  },
-  "kitchen": {
-    "title": "Kitchen Display",
-    "login": "Kitchen Login",
-    "enterPin": "Enter kitchen PIN",
-    "noOrders": "No orders",
-    "newOrder": "New Order",
+  "kanban": {
+    "new": "New",
     "preparing": "Preparing",
-    "ready": "Ready",
     "served": "Served",
-    "markPreparing": "Mark Preparing",
-    "markReady": "Mark Ready",
-    "table": "Table",
-    "items": "Items",
-    "notes": "Notes",
-    "minutesAgo": "min ago",
-    "comingSoon": "Coming soon..."
+    "paid": "Paid"
+  },
+  "adminHome": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "menuManage": "Menu Management",
+    "employees": "Employee Management",
+    "schedule": "Work Schedule",
+    "friday": "Friday Dinner",
+    "reports": "Financial Reports",
+    "settings": "Settings"
   },
   "admin": {
     "title": "Admin",
     "login": "Admin Login",
-    "enterPin": "Enter admin PIN",
-    "dashboard": "Dashboard",
-    "menuManage": "Menu Management",
-    "orders": "Orders",
-    "events": "Events",
-    "members": "Members",
-    "settings": "Settings"
+    "enterPin": "Enter admin PIN"
   },
   "dashboard": {
     "todayOrders": "Today's Orders",
@@ -148,19 +141,73 @@
     "delete": "Delete",
     "confirmDelete": "Delete this dish?"
   },
+  "employees": {
+    "addEmployee": "Add Employee",
+    "editEmployee": "Edit Employee",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "role": "Role",
+    "payType": "Pay Type",
+    "payRate": "Pay Rate",
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "startDate": "Start Date",
+    "active": "Active",
+    "inactive": "Inactive",
+    "cook": "Cook",
+    "waiter": "Waiter",
+    "bartender": "Bartender",
+    "other": "Other",
+    "attendance": "Attendance",
+    "manualCheckin": "Manual Check-in",
+    "documents": "Documents",
+    "vacationDays": "Vacation Days",
+    "monthlySalary": "Monthly Salary Summary"
+  },
+  "schedule": {
+    "title": "Work Schedule",
+    "morning": "Morning",
+    "evening": "Evening",
+    "fullDay": "Full Day",
+    "off": "Off",
+    "custom": "Custom",
+    "copyWeek": "Copy Week",
+    "shiftHours": "Shift Hours"
+  },
+  "reports": {
+    "title": "Financial Reports",
+    "revenue": "Revenue",
+    "expenses": "Expenses",
+    "profit": "Net Profit",
+    "totalRevenue": "Total Revenue",
+    "totalExpenses": "Total Expenses",
+    "employeeCosts": "Employee Costs",
+    "recurringExpenses": "Recurring Expenses",
+    "oneTimeExpenses": "One-time Expenses",
+    "addExpense": "Add Expense",
+    "filterByDate": "Filter by Date",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "customRange": "Custom Range"
+  },
   "settings": {
-    "openingHours": "Opening Hours",
-    "closedDates": "Closed Dates",
     "adminPin": "Admin PIN",
-    "kitchenPin": "Kitchen PIN",
-    "clubDiscount": "Club Discount (%)",
+    "employeePin": "Employee PIN",
+    "restaurantLocation": "Restaurant Location",
+    "setCurrentLocation": "Set Current Location",
+    "tableCount": "Number of Tables",
+    "openingHours": "Opening Hours",
+    "shiftHours": "Shift Hours",
+    "fridaySwitchTime": "Friday Menu Switch Time",
+    "showEmployeeSalary": "Show Salary to Employees",
+    "qrCodes": "QR Codes",
     "save": "Save",
     "saved": "Saved successfully"
   },
   "status": {
     "new": "New",
     "preparing": "Preparing",
-    "ready": "Ready",
     "served": "Served",
     "paid": "Paid"
   }

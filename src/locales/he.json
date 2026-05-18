@@ -18,10 +18,6 @@
   },
   "nav": {
     "menu": "תפריט",
-    "history": "היסטוריה",
-    "loyalty": "מועדון",
-    "events": "אירועים",
-    "kitchen": "מטבח",
     "admin": "ניהול"
   },
   "table": {
@@ -30,7 +26,7 @@
     "enterTable": "הזן מספר שולחן או סרוק קוד QR",
     "placeholder": "מספר שולחן",
     "submit": "כניסה לתפריט",
-    "invalid": "מספר שולחן לא תקין (1-30)"
+    "invalid": "מספר שולחן לא תקין"
   },
   "menu": {
     "title": "תפריט",
@@ -43,7 +39,7 @@
     "noImage": "אין תמונה",
     "askPrice": "שאל מחיר",
     "emptyCategory": "אין מנות בקטגוריה זו",
-    "comingSoon": "בקרוב..."
+    "fridayMenuActive": "תפריט שישי"
   },
   "cart": {
     "title": "ההזמנה שלי",
@@ -52,7 +48,6 @@
     "notes": "הערות",
     "notesPlaceholder": "הערות מיוחדות...",
     "total": "סה\"כ",
-    "discount": "הנחה",
     "submit": "שלח הזמנה",
     "clear": "נקה הזמנה",
     "removeItem": "הסר פריט",
@@ -62,67 +57,65 @@
     "confirmation": "אישור הזמנה",
     "orderNumber": "מספר הזמנה",
     "thankYou": "תודה על הזמנתך!",
+    "total": "סה\"כ",
+    "excludingService": "לא כולל שירות",
+    "newOrder": "הזמנה חדשה"
+  },
+  "staff": {
+    "title": "כניסת צוות",
+    "adminLogin": "כניסת מנהל",
+    "employeeLogin": "כניסת עובדים",
+    "enterPin": "הזן קוד 4 ספרות",
+    "invalidPin": "קוד שגוי",
+    "tooManyAttempts": "יותר מדי ניסיונות, נסה שוב מאוחר יותר"
+  },
+  "employee": {
+    "title": "מסך עובדים",
+    "checkIn": "התחל משמרת",
+    "checkOut": "סיים משמרת",
+    "shiftTimer": "זמן במשמרת",
+    "salary": "שכר מצטבר החודש",
     "newOrder": "הזמנה חדשה",
-    "viewHistory": "צפה בהיסטוריה"
+    "selectTable": "בחר שולחן",
+    "outOfRange": "אתה מחוץ לטווח המסעדה",
+    "locationRequired": "נדרשת גישה למיקום",
+    "schedule": "תכנית עבודה",
+    "myShifts": "המשמרות שלי"
   },
-  "history": {
-    "title": "היסטוריית הזמנות",
-    "enterPhone": "הזן מספר טלפון",
-    "phonePlaceholder": "מספר טלפון",
-    "noOrders": "לא נמצאו הזמנות",
-    "orderDate": "תאריך",
-    "orderTotal": "סה\"כ",
-    "orderStatus": "סטטוס"
+  "friday": {
+    "title": "ארוחת שישי",
+    "bookTitle": "הזמנת מקום לארוחת שישי",
+    "guestName": "שם מלא",
+    "guestPhone": "טלפון",
+    "numGuests": "מספר אורחים",
+    "selectDishes": "בחר מנות",
+    "totalPrice": "סה\"כ",
+    "submitBooking": "שלח הזמנה",
+    "bookingConfirmed": "ההזמנה התקבלה!",
+    "cancelled": "ארוחת שישי בוטלה השבוע",
+    "noMenu": "אין תפריט שישי",
+    "fridayMenu": "תפריט שישי"
   },
-  "loyalty": {
-    "title": "מועדון לקוחות",
-    "joinClub": "הצטרף למועדון",
-    "name": "שם מלא",
-    "phone": "טלפון",
-    "email": "אימייל",
-    "submit": "הצטרף",
-    "alreadyMember": "כבר חבר מועדון?",
-    "welcome": "ברוך הבא למועדון!",
-    "discount": "הנחת חברי מועדון"
-  },
-  "events": {
-    "title": "אירועים",
-    "noEvents": "אין אירועים קרובים",
-    "bookNow": "הזמן עכשיו",
-    "guests": "מספר אורחים",
-    "date": "תאריך",
-    "time": "שעה",
-    "pricePerPerson": "מחיר לאדם",
-    "book": "הזמן",
-    "bookingConfirmed": "ההזמנה אושרה!"
-  },
-  "kitchen": {
-    "title": "מסך מטבח",
-    "login": "כניסת מטבח",
-    "enterPin": "הזן קוד מטבח",
-    "noOrders": "אין הזמנות",
-    "newOrder": "הזמנה חדשה",
+  "kanban": {
+    "new": "חדשה",
     "preparing": "בהכנה",
-    "ready": "מוכן",
-    "served": "הוגש",
-    "markPreparing": "סמן בהכנה",
-    "markReady": "סמן מוכן",
-    "table": "שולחן",
-    "items": "פריטים",
-    "notes": "הערות",
-    "minutesAgo": "דקות",
-    "comingSoon": "בקרוב..."
+    "served": "הוגשה",
+    "paid": "שולמה"
+  },
+  "adminHome": {
+    "dashboard": "דשבורד",
+    "orders": "הזמנות",
+    "menuManage": "ניהול תפריט",
+    "employees": "ניהול עובדים",
+    "schedule": "תכנית עבודה",
+    "friday": "ארוחת שישי",
+    "reports": "דוחות כספיים",
+    "settings": "הגדרות"
   },
   "admin": {
     "title": "ניהול",
     "login": "כניסת מנהל",
-    "enterPin": "הזן קוד מנהל",
-    "dashboard": "לוח בקרה",
-    "menuManage": "ניהול תפריט",
-    "orders": "הזמנות",
-    "events": "אירועים",
-    "members": "חברי מועדון",
-    "settings": "הגדרות"
+    "enterPin": "הזן קוד מנהל"
   },
   "dashboard": {
     "todayOrders": "הזמנות היום",
@@ -148,19 +141,73 @@
     "delete": "מחק",
     "confirmDelete": "האם למחוק את המנה?"
   },
+  "employees": {
+    "addEmployee": "הוסף עובד",
+    "editEmployee": "ערוך עובד",
+    "fullName": "שם מלא",
+    "phone": "טלפון",
+    "role": "תפקיד",
+    "payType": "סוג שכר",
+    "payRate": "סכום שכר",
+    "hourly": "שעתי",
+    "daily": "יומי",
+    "startDate": "תאריך התחלה",
+    "active": "פעיל",
+    "inactive": "לא פעיל",
+    "cook": "טבח",
+    "waiter": "מלצר",
+    "bartender": "ברמן",
+    "other": "אחר",
+    "attendance": "נוכחות",
+    "manualCheckin": "צ'ק-אין ידני",
+    "documents": "מסמכים",
+    "vacationDays": "ימי חופש",
+    "monthlySalary": "סיכום שכר חודשי"
+  },
+  "schedule": {
+    "title": "תכנית עבודה",
+    "morning": "בוקר",
+    "evening": "ערב",
+    "fullDay": "יום מלא",
+    "off": "חופש",
+    "custom": "מותאם",
+    "copyWeek": "העתק שבוע",
+    "shiftHours": "שעות משמרות"
+  },
+  "reports": {
+    "title": "דוחות כספיים",
+    "revenue": "הכנסות",
+    "expenses": "הוצאות",
+    "profit": "רווח נקי",
+    "totalRevenue": "סה\"כ הכנסות",
+    "totalExpenses": "סה\"כ הוצאות",
+    "employeeCosts": "עלות עובדים",
+    "recurringExpenses": "הוצאות חוזרות",
+    "oneTimeExpenses": "הוצאות חד-פעמיות",
+    "addExpense": "הוסף הוצאה",
+    "filterByDate": "סנן לפי תאריכים",
+    "today": "היום",
+    "thisWeek": "השבוע",
+    "thisMonth": "החודש",
+    "customRange": "טווח מותאם"
+  },
   "settings": {
-    "openingHours": "שעות פתיחה",
-    "closedDates": "ימי סגירה",
     "adminPin": "קוד מנהל",
-    "kitchenPin": "קוד מטבח",
-    "clubDiscount": "הנחת מועדון (%)",
+    "employeePin": "קוד עובדים",
+    "restaurantLocation": "מיקום מסעדה",
+    "setCurrentLocation": "הגדר מיקום נוכחי",
+    "tableCount": "מספר שולחנות",
+    "openingHours": "שעות פתיחה",
+    "shiftHours": "שעות משמרות",
+    "fridaySwitchTime": "שעת מעבר לתפריט שישי",
+    "showEmployeeSalary": "הצג שכר לעובדים",
+    "qrCodes": "קודי QR",
     "save": "שמור",
     "saved": "נשמר בהצלחה"
   },
   "status": {
     "new": "חדשה",
     "preparing": "בהכנה",
-    "ready": "מוכנה",
     "served": "הוגשה",
     "paid": "שולמה"
   }

@@ -18,10 +18,6 @@
   },
   "nav": {
     "menu": "เมนู",
-    "history": "ประวัติ",
-    "loyalty": "สมาชิก",
-    "events": "กิจกรรม",
-    "kitchen": "ครัว",
     "admin": "ผู้ดูแล"
   },
   "table": {
@@ -30,7 +26,7 @@
     "enterTable": "กรอกหมายเลขโต๊ะ หรือสแกน QR code",
     "placeholder": "หมายเลขโต๊ะ",
     "submit": "ดูเมนู",
-    "invalid": "หมายเลขโต๊ะไม่ถูกต้อง (1-30)"
+    "invalid": "หมายเลขโต๊ะไม่ถูกต้อง"
   },
   "menu": {
     "title": "เมนู",
@@ -43,7 +39,7 @@
     "noImage": "ไม่มีรูปภาพ",
     "askPrice": "สอบถามราคา",
     "emptyCategory": "ไม่มีเมนูในหมวดนี้",
-    "comingSoon": "เร็วๆ นี้..."
+    "fridayMenuActive": "เมนูวันศุกร์"
   },
   "cart": {
     "title": "ออร์เดอร์ของฉัน",
@@ -52,7 +48,6 @@
     "notes": "หมายเหตุ",
     "notesPlaceholder": "หมายเหตุพิเศษ...",
     "total": "รวม",
-    "discount": "ส่วนลด",
     "submit": "ส่งออร์เดอร์",
     "clear": "ล้างออร์เดอร์",
     "removeItem": "ลบรายการ",
@@ -62,67 +57,65 @@
     "confirmation": "ยืนยันออร์เดอร์",
     "orderNumber": "หมายเลขออร์เดอร์",
     "thankYou": "ขอบคุณสำหรับออร์เดอร์!",
+    "total": "รวม",
+    "excludingService": "ไม่รวมค่าบริการ",
+    "newOrder": "ออร์เดอร์ใหม่"
+  },
+  "staff": {
+    "title": "เข้าสู่ระบบพนักงาน",
+    "adminLogin": "เข้าสู่ระบบผู้จัดการ",
+    "employeeLogin": "เข้าสู่ระบบพนักงาน",
+    "enterPin": "กรอก PIN 4 หลัก",
+    "invalidPin": "PIN ไม่ถูกต้อง",
+    "tooManyAttempts": "ลองหลายครั้งเกินไป ลองใหม่ภายหลัง"
+  },
+  "employee": {
+    "title": "หน้าจอพนักงาน",
+    "checkIn": "เริ่มกะ",
+    "checkOut": "สิ้นสุดกะ",
+    "shiftTimer": "เวลาทำงาน",
+    "salary": "รายได้สะสมเดือนนี้",
     "newOrder": "ออร์เดอร์ใหม่",
-    "viewHistory": "ดูประวัติ"
+    "selectTable": "เลือกโต๊ะ",
+    "outOfRange": "คุณอยู่นอกพื้นที่ร้านอาหาร",
+    "locationRequired": "ต้องการการเข้าถึงตำแหน่ง",
+    "schedule": "ตารางงาน",
+    "myShifts": "กะของฉัน"
   },
-  "history": {
-    "title": "ประวัติออร์เดอร์",
-    "enterPhone": "กรอกหมายเลขโทรศัพท์",
-    "phonePlaceholder": "หมายเลขโทรศัพท์",
-    "noOrders": "ไม่พบออร์เดอร์",
-    "orderDate": "วันที่",
-    "orderTotal": "รวม",
-    "orderStatus": "สถานะ"
+  "friday": {
+    "title": "อาหารค่ำวันศุกร์",
+    "bookTitle": "จองอาหารค่ำวันศุกร์",
+    "guestName": "ชื่อเต็ม",
+    "guestPhone": "โทรศัพท์",
+    "numGuests": "จำนวนแขก",
+    "selectDishes": "เลือกเมนู",
+    "totalPrice": "รวม",
+    "submitBooking": "ส่งการจอง",
+    "bookingConfirmed": "การจองได้รับการยืนยัน!",
+    "cancelled": "อาหารค่ำวันศุกร์ถูกยกเลิกสัปดาห์นี้",
+    "noMenu": "ไม่มีเมนูวันศุกร์",
+    "fridayMenu": "เมนูวันศุกร์"
   },
-  "loyalty": {
-    "title": "สมาชิกคลับ",
-    "joinClub": "สมัครสมาชิก",
-    "name": "ชื่อเต็ม",
-    "phone": "โทรศัพท์",
-    "email": "อีเมล",
-    "submit": "สมัคร",
-    "alreadyMember": "เป็นสมาชิกแล้ว?",
-    "welcome": "ยินดีต้อนรับสู่คลับ!",
-    "discount": "ส่วนลดสมาชิก"
-  },
-  "events": {
-    "title": "กิจกรรม",
-    "noEvents": "ไม่มีกิจกรรมที่กำลังจะมาถึง",
-    "bookNow": "จองเลย",
-    "guests": "จำนวนแขก",
-    "date": "วันที่",
-    "time": "เวลา",
-    "pricePerPerson": "ราคาต่อคน",
-    "book": "จอง",
-    "bookingConfirmed": "การจองได้รับการยืนยัน!"
-  },
-  "kitchen": {
-    "title": "หน้าจอครัว",
-    "login": "เข้าสู่ระบบครัว",
-    "enterPin": "กรอก PIN ครัว",
-    "noOrders": "ไม่มีออร์เดอร์",
-    "newOrder": "ออร์เดอร์ใหม่",
+  "kanban": {
+    "new": "ใหม่",
     "preparing": "กำลังเตรียม",
-    "ready": "พร้อม",
     "served": "เสิร์ฟแล้ว",
-    "markPreparing": "เตรียมอาหาร",
-    "markReady": "พร้อมเสิร์ฟ",
-    "table": "โต๊ะ",
-    "items": "รายการ",
-    "notes": "หมายเหตุ",
-    "minutesAgo": "นาทีที่แล้ว",
-    "comingSoon": "เร็วๆ นี้..."
+    "paid": "ชำระแล้ว"
+  },
+  "adminHome": {
+    "dashboard": "แดชบอร์ด",
+    "orders": "ออร์เดอร์",
+    "menuManage": "จัดการเมนู",
+    "employees": "จัดการพนักงาน",
+    "schedule": "ตารางงาน",
+    "friday": "อาหารค่ำวันศุกร์",
+    "reports": "รายงานการเงิน",
+    "settings": "ตั้งค่า"
   },
   "admin": {
     "title": "ผู้ดูแล",
     "login": "เข้าสู่ระบบผู้ดูแล",
-    "enterPin": "กรอก PIN ผู้ดูแล",
-    "dashboard": "แดชบอร์ด",
-    "menuManage": "จัดการเมนู",
-    "orders": "ออร์เดอร์",
-    "events": "กิจกรรม",
-    "members": "สมาชิก",
-    "settings": "ตั้งค่า"
+    "enterPin": "กรอก PIN ผู้ดูแล"
   },
   "dashboard": {
     "todayOrders": "ออร์เดอร์วันนี้",
@@ -148,19 +141,73 @@
     "delete": "ลบ",
     "confirmDelete": "ลบเมนูนี้?"
   },
+  "employees": {
+    "addEmployee": "เพิ่มพนักงาน",
+    "editEmployee": "แก้ไขพนักงาน",
+    "fullName": "ชื่อเต็ม",
+    "phone": "โทรศัพท์",
+    "role": "ตำแหน่ง",
+    "payType": "ประเภทค่าจ้าง",
+    "payRate": "อัตราค่าจ้าง",
+    "hourly": "รายชั่วโมง",
+    "daily": "รายวัน",
+    "startDate": "วันเริ่มงาน",
+    "active": "ใช้งาน",
+    "inactive": "ไม่ใช้งาน",
+    "cook": "พ่อครัว",
+    "waiter": "พนักงานเสิร์ฟ",
+    "bartender": "บาร์เทนเดอร์",
+    "other": "อื่นๆ",
+    "attendance": "การเข้างาน",
+    "manualCheckin": "เช็คอินด้วยตนเอง",
+    "documents": "เอกสาร",
+    "vacationDays": "วันหยุดพักร้อน",
+    "monthlySalary": "สรุปเงินเดือน"
+  },
+  "schedule": {
+    "title": "ตารางงาน",
+    "morning": "เช้า",
+    "evening": "เย็น",
+    "fullDay": "เต็มวัน",
+    "off": "หยุด",
+    "custom": "กำหนดเอง",
+    "copyWeek": "คัดลอกสัปดาห์",
+    "shiftHours": "เวลากะ"
+  },
+  "reports": {
+    "title": "รายงานการเงิน",
+    "revenue": "รายได้",
+    "expenses": "ค่าใช้จ่าย",
+    "profit": "กำไรสุทธิ",
+    "totalRevenue": "รายได้ทั้งหมด",
+    "totalExpenses": "ค่าใช้จ่ายทั้งหมด",
+    "employeeCosts": "ค่าใช้จ่ายพนักงาน",
+    "recurringExpenses": "ค่าใช้จ่ายประจำ",
+    "oneTimeExpenses": "ค่าใช้จ่ายครั้งเดียว",
+    "addExpense": "เพิ่มค่าใช้จ่าย",
+    "filterByDate": "กรองตามวันที่",
+    "today": "วันนี้",
+    "thisWeek": "สัปดาห์นี้",
+    "thisMonth": "เดือนนี้",
+    "customRange": "ช่วงกำหนดเอง"
+  },
   "settings": {
+    "adminPin": "PIN ผู้จัดการ",
+    "employeePin": "PIN พนักงาน",
+    "restaurantLocation": "ตำแหน่งร้านอาหาร",
+    "setCurrentLocation": "ตั้งค่าตำแหน่งปัจจุบัน",
+    "tableCount": "จำนวนโต๊ะ",
     "openingHours": "เวลาเปิด-ปิด",
-    "closedDates": "วันหยุด",
-    "adminPin": "PIN ผู้ดูแล",
-    "kitchenPin": "PIN ครัว",
-    "clubDiscount": "ส่วนลดสมาชิก (%)",
+    "shiftHours": "เวลากะ",
+    "fridaySwitchTime": "เวลาเปลี่ยนเมนูวันศุกร์",
+    "showEmployeeSalary": "แสดงเงินเดือนให้พนักงาน",
+    "qrCodes": "QR Codes",
     "save": "บันทึก",
     "saved": "บันทึกสำเร็จ"
   },
   "status": {
     "new": "ใหม่",
     "preparing": "กำลังเตรียม",
-    "ready": "พร้อม",
     "served": "เสิร์ฟแล้ว",
     "paid": "ชำระแล้ว"
   }
