@@ -1,111 +1,26 @@
-export const ORDER_STATUSES = ['new', 'preparing', 'ready', 'served', 'paid'] as const
-export type OrderStatus = (typeof ORDER_STATUSES)[number]
+export const ORDER_STATUSES = ['new', 'preparing', 'served', 'paid'] as const
 
-export const CATEGORY_SLUGS = [
-  'main',
-  'kids',
-  'salad-set',
-  'salads-ask',
-  'happy-friday',
-  'breakfast',
-  'lunch',
-  'hummus',
-  'yemeni',
-  'lafa',
-  'salad',
-  'baguettes',
-  'extras',
-  'drinks',
-  'shakes',
-] as const
-export type CategorySlug = (typeof CATEGORY_SLUGS)[number]
-
-export const TABLE_MIN = 1
-export const TABLE_MAX = 30
-
-export interface Category {
-  id: string
-  slug: CategorySlug
-  nameHe: string
-  nameEn: string
-  nameTh: string
-  sortOrder: number
+export const ORDER_STATUS_COLORS: Record<string, string> = {
+  new: '#ef4444',
+  preparing: '#f97316',
+  served: '#eab308',
+  paid: '#22c55e',
 }
 
-export interface Dish {
-  id: string
-  categoryId: string
-  nameHe: string
-  nameEn: string
-  nameTh: string
-  descriptionHe: string
-  descriptionEn: string
-  descriptionTh: string
-  price: number
-  imageUrl: string | null
-  available: boolean
-  kosher: boolean
-  spicy: boolean
-  vegetarian: boolean
-  sortOrder: number
+export const ORDER_STATUS_LABELS: Record<string, { he: string; en: string; th: string }> = {
+  new: { he: 'חדשה', en: 'New', th: 'ใหม่' },
+  preparing: { he: 'בהכנה', en: 'Preparing', th: 'กำลังเตรียม' },
+  served: { he: 'הוגשה', en: 'Served', th: 'เสิร์ฟแล้ว' },
+  paid: { he: 'שולמה', en: 'Paid', th: 'ชำระแล้ว' },
 }
 
-export interface OrderItem {
-  id: string
-  orderId: string
-  dishId: string
-  nameHe: string
-  nameEn: string
-  nameTh: string
-  price: number
-  quantity: number
-  notes: string
-}
+export const SHIFT_TYPES = ['morning', 'evening', 'full', 'custom', 'off'] as const
 
-export interface Order {
-  id: string
-  tableNumber: number
-  status: OrderStatus
-  totalAmount: number
-  discountPercent: number
-  notes: string
-  memberPhone: string | null
-  createdAt: string
-  updatedAt: string
-  items: OrderItem[]
-}
+export const EMPLOYEE_ROLES = ['cook', 'waiter', 'bartender', 'other'] as const
 
-export interface Member {
-  id: string
-  name: string
-  phone: string
-  email: string | null
-  joinedAt: string
-  totalSpent: number
-  visitCount: number
-}
+export const EXPENSE_CATEGORIES = ['equipment', 'repair', 'supplies', 'other'] as const
 
-export interface Event {
-  id: string
-  titleHe: string
-  titleEn: string
-  titleTh: string
-  descriptionHe: string
-  descriptionEn: string
-  descriptionTh: string
-  date: string
-  time: string
-  pricePerPerson: number
-  maxGuests: number
-  imageUrl: string | null
-  active: boolean
-}
-
-export interface Settings {
-  id: string
-  openingHours: string
-  closedDates: string[]
-  adminPin: string
-  kitchenPin: string
-  clubDiscountPercent: number
-}
+export const DEFAULT_ADMIN_PIN = '1111'
+export const DEFAULT_EMPLOYEE_PIN = '0000'
+export const DEFAULT_RADIUS_METERS = 50
+export const THAILAND_TIMEZONE = 'Asia/Bangkok'
