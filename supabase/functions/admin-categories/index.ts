@@ -40,14 +40,15 @@ Deno.serve(async (req) => {
     }
 
     if (action === 'create') {
-      const { name, sort_order, image_url } = data as {
-        name: string
+      const { name_he, name_en, name_th, sort_order } = data as {
+        name_he: string
+        name_en?: string
+        name_th?: string
         sort_order?: number
-        image_url?: string
       }
 
-      if (!name) {
-        return new Response(JSON.stringify({ error: 'name is required' }), {
+      if (!name_he) {
+        return new Response(JSON.stringify({ error: 'name_he is required' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         })
@@ -55,7 +56,7 @@ Deno.serve(async (req) => {
 
       const { data: category, error } = await supabase
         .from('categories')
-        .insert({ name, sort_order: sort_order ?? 0, image_url })
+        .insert({ name_he, name_en, name_th, sort_order: sort_order ?? 0 })
         .select()
         .single()
 

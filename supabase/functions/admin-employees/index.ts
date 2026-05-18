@@ -110,7 +110,7 @@ Deno.serve(async (req) => {
 
       const { data: employee, error } = await supabase
         .from('employees')
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updates })
         .eq('id', id)
         .select()
         .single()

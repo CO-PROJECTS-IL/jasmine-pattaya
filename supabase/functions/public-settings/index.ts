@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
     }
 
     // Remove sensitive PIN fields before returning
-    const { admin_pin, employee_pin, ...publicSettings } = settings
+    const { admin_pin_hash, employee_pin_hash, ...publicSettings } = settings
 
     return new Response(JSON.stringify({ settings: publicSettings }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

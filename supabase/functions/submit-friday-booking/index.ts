@@ -22,17 +22,18 @@ Deno.serve(async (req) => {
     )
 
     const body = await req.json()
-    const { guest_name, phone, num_guests, notes, items } = body as {
+    const { guest_name, guest_phone, num_guests, friday_date, notes, items } = body as {
       guest_name: string
-      phone: string
+      guest_phone: string
       num_guests: number
+      friday_date: string
       notes?: string
       items: BookingItem[]
     }
 
-    if (!guest_name || !phone || !num_guests || !items || !Array.isArray(items) || items.length === 0) {
+    if (!guest_name || !guest_phone || !num_guests || !friday_date || !items || !Array.isArray(items) || items.length === 0) {
       return new Response(
-        JSON.stringify({ error: 'guest_name, phone, num_guests, and items are required' }),
+        JSON.stringify({ error: 'guest_name, guest_phone, num_guests, friday_date, and items are required' }),
         {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -44,14 +45,14 @@ Deno.serve(async (req) => {
     const menuIds = items.map((i) => i.friday_menu_id)
     const { data: menuItems, error: menuError } = await supabase
       .from('friday_menu')
-      .select('id, price, is_available')
+      .select('id, friday_price, is_active')
       .in('id', menuIds)
 
     if (menuError) throw menuError
 
     const menuMap = new Map(menuItems?.map((m) => [m.id, m]) || [])
 
-    // Validate all menu items exist and are available
+    // Validate all menu items exist and are active
     for (const item of items) {
       const menuItem = menuMap.get(item.friday_menu_id)
       if (!menuItem) {
@@ -63,7 +64,7 @@ Deno.serve(async (req) => {
           }
         )
       }
-      if (!menuItem.is_available) {
+      if (!menuItem.is_active) {
         return new Response(
           JSON.stringify({ error: `Menu item ${item.friday_menu_id} is not available` }),
           {
@@ -78,7 +79,7 @@ Deno.serve(async (req) => {
     let total = 0
     for (const item of items) {
       const menuItem = menuMap.get(item.friday_menu_id)
-      total += menuItem!.price * item.quantity
+      total += menuItem!.friday_price * item.quantity
     }
 
     // Insert booking
@@ -86,10 +87,10 @@ Deno.serve(async (req) => {
       .from('friday_bookings')
       .insert({
         guest_name,
-        phone,
+        guest_phone,
         num_guests,
+        friday_date,
         notes: notes || null,
-        total,
         status: 'pending',
       })
       .select('id')
@@ -102,7 +103,6 @@ Deno.serve(async (req) => {
       booking_id: booking.id,
       friday_menu_id: item.friday_menu_id,
       quantity: item.quantity,
-      unit_price: menuMap.get(item.friday_menu_id)!.price,
     }))
 
     const { error: itemsError } = await supabase

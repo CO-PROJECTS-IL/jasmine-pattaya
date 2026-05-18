@@ -28,7 +28,7 @@ Deno.serve(async (req) => {
 
     const { data: settings, error } = await supabase
       .from('settings')
-      .select('admin_pin, employee_pin')
+      .select('admin_pin_hash, employee_pin_hash')
       .eq('id', 1)
       .single()
 
@@ -41,9 +41,9 @@ Deno.serve(async (req) => {
 
     let valid = false
     if (role === 'admin') {
-      valid = pin === settings.admin_pin
+      valid = pin === settings.admin_pin_hash
     } else if (role === 'employee') {
-      valid = pin === settings.employee_pin
+      valid = pin === settings.employee_pin_hash
     }
 
     return new Response(JSON.stringify({ valid }), {

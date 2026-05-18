@@ -44,10 +44,11 @@ Deno.serve(async (req) => {
     const tableName = type === 'recurring' ? 'expenses_recurring' : 'expenses_onetime'
 
     if (action === 'list') {
+      const orderColumn = type === 'onetime' ? 'date' : 'name'
       const { data: expenses, error } = await supabase
         .from(tableName)
         .select('*')
-        .order('created_at', { ascending: false })
+        .order(orderColumn, { ascending: type === 'onetime' ? false : true })
 
       if (error) throw error
 
@@ -95,7 +96,7 @@ Deno.serve(async (req) => {
 
       const { data: expense, error } = await supabase
         .from(tableName)
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updates })
         .eq('id', id)
         .select()
         .single()

@@ -112,7 +112,7 @@ Deno.serve(async (req) => {
       order_id: order.id,
       dish_id: item.dish_id,
       quantity: item.quantity,
-      unit_price: dishMap.get(item.dish_id)!.price,
+      price_at_order: dishMap.get(item.dish_id)!.price,
       notes: item.notes || null,
     }))
 

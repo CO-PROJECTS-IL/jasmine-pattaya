@@ -40,8 +40,13 @@ Deno.serve(async (req) => {
             *,
             friday_menu (
               id,
-              name,
-              price
+              friday_price,
+              dishes (
+                id,
+                name_he,
+                name_en,
+                name_th
+              )
             )
           )
         `)
@@ -87,7 +92,7 @@ Deno.serve(async (req) => {
 
       const { error } = await supabase
         .from('friday_bookings')
-        .update({ status, updated_at: new Date().toISOString() })
+        .update({ status })
         .eq('id', booking_id)
 
       if (error) throw error

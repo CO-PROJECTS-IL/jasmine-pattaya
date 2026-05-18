@@ -54,7 +54,7 @@ Deno.serve(async (req) => {
     // Fetch restaurant location settings
     const { data: settings, error: settingsError } = await supabase
       .from('settings')
-      .select('restaurant_lat, restaurant_lng, radius_meters')
+      .select('restaurant_lat, restaurant_lng, restaurant_radius')
       .eq('id', 1)
       .single()
 
@@ -72,10 +72,10 @@ Deno.serve(async (req) => {
       settings.restaurant_lng
     )
 
-    if (distance > settings.radius_meters) {
+    if (distance > settings.restaurant_radius) {
       return new Response(
         JSON.stringify({
-          error: `Too far from restaurant. Distance: ${Math.round(distance)}m, allowed: ${settings.radius_meters}m`,
+          error: `Too far from restaurant. Distance: ${Math.round(distance)}m, allowed: ${settings.restaurant_radius}m`,
           distance: Math.round(distance),
         }),
         {
@@ -89,8 +89,8 @@ Deno.serve(async (req) => {
       const { error } = await supabase.from('attendance').insert({
         employee_id,
         check_in: new Date().toISOString(),
-        lat,
-        lng,
+        location_lat: lat,
+        location_lng: lng,
         is_manual: false,
       })
       if (error) throw error

@@ -38,8 +38,17 @@ Deno.serve(async (req) => {
     if (action === 'list-menu') {
       const { data: menuItems, error } = await supabase
         .from('friday_menu')
-        .select('*')
-        .order('name')
+        .select(`
+          *,
+          dishes (
+            id,
+            name_he,
+            name_en,
+            name_th,
+            image_url
+          )
+        `)
+        .order('sort_order')
 
       if (error) throw error
 
@@ -49,28 +58,26 @@ Deno.serve(async (req) => {
     }
 
     if (action === 'upsert-menu') {
-      const { id, name, description, price, image_url, is_available } = data as {
+      const { id, dish_id, friday_price, sort_order, is_active } = data as {
         id?: string
-        name: string
-        description?: string
-        price: number
-        image_url?: string
-        is_available?: boolean
+        dish_id: string
+        friday_price: number
+        sort_order?: number
+        is_active?: boolean
       }
 
-      if (!name || price === undefined) {
-        return new Response(JSON.stringify({ error: 'name and price are required' }), {
+      if (!dish_id || friday_price === undefined) {
+        return new Response(JSON.stringify({ error: 'dish_id and friday_price are required' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         })
       }
 
       const record: Record<string, unknown> = {
-        name,
-        description,
-        price,
-        image_url,
-        is_available: is_available ?? true,
+        dish_id,
+        friday_price,
+        sort_order: sort_order ?? 0,
+        is_active: is_active ?? true,
       }
 
       if (id) record.id = id
@@ -108,10 +115,10 @@ Deno.serve(async (req) => {
     }
 
     if (action === 'cancel-date') {
-      const { date, reason } = data as { date: string; reason?: string }
+      const { friday_date, reason } = data as { friday_date: string; reason?: string }
 
-      if (!date) {
-        return new Response(JSON.stringify({ error: 'date is required' }), {
+      if (!friday_date) {
+        return new Response(JSON.stringify({ error: 'friday_date is required' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         })
@@ -119,7 +126,7 @@ Deno.serve(async (req) => {
 
       const { error } = await supabase
         .from('friday_cancelled_dates')
-        .upsert({ date, reason }, { onConflict: 'date' })
+        .upsert({ friday_date, reason }, { onConflict: 'friday_date' })
 
       if (error) throw error
 
@@ -129,10 +136,10 @@ Deno.serve(async (req) => {
     }
 
     if (action === 'uncancel-date') {
-      const { date } = data as { date: string }
+      const { friday_date } = data as { friday_date: string }
 
-      if (!date) {
-        return new Response(JSON.stringify({ error: 'date is required' }), {
+      if (!friday_date) {
+        return new Response(JSON.stringify({ error: 'friday_date is required' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         })
@@ -141,7 +148,7 @@ Deno.serve(async (req) => {
       const { error } = await supabase
         .from('friday_cancelled_dates')
         .delete()
-        .eq('date', date)
+        .eq('friday_date', friday_date)
 
       if (error) throw error
 
@@ -154,7 +161,7 @@ Deno.serve(async (req) => {
       const { data: cancelledDates, error } = await supabase
         .from('friday_cancelled_dates')
         .select('*')
-        .order('date')
+        .order('friday_date')
 
       if (error) throw error
 

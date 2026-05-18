@@ -33,20 +33,22 @@ Deno.serve(async (req) => {
           *,
           categories (
             id,
-            name,
+            name_he,
+            name_en,
+            name_th,
             sort_order
           )
         `)
-        .order('name')
+        .order('sort_order')
 
       if (error) throw error
 
-      // Sort by category sort_order then dish name
+      // Sort by category sort_order then dish sort_order
       const sorted = (dishes || []).sort((a, b) => {
         const aOrder = a.categories?.sort_order ?? 999
         const bOrder = b.categories?.sort_order ?? 999
         if (aOrder !== bOrder) return aOrder - bOrder
-        return a.name.localeCompare(b.name)
+        return (a.sort_order ?? 0) - (b.sort_order ?? 0)
       })
 
       return new Response(JSON.stringify({ dishes: sorted }), {
@@ -55,17 +57,25 @@ Deno.serve(async (req) => {
     }
 
     if (action === 'create') {
-      const { name, description, price, category_id, image_url, is_available } = data as {
-        name: string
-        description?: string
+      const { name_he, name_en, name_th, description_he, description_en, description_th, price, category_id, image_url, is_available, is_kosher, is_spicy, is_vegetarian, sort_order } = data as {
+        name_he: string
+        name_en?: string
+        name_th?: string
+        description_he?: string
+        description_en?: string
+        description_th?: string
         price: number
         category_id?: string
         image_url?: string
         is_available?: boolean
+        is_kosher?: boolean
+        is_spicy?: boolean
+        is_vegetarian?: boolean
+        sort_order?: number
       }
 
-      if (!name || price === undefined) {
-        return new Response(JSON.stringify({ error: 'name and price are required' }), {
+      if (!name_he || price === undefined) {
+        return new Response(JSON.stringify({ error: 'name_he and price are required' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         })
@@ -73,7 +83,7 @@ Deno.serve(async (req) => {
 
       const { data: dish, error } = await supabase
         .from('dishes')
-        .insert({ name, description, price, category_id, image_url, is_available: is_available ?? true })
+        .insert({ name_he, name_en, name_th, description_he, description_en, description_th, price, category_id, image_url, is_available: is_available ?? true, is_kosher, is_spicy, is_vegetarian, sort_order })
         .select()
         .single()
 
@@ -96,7 +106,7 @@ Deno.serve(async (req) => {
 
       const { data: dish, error } = await supabase
         .from('dishes')
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updates })
         .eq('id', id)
         .select()
         .single()
