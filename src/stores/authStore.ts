@@ -1,23 +1,21 @@
 import { create } from 'zustand'
 import { callEdgeFunction, isSupabaseConfigured } from '../lib/supabase'
-
-type Role = 'guest' | 'kitchen' | 'admin'
+import type { UserRole } from '../lib/types'
+import { DEFAULT_ADMIN_PIN, DEFAULT_EMPLOYEE_PIN } from '../lib/constants'
 
 interface AuthState {
-  role: Role
-  validatePin: (pin: string, role: 'kitchen' | 'admin') => Promise<boolean>
+  role: UserRole
+  validatePin: (pin: string, role: 'employee' | 'admin') => Promise<boolean>
   logout: () => void
 }
 
-const DEV_PIN = '1234'
-
 export const useAuthStore = create<AuthState>()((set) => ({
-  role: (sessionStorage.getItem('jasmine-role') as Role) || 'guest',
+  role: (sessionStorage.getItem('jasmine-role') as UserRole) || 'guest',
 
-  validatePin: async (pin: string, role: 'kitchen' | 'admin') => {
+  validatePin: async (pin: string, role: 'employee' | 'admin') => {
     let valid = false
     if (!isSupabaseConfigured) {
-      valid = pin === DEV_PIN
+      valid = role === 'admin' ? pin === DEFAULT_ADMIN_PIN : pin === DEFAULT_EMPLOYEE_PIN
     } else {
       try {
         const result = await callEdgeFunction('validate-pin', { pin, role })

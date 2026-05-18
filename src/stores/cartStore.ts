@@ -15,11 +15,13 @@ interface CartState {
   items: CartItem[]
   tableNumber: number | null
   orderNotes: string
+  createdBy: 'customer' | 'employee'
   addItem: (item: Omit<CartItem, 'quantity' | 'notes'> & { quantity?: number; notes?: string }) => void
   removeItem: (dishId: string) => void
   updateQuantity: (dishId: string, quantity: number) => void
   setTable: (table: number | null) => void
   setNotes: (notes: string) => void
+  setCreatedBy: (by: 'customer' | 'employee') => void
   clear: () => void
   getTotal: () => number
 }
@@ -30,6 +32,7 @@ export const useCartStore = create<CartState>()(
       items: [],
       tableNumber: null,
       orderNotes: '',
+      createdBy: 'customer',
 
       addItem: (item) => {
         set((state) => {
@@ -82,7 +85,9 @@ export const useCartStore = create<CartState>()(
 
       setNotes: (notes) => set({ orderNotes: notes }),
 
-      clear: () => set({ items: [], orderNotes: '' }),
+      setCreatedBy: (by) => set({ createdBy: by }),
+
+      clear: () => set({ items: [], orderNotes: '', createdBy: 'customer' }),
 
       getTotal: () => {
         return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0)
