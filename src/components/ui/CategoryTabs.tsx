@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { Category } from '../../lib/constants'
+import type { Category } from '../../lib/types'
 
 interface CategoryTabsProps {
   categories: Category[]
@@ -9,9 +9,9 @@ interface CategoryTabsProps {
 }
 
 function getCategoryName(cat: Category, lang: string) {
-  if (lang === 'he') return cat.nameHe
-  if (lang === 'th') return cat.nameTh
-  return cat.nameEn
+  if (lang === 'he') return cat.name_he
+  if (lang === 'th') return cat.name_th
+  return cat.name_en
 }
 
 export default function CategoryTabs({ categories, activeId, onSelect }: CategoryTabsProps) {

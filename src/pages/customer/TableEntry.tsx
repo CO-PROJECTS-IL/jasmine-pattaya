@@ -12,7 +12,7 @@ export default function TableEntry() {
   const setTable = useCartStore((s) => s.setTable)
   const [tableInput, setTableInput] = useState('')
   const [error, setError] = useState('')
-  const { settings } = useSettings()
+  const { data: settings } = useSettings()
 
   const tableMin = 1
   const tableMax = settings?.table_count || 30

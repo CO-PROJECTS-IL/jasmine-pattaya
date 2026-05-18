@@ -1,4 +1,4 @@
-export type OrderStatus = 'new' | 'preparing' | 'served' | 'paid'
+export type OrderStatus = 'new' | 'preparing' | 'ready' | 'served' | 'paid'
 export type PayType = 'hourly' | 'daily'
 export type ShiftType = 'morning' | 'evening' | 'full' | 'custom' | 'off'
 export type ExpenseFrequency = 'daily' | 'weekly' | 'monthly' | 'yearly'

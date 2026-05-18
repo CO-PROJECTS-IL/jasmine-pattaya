@@ -13,8 +13,8 @@ export default function EmployeeDashboard() {
   const [checkedIn, setCheckedIn] = useState(false)
   const [shiftStart, setShiftStart] = useState<Date | null>(null)
   const [elapsed, setElapsed] = useState('00:00:00')
-  const [salary, setSalary] = useState<number | null>(null)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const [salary] = useState<number | null>(null)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (!checkedIn || !shiftStart) return

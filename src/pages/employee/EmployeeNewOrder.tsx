@@ -13,8 +13,8 @@ export default function EmployeeNewOrder() {
   const navigate = useNavigate()
   const { data: settings } = useSettings()
   const { categories, dishes, getDishesByCategory } = useMenu()
-  const { isFridayMenuActive } = useFridayStatus()
-  const { items, addItem, removeItem, updateQuantity, clear, getTotal, setCreatedBy } = useCartStore()
+  useFridayStatus()
+  const { items, addItem, clear, getTotal, setCreatedBy } = useCartStore()
 
   const [selectedTable, setSelectedTable] = useState<number | null>(null)
   const [activeCategory, setActiveCategory] = useState<string | null>(null)

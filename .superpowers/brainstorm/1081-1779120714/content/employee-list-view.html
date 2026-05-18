@@ -1,0 +1,109 @@
+<h2>תצוגת רשימת עובדים</h2>
+<p class="subtitle">איך המנהל רואה את כל העובדים?</p>
+
+<div class="split">
+  <div class="mockup" data-choice="cards-view" onclick="toggleSelect(this)" style="cursor: pointer;">
+    <div class="mockup-header">כרטיסים</div>
+    <div class="mockup-body" style="padding: 12px;">
+      <!-- Employee Card 1 -->
+      <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 14px; margin-bottom: 10px;">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #a88a3a); display: flex; align-items: center; justify-content: center; color: #080808; font-weight: 700; font-size: 16px;">ס</div>
+          <div style="flex: 1;">
+            <div style="color: #e8e8e8; font-size: 14px; font-weight: 600;">סומצ'אי</div>
+            <div style="color: #888; font-size: 11px;">טבח • ฿400/יום</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; font-size: 14px;">💬</div>
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 14px;">📞</div>
+          </div>
+        </div>
+        <div style="margin-top: 8px; display: flex; gap: 6px;">
+          <span style="background: rgba(34,197,94,0.15); color: #22c55e; font-size: 10px; padding: 2px 8px; border-radius: 10px;">פעיל</span>
+          <span style="background: rgba(201,168,76,0.15); color: #c9a84c; font-size: 10px; padding: 2px 8px; border-radius: 10px;">במשמרת</span>
+        </div>
+      </div>
+      <!-- Employee Card 2 -->
+      <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; margin-bottom: 10px;">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #64748b, #475569); display: flex; align-items: center; justify-content: center; color: #e8e8e8; font-weight: 700; font-size: 16px;">נ</div>
+          <div style="flex: 1;">
+            <div style="color: #e8e8e8; font-size: 14px; font-weight: 600;">נוי</div>
+            <div style="color: #888; font-size: 11px;">מלצרית • ฿60/שעה</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; font-size: 14px;">💬</div>
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 14px;">📞</div>
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <span style="background: rgba(34,197,94,0.15); color: #22c55e; font-size: 10px; padding: 2px 8px; border-radius: 10px;">פעילה</span>
+        </div>
+      </div>
+      <!-- Employee Card 3 -->
+      <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; opacity: 0.5;">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #64748b, #475569); display: flex; align-items: center; justify-content: center; color: #e8e8e8; font-weight: 700; font-size: 16px;">פ</div>
+          <div style="flex: 1;">
+            <div style="color: #e8e8e8; font-size: 14px; font-weight: 600;">פאט</div>
+            <div style="color: #888; font-size: 11px;">ברמן • ฿350/יום</div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; font-size: 14px;">💬</div>
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 14px;">📞</div>
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <span style="background: rgba(239,68,68,0.15); color: #ef4444; font-size: 10px; padding: 2px 8px; border-radius: 10px;">לא פעיל</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup" data-choice="table-view" onclick="toggleSelect(this)" style="cursor: pointer;">
+    <div class="mockup-header">טבלה</div>
+    <div class="mockup-body" style="padding: 12px;">
+      <!-- Search bar -->
+      <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; color: #666; font-size: 12px;">🔍 חיפוש עובד...</div>
+      <!-- Table header -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 8px; padding: 8px 4px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #888; font-size: 10px; font-weight: 600;">
+        <div>שם</div>
+        <div>תפקיד</div>
+        <div>שכר</div>
+        <div>סטטוס</div>
+      </div>
+      <!-- Row 1 -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 8px; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; font-size: 12px; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #c9a84c; display: flex; align-items: center; justify-content: center; color: #080808; font-size: 10px; font-weight: 700;">ס</div>
+          סומצ'אי
+        </div>
+        <div style="color: #888;">טבח</div>
+        <div>฿400/י</div>
+        <div><span style="background: rgba(34,197,94,0.15); color: #22c55e; font-size: 9px; padding: 2px 6px; border-radius: 8px;">פעיל</span></div>
+      </div>
+      <!-- Row 2 -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 8px; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; font-size: 12px; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #64748b; display: flex; align-items: center; justify-content: center; color: #e8e8e8; font-size: 10px; font-weight: 700;">נ</div>
+          נוי
+        </div>
+        <div style="color: #888;">מלצרית</div>
+        <div>฿60/ש</div>
+        <div><span style="background: rgba(34,197,94,0.15); color: #22c55e; font-size: 9px; padding: 2px 6px; border-radius: 8px;">פעילה</span></div>
+      </div>
+      <!-- Row 3 -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 8px; padding: 10px 4px; color: #ccc; font-size: 12px; align-items: center; opacity: 0.5;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #64748b; display: flex; align-items: center; justify-content: center; color: #e8e8e8; font-size: 10px; font-weight: 700;">פ</div>
+          פאט
+        </div>
+        <div style="color: #888;">ברמן</div>
+        <div>฿350/י</div>
+        <div><span style="background: rgba(239,68,68,0.15); color: #ef4444; font-size: 9px; padding: 2px 6px; border-radius: 8px;">לא פעיל</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p style="text-align: center; color: #888; font-size: 13px; margin-top: 16px;">לחץ על המוקאפ שמוצא חן בעיניך</p>

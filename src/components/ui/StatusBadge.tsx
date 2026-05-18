@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import type { OrderStatus } from '../../lib/constants'
+import type { OrderStatus } from '../../lib/types'
 
 const STATUS_COLORS: Record<OrderStatus, string> = {
   new: 'bg-red-600/20 text-red-400 border-red-600/30',

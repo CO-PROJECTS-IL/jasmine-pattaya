@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabase, isSupabaseConfigured, callEdgeFunction } from '../../lib/supabase'
 import AdminLayout from '../../components/layout/AdminLayout'
-import type { Employee, Shift, ShiftType } from '../../lib/types'
+import type { Employee, Shift } from '../../lib/types'
 import { SHIFT_TYPES } from '../../lib/constants'
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']

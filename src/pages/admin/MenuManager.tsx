@@ -1,16 +1,14 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { useMenu } from '../../hooks/useMenu'
 import { callEdgeFunction } from '../../lib/supabase'
 import AdminLayout from '../../components/layout/AdminLayout'
 import type { Dish } from '../../lib/types'
-import DishEditor from './DishEditor'
 
 export default function MenuManager() {
   const { t, i18n } = useTranslation()
-  const { categories, dishes, isLoading } = useMenu()
-  const [editingDish, setEditingDish] = useState<Dish | null>(null)
-  const [creating, setCreating] = useState(false)
+  const navigate = useNavigate()
+  const { categories, dishes } = useMenu()
 
   const langKey = i18n.language === 'he' ? 'name_he' : i18n.language === 'th' ? 'name_th' : 'name_en'
 
@@ -37,24 +35,12 @@ export default function MenuManager() {
     }
   }
 
-  if (editingDish || creating) {
-    return (
-      <AdminLayout>
-        <DishEditor
-          dish={creating ? undefined : editingDish!}
-          categories={categories}
-          onClose={() => { setEditingDish(null); setCreating(false) }}
-        />
-      </AdminLayout>
-    )
-  }
-
   return (
     <AdminLayout>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl text-[#c9a84c]">{t('adminHome.menuManage')}</h1>
         <button
-          onClick={() => setCreating(true)}
+          onClick={() => navigate('/admin/menu/new')}
           className="px-4 py-2 bg-[#c9a84c] text-black rounded-lg text-sm font-medium hover:bg-[#d4b96a] transition-colors"
         >
           {t('menuManage.addDish')}
@@ -94,7 +80,7 @@ export default function MenuManager() {
                       {dish.is_available ? '✓' : '✕'}
                     </button>
                     <button
-                      onClick={() => setEditingDish(dish)}
+                      onClick={() => navigate(`/admin/menu/${dish.id}`)}
                       className="w-8 h-8 rounded-lg bg-white/5 text-gray-400 text-xs hover:bg-white/10"
                     >
                       ✎

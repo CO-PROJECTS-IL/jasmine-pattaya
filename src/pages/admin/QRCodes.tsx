@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { TABLE_MIN, TABLE_MAX } from '../../lib/constants'
+import { useSettings } from '../../hooks/useSettings'
 
 function getBaseUrl() {
   const loc = window.location
@@ -12,8 +12,10 @@ function qrImageUrl(data: string, size = 200) {
 
 export default function QRCodes() {
   const { t } = useTranslation()
+  const { data: settings } = useSettings()
+  const tableCount = settings?.table_count || 30
   const base = getBaseUrl()
-  const tables = Array.from({ length: TABLE_MAX - TABLE_MIN + 1 }, (_, i) => i + TABLE_MIN)
+  const tables = Array.from({ length: tableCount }, (_, i) => i + 1)
 
   const handlePrint = () => window.print()
 

@@ -1,0 +1,84 @@
+<h2>עיצוב מלא — יסמין PWA (גרסה סופית)</h2>
+<p class="subtitle">כולל כל התוספות. עבור על הכל ואשר.</p>
+
+<!-- SECTION 1: General -->
+<div class="section">
+  <h3>🎨 כללי</h3>
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; color: #ccc; font-size: 13px; line-height: 2;">
+    <strong style="color: #c9a84c;">סגנון:</strong> יוקרה כהה — שחור (#080808) + זהב (#c9a84c)<br>
+    <strong style="color: #c9a84c;">שפות:</strong> עברית, אנגלית, תאית — מתג שפה בכל מסך<br>
+    <strong style="color: #c9a84c;">3 פורטלים:</strong> לקוחות (עברית), עובדים (תאית), מנהל (עברית)<br>
+    <strong style="color: #c9a84c;">כניסת צוות:</strong> אייקון קטן בפינת מסך הכניסה → מסך עם כניסת מנהל (עברית) + כניסת עובדים (תאית)<br>
+    <strong style="color: #c9a84c;">PWA:</strong> התקנה על טלפון, עבודה אופליין, עדכון אוטומטי
+  </div>
+</div>
+
+<!-- SECTION 2: Customer -->
+<div class="section">
+  <h3>👤 מסך לקוחות</h3>
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; color: #ccc; font-size: 13px; line-height: 2;">
+    <strong style="color: #c9a84c;">ניווט תחתון:</strong> תפריט | ארוחת שישי<br>
+    <strong style="color: #c9a84c;">כניסה:</strong> מספר שולחן או סריקת QR<br>
+    <strong style="color: #c9a84c;">תפריט:</strong> קטגוריות + כרטיסי מנות + הוספה לעגלה<br>
+    <strong style="color: #c9a84c;">עגלה:</strong> סליידר תחתון, כמויות, הערות, שליחה<br>
+    <strong style="color: #c9a84c;">אישור הזמנה:</strong> מציג סכום כולל + הכיתוב "לא כולל שירות"<br>
+    <strong style="color: #c9a84c;">תפריט שישי אוטומטי:</strong> ביום שישי, משעה שהמנהל מגדיר — התפריט הרגיל מוחלף בתפריט שישי. החלפה מלאה.<br>
+    <strong style="color: #c9a84c;">ארוחת שישי (הזמנה מראש):</strong> בחירת מנות עם מחיר לכל מנה, שם + טלפון + מספר אורחים<br>
+    <strong style="color: #c9a84c;">תשלום:</strong> פיזי — המלצר/מנהל מסמן "שולם"
+  </div>
+</div>
+
+<!-- SECTION 3: Employee -->
+<div class="section">
+  <h3>👷 מסך עובדים</h3>
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; color: #ccc; font-size: 13px; line-height: 2;">
+    <strong style="color: #c9a84c;">ברירת מחדל:</strong> תאית | PIN 0000<br>
+    <strong style="color: #c9a84c;">הגבלת מיקום:</strong> כל המסך עובד רק בטווח 50 מטר (GPS)<br>
+    <strong style="color: #c9a84c;">שעון נוכחות:</strong> צ'ק-אין / צ'ק-אאוט + טיימר<br>
+    <strong style="color: #c9a84c;">צבירת שכר:</strong> סכום שהעובד הרוויח מתחילת החודש (ניתן להשבתה)<br>
+    <strong style="color: #c9a84c;">הזמנה חדשה:</strong> כפתור שפותח תפריט → העובד בוחר שולחן + מנות ושולח הזמנה. ביום שישי — פותח תפריט שישי.<br>
+    <strong style="color: #c9a84c;">דשבורד הזמנות:</strong> קנבן 4 עמודות:<br>
+    &nbsp;&nbsp;🔴 חדשה → 🟠 בהכנה → 🟡 הוגשה → 🟢 שולמה<br>
+    &nbsp;&nbsp;אפשרות להחזיר סטטוס | התראה צלילית | עדכון בזמן אמת<br>
+    <strong style="color: #c9a84c;">תכנית עבודה:</strong> העובד רואה את המשמרות שלו
+  </div>
+</div>
+
+<!-- SECTION 4: Admin Home -->
+<div class="section">
+  <h3>⚙️ מסך מנהל — מסך בית</h3>
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; color: #ccc; font-size: 13px; line-height: 2;">
+    <strong style="color: #c9a84c;">ברירת מחדל:</strong> עברית | PIN 1111<br>
+    <strong style="color: #c9a84c;">ניווט:</strong> 8 כפתורים גדולים:<br>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 8px 0 8px 16px; color: #e8e8e8; font-size: 12px;">
+      <div>📊 דשבורד</div>
+      <div>🍽️ הזמנות</div>
+      <div>📋 ניהול תפריט</div>
+      <div>👥 ניהול עובדים</div>
+      <div>📅 תכנית עבודה</div>
+      <div>🕯️ ארוחת שישי</div>
+      <div>💰 דוחות כספיים</div>
+      <div>⚙️ הגדרות</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: Admin Features -->
+<div class="section">
+  <h3>⚙️ פירוט פיצ'רים — מנהל</h3>
+  <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 16px; color: #ccc; font-size: 13px; line-height: 2;">
+    <strong style="color: #c9a84c;">דשבורד:</strong> סיכום יומי — הזמנות, הכנסות, ממוצע הזמנה, הזמנות לפי סטטוס<br>
+    <strong style="color: #c9a84c;">הזמנות:</strong> קנבן זהה לעובדים + סימון "שולם"<br>
+    <strong style="color: #c9a84c;">תפריט:</strong> הוספה/עריכה/מחיקת מנות, תמונות, מחירים, קטגוריות, תגיות<br>
+    <strong style="color: #c9a84c;">עובדים:</strong> כרטיסים — שם, תמונה, תפקיד, טלפון, שכר (שעתי/יומי), תאריך התחלה, הערות, מסמכים, ימי חופש, סטטוס. WhatsApp + חיוג. צ'ק-אין ידני (עקיפת GPS).<br>
+    <strong style="color: #c9a84c;">תכנית עבודה:</strong> טבלה שבועית (עובדים × ימים). שעות משמרת מוגדרות. העתקת שבוע.<br>
+    <strong style="color: #c9a84c;">ארוחת שישי:</strong> אוטומטית כל שבוע. תפריט מיוחד עם מחירים. ביטול שישי ספציפי. שעת מעבר לתפריט שישי. צפייה בהזמנות מראש.<br>
+    <strong style="color: #c9a84c;">דוחות כספיים:</strong> גרפים מפורטים — הכנסות, הוצאות לפי קטגוריה (עוגה), רווח לאורך זמן. סינון תאריכים. 3 סוגי הוצאות: עובדים (אוטומטי), חוזרות (תדירות), חד-פעמיות.<br>
+    <strong style="color: #c9a84c;">הגדרות:</strong> PIN מנהל + עובדים, מיקום מסעדה (דינמי), מספר שולחנות (דינמי + QR), שעות פתיחה, שעות משמרות, שעת מעבר תפריט שישי, הפעלת/השבתת תצוגת שכר לעובדים
+  </div>
+</div>
+
+<div style="text-align: center; margin-top: 32px; padding: 20px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 12px;">
+  <div style="color: #c9a84c; font-size: 16px; font-weight: 600;">✅ זה העיצוב הסופי</div>
+  <div style="color: #aaa; font-size: 13px; margin-top: 8px;">אם הכל מתאים — אני ממשיך לכתוב את מסמך הספק המלא</div>
+</div>

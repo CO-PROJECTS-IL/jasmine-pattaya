@@ -36,7 +36,7 @@ export default function StaffLogin() {
           {mode === 'admin' ? t('staff.adminLogin') : t('staff.employeeLogin')}
         </h1>
         <p className="text-gray-400 text-sm mb-8">{t('staff.enterPin')}</p>
-        <PinInput length={4} onComplete={handleSubmit} disabled={loading} />
+        <PinInput onSubmit={handleSubmit} title="" loading={loading} />
         {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
         <button
           onClick={() => { setMode(null); setError('') }}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { Order, OrderStatus } from '../../lib/constants'
+import type { Order, OrderStatus, OrderItem } from '../../lib/types'
 
 interface OrderCardProps {
   order: Order
@@ -34,15 +34,15 @@ function getNextStatus(current: OrderStatus): OrderStatus | null {
 }
 
 export default function OrderCard({ order, onUpdateStatus }: OrderCardProps) {
-  const { t, i18n } = useTranslation()
-  const [minutesAgo, setMinutesAgo] = useState(getMinutesAgo(order.createdAt))
+  const { t } = useTranslation()
+  const [minutesAgo, setMinutesAgo] = useState(getMinutesAgo(order.created_at))
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMinutesAgo(getMinutesAgo(order.createdAt))
+      setMinutesAgo(getMinutesAgo(order.created_at))
     }, 30000)
     return () => clearInterval(interval)
-  }, [order.createdAt])
+  }, [order.created_at])
 
   const nextStatus = getNextStatus(order.status)
   const isPulsing = order.status === 'new' && minutesAgo >= 10
@@ -71,7 +71,7 @@ export default function OrderCard({ order, onUpdateStatus }: OrderCardProps) {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className="text-2xl font-bold text-white">
-            {t('kitchen.table')} {order.tableNumber}
+            {t('kitchen.table')} {order.table_number}
           </span>
           <span className="text-sm text-gray-400">
             {minutesAgo} {t('kitchen.minutesAgo')}
@@ -88,11 +88,11 @@ export default function OrderCard({ order, onUpdateStatus }: OrderCardProps) {
       </div>
 
       <div className="space-y-1 mb-3">
-        {order.items.map((item) => (
+        {(order.items || []).map((item: OrderItem) => (
           <div key={item.id} className="flex justify-between text-sm">
             <span className="text-white">
               {item.quantity}x{' '}
-              {i18n.language === 'he' ? item.nameHe : item.nameEn}
+              {item.dish_id}
             </span>
           </div>
         ))}

@@ -195,7 +195,7 @@ export default function ReportsPage() {
                 <Tooltip
                   contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c9a84c33', borderRadius: 8 }}
                   itemStyle={{ color: '#fff' }}
-                  formatter={(value: number) => [`฿${value.toLocaleString()}`, '']}
+                  formatter={(value: any) => [`฿${Number(value).toLocaleString()}`, '']}
                 />
                 <Legend
                   iconSize={10}

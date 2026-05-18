@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function OrderKanbanCard({ order, onStatusChange }: Props) {
-  const { i18n } = useTranslation()
+  useTranslation()
   const currentIndex = ORDER_STATUSES.indexOf(order.status as any)
   const canAdvance = currentIndex < ORDER_STATUSES.length - 1
   const canRevert = currentIndex > 0

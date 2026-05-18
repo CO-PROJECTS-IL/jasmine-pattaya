@@ -5,21 +5,25 @@ import CustomerLayout from './components/layout/CustomerLayout'
 import TableEntry from './pages/customer/TableEntry'
 import Menu from './pages/customer/Menu'
 import OrderConfirmation from './pages/customer/OrderConfirmation'
-import OrderHistory from './pages/customer/OrderHistory'
-import LoyaltyJoin from './pages/customer/LoyaltyJoin'
-import Events from './pages/customer/Events'
+import FridayDinner from './pages/customer/FridayDinner'
 
-const KitchenLayout = lazy(() => import('./components/layout/KitchenLayout'))
-const KitchenLogin = lazy(() => import('./pages/kitchen/KitchenLogin'))
-const KitchenBoard = lazy(() => import('./pages/kitchen/KitchenBoard'))
+const StaffLogin = lazy(() => import('./pages/staff/StaffLogin'))
+const EmployeeLayout = lazy(() => import('./components/layout/EmployeeLayout'))
+const EmployeeDashboard = lazy(() => import('./pages/employee/EmployeeDashboard'))
+const EmployeeNewOrder = lazy(() => import('./pages/employee/EmployeeNewOrder'))
+const EmployeeSchedule = lazy(() => import('./pages/employee/EmployeeSchedule'))
+const AdminHome = lazy(() => import('./pages/admin/AdminHome'))
 const AdminLayout = lazy(() => import('./components/layout/AdminLayout'))
-const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'))
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const MenuManager = lazy(() => import('./pages/admin/MenuManager'))
 const DishEditor = lazy(() => import('./pages/admin/DishEditor'))
-const EventManager = lazy(() => import('./pages/admin/EventManager'))
-const MembersList = lazy(() => import('./pages/admin/MembersList'))
 const OrdersManager = lazy(() => import('./pages/admin/OrdersManager'))
+const EmployeeManager = lazy(() => import('./pages/admin/EmployeeManager'))
+const EmployeeDetail = lazy(() => import('./pages/admin/EmployeeDetail'))
+const ScheduleManager = lazy(() => import('./pages/admin/ScheduleManager'))
+const FridayManager = lazy(() => import('./pages/admin/FridayManager'))
+const ReportsPage = lazy(() => import('./pages/admin/ReportsPage'))
+const ExpensesManager = lazy(() => import('./pages/admin/ExpensesManager'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const QRCodes = lazy(() => import('./pages/admin/QRCodes'))
 
@@ -31,7 +35,11 @@ function LazyFallback() {
   )
 }
 
-function ProtectedRoute({ children, requiredRole, loginPath }: { children: ReactNode; requiredRole: 'kitchen' | 'admin'; loginPath: string }) {
+function ProtectedRoute({ children, requiredRole, loginPath }: {
+  children: ReactNode
+  requiredRole: 'employee' | 'admin'
+  loginPath: string
+}) {
   const role = useAuthStore((s) => s.role)
   if (role !== requiredRole && role !== 'admin') {
     return <Navigate to={loginPath} replace />
@@ -39,50 +47,59 @@ function ProtectedRoute({ children, requiredRole, loginPath }: { children: React
   return <>{children}</>
 }
 
+function AdminPage({ children }: { children: ReactNode }) {
+  return (
+    <ProtectedRoute requiredRole="admin" loginPath="/staff">
+      <AdminLayout>{children}</AdminLayout>
+    </ProtectedRoute>
+  )
+}
+
 export default function App() {
   return (
     <HashRouter>
       <Suspense fallback={<LazyFallback />}>
         <Routes>
+          {/* Customer */}
           <Route path="/" element={<TableEntry />} />
-
           <Route path="/menu" element={<CustomerLayout><Menu /></CustomerLayout>} />
           <Route path="/order-confirmation" element={<CustomerLayout><OrderConfirmation /></CustomerLayout>} />
-          <Route path="/history" element={<CustomerLayout><OrderHistory /></CustomerLayout>} />
-          <Route path="/loyalty" element={<CustomerLayout><LoyaltyJoin /></CustomerLayout>} />
-          <Route path="/events" element={<CustomerLayout><Events /></CustomerLayout>} />
+          <Route path="/friday-dinner" element={<CustomerLayout><FridayDinner /></CustomerLayout>} />
 
-          <Route path="/kitchen" element={<KitchenLogin />} />
-          <Route
-            path="/kitchen/board"
-            element={
-              <ProtectedRoute requiredRole="kitchen" loginPath="/kitchen">
-                <KitchenLayout><KitchenBoard /></KitchenLayout>
-              </ProtectedRoute>
-            }
-          />
+          {/* Staff Login */}
+          <Route path="/staff" element={<StaffLogin />} />
 
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route
-            path="/admin/*"
-            element={
-              <ProtectedRoute requiredRole="admin" loginPath="/admin">
-                <AdminLayout>
-                  <Routes>
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="menu" element={<MenuManager />} />
-                    <Route path="menu/:id" element={<DishEditor />} />
-                    <Route path="orders" element={<OrdersManager />} />
-                    <Route path="events" element={<EventManager />} />
-                    <Route path="members" element={<MembersList />} />
-                    <Route path="settings" element={<Settings />} />
-                    <Route path="qrcodes" element={<QRCodes />} />
-                    <Route path="*" element={<Navigate to="dashboard" replace />} />
-                  </Routes>
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
+          {/* Employee */}
+          <Route path="/employee" element={
+            <ProtectedRoute requiredRole="employee" loginPath="/staff">
+              <EmployeeLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<EmployeeDashboard />} />
+            <Route path="new-order" element={<EmployeeNewOrder />} />
+            <Route path="schedule" element={<EmployeeSchedule />} />
+          </Route>
+
+          {/* Admin Home */}
+          <Route path="/admin" element={
+            <ProtectedRoute requiredRole="admin" loginPath="/staff">
+              <AdminHome />
+            </ProtectedRoute>
+          } />
+
+          {/* Admin Sub-pages */}
+          <Route path="/admin/dashboard" element={<AdminPage><Dashboard /></AdminPage>} />
+          <Route path="/admin/orders" element={<AdminPage><OrdersManager /></AdminPage>} />
+          <Route path="/admin/menu" element={<AdminPage><MenuManager /></AdminPage>} />
+          <Route path="/admin/menu/:id" element={<AdminPage><DishEditor /></AdminPage>} />
+          <Route path="/admin/employees" element={<AdminPage><EmployeeManager /></AdminPage>} />
+          <Route path="/admin/employees/:id" element={<AdminPage><EmployeeDetail /></AdminPage>} />
+          <Route path="/admin/schedule" element={<AdminPage><ScheduleManager /></AdminPage>} />
+          <Route path="/admin/friday" element={<AdminPage><FridayManager /></AdminPage>} />
+          <Route path="/admin/reports" element={<AdminPage><ReportsPage /></AdminPage>} />
+          <Route path="/admin/expenses" element={<AdminPage><ExpensesManager /></AdminPage>} />
+          <Route path="/admin/settings" element={<AdminPage><Settings /></AdminPage>} />
+          <Route path="/admin/qr-codes" element={<AdminPage><QRCodes /></AdminPage>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -1,31 +1,54 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { callEdgeFunction } from '../../lib/supabase'
+import { supabase, callEdgeFunction, isSupabaseConfigured } from '../../lib/supabase'
 import { uploadImage } from '../../lib/cloudinary'
 import type { Employee } from '../../lib/types'
 import { EMPLOYEE_ROLES } from '../../lib/constants'
 
-interface Props {
-  employee?: Employee
-  onClose: () => void
-}
-
-export default function EmployeeDetail({ employee, onClose }: Props) {
+export default function EmployeeDetail() {
+  const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
   const { t } = useTranslation()
-  const isNew = !employee
+  const isNew = id === 'new'
   const [saving, setSaving] = useState(false)
+  const [employee, setEmployee] = useState<Employee | null>(null)
   const [form, setForm] = useState({
-    full_name: employee?.full_name || '',
-    phone: employee?.phone || '',
-    role: employee?.role || 'waiter',
-    photo_url: employee?.photo_url || '',
-    pay_type: employee?.pay_type || 'daily',
-    pay_rate: employee?.pay_rate || 0,
-    start_date: employee?.start_date || new Date().toISOString().split('T')[0],
-    notes: employee?.notes || '',
-    vacation_days: employee?.vacation_days || 0,
-    is_active: employee?.is_active ?? true,
+    full_name: '',
+    phone: '',
+    role: 'waiter',
+    photo_url: '',
+    pay_type: 'daily',
+    pay_rate: 0,
+    start_date: new Date().toISOString().split('T')[0],
+    notes: '',
+    vacation_days: 0,
+    is_active: true,
   })
+
+  useEffect(() => {
+    const load = async () => {
+      if (!isNew && id && isSupabaseConfigured) {
+        const { data } = await supabase.from('employees').select('*').eq('id', id).single()
+        if (data) {
+          setEmployee(data)
+          setForm({
+            full_name: data.full_name || '',
+            phone: data.phone || '',
+            role: data.role || 'waiter',
+            photo_url: data.photo_url || '',
+            pay_type: data.pay_type || 'daily',
+            pay_rate: data.pay_rate || 0,
+            start_date: data.start_date || new Date().toISOString().split('T')[0],
+            notes: data.notes || '',
+            vacation_days: data.vacation_days || 0,
+            is_active: data.is_active ?? true,
+          })
+        }
+      }
+    }
+    load()
+  }, [id, isNew])
 
   const update = (key: string, value: any) => setForm((f) => ({ ...f, [key]: value }))
 
@@ -48,8 +71,7 @@ export default function EmployeeDetail({ employee, onClose }: Props) {
         id: employee?.id,
         data: form,
       })
-      onClose()
-      window.location.reload()
+      navigate('/admin/employees')
     } catch (err) {
       console.error(err)
     }
@@ -151,7 +173,7 @@ export default function EmployeeDetail({ employee, onClose }: Props) {
         )}
 
         <div className="flex gap-3 pt-4">
-          <button onClick={onClose} className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10">{t('common.cancel')}</button>
+          <button onClick={() => navigate('/admin/employees')} className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10">{t('common.cancel')}</button>
           <button onClick={handleSave} disabled={saving || !form.full_name}
             className="flex-1 py-2 bg-[#c9a84c] text-black rounded-lg font-medium hover:bg-[#d4b96a] disabled:opacity-50">
             {saving ? t('common.loading') : t('common.save')}

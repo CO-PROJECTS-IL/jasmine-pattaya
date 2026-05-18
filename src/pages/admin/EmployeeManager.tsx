@@ -1,17 +1,15 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { supabase, isSupabaseConfigured, callEdgeFunction } from '../../lib/supabase'
+import { supabase, isSupabaseConfigured } from '../../lib/supabase'
 import AdminLayout from '../../components/layout/AdminLayout'
 import type { Employee } from '../../lib/types'
-import EmployeeDetail from './EmployeeDetail'
 
 export default function EmployeeManager() {
   const { t } = useTranslation()
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [creating, setCreating] = useState(false)
+  const navigate = useNavigate()
 
-  const { data: employees = [], isLoading } = useQuery({
+  const { data: employees = [] } = useQuery({
     queryKey: ['employees'],
     queryFn: async (): Promise<Employee[]> => {
       if (!isSupabaseConfigured) return []
@@ -21,25 +19,12 @@ export default function EmployeeManager() {
     },
   })
 
-  const selected = employees.find((e) => e.id === selectedId)
-
-  if (selectedId || creating) {
-    return (
-      <AdminLayout>
-        <EmployeeDetail
-          employee={creating ? undefined : selected}
-          onClose={() => { setSelectedId(null); setCreating(false) }}
-        />
-      </AdminLayout>
-    )
-  }
-
   return (
     <AdminLayout>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl text-[#c9a84c]">{t('adminHome.employees')}</h1>
         <button
-          onClick={() => setCreating(true)}
+          onClick={() => navigate('/admin/employees/new')}
           className="px-4 py-2 bg-[#c9a84c] text-black rounded-lg text-sm font-medium hover:bg-[#d4b96a]"
         >
           {t('employees.addEmployee')}
@@ -50,7 +35,7 @@ export default function EmployeeManager() {
         {employees.map((emp) => (
           <div
             key={emp.id}
-            onClick={() => setSelectedId(emp.id)}
+            onClick={() => navigate(`/admin/employees/${emp.id}`)}
             className="flex items-center gap-3 p-4 bg-[#121212] border border-white/5 rounded-xl cursor-pointer hover:border-[#c9a84c]/20 transition-colors"
           >
             <div className="w-12 h-12 rounded-full bg-[#c9a84c]/20 flex items-center justify-center text-[#c9a84c] font-bold text-lg">

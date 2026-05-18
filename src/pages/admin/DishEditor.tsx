@@ -1,34 +1,66 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { callEdgeFunction } from '../../lib/supabase'
+import { supabase, callEdgeFunction, isSupabaseConfigured } from '../../lib/supabase'
 import { uploadImage } from '../../lib/cloudinary'
 import type { Dish, Category } from '../../lib/types'
 
-interface DishEditorProps {
-  dish?: Dish
-  categories: Category[]
-  onClose: () => void
-}
-
-export default function DishEditor({ dish, categories, onClose }: DishEditorProps) {
+export default function DishEditor() {
+  const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
   const { t } = useTranslation()
-  const isNew = !dish
+  const isNew = id === 'new'
   const [saving, setSaving] = useState(false)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [dish, setDish] = useState<Dish | null>(null)
   const [form, setForm] = useState({
-    name_he: dish?.name_he || '',
-    name_en: dish?.name_en || '',
-    name_th: dish?.name_th || '',
-    description_he: dish?.description_he || '',
-    description_en: dish?.description_en || '',
-    description_th: dish?.description_th || '',
-    price: dish?.price || 0,
-    category_id: dish?.category_id || categories[0]?.id || '',
-    image_url: dish?.image_url || '',
-    is_kosher: dish?.is_kosher || false,
-    is_spicy: dish?.is_spicy || false,
-    is_vegetarian: dish?.is_vegetarian || false,
-    is_available: dish?.is_available ?? true,
+    name_he: '',
+    name_en: '',
+    name_th: '',
+    description_he: '',
+    description_en: '',
+    description_th: '',
+    price: 0,
+    category_id: '',
+    image_url: '',
+    is_kosher: false,
+    is_spicy: false,
+    is_vegetarian: false,
+    is_available: true,
   })
+
+  useEffect(() => {
+    const load = async () => {
+      if (!isSupabaseConfigured) return
+      const { data: cats } = await supabase.from('categories').select('*').order('sort_order')
+      if (cats) setCategories(cats)
+
+      if (!isNew && id) {
+        const { data } = await supabase.from('dishes').select('*').eq('id', id).single()
+        if (data) {
+          setDish(data)
+          setForm({
+            name_he: data.name_he || '',
+            name_en: data.name_en || '',
+            name_th: data.name_th || '',
+            description_he: data.description_he || '',
+            description_en: data.description_en || '',
+            description_th: data.description_th || '',
+            price: data.price || 0,
+            category_id: data.category_id || '',
+            image_url: data.image_url || '',
+            is_kosher: data.is_kosher || false,
+            is_spicy: data.is_spicy || false,
+            is_vegetarian: data.is_vegetarian || false,
+            is_available: data.is_available ?? true,
+          })
+        }
+      } else if (cats && cats.length > 0) {
+        setForm((f) => ({ ...f, category_id: cats[0].id }))
+      }
+    }
+    load()
+  }, [id, isNew])
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -49,8 +81,7 @@ export default function DishEditor({ dish, categories, onClose }: DishEditorProp
         id: dish?.id,
         data: form,
       })
-      onClose()
-      window.location.reload()
+      navigate('/admin/menu')
     } catch (err) {
       console.error(err)
     }
@@ -140,7 +171,7 @@ export default function DishEditor({ dish, categories, onClose }: DishEditorProp
 
         <div className="flex gap-3 pt-4">
           <button
-            onClick={onClose}
+            onClick={() => navigate('/admin/menu')}
             className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 transition-colors"
           >
             {t('common.cancel')}

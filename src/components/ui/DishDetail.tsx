@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { Dish } from '../../lib/constants'
+import type { Dish } from '../../lib/types'
 
 interface DishDetailProps {
   dish: Dish | null
@@ -9,14 +9,14 @@ interface DishDetailProps {
 }
 
 function getDishName(dish: Dish, lang: string) {
-  if (lang === 'he') return dish.nameHe
-  if (lang === 'th') return dish.nameTh
-  return dish.nameEn
+  if (lang === 'he') return dish.name_he
+  if (lang === 'th') return dish.name_th
+  return dish.name_en
 }
 
 function getDishDescription(dish: Dish, lang: string) {
-  if (lang === 'he') return dish.descriptionHe
-  return dish.descriptionEn
+  if (lang === 'he') return dish.description_he
+  return dish.description_en
 }
 
 export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailProps) {
@@ -38,10 +38,10 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div className="absolute inset-0 bg-black/80" onClick={onClose} />
       <div className="relative w-full max-w-lg bg-[#121212] rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto">
-        {dish.imageUrl ? (
+        {dish.image_url ? (
           <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
             <img
-              src={dish.imageUrl}
+              src={dish.image_url}
               alt={name}
               className="w-full h-full object-cover"
             />
@@ -51,7 +51,7 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
             >
               &times;
             </button>
-            {dish.kosher && (
+            {dish.is_kosher && (
               <span className="absolute top-3 start-3 bg-green-600 text-white text-sm px-3 py-1 rounded-full">
                 {t('menu.kosher')}
               </span>

@@ -1,0 +1,55 @@
+<h2>איך המנהל מנהל הוצאות ורואה דוחות?</h2>
+<p class="subtitle">ביקשת מעקב הכנסות, הוצאות עובדים, הוצאות נוספות עם תדירות, ודוחות. בוא נפרט.</p>
+
+<h3 style="margin-top: 24px; color: #c9a84c;">סוגי הוצאות</h3>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="employee-auto" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>עלות עובדים — חישוב אוטומטי</h3>
+      <p>המערכת מחשבת אוטומטית את עלות העובדים לפי שעות הנוכחות × שכר שעתי/יומי. המנהל לא צריך להזין ידנית.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="recurring" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>הוצאות חוזרות</h3>
+      <p>שכירות, חשמל, מים, ביטוח וכו'. המנהל מגדיר: שם, סכום, תדירות (יומי/שבועי/חודשי/שנתי), תאריך התחלה. המערכת מחשבת אוטומטית לכל תקופה.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="onetime" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>הוצאות חד-פעמיות</h3>
+      <p>קניית ציוד, תיקון, רכישת סחורה וכו'. המנהל מזין: שם, סכום, תאריך, קטגוריה (אופציונלי).</p>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top: 32px;">בחר את כל סוגי ההוצאות שאתה צריך (אפשר לבחור מספר אפשרויות)</p>
+
+<h3 style="margin-top: 32px; color: #c9a84c;">תצוגת דוחות</h3>
+
+<div class="options">
+  <div class="option" data-choice="simple-summary" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>סיכום פשוט — מספרים + גרף אחד</h3>
+      <p>כרטיסי סיכום: הכנסות, הוצאות, רווח נקי. גרף עמודות של הכנסות מול הוצאות לפי ימים/חודשים. טבלת הוצאות מפורטת.</p>
+      <p style="color: #888; font-size: 12px;">פשוט ונקי. מבט מהיר על המצב הכספי. מתאים לשימוש יומי.</p>
+      <p style="color: #c9a84c; font-size: 12px;">⭐ מומלץ</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="detailed-dashboard" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>דשבורד מפורט — מספר גרפים</h3>
+      <p>כרטיסי סיכום + גרף הכנסות, גרף הוצאות לפי קטגוריה (עוגה), גרף רווח לאורך זמן, פירוט עלות עובדים. אפשרות סינון לפי תאריכים.</p>
+      <p style="color: #888; font-size: 12px;">מקיף ומפורט. נותן תמונה מלאה. אבל יותר עמוס.</p>
+    </div>
+  </div>
+</div>
