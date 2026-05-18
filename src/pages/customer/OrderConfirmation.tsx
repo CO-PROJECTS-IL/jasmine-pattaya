@@ -36,9 +36,10 @@ export default function OrderConfirmation() {
       )}
 
       {total > 0 && (
-        <p className="text-2xl text-[#c9a84c] font-bold mb-8">
-          ฿{total}
-        </p>
+        <div className="mb-8 text-center">
+          <p className="text-2xl text-[#c9a84c] font-bold">฿{total}</p>
+          <p className="text-gray-500 text-sm mt-1">{t('order.excludingService')}</p>
+        </div>
       )}
 
       <div className="space-y-3 w-full max-w-xs">
