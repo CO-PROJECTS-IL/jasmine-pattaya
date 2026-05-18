@@ -1,0 +1,167 @@
+{
+  "common": {
+    "appName": "Jasmine",
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "back": "Back",
+    "close": "Close",
+    "search": "Search",
+    "noResults": "No results found",
+    "offline": "No internet connection",
+    "orderQueued": "Order will be sent when connection is restored",
+    "install": "Install App",
+    "installHint": "Add to home screen for quick access"
+  },
+  "nav": {
+    "menu": "Menu",
+    "history": "History",
+    "loyalty": "Club",
+    "events": "Events",
+    "kitchen": "Kitchen",
+    "admin": "Admin"
+  },
+  "table": {
+    "title": "Jasmine",
+    "subtitle": "Israeli Restaurant in Pattaya",
+    "enterTable": "Enter table number",
+    "placeholder": "Table number",
+    "submit": "View Menu",
+    "invalid": "Invalid table number (1-30)"
+  },
+  "menu": {
+    "title": "Menu",
+    "addToCart": "Add to Order",
+    "addedToCart": "Added to Order",
+    "viewCart": "View Order",
+    "kosher": "Kosher",
+    "spicy": "Spicy",
+    "vegetarian": "Vegetarian",
+    "noImage": "No image",
+    "askPrice": "Ask price",
+    "emptyCategory": "No dishes in this category",
+    "comingSoon": "Coming soon..."
+  },
+  "cart": {
+    "title": "My Order",
+    "empty": "Order is empty",
+    "table": "Table",
+    "notes": "Notes",
+    "notesPlaceholder": "Special notes...",
+    "total": "Total",
+    "discount": "Discount",
+    "submit": "Submit Order",
+    "clear": "Clear Order",
+    "removeItem": "Remove item",
+    "quantity": "Quantity"
+  },
+  "order": {
+    "confirmation": "Order Confirmation",
+    "orderNumber": "Order Number",
+    "thankYou": "Thank you for your order!",
+    "newOrder": "New Order",
+    "viewHistory": "View History"
+  },
+  "history": {
+    "title": "Order History",
+    "enterPhone": "Enter phone number",
+    "phonePlaceholder": "Phone number",
+    "noOrders": "No orders found",
+    "orderDate": "Date",
+    "orderTotal": "Total",
+    "orderStatus": "Status"
+  },
+  "loyalty": {
+    "title": "Loyalty Club",
+    "joinClub": "Join the Club",
+    "name": "Full Name",
+    "phone": "Phone",
+    "email": "Email",
+    "submit": "Join",
+    "alreadyMember": "Already a member?",
+    "welcome": "Welcome to the club!",
+    "discount": "Club member discount"
+  },
+  "events": {
+    "title": "Events",
+    "noEvents": "No upcoming events",
+    "bookNow": "Book Now",
+    "guests": "Number of Guests",
+    "date": "Date",
+    "time": "Time",
+    "pricePerPerson": "Price per Person",
+    "book": "Book",
+    "bookingConfirmed": "Booking confirmed!"
+  },
+  "kitchen": {
+    "title": "Kitchen Display",
+    "login": "Kitchen Login",
+    "enterPin": "Enter kitchen PIN",
+    "noOrders": "No orders",
+    "newOrder": "New Order",
+    "preparing": "Preparing",
+    "ready": "Ready",
+    "served": "Served",
+    "markPreparing": "Mark Preparing",
+    "markReady": "Mark Ready",
+    "table": "Table",
+    "items": "Items",
+    "notes": "Notes",
+    "minutesAgo": "min ago",
+    "comingSoon": "Coming soon..."
+  },
+  "admin": {
+    "title": "Admin",
+    "login": "Admin Login",
+    "enterPin": "Enter admin PIN",
+    "dashboard": "Dashboard",
+    "menuManage": "Menu Management",
+    "orders": "Orders",
+    "events": "Events",
+    "members": "Members",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "todayOrders": "Today's Orders",
+    "todayRevenue": "Today's Revenue",
+    "avgOrder": "Average Order",
+    "ordersByStatus": "Orders by Status",
+    "revenueChart": "Revenue Chart",
+    "ordersChart": "Orders Chart"
+  },
+  "menuManage": {
+    "addDish": "Add Dish",
+    "editDish": "Edit Dish",
+    "dishName": "Dish Name",
+    "description": "Description",
+    "price": "Price",
+    "category": "Category",
+    "image": "Image",
+    "available": "Available",
+    "kosher": "Kosher",
+    "spicy": "Spicy",
+    "vegetarian": "Vegetarian",
+    "save": "Save",
+    "delete": "Delete",
+    "confirmDelete": "Delete this dish?"
+  },
+  "settings": {
+    "openingHours": "Opening Hours",
+    "closedDates": "Closed Dates",
+    "adminPin": "Admin PIN",
+    "kitchenPin": "Kitchen PIN",
+    "clubDiscount": "Club Discount (%)",
+    "save": "Save",
+    "saved": "Saved successfully"
+  },
+  "status": {
+    "new": "New",
+    "preparing": "Preparing",
+    "ready": "Ready",
+    "served": "Served",
+    "paid": "Paid"
+  }
+}

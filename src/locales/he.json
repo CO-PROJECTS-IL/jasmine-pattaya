@@ -1,0 +1,167 @@
+{
+  "common": {
+    "appName": "יסמין",
+    "loading": "טוען...",
+    "error": "שגיאה",
+    "save": "שמור",
+    "cancel": "ביטול",
+    "confirm": "אישור",
+    "delete": "מחק",
+    "back": "חזור",
+    "close": "סגור",
+    "search": "חיפוש",
+    "noResults": "לא נמצאו תוצאות",
+    "offline": "אין חיבור לאינטרנט",
+    "orderQueued": "ההזמנה תישלח כשהחיבור יחזור",
+    "install": "התקן אפליקציה",
+    "installHint": "הוסף למסך הבית לגישה מהירה"
+  },
+  "nav": {
+    "menu": "תפריט",
+    "history": "היסטוריה",
+    "loyalty": "מועדון",
+    "events": "אירועים",
+    "kitchen": "מטבח",
+    "admin": "ניהול"
+  },
+  "table": {
+    "title": "יסמין",
+    "subtitle": "מסעדה ישראלית בפאטייה",
+    "enterTable": "הזן מספר שולחן",
+    "placeholder": "מספר שולחן",
+    "submit": "כניסה לתפריט",
+    "invalid": "מספר שולחן לא תקין (1-30)"
+  },
+  "menu": {
+    "title": "תפריט",
+    "addToCart": "הוסף להזמנה",
+    "addedToCart": "נוסף להזמנה",
+    "viewCart": "צפה בהזמנה",
+    "kosher": "כשר",
+    "spicy": "חריף",
+    "vegetarian": "צמחוני",
+    "noImage": "אין תמונה",
+    "askPrice": "שאל מחיר",
+    "emptyCategory": "אין מנות בקטגוריה זו",
+    "comingSoon": "בקרוב..."
+  },
+  "cart": {
+    "title": "ההזמנה שלי",
+    "empty": "ההזמנה ריקה",
+    "table": "שולחן",
+    "notes": "הערות",
+    "notesPlaceholder": "הערות מיוחדות...",
+    "total": "סה\"כ",
+    "discount": "הנחה",
+    "submit": "שלח הזמנה",
+    "clear": "נקה הזמנה",
+    "removeItem": "הסר פריט",
+    "quantity": "כמות"
+  },
+  "order": {
+    "confirmation": "אישור הזמנה",
+    "orderNumber": "מספר הזמנה",
+    "thankYou": "תודה על הזמנתך!",
+    "newOrder": "הזמנה חדשה",
+    "viewHistory": "צפה בהיסטוריה"
+  },
+  "history": {
+    "title": "היסטוריית הזמנות",
+    "enterPhone": "הזן מספר טלפון",
+    "phonePlaceholder": "מספר טלפון",
+    "noOrders": "לא נמצאו הזמנות",
+    "orderDate": "תאריך",
+    "orderTotal": "סה\"כ",
+    "orderStatus": "סטטוס"
+  },
+  "loyalty": {
+    "title": "מועדון לקוחות",
+    "joinClub": "הצטרף למועדון",
+    "name": "שם מלא",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "submit": "הצטרף",
+    "alreadyMember": "כבר חבר מועדון?",
+    "welcome": "ברוך הבא למועדון!",
+    "discount": "הנחת חברי מועדון"
+  },
+  "events": {
+    "title": "אירועים",
+    "noEvents": "אין אירועים קרובים",
+    "bookNow": "הזמן עכשיו",
+    "guests": "מספר אורחים",
+    "date": "תאריך",
+    "time": "שעה",
+    "pricePerPerson": "מחיר לאדם",
+    "book": "הזמן",
+    "bookingConfirmed": "ההזמנה אושרה!"
+  },
+  "kitchen": {
+    "title": "מסך מטבח",
+    "login": "כניסת מטבח",
+    "enterPin": "הזן קוד מטבח",
+    "noOrders": "אין הזמנות",
+    "newOrder": "הזמנה חדשה",
+    "preparing": "בהכנה",
+    "ready": "מוכן",
+    "served": "הוגש",
+    "markPreparing": "סמן בהכנה",
+    "markReady": "סמן מוכן",
+    "table": "שולחן",
+    "items": "פריטים",
+    "notes": "הערות",
+    "minutesAgo": "דקות",
+    "comingSoon": "בקרוב..."
+  },
+  "admin": {
+    "title": "ניהול",
+    "login": "כניסת מנהל",
+    "enterPin": "הזן קוד מנהל",
+    "dashboard": "לוח בקרה",
+    "menuManage": "ניהול תפריט",
+    "orders": "הזמנות",
+    "events": "אירועים",
+    "members": "חברי מועדון",
+    "settings": "הגדרות"
+  },
+  "dashboard": {
+    "todayOrders": "הזמנות היום",
+    "todayRevenue": "הכנסות היום",
+    "avgOrder": "הזמנה ממוצעת",
+    "ordersByStatus": "הזמנות לפי סטטוס",
+    "revenueChart": "גרף הכנסות",
+    "ordersChart": "גרף הזמנות"
+  },
+  "menuManage": {
+    "addDish": "הוסף מנה",
+    "editDish": "ערוך מנה",
+    "dishName": "שם המנה",
+    "description": "תיאור",
+    "price": "מחיר",
+    "category": "קטגוריה",
+    "image": "תמונה",
+    "available": "זמין",
+    "kosher": "כשר",
+    "spicy": "חריף",
+    "vegetarian": "צמחוני",
+    "save": "שמור",
+    "delete": "מחק",
+    "confirmDelete": "האם למחוק את המנה?"
+  },
+  "settings": {
+    "openingHours": "שעות פתיחה",
+    "closedDates": "ימי סגירה",
+    "adminPin": "קוד מנהל",
+    "kitchenPin": "קוד מטבח",
+    "clubDiscount": "הנחת מועדון (%)",
+    "save": "שמור",
+    "saved": "נשמר בהצלחה"
+  },
+  "status": {
+    "new": "חדשה",
+    "preparing": "בהכנה",
+    "ready": "מוכנה",
+    "served": "הוגשה",
+    "paid": "שולמה"
+  }
+}

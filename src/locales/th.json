@@ -1,0 +1,167 @@
+{
+  "common": {
+    "appName": "จัสมิน",
+    "loading": "กำลังโหลด...",
+    "error": "ข้อผิดพลาด",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "confirm": "ยืนยัน",
+    "delete": "ลบ",
+    "back": "กลับ",
+    "close": "ปิด",
+    "search": "ค้นหา",
+    "noResults": "ไม่พบผลลัพธ์",
+    "offline": "ไม่มีการเชื่อมต่ออินเทอร์เน็ต",
+    "orderQueued": "คำสั่งซื้อจะถูกส่งเมื่อเชื่อมต่อกลับมา",
+    "install": "ติดตั้งแอป",
+    "installHint": "เพิ่มไปยังหน้าจอหลักเพื่อการเข้าถึงที่รวดเร็ว"
+  },
+  "nav": {
+    "menu": "เมนู",
+    "history": "ประวัติ",
+    "loyalty": "สมาชิก",
+    "events": "กิจกรรม",
+    "kitchen": "ครัว",
+    "admin": "ผู้ดูแล"
+  },
+  "table": {
+    "title": "จัสมิน",
+    "subtitle": "ร้านอาหารอิสราเอลในพัทยา",
+    "enterTable": "กรอกหมายเลขโต๊ะ",
+    "placeholder": "หมายเลขโต๊ะ",
+    "submit": "ดูเมนู",
+    "invalid": "หมายเลขโต๊ะไม่ถูกต้อง (1-30)"
+  },
+  "menu": {
+    "title": "เมนู",
+    "addToCart": "เพิ่มในออร์เดอร์",
+    "addedToCart": "เพิ่มในออร์เดอร์แล้ว",
+    "viewCart": "ดูออร์เดอร์",
+    "kosher": "โคเชอร์",
+    "spicy": "เผ็ด",
+    "vegetarian": "มังสวิรัติ",
+    "noImage": "ไม่มีรูปภาพ",
+    "askPrice": "สอบถามราคา",
+    "emptyCategory": "ไม่มีเมนูในหมวดนี้",
+    "comingSoon": "เร็วๆ นี้..."
+  },
+  "cart": {
+    "title": "ออร์เดอร์ของฉัน",
+    "empty": "ออร์เดอร์ว่าง",
+    "table": "โต๊ะ",
+    "notes": "หมายเหตุ",
+    "notesPlaceholder": "หมายเหตุพิเศษ...",
+    "total": "รวม",
+    "discount": "ส่วนลด",
+    "submit": "ส่งออร์เดอร์",
+    "clear": "ล้างออร์เดอร์",
+    "removeItem": "ลบรายการ",
+    "quantity": "จำนวน"
+  },
+  "order": {
+    "confirmation": "ยืนยันออร์เดอร์",
+    "orderNumber": "หมายเลขออร์เดอร์",
+    "thankYou": "ขอบคุณสำหรับออร์เดอร์!",
+    "newOrder": "ออร์เดอร์ใหม่",
+    "viewHistory": "ดูประวัติ"
+  },
+  "history": {
+    "title": "ประวัติออร์เดอร์",
+    "enterPhone": "กรอกหมายเลขโทรศัพท์",
+    "phonePlaceholder": "หมายเลขโทรศัพท์",
+    "noOrders": "ไม่พบออร์เดอร์",
+    "orderDate": "วันที่",
+    "orderTotal": "รวม",
+    "orderStatus": "สถานะ"
+  },
+  "loyalty": {
+    "title": "สมาชิกคลับ",
+    "joinClub": "สมัครสมาชิก",
+    "name": "ชื่อเต็ม",
+    "phone": "โทรศัพท์",
+    "email": "อีเมล",
+    "submit": "สมัคร",
+    "alreadyMember": "เป็นสมาชิกแล้ว?",
+    "welcome": "ยินดีต้อนรับสู่คลับ!",
+    "discount": "ส่วนลดสมาชิก"
+  },
+  "events": {
+    "title": "กิจกรรม",
+    "noEvents": "ไม่มีกิจกรรมที่กำลังจะมาถึง",
+    "bookNow": "จองเลย",
+    "guests": "จำนวนแขก",
+    "date": "วันที่",
+    "time": "เวลา",
+    "pricePerPerson": "ราคาต่อคน",
+    "book": "จอง",
+    "bookingConfirmed": "การจองได้รับการยืนยัน!"
+  },
+  "kitchen": {
+    "title": "หน้าจอครัว",
+    "login": "เข้าสู่ระบบครัว",
+    "enterPin": "กรอก PIN ครัว",
+    "noOrders": "ไม่มีออร์เดอร์",
+    "newOrder": "ออร์เดอร์ใหม่",
+    "preparing": "กำลังเตรียม",
+    "ready": "พร้อม",
+    "served": "เสิร์ฟแล้ว",
+    "markPreparing": "เตรียมอาหาร",
+    "markReady": "พร้อมเสิร์ฟ",
+    "table": "โต๊ะ",
+    "items": "รายการ",
+    "notes": "หมายเหตุ",
+    "minutesAgo": "นาทีที่แล้ว",
+    "comingSoon": "เร็วๆ นี้..."
+  },
+  "admin": {
+    "title": "ผู้ดูแล",
+    "login": "เข้าสู่ระบบผู้ดูแล",
+    "enterPin": "กรอก PIN ผู้ดูแล",
+    "dashboard": "แดชบอร์ด",
+    "menuManage": "จัดการเมนู",
+    "orders": "ออร์เดอร์",
+    "events": "กิจกรรม",
+    "members": "สมาชิก",
+    "settings": "ตั้งค่า"
+  },
+  "dashboard": {
+    "todayOrders": "ออร์เดอร์วันนี้",
+    "todayRevenue": "รายได้วันนี้",
+    "avgOrder": "ออร์เดอร์เฉลี่ย",
+    "ordersByStatus": "ออร์เดอร์ตามสถานะ",
+    "revenueChart": "กราฟรายได้",
+    "ordersChart": "กราฟออร์เดอร์"
+  },
+  "menuManage": {
+    "addDish": "เพิ่มเมนู",
+    "editDish": "แก้ไขเมนู",
+    "dishName": "ชื่อเมนู",
+    "description": "รายละเอียด",
+    "price": "ราคา",
+    "category": "หมวดหมู่",
+    "image": "รูปภาพ",
+    "available": "พร้อมจำหน่าย",
+    "kosher": "โคเชอร์",
+    "spicy": "เผ็ด",
+    "vegetarian": "มังสวิรัติ",
+    "save": "บันทึก",
+    "delete": "ลบ",
+    "confirmDelete": "ลบเมนูนี้?"
+  },
+  "settings": {
+    "openingHours": "เวลาเปิด-ปิด",
+    "closedDates": "วันหยุด",
+    "adminPin": "PIN ผู้ดูแล",
+    "kitchenPin": "PIN ครัว",
+    "clubDiscount": "ส่วนลดสมาชิก (%)",
+    "save": "บันทึก",
+    "saved": "บันทึกสำเร็จ"
+  },
+  "status": {
+    "new": "ใหม่",
+    "preparing": "กำลังเตรียม",
+    "ready": "พร้อม",
+    "served": "เสิร์ฟแล้ว",
+    "paid": "ชำระแล้ว"
+  }
+}
