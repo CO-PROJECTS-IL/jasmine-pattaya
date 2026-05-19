@@ -66,10 +66,11 @@ export default function BottomNav() {
           <NavLink
             key={tab.to}
             to={tab.to}
-            className="flex flex-col items-center py-3 px-4 text-xs transition-all duration-200"
+            className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs transition-all duration-200"
             style={({ isActive }) => ({
               color: isActive ? 'oklch(0.75 0.12 85)' : 'oklch(0.50 0.01 85)',
             })}
+            aria-label={tab.label}
           >
             {({ isActive }) => (
               <>
@@ -83,8 +84,9 @@ export default function BottomNav() {
           href={GOOGLE_MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center py-3 px-4 text-xs transition-all duration-200"
+          className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs transition-all duration-200"
           style={{ color: 'oklch(0.50 0.01 85)' }}
+          aria-label={t('nav.navigate')}
         >
           <NavIcon />
           <span className="mt-1">{t('nav.navigate')}</span>

@@ -6,11 +6,14 @@ import { useFridayStatus } from '../../hooks/useFridayStatus'
 import { useSettings } from '../../hooks/useSettings'
 import { useCartStore } from '../../stores/cartStore'
 import { callEdgeFunction } from '../../lib/supabase'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 import type { Dish } from '../../lib/types'
 
 export default function EmployeeNewOrder() {
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
+  const { toast, showToast } = useToast()
   const { data: settings } = useSettings()
   const { categories, dishes, getDishesByCategory } = useMenu()
   useFridayStatus()
@@ -26,13 +29,14 @@ export default function EmployeeNewOrder() {
   if (!selectedTable) {
     return (
       <div className="max-w-lg mx-auto">
-        <h2 className="text-xl text-[#c9a84c] mb-4 text-center">{t('employee.selectTable')}</h2>
+        <h2 className="text-xl mb-4 text-center" style={{ color: 'var(--gold)' }}>{t('employee.selectTable')}</h2>
         <div className="grid grid-cols-5 gap-2">
           {Array.from({ length: tableCount }, (_, i) => i + 1).map((num) => (
             <button
               key={num}
               onClick={() => setSelectedTable(num)}
-              className="py-3 bg-[#121212] border border-white/10 rounded-lg text-white text-lg hover:bg-[#c9a84c]/20 hover:border-[#c9a84c]/30 transition-colors"
+              className="py-3 rounded-lg text-lg transition-colors"
+              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
             >
               {num}
             </button>
@@ -69,7 +73,7 @@ export default function EmployeeNewOrder() {
       clear()
       navigate('/employee')
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בשליחת ההזמנה', 'error')
     }
     setSubmitting(false)
   }
@@ -80,10 +84,10 @@ export default function EmployeeNewOrder() {
   return (
     <div className="max-w-lg mx-auto pb-32">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl text-[#c9a84c]">
+        <h2 className="text-xl" style={{ color: 'var(--gold)' }}>
           {t('cart.table')} #{selectedTable}
         </h2>
-        <button onClick={() => setSelectedTable(null)} className="text-gray-400 text-sm hover:text-white">
+        <button onClick={() => setSelectedTable(null)} className="text-sm" style={{ color: 'var(--text-muted)' }}>
           {t('employee.selectTable')}
         </button>
       </div>
@@ -94,11 +98,12 @@ export default function EmployeeNewOrder() {
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-sm transition-colors ${
+            className="whitespace-nowrap px-3 py-1.5 rounded-lg text-sm transition-colors"
+            style={
               currentCategory === cat.id
-                ? 'bg-[#c9a84c]/20 text-[#c9a84c] border border-[#c9a84c]/30'
-                : 'bg-white/5 text-gray-400 border border-transparent'
-            }`}
+                ? { backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)', border: '1px solid oklch(0.75 0.12 85 / 0.3)' }
+                : { backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', border: '1px solid transparent' }
+            }
           >
             {(cat as any)[langKey]}
           </button>
@@ -108,14 +113,15 @@ export default function EmployeeNewOrder() {
       {/* Dishes */}
       <div className="space-y-2 mb-4">
         {currentDishes.map((dish) => (
-          <div key={dish.id} className="flex items-center justify-between p-3 bg-[#121212] border border-white/5 rounded-xl">
+          <div key={dish.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
             <div>
-              <p className="text-white text-sm">{(dish as any)[langKey]}</p>
-              <p className="text-[#c9a84c] text-sm">{dish.price}฿</p>
+              <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{(dish as any)[langKey]}</p>
+              <p className="text-sm" style={{ color: 'var(--gold)' }}>{dish.price}฿</p>
             </div>
             <button
               onClick={() => handleAdd(dish)}
-              className="px-3 py-1 bg-[#c9a84c]/20 text-[#c9a84c] rounded-lg text-sm hover:bg-[#c9a84c]/30"
+              className="px-3 py-1 rounded-lg text-sm"
+              style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}
             >
               +
             </button>
@@ -125,23 +131,25 @@ export default function EmployeeNewOrder() {
 
       {/* Cart summary */}
       {items.length > 0 && (
-        <div className="fixed bottom-0 inset-x-0 bg-[#121212] border-t border-[#c9a84c]/20 p-4 z-40">
+        <div className="fixed bottom-0 inset-x-0 p-4 z-40" style={{ backgroundColor: 'var(--dark-light)', borderTop: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
           <div className="max-w-lg mx-auto">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-gray-400">{items.length} {t('cart.quantity')}</span>
-              <span className="text-[#c9a84c] font-bold">{getTotal()}฿</span>
+              <span style={{ color: 'var(--text-muted)' }}>{items.length} {t('cart.quantity')}</span>
+              <span className="font-bold" style={{ color: 'var(--gold)' }}>{getTotal()}฿</span>
             </div>
             <div className="flex gap-2">
               <button
                 onClick={clear}
-                className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg text-sm"
+                className="flex-1 py-2 bg-white/5 rounded-lg text-sm"
+                style={{ color: 'var(--text-muted)' }}
               >
                 {t('cart.clear')}
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="flex-2 py-2 bg-[#c9a84c] text-black rounded-lg font-medium disabled:opacity-50"
+                className="flex-2 py-2 rounded-lg font-medium disabled:opacity-50"
+                style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
               >
                 {submitting ? t('common.loading') : t('cart.submit')}
               </button>
@@ -149,6 +157,7 @@ export default function EmployeeNewOrder() {
           </div>
         </div>
       )}
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </div>
   )
 }

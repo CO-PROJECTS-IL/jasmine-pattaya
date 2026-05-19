@@ -28,13 +28,14 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h2 className="text-2xl text-[#c9a84c]">{title}</h2>
+      <h2 className="text-2xl" style={{ color: 'var(--gold)' }}>{title}</h2>
 
       <div className="flex gap-3">
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
-            className="w-12 h-12 rounded-lg border-2 border-[#c9a84c]/40 bg-[#1a1a1a] flex items-center justify-center text-xl"
+            className="w-12 h-12 rounded-lg flex items-center justify-center text-xl"
+            style={{ border: '2px solid oklch(0.75 0.12 85 / 0.4)', backgroundColor: 'var(--dark-lighter)' }}
           >
             {pin[i] ? '•' : ''}
           </div>
@@ -42,7 +43,7 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
       </div>
 
       {loading && (
-        <div className="w-6 h-6 border-2 border-[#c9a84c] border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 rounded-full animate-spin" style={{ border: '2px solid var(--gold)', borderTopColor: 'transparent' }} />
       )}
 
       <div className="grid grid-cols-3 gap-3 w-64" dir="ltr">
@@ -54,7 +55,8 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
                 key={i}
                 onClick={handleDelete}
                 disabled={loading}
-                className="h-14 rounded-xl bg-[#1a1a1a] text-gray-400 hover:bg-[#252525] active:bg-[#303030] text-sm font-medium transition-colors disabled:opacity-50"
+                className="h-14 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
+                style={{ backgroundColor: 'var(--dark-lighter)', color: 'var(--text-muted)' }}
               >
                 &#9003;
               </button>
@@ -65,7 +67,8 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
               key={i}
               onClick={() => handleDigit(d)}
               disabled={loading}
-              className="h-14 rounded-xl bg-[#1a1a1a] text-white hover:bg-[#c9a84c]/20 active:bg-[#c9a84c]/40 text-xl font-medium transition-colors disabled:opacity-50"
+              className="h-14 rounded-xl text-xl font-medium transition-colors disabled:opacity-50"
+              style={{ backgroundColor: 'var(--dark-lighter)', color: 'var(--text-primary)' }}
             >
               {d}
             </button>

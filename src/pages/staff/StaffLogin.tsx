@@ -30,17 +30,18 @@ export default function StaffLogin() {
 
   if (mode) {
     return (
-      <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center p-4" style={{ backgroundColor: 'var(--dark)' }}>
         <div className="absolute top-4 right-4"><LanguageSwitcher /></div>
-        <h1 className="text-2xl text-[#c9a84c] mb-2">
+        <h1 className="text-2xl mb-2" style={{ color: 'var(--gold)' }}>
           {mode === 'admin' ? t('staff.adminLogin') : t('staff.employeeLogin')}
         </h1>
-        <p className="text-gray-400 text-sm mb-8">{t('staff.enterPin')}</p>
+        <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>{t('staff.enterPin')}</p>
         <PinInput onSubmit={handleSubmit} title="" loading={loading} />
         {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
         <button
           onClick={() => { setMode(null); setError('') }}
-          className="mt-8 text-gray-500 text-sm hover:text-gray-300"
+          className="mt-8 text-sm"
+          style={{ color: 'var(--text-muted)' }}
         >
           {t('common.back')}
         </button>
@@ -49,24 +50,27 @@ export default function StaffLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center p-4 gap-6">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-6" style={{ backgroundColor: 'var(--dark)' }}>
       <div className="absolute top-4 right-4"><LanguageSwitcher /></div>
-      <h1 className="text-3xl text-[#c9a84c] mb-4">{t('staff.title')}</h1>
+      <h1 className="text-3xl mb-4" style={{ color: 'var(--gold)' }}>{t('staff.title')}</h1>
       <button
         onClick={() => setMode('admin')}
-        className="w-64 py-4 bg-[#c9a84c]/10 border border-[#c9a84c]/30 rounded-xl text-[#c9a84c] text-lg font-medium hover:bg-[#c9a84c]/20 transition-colors"
+        className="w-64 py-4 rounded-xl text-lg font-medium transition-colors"
+        style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.1)', border: '1px solid oklch(0.75 0.12 85 / 0.3)', color: 'var(--gold)' }}
       >
         {t('staff.adminLogin')}
       </button>
       <button
         onClick={() => setMode('employee')}
-        className="w-64 py-4 bg-white/5 border border-white/10 rounded-xl text-gray-300 text-lg font-medium hover:bg-white/10 transition-colors"
+        className="w-64 py-4 bg-white/5 rounded-xl text-lg font-medium hover:bg-white/10 transition-colors"
+        style={{ border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-secondary)' }}
       >
         {t('staff.employeeLogin')}
       </button>
       <button
         onClick={() => navigate('/')}
-        className="mt-4 text-gray-500 text-sm hover:text-gray-300"
+        className="mt-4 text-sm"
+        style={{ color: 'var(--text-muted)' }}
       >
         {t('common.back')}
       </button>

@@ -72,10 +72,11 @@ export default function TableEntry() {
       </div>
 
       <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-5 animate-slide-up relative z-10">
-        <label className="text-sm text-center font-medium" style={{ color: 'oklch(0.55 0.01 85)' }}>
+        <label htmlFor="input-table-number" className="text-sm text-center font-medium" style={{ color: 'oklch(0.55 0.01 85)' }}>
           {t('table.enterTable')}
         </label>
         <input
+          id="input-table-number"
           type="number"
           inputMode="numeric"
           min={tableMin}
@@ -86,7 +87,7 @@ export default function TableEntry() {
             setError('')
           }}
           placeholder={t('table.placeholder')}
-          className="w-full px-5 py-4 rounded-2xl text-center text-2xl font-semibold placeholder-gray-700 focus:outline-none transition-all duration-300"
+          className="w-full px-5 py-4 rounded-2xl text-center text-2xl font-semibold placeholder-gray-500 transition-all duration-300"
           style={{
             backgroundColor: 'oklch(0.18 0.005 85)',
             border: '1px solid oklch(0.75 0.12 85 / 0.2)',

@@ -41,6 +41,7 @@
     "noImage": "No image",
     "askPrice": "Ask price",
     "emptyCategory": "No dishes in this category",
+    "tryOtherCategory": "Try selecting another category",
     "fridayMenuActive": "Friday Menu"
   },
   "cart": {

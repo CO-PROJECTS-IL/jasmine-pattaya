@@ -30,8 +30,8 @@ const QRCodes = lazy(() => import('./pages/admin/QRCodes'))
 
 function LazyFallback() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#080808]">
-      <div className="w-8 h-8 border-2 border-[#c9a84c] border-t-transparent rounded-full animate-spin" />
+    <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
+      <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--gold)', borderTopColor: 'transparent' }} />
     </div>
   )
 }

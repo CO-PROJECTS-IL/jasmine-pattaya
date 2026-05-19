@@ -22,10 +22,11 @@ export default function QRCodes() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6 print:hidden">
-        <h1 className="text-2xl text-[#c9a84c] font-bold">QR Codes</h1>
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>QR Codes</h1>
         <button
           onClick={handlePrint}
-          className="bg-[#c9a84c] text-black px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#d4b96a] transition-colors"
+          className="px-6 py-2 rounded-lg font-bold text-sm transition-colors"
+          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
         >
           {t('common.save')} / Print
         </button>
@@ -37,7 +38,8 @@ export default function QRCodes() {
           return (
             <div
               key={num}
-              className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4 flex flex-col items-center gap-2 print:border print:border-gray-300 print:bg-white print:rounded-lg"
+              className="rounded-xl p-4 flex flex-col items-center gap-2 print:border print:border-gray-300 print:bg-white print:rounded-lg"
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.25 0.005 85)' }}
             >
               <img
                 src={qrImageUrl(url)}
@@ -48,10 +50,10 @@ export default function QRCodes() {
                 loading="lazy"
               />
               <div className="text-center">
-                <p className="text-[#c9a84c] font-bold text-lg print:text-black">
+                <p className="font-bold text-lg print:text-black" style={{ color: 'var(--gold)' }}>
                   {t('cart.table')} {num}
                 </p>
-                <p className="text-gray-500 text-[10px] font-mono break-all print:text-gray-600">
+                <p className="text-[10px] font-mono break-all print:text-gray-600" style={{ color: 'var(--text-muted)' }}>
                   {url}
                 </p>
               </div>

@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
           style={
             currentLang === lang.code
               ? {
-                  background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+                  backgroundColor: 'var(--gold)',
                   color: 'oklch(0.15 0.01 85)',
                 }
               : {

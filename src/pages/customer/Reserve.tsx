@@ -75,18 +75,19 @@ export default function Reserve() {
         {t('reserve.title')}
       </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+          <label htmlFor="input-reserve-date" className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
             {t('reserve.date')}
           </label>
           <input
+            id="input-reserve-date"
             type="date"
             required
             min={today}
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all"
+            className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
               backgroundColor: 'oklch(0.18 0.005 85)',
               border: '1px solid oklch(0.28 0.005 85)',
@@ -100,17 +101,17 @@ export default function Reserve() {
           <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
             {t('reserve.time')}
           </label>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {TIME_SLOTS.map((slot) => (
               <button
                 key={slot}
                 type="button"
                 onClick={() => setTime(slot)}
-                className="py-2.5 rounded-xl text-sm font-medium transition-all active:scale-95"
+                className="min-h-[2.75rem] rounded-xl text-sm font-medium transition-all active:scale-95"
                 style={
                   time === slot
                     ? {
-                        background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+                        backgroundColor: 'var(--gold)',
                         color: 'oklch(0.15 0.01 85)',
                       }
                     : {
@@ -130,7 +131,7 @@ export default function Reserve() {
           <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
             {t('reserve.guests')}
           </label>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             {GUEST_OPTIONS.map((n) => (
               <button
                 key={n}
@@ -140,7 +141,7 @@ export default function Reserve() {
                 style={
                   guests === n
                     ? {
-                        background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+                        backgroundColor: 'var(--gold)',
                         color: 'oklch(0.15 0.01 85)',
                       }
                     : {
@@ -157,15 +158,16 @@ export default function Reserve() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+          <label htmlFor="input-reserve-name" className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
             {t('reserve.name')}
           </label>
           <input
+            id="input-reserve-name"
             type="text"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all"
+            className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
               backgroundColor: 'oklch(0.18 0.005 85)',
               border: '1px solid oklch(0.28 0.005 85)',
@@ -175,15 +177,16 @@ export default function Reserve() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+          <label htmlFor="input-reserve-phone" className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
             {t('reserve.phone')}
           </label>
           <input
+            id="input-reserve-phone"
             type="tel"
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-4 py-3 rounded-2xl text-sm focus:outline-none transition-all"
+            className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
               backgroundColor: 'oklch(0.18 0.005 85)',
               border: '1px solid oklch(0.28 0.005 85)',

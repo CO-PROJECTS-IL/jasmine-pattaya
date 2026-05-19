@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabase, isSupabaseConfigured, callEdgeFunction } from '../../lib/supabase'
-import AdminLayout from '../../components/layout/AdminLayout'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 import type { Employee, Shift } from '../../lib/types'
 import { SHIFT_TYPES } from '../../lib/constants'
 
@@ -19,6 +20,7 @@ const SHIFT_COLORS: Record<string, string> = {
 export default function ScheduleManager() {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
+  const { toast, showToast } = useToast()
   const [weekOffset, setWeekOffset] = useState(0)
 
   const weekStart = useMemo(() => {
@@ -78,7 +80,7 @@ export default function ScheduleManager() {
       })
       queryClient.invalidateQueries({ queryKey: ['shifts'] })
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בשמירת תכנית', 'error')
     }
   }
 
@@ -93,24 +95,25 @@ export default function ScheduleManager() {
       })
       queryClient.invalidateQueries({ queryKey: ['shifts'] })
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בהעתקת שבוע', 'error')
     }
   }
 
   return (
-    <AdminLayout>
+    <>
+      {toast && <Toast message={toast.message} type={toast.type} />}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl text-[#c9a84c]">{t('schedule.title')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('schedule.title')}</h1>
         <div className="flex items-center gap-2">
-          <button onClick={() => setWeekOffset((w) => w - 1)} className="px-3 py-1 bg-white/5 text-gray-400 rounded-lg text-sm">◀</button>
-          <span className="text-gray-400 text-sm">
+          <button onClick={() => setWeekOffset((w) => w - 1)} className="px-3 py-1 bg-white/5 rounded-lg text-sm" style={{ color: 'var(--text-muted)' }}>◀</button>
+          <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
             {weekDates[0].toLocaleDateString()} - {weekDates[6].toLocaleDateString()}
           </span>
-          <button onClick={() => setWeekOffset((w) => w + 1)} className="px-3 py-1 bg-white/5 text-gray-400 rounded-lg text-sm">▶</button>
+          <button onClick={() => setWeekOffset((w) => w + 1)} className="px-3 py-1 bg-white/5 rounded-lg text-sm" style={{ color: 'var(--text-muted)' }}>▶</button>
         </div>
       </div>
 
-      <button onClick={copyPreviousWeek} className="mb-4 px-4 py-2 bg-white/5 text-gray-400 rounded-lg text-sm hover:bg-white/10">
+      <button onClick={copyPreviousWeek} className="mb-4 px-4 py-2 bg-white/5 rounded-lg text-sm hover:bg-white/10" style={{ color: 'var(--text-muted)' }}>
         {t('schedule.copyWeek')}
       </button>
 
@@ -118,9 +121,9 @@ export default function ScheduleManager() {
         <table className="w-full min-w-[700px]">
           <thead>
             <tr>
-              <th className="text-left text-xs text-gray-500 pb-2 pr-3 w-32"></th>
+              <th className="text-left text-xs pb-2 pr-3 w-32" style={{ color: 'var(--text-muted)' }}></th>
               {weekDates.map((d, i) => (
-                <th key={i} className="text-center text-xs text-gray-500 pb-2 px-1">
+                <th key={i} className="text-center text-xs pb-2 px-1" style={{ color: 'var(--text-muted)' }}>
                   {DAYS[d.getDay()]}<br/>{d.getDate()}
                 </th>
               ))}
@@ -129,7 +132,7 @@ export default function ScheduleManager() {
           <tbody>
             {employees.map((emp) => (
               <tr key={emp.id}>
-                <td className="text-sm text-white py-1 pr-3 truncate">{emp.full_name}</td>
+                <td className="text-sm py-1 pr-3 truncate" style={{ color: 'var(--text-primary)' }}>{emp.full_name}</td>
                 {weekDates.map((date, i) => {
                   const shift = getShift(emp.id, date)
                   const type = shift?.shift_type || 'off'
@@ -149,6 +152,6 @@ export default function ScheduleManager() {
           </tbody>
         </table>
       </div>
-    </AdminLayout>
+    </>
   )
 }

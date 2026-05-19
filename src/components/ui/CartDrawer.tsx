@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCartStore } from '../../stores/cartStore'
 import { useNavigate } from 'react-router-dom'
@@ -20,6 +21,25 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     useCartStore()
 
   const total = getTotal()
+  const drawerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) return
+    const drawer = drawerRef.current
+    if (!drawer) return
+    const focusable = drawer.querySelectorAll<HTMLElement>('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])')
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    first?.focus()
+    const trap = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { onClose(); return }
+      if (e.key !== 'Tab') return
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus() }
+    }
+    document.addEventListener('keydown', trap)
+    return () => document.removeEventListener('keydown', trap)
+  }, [isOpen, onClose])
 
   const handleSubmit = () => {
     onClose()
@@ -32,6 +52,10 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         <div className="fixed inset-0 z-40" style={{ backgroundColor: 'oklch(0 0 0 / 0.6)' }} onClick={onClose} />
       )}
       <div
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t('cart.title')}
         className={`fixed inset-x-0 bottom-0 z-50 rounded-t-3xl transition-transform duration-300 max-h-[85vh] flex flex-col ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
         }`}
@@ -50,8 +74,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           </h2>
           <button
             onClick={onClose}
-            className="text-2xl transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-2xl rounded-xl transition-colors"
             style={{ color: 'var(--text-muted)' }}
+            aria-label={t('common.close')}
           >
             &times;
           </button>
@@ -59,7 +84,13 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {items.length === 0 ? (
-            <p className="text-center py-10 text-sm" style={{ color: 'var(--text-muted)' }}>{t('cart.empty')}</p>
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)', marginBottom: 12 }}>
+                <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" />
+                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+              </svg>
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{t('cart.empty')}</p>
+            </div>
           ) : (
             items.map((item) => (
               <div
@@ -78,25 +109,28 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => updateQuantity(item.dishId, item.quantity - 1)}
-                    className="w-8 h-8 rounded-xl flex items-center justify-center text-sm transition-all active:scale-90"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-sm transition-all active:scale-95"
                     style={{ backgroundColor: 'oklch(0.26 0.005 85)', color: 'var(--text-primary)' }}
+                    aria-label={t('cart.removeItem')}
                   >
                     -
                   </button>
-                  <span className="text-sm font-bold w-5 text-center" style={{ color: 'var(--text-primary)' }}>
+                  <span className="text-sm font-bold w-6 text-center" style={{ color: 'var(--text-primary)' }} aria-live="polite">
                     {item.quantity}
                   </span>
                   <button
                     onClick={() => updateQuantity(item.dishId, item.quantity + 1)}
-                    className="w-8 h-8 rounded-xl flex items-center justify-center text-sm transition-all active:scale-90"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-sm transition-all active:scale-95"
                     style={{ backgroundColor: 'oklch(0.26 0.005 85)', color: 'var(--text-primary)' }}
+                    aria-label={`${t('cart.quantity')} +1`}
                   >
                     +
                   </button>
                   <button
                     onClick={() => removeItem(item.dishId)}
-                    className="w-8 h-8 rounded-xl flex items-center justify-center text-sm ms-1 transition-all active:scale-90"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-sm ms-1 transition-all active:scale-95"
                     style={{ backgroundColor: 'oklch(0.35 0.12 25 / 0.2)', color: 'oklch(0.65 0.15 25)' }}
+                    aria-label={t('common.delete')}
                   >
                     &times;
                   </button>
@@ -110,7 +144,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               value={orderNotes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder={t('cart.notesPlaceholder')}
-              className="w-full rounded-2xl p-4 text-sm resize-none h-20 focus:outline-none transition-all"
+              className="w-full rounded-2xl p-4 text-sm resize-none h-20 transition-all"
               style={{
                 backgroundColor: 'oklch(0.20 0.005 85)',
                 border: '1px solid oklch(0.28 0.005 85)',

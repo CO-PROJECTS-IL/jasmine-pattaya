@@ -5,7 +5,6 @@ import {
   PieChart, Pie, Cell, LineChart, Line, Legend,
 } from 'recharts'
 import { supabase } from '../../lib/supabase'
-import AdminLayout from '../../components/layout/AdminLayout'
 
 type DateRange = 'today' | 'week' | 'month' | 'custom'
 
@@ -81,25 +80,30 @@ export default function ReportsPage() {
     { name: t('reports.onetimeExpenses'), value: reportData.expenses.onetime },
   ]
 
-  const inputClass =
-    'bg-[#121212] border border-[#c9a84c]/30 rounded-lg px-3 py-1.5 text-white text-sm focus:outline-none focus:border-[#c9a84c]'
+  const chartInputStyle = {
+    backgroundColor: 'var(--dark-light)',
+    border: '1px solid oklch(0.75 0.12 85 / 0.3)',
+    color: 'var(--text-primary)',
+  }
+
   const rangeBtn = (key: DateRange, label: string) => (
     <button
       key={key}
       onClick={() => setRange(key)}
-      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+      className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+      style={
         range === key
-          ? 'bg-[#c9a84c] text-black'
-          : 'bg-[#121212] border border-[#c9a84c]/20 text-gray-400 hover:text-white'
-      }`}
+          ? { backgroundColor: 'var(--gold)', color: 'var(--dark)' }
+          : { backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)', color: 'var(--text-muted)' }
+      }
     >
       {label}
     </button>
   )
 
   return (
-    <AdminLayout>
-      <h1 className="text-xl text-[#c9a84c] mb-6">{t('reports.title')}</h1>
+    <>
+      <h1 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>{t('reports.title')}</h1>
 
       {/* Date range filter */}
       <div className="flex flex-wrap gap-2 mb-6 items-center">
@@ -114,49 +118,51 @@ export default function ReportsPage() {
               type="date"
               value={customStart}
               onChange={(e) => setCustomStart(e.target.value)}
-              className={inputClass}
+              className="rounded-lg px-3 py-1.5 text-sm"
+              style={chartInputStyle}
             />
-            <span className="text-gray-500">–</span>
+            <span style={{ color: 'var(--text-muted)' }}>–</span>
             <input
               type="date"
               value={customEnd}
               onChange={(e) => setCustomEnd(e.target.value)}
-              className={inputClass}
+              className="rounded-lg px-3 py-1.5 text-sm"
+              style={chartInputStyle}
             />
           </div>
         )}
 
         {loading && (
-          <span className="text-xs text-gray-500 ms-2">...</span>
+          <span className="text-xs ms-2" style={{ color: 'var(--text-muted)' }}>...</span>
         )}
       </div>
 
       {/* Summary cards */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="bg-[#121212] border border-[#c9a84c]/20 rounded-xl p-4 text-center">
-          <p className="text-gray-400 text-xs mb-1">{t('reports.revenue')}</p>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.revenue')}</p>
           <p className="text-xl font-bold text-green-400">฿{reportData.revenue.toLocaleString()}</p>
         </div>
-        <div className="bg-[#121212] border border-[#c9a84c]/20 rounded-xl p-4 text-center">
-          <p className="text-gray-400 text-xs mb-1">{t('reports.expenses')}</p>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.expenses')}</p>
           <p className="text-xl font-bold text-red-400">฿{totalExpenses.toLocaleString()}</p>
         </div>
-        <div className="bg-[#121212] border border-[#c9a84c]/20 rounded-xl p-4 text-center">
-          <p className="text-gray-400 text-xs mb-1">{t('reports.netProfit')}</p>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.netProfit')}</p>
           <p
             className="text-xl font-bold"
-            style={{ color: netProfit >= 0 ? '#c9a84c' : '#ef4444' }}
+            style={{ color: netProfit >= 0 ? 'var(--gold)' : '#ef4444' }}
           >
             ฿{netProfit.toLocaleString()}
           </p>
         </div>
       </div>
 
-      {/* Charts */}
+      {/* Charts — Recharts hex values kept as-is */}
       <div className="space-y-4">
         {/* Revenue over time */}
-        <div className="bg-[#121212] border border-[#c9a84c]/20 rounded-xl p-4">
-          <h3 className="text-sm text-gray-400 mb-3">{t('reports.revenueOverTime')}</h3>
+        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.revenueOverTime')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={reportData.dailyRevenue}>
               <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
@@ -175,8 +181,8 @@ export default function ReportsPage() {
         {/* Expenses by category + Profit trend side by side */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Expenses by category — PieChart */}
-          <div className="bg-[#121212] border border-[#c9a84c]/20 rounded-xl p-4">
-            <h3 className="text-sm text-gray-400 mb-3">{t('reports.expensesByCategory')}</h3>
+          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+            <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.expensesByCategory')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
@@ -206,8 +212,8 @@ export default function ReportsPage() {
           </div>
 
           {/* Profit trend — LineChart */}
-          <div className="bg-[#121212] border border-[#c9a84c]/20 rounded-xl p-4">
-            <h3 className="text-sm text-gray-400 mb-3">{t('reports.profitTrend')}</h3>
+          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+            <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.profitTrend')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={reportData.dailyProfit}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
@@ -231,6 +237,6 @@ export default function ReportsPage() {
           </div>
         </div>
       </div>
-    </AdminLayout>
+    </>
   )
 }

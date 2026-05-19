@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { supabase, callEdgeFunction, isSupabaseConfigured } from '../../lib/supabase'
 import { uploadImage } from '../../lib/cloudinary'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 import type { Employee } from '../../lib/types'
 import { EMPLOYEE_ROLES } from '../../lib/constants'
 
@@ -10,6 +12,7 @@ export default function EmployeeDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const { toast, showToast } = useToast()
   const isNew = id === 'new'
   const [saving, setSaving] = useState(false)
   const [employee, setEmployee] = useState<Employee | null>(null)
@@ -59,7 +62,7 @@ export default function EmployeeDetail() {
       const url = await uploadImage(file)
       update('photo_url', url)
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בהעלאת תמונה', 'error')
     }
   }
 
@@ -73,7 +76,7 @@ export default function EmployeeDetail() {
       })
       navigate('/admin/employees')
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בשמירה', 'error')
     }
     setSaving(false)
   }
@@ -84,52 +87,62 @@ export default function EmployeeDetail() {
       await callEdgeFunction('manual-checkin', { employee_id: employee.id })
       alert(t('employees.manualCheckin') + ' ✓')
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בצ׳ק-אין', 'error')
     }
+  }
+
+  const inputStyle = {
+    backgroundColor: 'var(--dark-lighter)',
+    border: '1px solid oklch(0.30 0.005 85)',
+    color: 'var(--text-primary)',
   }
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl text-[#c9a84c] mb-6">
+      <h2 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>
         {isNew ? t('employees.addEmployee') : t('employees.editEmployee')}
       </h2>
 
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-[#c9a84c]/20 flex items-center justify-center overflow-hidden">
+          <div className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)' }}>
             {form.photo_url ? (
               <img src={form.photo_url} alt="" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-[#c9a84c] text-2xl font-bold">{form.full_name.charAt(0) || '?'}</span>
+              <span className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>{form.full_name.charAt(0) || '?'}</span>
             )}
           </div>
-          <input type="file" accept="image/*" onChange={handlePhotoUpload} className="text-xs text-gray-400" />
+          <input type="file" accept="image/*" onChange={handlePhotoUpload} className="text-xs" style={{ color: 'var(--text-muted)' }} />
         </div>
 
         <div>
-          <label className="text-xs text-gray-400">{t('employees.fullName')}</label>
-          <input type="text" value={form.full_name} onChange={(e) => update('full_name', e.target.value)}
-            className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none" />
+          <label htmlFor="input-full-name" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.fullName')}</label>
+          <input id="input-full-name" type="text" value={form.full_name} onChange={(e) => update('full_name', e.target.value)}
+            className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+            style={inputStyle} />
         </div>
 
         <div>
-          <label className="text-xs text-gray-400">{t('employees.phone')}</label>
-          <input type="tel" value={form.phone} onChange={(e) => update('phone', e.target.value)}
-            className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none" />
+          <label htmlFor="input-phone" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.phone')}</label>
+          <input id="input-phone" type="tel" value={form.phone} onChange={(e) => update('phone', e.target.value)}
+            className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+            style={inputStyle} />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs text-gray-400">{t('employees.role')}</label>
-            <select value={form.role} onChange={(e) => update('role', e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none">
+            <label htmlFor="select-role" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.role')}</label>
+            <select id="select-role" value={form.role} onChange={(e) => update('role', e.target.value)}
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle}>
               {EMPLOYEE_ROLES.map((r) => <option key={r} value={r}>{t(`employees.${r}` as any)}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs text-gray-400">{t('employees.payType')}</label>
-            <select value={form.pay_type} onChange={(e) => update('pay_type', e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none">
+            <label htmlFor="select-pay-type" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.payType')}</label>
+            <select id="select-pay-type" value={form.pay_type} onChange={(e) => update('pay_type', e.target.value)}
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle}>
               <option value="hourly">{t('employees.hourly')}</option>
               <option value="daily">{t('employees.daily')}</option>
             </select>
@@ -138,31 +151,35 @@ export default function EmployeeDetail() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs text-gray-400">{t('employees.payRate')}</label>
-            <input type="number" value={form.pay_rate} onChange={(e) => update('pay_rate', parseFloat(e.target.value) || 0)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none" />
+            <label htmlFor="input-pay-rate" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.payRate')}</label>
+            <input id="input-pay-rate" type="number" value={form.pay_rate} onChange={(e) => update('pay_rate', parseFloat(e.target.value) || 0)}
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle} />
           </div>
           <div>
-            <label className="text-xs text-gray-400">{t('employees.startDate')}</label>
-            <input type="date" value={form.start_date} onChange={(e) => update('start_date', e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none" />
+            <label htmlFor="input-start-date" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.startDate')}</label>
+            <input id="input-start-date" type="date" value={form.start_date} onChange={(e) => update('start_date', e.target.value)}
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle} />
           </div>
         </div>
 
         <div>
-          <label className="text-xs text-gray-400">{t('employees.vacationDays')}</label>
-          <input type="number" value={form.vacation_days} onChange={(e) => update('vacation_days', parseInt(e.target.value) || 0)}
-            className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none" />
+          <label htmlFor="input-vacation-days" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('employees.vacationDays')}</label>
+          <input id="input-vacation-days" type="number" value={form.vacation_days} onChange={(e) => update('vacation_days', parseInt(e.target.value) || 0)}
+            className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+            style={inputStyle} />
         </div>
 
         <div>
-          <label className="text-xs text-gray-400">Notes</label>
-          <textarea value={form.notes} onChange={(e) => update('notes', e.target.value)} rows={2}
-            className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none resize-none" />
+          <label htmlFor="input-notes" className="text-xs" style={{ color: 'var(--text-muted)' }}>Notes</label>
+          <textarea id="input-notes" value={form.notes} onChange={(e) => update('notes', e.target.value)} rows={2}
+            className="w-full mt-1 px-3 py-2 rounded-lg text-sm resize-none"
+            style={inputStyle} />
         </div>
 
-        <label className="flex items-center gap-2 text-sm text-gray-300">
-          <input type="checkbox" checked={form.is_active} onChange={(e) => update('is_active', e.target.checked)} className="accent-[#c9a84c]" />
+        <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
+          <input type="checkbox" checked={form.is_active} onChange={(e) => update('is_active', e.target.checked)} style={{ accentColor: 'var(--gold)' }} />
           {t('employees.active')}
         </label>
 
@@ -173,13 +190,15 @@ export default function EmployeeDetail() {
         )}
 
         <div className="flex gap-3 pt-4">
-          <button onClick={() => navigate('/admin/employees')} className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10">{t('common.cancel')}</button>
+          <button onClick={() => navigate('/admin/employees')} className="flex-1 py-2 bg-white/5 rounded-lg hover:bg-white/10" style={{ color: 'var(--text-muted)' }}>{t('common.cancel')}</button>
           <button onClick={handleSave} disabled={saving || !form.full_name}
-            className="flex-1 py-2 bg-[#c9a84c] text-black rounded-lg font-medium hover:bg-[#d4b96a] disabled:opacity-50">
+            className="flex-1 py-2 rounded-lg font-medium disabled:opacity-50"
+            style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}>
             {saving ? t('common.loading') : t('common.save')}
           </button>
         </div>
       </div>
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </div>
   )
 }

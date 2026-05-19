@@ -8,12 +8,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-[#080808]">
-      <header className="sticky top-0 z-30 bg-[#121212] border-b border-[#1a1a1a]">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
+      <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.005 85)' }}>
         <div className="flex items-center justify-between px-4 py-3 max-w-4xl mx-auto">
           <button
             onClick={() => navigate('/admin')}
-            className="text-[#c9a84c] text-sm hover:text-[#d4b96a] transition-colors"
+            className="text-sm transition-colors"
+            style={{ color: 'var(--gold)' }}
           >
             ← {t('common.back')}
           </button>

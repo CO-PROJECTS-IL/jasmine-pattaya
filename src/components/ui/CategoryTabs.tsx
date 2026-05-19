@@ -28,23 +28,50 @@ export default function CategoryTabs({ categories, activeId, onSelect }: Categor
     }
   }, [activeId])
 
+  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+    let next = -1
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      next = (index + 1) % categories.length
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      next = (index - 1 + categories.length) % categories.length
+    } else if (e.key === 'Home') {
+      next = 0
+    } else if (e.key === 'End') {
+      next = categories.length - 1
+    }
+    if (next >= 0) {
+      e.preventDefault()
+      onSelect(categories[next].id)
+      const container = scrollRef.current
+      if (container) {
+        const buttons = container.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+        buttons[next]?.focus()
+      }
+    }
+  }
+
   return (
     <div
       ref={scrollRef}
+      role="tablist"
+      aria-label={i18n.language === 'he' ? 'קטגוריות' : 'Categories'}
       className="flex gap-2 overflow-x-auto no-scrollbar py-3 px-3"
     >
-      {categories.map((cat) => {
+      {categories.map((cat, index) => {
         const isActive = cat.id === activeId
         return (
           <button
             key={cat.id}
             ref={isActive ? activeRef : null}
+            role="tab"
+            aria-selected={isActive}
+            tabIndex={isActive ? 0 : -1}
             onClick={() => onSelect(cat.id)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             className="shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 whitespace-nowrap"
             style={isActive ? {
-              background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+              backgroundColor: 'var(--gold)',
               color: 'oklch(0.15 0.01 85)',
-              boxShadow: '0 2px 12px oklch(0.75 0.12 85 / 0.25)',
             } : {
               backgroundColor: 'oklch(0.20 0.005 85)',
               color: 'oklch(0.70 0.01 85)',

@@ -12,24 +12,28 @@ export default function EmployeeLayout() {
 
   return (
     <GeoGate>
-      <div className="min-h-screen bg-[#080808]">
+      <div className="min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
         <OfflineBanner />
-        <header className="sticky top-0 z-30 bg-[#121212] border-b border-white/5">
+        <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.005 85)' }}>
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-3">
               <NavLink
                 to="/employee"
                 end
-                className={({ isActive }) =>
-                  `text-sm px-3 py-1 rounded-lg transition-colors ${isActive ? 'bg-[#c9a84c]/20 text-[#c9a84c]' : 'text-gray-400 hover:text-white'}`
+                className="text-sm px-3 py-1.5 rounded-lg transition-colors"
+                style={({ isActive }) => isActive
+                  ? { backgroundColor: 'oklch(0.75 0.12 85 / 0.15)', color: 'var(--gold)' }
+                  : { color: 'var(--text-muted)' }
                 }
               >
                 {t('employee.title')}
               </NavLink>
               <NavLink
                 to="/employee/schedule"
-                className={({ isActive }) =>
-                  `text-sm px-3 py-1 rounded-lg transition-colors ${isActive ? 'bg-[#c9a84c]/20 text-[#c9a84c]' : 'text-gray-400 hover:text-white'}`
+                className="text-sm px-3 py-1.5 rounded-lg transition-colors"
+                style={({ isActive }) => isActive
+                  ? { backgroundColor: 'oklch(0.75 0.12 85 / 0.15)', color: 'var(--gold)' }
+                  : { color: 'var(--text-muted)' }
                 }
               >
                 {t('employee.myShifts')}
@@ -39,7 +43,8 @@ export default function EmployeeLayout() {
               <LanguageSwitcher />
               <button
                 onClick={() => { logout(); navigate('/') }}
-                className="text-xs text-red-400/60 hover:text-red-400 px-2 py-1"
+                className="text-xs px-2 py-1 transition-colors"
+                style={{ color: 'oklch(0.55 0.15 25 / 0.6)' }}
               >
                 {t('common.back')}
               </button>

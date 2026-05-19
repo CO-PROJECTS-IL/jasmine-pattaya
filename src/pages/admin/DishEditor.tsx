@@ -3,12 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { supabase, callEdgeFunction, isSupabaseConfigured } from '../../lib/supabase'
 import { uploadImage } from '../../lib/cloudinary'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 import type { Dish, Category } from '../../lib/types'
 
 export default function DishEditor() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const { toast, showToast } = useToast()
   const isNew = id === 'new'
   const [saving, setSaving] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
@@ -69,7 +72,7 @@ export default function DishEditor() {
       const url = await uploadImage(file)
       setForm((f) => ({ ...f, image_url: url }))
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בהעלאת תמונה', 'error')
     }
   }
 
@@ -83,60 +86,74 @@ export default function DishEditor() {
       })
       navigate('/admin/menu')
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בשמירה', 'error')
     }
     setSaving(false)
   }
 
   const update = (key: string, value: any) => setForm((f) => ({ ...f, [key]: value }))
 
+  const inputStyle = {
+    backgroundColor: 'var(--dark-lighter)',
+    border: '1px solid oklch(0.30 0.005 85)',
+    color: 'var(--text-primary)',
+  }
+
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl text-[#c9a84c] mb-6">
+      <h2 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>
         {isNew ? t('menuManage.addDish') : t('menuManage.editDish')}
       </h2>
 
       <div className="space-y-4">
         {['he', 'en', 'th'].map((lang) => (
           <div key={lang}>
-            <label className="text-xs text-gray-400 uppercase">{t('menuManage.dishName')} ({lang})</label>
+            <label htmlFor={`input-dish-name-${lang}`} className="text-xs uppercase" style={{ color: 'var(--text-muted)' }}>{t('menuManage.dishName')} ({lang})</label>
             <input
+              id={`input-dish-name-${lang}`}
               type="text"
               value={(form as any)[`name_${lang}`]}
               onChange={(e) => update(`name_${lang}`, e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle}
             />
           </div>
         ))}
 
         {['he', 'en', 'th'].map((lang) => (
           <div key={`desc-${lang}`}>
-            <label className="text-xs text-gray-400 uppercase">{t('menuManage.description')} ({lang})</label>
+            <label htmlFor={`input-dish-desc-${lang}`} className="text-xs uppercase" style={{ color: 'var(--text-muted)' }}>{t('menuManage.description')} ({lang})</label>
             <textarea
+              id={`input-dish-desc-${lang}`}
               value={(form as any)[`description_${lang}`]}
               onChange={(e) => update(`description_${lang}`, e.target.value)}
               rows={2}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none resize-none"
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm resize-none"
+              style={inputStyle}
             />
           </div>
         ))}
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs text-gray-400">{t('menuManage.price')}</label>
+            <label htmlFor="input-dish-price" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('menuManage.price')}</label>
             <input
+              id="input-dish-price"
               type="number"
               value={form.price}
               onChange={(e) => update('price', parseFloat(e.target.value) || 0)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle}
             />
           </div>
           <div>
-            <label className="text-xs text-gray-400">{t('menuManage.category')}</label>
+            <label htmlFor="select-dish-category" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('menuManage.category')}</label>
             <select
+              id="select-dish-category"
               value={form.category_id}
               onChange={(e) => update('category_id', e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+              className="w-full mt-1 px-3 py-2 rounded-lg text-sm"
+              style={inputStyle}
             >
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>{cat.name_he}</option>
@@ -146,8 +163,8 @@ export default function DishEditor() {
         </div>
 
         <div>
-          <label className="text-xs text-gray-400">{t('menuManage.image')}</label>
-          <input type="file" accept="image/*" onChange={handleImageUpload} className="mt-1 text-sm text-gray-400" />
+          <label htmlFor="input-dish-image" className="text-xs" style={{ color: 'var(--text-muted)' }}>{t('menuManage.image')}</label>
+          <input id="input-dish-image" type="file" accept="image/*" onChange={handleImageUpload} className="mt-1 text-sm" style={{ color: 'var(--text-muted)' }} />
           {form.image_url && <img src={form.image_url} alt="" className="mt-2 w-20 h-20 rounded-lg object-cover" />}
         </div>
 
@@ -157,12 +174,12 @@ export default function DishEditor() {
             { key: 'is_spicy', label: t('menuManage.spicy') },
             { key: 'is_vegetarian', label: t('menuManage.vegetarian') },
           ].map(({ key, label }) => (
-            <label key={key} className="flex items-center gap-2 text-sm text-gray-300">
+            <label key={key} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
               <input
                 type="checkbox"
                 checked={(form as any)[key]}
                 onChange={(e) => update(key, e.target.checked)}
-                className="accent-[#c9a84c]"
+                style={{ accentColor: 'var(--gold)' }}
               />
               {label}
             </label>
@@ -172,19 +189,22 @@ export default function DishEditor() {
         <div className="flex gap-3 pt-4">
           <button
             onClick={() => navigate('/admin/menu')}
-            className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 transition-colors"
+            className="flex-1 py-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
+            style={{ color: 'var(--text-muted)' }}
           >
             {t('common.cancel')}
           </button>
           <button
             onClick={handleSave}
             disabled={saving || !form.name_he}
-            className="flex-1 py-2 bg-[#c9a84c] text-black rounded-lg font-medium hover:bg-[#d4b96a] disabled:opacity-50 transition-colors"
+            className="flex-1 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
+            style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
           >
             {saving ? t('common.loading') : t('common.save')}
           </button>
         </div>
       </div>
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </div>
   )
 }

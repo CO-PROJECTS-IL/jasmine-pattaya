@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import { useMenu } from '../../hooks/useMenu'
 import { callEdgeFunction } from '../../lib/supabase'
 import { useQueryClient } from '@tanstack/react-query'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 import type { Dish } from '../../lib/types'
 
 export default function MenuManager() {
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const { toast, showToast } = useToast()
   const { categories, dishes } = useMenu()
   const [showCatForm, setShowCatForm] = useState(false)
   const [catName, setCatName] = useState({ he: '', en: '', th: '' })
@@ -28,7 +31,7 @@ export default function MenuManager() {
       await callEdgeFunction('admin-dishes', { action: 'delete', id: dishId })
       refresh()
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה במחיקת מנה', 'error')
     }
   }
 
@@ -41,7 +44,7 @@ export default function MenuManager() {
       })
       refresh()
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בעדכון זמינות', 'error')
     }
   }
 
@@ -67,7 +70,7 @@ export default function MenuManager() {
       })
       refresh()
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בשכפול מנה', 'error')
     }
   }
 
@@ -86,7 +89,7 @@ export default function MenuManager() {
       setShowCatForm(false)
       refresh()
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בהוספת קטגוריה', 'error')
     }
     setSavingCat(false)
   }
@@ -101,24 +104,27 @@ export default function MenuManager() {
       await callEdgeFunction('admin-categories', { action: 'delete', id: catId })
       refresh()
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה במחיקת קטגוריה', 'error')
     }
   }
 
   return (
     <div>
+      {toast && <Toast message={toast.message} type={toast.type} />}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl text-[#c9a84c]">{t('adminHome.menuManage')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('adminHome.menuManage')}</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setShowCatForm(!showCatForm)}
-            className="px-3 py-2 bg-white/5 text-gray-300 rounded-lg text-sm hover:bg-white/10 transition-colors"
+            className="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-white/10 transition-colors"
+            style={{ color: 'var(--text-secondary)' }}
           >
             + קטגוריה
           </button>
           <button
             onClick={() => navigate('/admin/menu/new')}
-            className="px-3 py-2 bg-[#c9a84c] text-black rounded-lg text-sm font-medium hover:bg-[#d4b96a] transition-colors"
+            className="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+            style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
           >
             {t('menuManage.addDish')}
           </button>
@@ -126,13 +132,14 @@ export default function MenuManager() {
       </div>
 
       {showCatForm && (
-        <div className="mb-6 p-4 bg-[#121212] border border-white/10 rounded-xl space-y-3">
+        <div className="mb-6 p-4 rounded-xl space-y-3" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.005 85)' }}>
           <input
             type="text"
             placeholder="שם בעברית *"
             value={catName.he}
             onChange={(e) => setCatName((c) => ({ ...c, he: e.target.value }))}
-            className="w-full px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+            className="w-full px-3 py-2 rounded-lg text-sm"
+            style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
           />
           <div className="grid grid-cols-2 gap-3">
             <input
@@ -140,27 +147,31 @@ export default function MenuManager() {
               placeholder="Name in English"
               value={catName.en}
               onChange={(e) => setCatName((c) => ({ ...c, en: e.target.value }))}
-              className="px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+              className="px-3 py-2 rounded-lg text-sm"
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
             />
             <input
               type="text"
               placeholder="ชื่อภาษาไทย"
               value={catName.th}
               onChange={(e) => setCatName((c) => ({ ...c, th: e.target.value }))}
-              className="px-3 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-white text-sm focus:border-[#c9a84c] focus:outline-none"
+              className="px-3 py-2 rounded-lg text-sm"
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
             />
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => setShowCatForm(false)}
-              className="flex-1 py-2 bg-white/5 text-gray-400 rounded-lg text-sm"
+              className="flex-1 py-2 bg-white/5 rounded-lg text-sm"
+              style={{ color: 'var(--text-muted)' }}
             >
               {t('common.cancel')}
             </button>
             <button
               onClick={handleAddCategory}
               disabled={!catName.he || savingCat}
-              className="flex-1 py-2 bg-[#c9a84c] text-black rounded-lg text-sm font-medium disabled:opacity-50"
+              className="flex-1 py-2 rounded-lg text-sm font-medium disabled:opacity-50"
+              style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
             >
               {savingCat ? '...' : t('common.save')}
             </button>
@@ -173,7 +184,7 @@ export default function MenuManager() {
         return (
           <div key={cat.id} className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-sm text-[#c9a84c]/70 uppercase tracking-wide">
+              <h2 className="text-sm uppercase tracking-wide" style={{ color: 'oklch(0.75 0.12 85 / 0.7)' }}>
                 {(cat as any)[langKey]} ({catDishes.length})
               </h2>
               <button
@@ -187,45 +198,48 @@ export default function MenuManager() {
               {catDishes.map((dish) => (
                 <div
                   key={dish.id}
-                  className="flex items-center justify-between p-3 bg-[#121212] border border-white/5 rounded-xl"
+                  className="flex items-center justify-between p-3 rounded-xl"
+                  style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0">
                     {dish.image_url && (
                       <img src={dish.image_url} alt="" className="w-10 h-10 rounded-lg object-cover" />
                     )}
                     <div className="min-w-0">
-                      <p className={`text-sm truncate ${dish.is_available ? 'text-white' : 'text-gray-500 line-through'}`}>
+                      <p className={`text-sm truncate ${dish.is_available ? '' : 'line-through'}`} style={{ color: dish.is_available ? 'var(--text-primary)' : 'var(--text-muted)' }}>
                         {(dish as any)[langKey]}
                       </p>
-                      <p className="text-xs text-[#c9a84c]">{dish.price}฿</p>
+                      <p className="text-xs" style={{ color: 'var(--gold)' }}>{dish.price}฿</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => handleToggleAvailable(dish)}
-                      className={`w-8 h-8 rounded-lg text-xs ${dish.is_available ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}
-                      title={dish.is_available ? 'זמין' : 'לא זמין'}
+                      className={`w-11 h-11 rounded-lg text-xs ${dish.is_available ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}
+                      aria-label={dish.is_available ? 'זמין' : 'לא זמין'}
                     >
                       {dish.is_available ? '✓' : '✕'}
                     </button>
                     <button
                       onClick={() => handleDuplicate(dish)}
-                      className="w-8 h-8 rounded-lg bg-white/5 text-gray-400 text-xs hover:bg-white/10"
-                      title="שכפל מנה"
+                      className="w-11 h-11 rounded-lg bg-white/5 text-xs hover:bg-white/10"
+                      style={{ color: 'var(--text-muted)' }}
+                      aria-label="שכפל מנה"
                     >
                       ⧉
                     </button>
                     <button
                       onClick={() => navigate(`/admin/menu/${dish.id}`)}
-                      className="w-8 h-8 rounded-lg bg-white/5 text-gray-400 text-xs hover:bg-white/10"
-                      title="ערוך"
+                      className="w-11 h-11 rounded-lg bg-white/5 text-xs hover:bg-white/10"
+                      style={{ color: 'var(--text-muted)' }}
+                      aria-label="ערוך"
                     >
                       ✎
                     </button>
                     <button
                       onClick={() => handleDeleteDish(dish.id)}
-                      className="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 text-xs hover:bg-red-500/20"
-                      title="מחק"
+                      className="w-11 h-11 rounded-lg bg-red-500/10 text-red-400 text-xs hover:bg-red-500/20"
+                      aria-label="מחק"
                     >
                       ✕
                     </button>
@@ -233,7 +247,7 @@ export default function MenuManager() {
                 </div>
               ))}
               {catDishes.length === 0 && (
-                <p className="text-xs text-gray-600 py-2 text-center">אין מנות בקטגוריה זו</p>
+                <p className="text-xs py-2 text-center" style={{ color: 'var(--text-muted)' }}>אין מנות בקטגוריה זו</p>
               )}
             </div>
           </div>

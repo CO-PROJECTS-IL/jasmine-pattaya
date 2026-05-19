@@ -18,16 +18,16 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
   )
 
   return (
-    <div className="bg-[#1a1a1a] border border-white/10 rounded-lg p-3">
+    <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.005 85)' }}>
       <div className="flex justify-between items-center mb-2">
-        <span className="text-[#c9a84c] font-bold text-lg">#{order.table_number}</span>
-        <span className="text-gray-500 text-xs">{minutesAgo}m</span>
+        <span className="font-bold text-lg" style={{ color: 'var(--gold)' }}>#{order.table_number}</span>
+        <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{minutesAgo}m</span>
       </div>
 
       {order.items?.map((item) => (
-        <div key={item.id} className="text-sm text-gray-300 flex justify-between">
+        <div key={item.id} className="text-sm flex justify-between" style={{ color: 'var(--text-secondary)' }}>
           <span>{item.quantity}x {item.dish_id}</span>
-          <span className="text-gray-500">{item.price_at_order}฿</span>
+          <span style={{ color: 'var(--text-muted)' }}>{item.price_at_order}฿</span>
         </div>
       ))}
 
@@ -39,7 +39,8 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
         {canRevert && (
           <button
             onClick={() => onStatusChange(order.id, ORDER_STATUSES[currentIndex - 1] as OrderStatus)}
-            className="flex-1 py-1.5 text-xs bg-white/5 text-gray-400 rounded hover:bg-white/10 transition-colors"
+            className="flex-1 py-1.5 text-xs bg-white/5 rounded hover:bg-white/10 transition-colors"
+            style={{ color: 'var(--text-muted)' }}
           >
             ◀
           </button>
@@ -47,7 +48,8 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
         {canAdvance && (
           <button
             onClick={() => onStatusChange(order.id, ORDER_STATUSES[currentIndex + 1] as OrderStatus)}
-            className="flex-1 py-1.5 text-xs bg-[#c9a84c]/20 text-[#c9a84c] rounded hover:bg-[#c9a84c]/30 transition-colors font-medium"
+            className="flex-1 py-1.5 text-xs rounded font-medium transition-colors"
+            style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}
           >
             ▶
           </button>

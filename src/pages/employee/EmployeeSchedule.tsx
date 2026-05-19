@@ -42,10 +42,10 @@ export default function EmployeeSchedule() {
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl text-[#c9a84c] mb-4">{t('employee.myShifts')}</h2>
+      <h2 className="text-xl mb-4" style={{ color: 'var(--gold)' }}>{t('employee.myShifts')}</h2>
 
       {shifts.length === 0 ? (
-        <p className="text-gray-500 text-center py-8">{t('common.noResults')}</p>
+        <p className="text-center py-8" style={{ color: 'var(--text-muted)' }}>{t('common.noResults')}</p>
       ) : (
         <div className="space-y-2">
           {shifts.map((shift) => {
@@ -53,11 +53,11 @@ export default function EmployeeSchedule() {
             const dayName = DAYS[date.getDay()]
             const dateStr = date.toLocaleDateString()
             return (
-              <div key={shift.id} className="flex items-center justify-between p-3 bg-[#121212] border border-white/5 rounded-xl">
+              <div key={shift.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
                 <div>
-                  <p className="text-white text-sm">{dayName} {dateStr}</p>
+                  <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{dayName} {dateStr}</p>
                   {shift.shift_type === 'custom' && shift.custom_start && shift.custom_end && (
-                    <p className="text-gray-500 text-xs">{shift.custom_start} - {shift.custom_end}</p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{shift.custom_start} - {shift.custom_end}</p>
                   )}
                 </div>
                 <span className={`px-3 py-1 rounded-lg text-xs font-medium ${shiftTypeColors[shift.shift_type] || ''}`}>

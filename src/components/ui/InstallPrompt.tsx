@@ -38,20 +38,28 @@ export default function InstallPrompt() {
   }
 
   return (
-    <div className="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-[#1a1a1a] to-[#121212] border-b border-[#c9a84c]/30 px-4 py-3 flex items-center justify-between gap-3">
+    <div
+      className="fixed top-0 inset-x-0 z-50 px-4 py-3 flex items-center justify-between gap-3"
+      style={{
+        background: 'linear-gradient(to bottom, var(--dark-lighter), var(--dark-light))',
+        borderBottom: '1px solid oklch(0.75 0.12 85 / 0.3)',
+      }}
+    >
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-white font-medium truncate">{t('common.installHint')}</p>
+        <p className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>{t('common.installHint')}</p>
       </div>
       <div className="flex gap-2 flex-shrink-0">
         <button
           onClick={handleInstall}
-          className="px-4 py-1.5 bg-[#c9a84c] text-[#080808] rounded-lg text-sm font-bold hover:bg-[#d4b96a] transition-colors"
+          className="px-4 py-1.5 rounded-lg text-sm font-bold transition-colors"
+          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
         >
           {t('common.install')}
         </button>
         <button
           onClick={handleDismiss}
-          className="text-gray-500 hover:text-white text-xl leading-none px-1"
+          className="text-xl leading-none px-1"
+          style={{ color: 'var(--text-muted)' }}
         >
           &times;
         </button>

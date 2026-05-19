@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { callEdgeFunction, isSupabaseConfigured } from '../../lib/supabase'
 import { useSettings } from '../../hooks/useSettings'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 import KanbanBoard from '../../components/ui/KanbanBoard'
 import type { OrderStatus } from '../../lib/types'
 
@@ -10,6 +12,7 @@ export default function EmployeeDashboard() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { data: settings } = useSettings()
+  const { toast, showToast } = useToast()
   const [checkedIn, setCheckedIn] = useState(false)
   const [shiftStart, setShiftStart] = useState<Date | null>(null)
   const [elapsed, setElapsed] = useState('00:00:00')
@@ -33,7 +36,7 @@ export default function EmployeeDashboard() {
       try {
         await callEdgeFunction('employee-checkin', { action: 'check_in' })
       } catch (err) {
-        console.error(err)
+        showToast('שגיאה בדיווח נוכחות', 'error')
       }
     }
     setCheckedIn(true)
@@ -45,7 +48,7 @@ export default function EmployeeDashboard() {
       try {
         await callEdgeFunction('employee-checkin', { action: 'check_out' })
       } catch (err) {
-        console.error(err)
+        showToast('שגיאה בדיווח נוכחות', 'error')
       }
     }
     setCheckedIn(false)
@@ -57,16 +60,16 @@ export default function EmployeeDashboard() {
     try {
       await callEdgeFunction('update-order-status', { orderId, status: newStatus })
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בטעינת נתונים', 'error')
     }
   }
 
   return (
     <div className="space-y-6">
       {/* Check-in / Check-out */}
-      <div className="bg-[#121212] border border-white/5 rounded-xl p-6 text-center">
-        <p className="text-gray-400 text-sm mb-1">{t('employee.shiftTimer')}</p>
-        <p className="text-4xl text-white font-mono mb-4">{elapsed}</p>
+      <div className="rounded-xl p-6 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+        <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>{t('employee.shiftTimer')}</p>
+        <p className="text-4xl font-mono mb-4" style={{ color: 'var(--text-primary)' }}>{elapsed}</p>
         {!checkedIn ? (
           <button
             onClick={handleCheckIn}
@@ -86,22 +89,24 @@ export default function EmployeeDashboard() {
 
       {/* Salary */}
       {settings?.show_employee_salary && salary !== null && (
-        <div className="bg-[#121212] border border-white/5 rounded-xl p-4 text-center">
-          <p className="text-gray-400 text-sm">{t('employee.salary')}</p>
-          <p className="text-2xl text-[#c9a84c] font-bold">{salary}฿</p>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{t('employee.salary')}</p>
+          <p className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>{salary}฿</p>
         </div>
       )}
 
       {/* Quick Actions */}
       <button
         onClick={() => navigate('/employee/new-order')}
-        className="w-full py-4 bg-[#c9a84c]/10 border border-[#c9a84c]/30 rounded-xl text-[#c9a84c] text-lg font-medium hover:bg-[#c9a84c]/20 transition-colors"
+        className="w-full py-4 rounded-xl text-lg font-medium transition-colors"
+        style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.1)', border: '1px solid oklch(0.75 0.12 85 / 0.3)', color: 'var(--gold)' }}
       >
         {t('employee.newOrder')}
       </button>
 
       {/* Kanban */}
       <KanbanBoard onStatusChange={handleStatusChange} />
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </div>
   )
 }

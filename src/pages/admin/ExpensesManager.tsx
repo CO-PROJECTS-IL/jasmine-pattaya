@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { supabase } from '../../lib/supabase'
-import AdminLayout from '../../components/layout/AdminLayout'
 import type { ExpenseRecurring, ExpenseOnetime, ExpenseFrequency } from '../../lib/types'
 import { EXPENSE_CATEGORIES } from '../../lib/constants'
 
@@ -10,8 +9,14 @@ type Tab = 'recurring' | 'onetime'
 const FREQUENCIES: ExpenseFrequency[] = ['daily', 'weekly', 'monthly', 'yearly']
 
 const inputClass =
-  'w-full bg-[#121212] border border-[#c9a84c]/30 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-[#c9a84c]'
-const labelClass = 'block text-xs text-gray-500 mb-1'
+  'w-full rounded-lg px-3 py-2 text-sm'
+const inputStyle = {
+  backgroundColor: 'var(--dark-light)',
+  border: '1px solid oklch(0.75 0.12 85 / 0.3)',
+  color: 'var(--text-primary)',
+}
+const labelClass = 'block text-xs mb-1'
+const labelStyle = { color: 'var(--text-muted)' }
 
 /* ─── Recurring form state ─────────────────────────────── */
 interface RecurringForm {
@@ -223,29 +228,31 @@ export default function ExpensesManager() {
      RENDER
   ════════════════════════════════════════════════ */
   return (
-    <AdminLayout>
+    <>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl text-[#c9a84c]">{t('expenses.title')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('expenses.title')}</h1>
         <button
           onClick={tab === 'recurring' ? openAddRecurring : openAddOnetime}
-          className="px-4 py-2 bg-[#c9a84c] text-black rounded-lg text-sm font-medium hover:bg-[#d4b96a] transition-colors"
+          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
         >
           + {t('expenses.add')}
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-white/10 mb-5">
+      <div className="flex mb-5" style={{ borderBottom: '1px solid oklch(0.30 0.005 85)' }}>
         {(['recurring', 'onetime'] as Tab[]).map((key) => (
           <button
             key={key}
             onClick={() => setTab(key)}
-            className={`px-5 py-2 text-sm font-medium transition-colors ${
+            className="px-5 py-2 text-sm font-medium transition-colors"
+            style={
               tab === key
-                ? 'text-[#c9a84c] border-b-2 border-[#c9a84c]'
-                : 'text-gray-500 hover:text-gray-300'
-            }`}
+                ? { color: 'var(--gold)', borderBottom: '2px solid var(--gold)' }
+                : { color: 'var(--text-muted)' }
+            }
           >
             {t(`expenses.${key}`)}
           </button>
@@ -256,17 +263,17 @@ export default function ExpensesManager() {
       {tab === 'recurring' && (
         <>
           {recurring.length === 0 ? (
-            <p className="text-center text-gray-500 py-12">{t('expenses.noRecurring')}</p>
+            <p className="text-center py-12" style={{ color: 'var(--text-muted)' }}>{t('expenses.noRecurring')}</p>
           ) : (
-            <div className="overflow-x-auto rounded-xl border border-[#c9a84c]/20">
+            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#121212] text-gray-400 text-xs">
-                    <th className="text-start px-4 py-3">{t('expenses.name')}</th>
-                    <th className="text-start px-4 py-3">{t('expenses.amount')}</th>
-                    <th className="text-start px-4 py-3">{t('expenses.frequency')}</th>
-                    <th className="text-start px-4 py-3">{t('expenses.startDate')}</th>
-                    <th className="text-center px-4 py-3">{t('expenses.active')}</th>
+                  <tr style={{ backgroundColor: 'var(--dark-light)' }}>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.name')}</th>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.amount')}</th>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.frequency')}</th>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.startDate')}</th>
+                    <th className="text-center px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.active')}</th>
                     <th className="px-4 py-3" />
                   </tr>
                 </thead>
@@ -274,14 +281,15 @@ export default function ExpensesManager() {
                   {recurring.map((exp) => (
                     <tr
                       key={exp.id}
-                      className="border-t border-white/5 hover:bg-white/5 transition-colors"
+                      className="hover:bg-white/5 transition-colors"
+                      style={{ borderTop: '1px solid oklch(0.25 0.005 85)' }}
                     >
-                      <td className="px-4 py-3 text-white">{exp.name}</td>
-                      <td className="px-4 py-3 text-[#c9a84c] font-medium">
+                      <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{exp.name}</td>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--gold)' }}>
                         ฿{exp.amount.toLocaleString()}
                       </td>
-                      <td className="px-4 py-3 text-gray-300">{t(`expenses.freq_${exp.frequency}`) || exp.frequency}</td>
-                      <td className="px-4 py-3 text-gray-400">{exp.start_date}</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{t(`expenses.freq_${exp.frequency}`) || exp.frequency}</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--text-muted)' }}>{exp.start_date}</td>
                       <td className="px-4 py-3 text-center">
                         <button
                           onClick={() => toggleRecurring(exp)}
@@ -300,7 +308,8 @@ export default function ExpensesManager() {
                         <div className="flex gap-3 justify-end">
                           <button
                             onClick={() => openEditRecurring(exp)}
-                            className="text-[#c9a84c] hover:text-[#d4b96a] text-xs"
+                            className="text-xs"
+                            style={{ color: 'var(--gold)' }}
                           >
                             {t('expenses.edit')}
                           </button>
@@ -314,7 +323,8 @@ export default function ExpensesManager() {
                               </button>
                               <button
                                 onClick={() => setDeleteConfirmId(null)}
-                                className="text-gray-500 hover:text-gray-300 text-xs"
+                                className="hover:text-gray-300 text-xs"
+                                style={{ color: 'var(--text-muted)' }}
                               >
                                 ✕
                               </button>
@@ -342,16 +352,16 @@ export default function ExpensesManager() {
       {tab === 'onetime' && (
         <>
           {onetime.length === 0 ? (
-            <p className="text-center text-gray-500 py-12">{t('expenses.noOnetime')}</p>
+            <p className="text-center py-12" style={{ color: 'var(--text-muted)' }}>{t('expenses.noOnetime')}</p>
           ) : (
-            <div className="overflow-x-auto rounded-xl border border-[#c9a84c]/20">
+            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#121212] text-gray-400 text-xs">
-                    <th className="text-start px-4 py-3">{t('expenses.name')}</th>
-                    <th className="text-start px-4 py-3">{t('expenses.amount')}</th>
-                    <th className="text-start px-4 py-3">{t('expenses.date')}</th>
-                    <th className="text-start px-4 py-3">{t('expenses.category')}</th>
+                  <tr style={{ backgroundColor: 'var(--dark-light)' }}>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.name')}</th>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.amount')}</th>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.date')}</th>
+                    <th className="text-start px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>{t('expenses.category')}</th>
                     <th className="px-4 py-3" />
                   </tr>
                 </thead>
@@ -359,14 +369,15 @@ export default function ExpensesManager() {
                   {onetime.map((exp) => (
                     <tr
                       key={exp.id}
-                      className="border-t border-white/5 hover:bg-white/5 transition-colors"
+                      className="hover:bg-white/5 transition-colors"
+                      style={{ borderTop: '1px solid oklch(0.25 0.005 85)' }}
                     >
-                      <td className="px-4 py-3 text-white">{exp.name}</td>
-                      <td className="px-4 py-3 text-[#c9a84c] font-medium">
+                      <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{exp.name}</td>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--gold)' }}>
                         ฿{exp.amount.toLocaleString()}
                       </td>
-                      <td className="px-4 py-3 text-gray-400">{exp.date}</td>
-                      <td className="px-4 py-3 text-gray-300">{exp.category}</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--text-muted)' }}>{exp.date}</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{exp.category}</td>
                       <td className="px-4 py-3 text-end">
                         {deleteConfirmId === exp.id ? (
                           <span className="flex gap-2 items-center justify-end">
@@ -378,7 +389,8 @@ export default function ExpensesManager() {
                             </button>
                             <button
                               onClick={() => setDeleteConfirmId(null)}
-                              className="text-gray-500 hover:text-gray-300 text-xs"
+                              className="hover:text-gray-300 text-xs"
+                              style={{ color: 'var(--text-muted)' }}
                             >
                               ✕
                             </button>
@@ -406,40 +418,46 @@ export default function ExpensesManager() {
       ══════════════════════════════════════════════ */}
       {showRecurringModal && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[#1a1a1a] border border-[#c9a84c]/20 rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-lg text-[#c9a84c] font-bold mb-4">
+          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--gold)' }}>
               {editingRecurring ? t('expenses.edit') : t('expenses.add')} — {t('expenses.recurring')}
             </h2>
 
             <div className="space-y-3">
               <div>
-                <label className={labelClass}>{t('expenses.name')}</label>
+                <label htmlFor="input-recurring-name" className={labelClass} style={labelStyle}>{t('expenses.name')}</label>
                 <input
+                  id="input-recurring-name"
                   value={recurringForm.name}
                   onChange={(e) => setRecurringForm((f) => ({ ...f, name: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.amount')} (฿)</label>
+                <label htmlFor="input-recurring-amount" className={labelClass} style={labelStyle}>{t('expenses.amount')} (฿)</label>
                 <input
+                  id="input-recurring-amount"
                   type="number"
                   min="0"
                   value={recurringForm.amount}
                   onChange={(e) => setRecurringForm((f) => ({ ...f, amount: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.frequency')}</label>
+                <label htmlFor="select-recurring-frequency" className={labelClass} style={labelStyle}>{t('expenses.frequency')}</label>
                 <select
+                  id="select-recurring-frequency"
                   value={recurringForm.frequency}
                   onChange={(e) =>
                     setRecurringForm((f) => ({ ...f, frequency: e.target.value as ExpenseFrequency }))
                   }
                   className={inputClass}
+                  style={inputStyle}
                 >
                   {FREQUENCIES.map((freq) => (
                     <option key={freq} value={freq}>
@@ -450,11 +468,13 @@ export default function ExpensesManager() {
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.category')}</label>
+                <label htmlFor="select-recurring-category" className={labelClass} style={labelStyle}>{t('expenses.category')}</label>
                 <select
+                  id="select-recurring-category"
                   value={recurringForm.category}
                   onChange={(e) => setRecurringForm((f) => ({ ...f, category: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 >
                   {EXPENSE_CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
@@ -465,12 +485,14 @@ export default function ExpensesManager() {
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.startDate')}</label>
+                <label htmlFor="input-recurring-start-date" className={labelClass} style={labelStyle}>{t('expenses.startDate')}</label>
                 <input
+                  id="input-recurring-start-date"
                   type="date"
                   value={recurringForm.start_date}
                   onChange={(e) => setRecurringForm((f) => ({ ...f, start_date: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 />
               </div>
             </div>
@@ -479,13 +501,15 @@ export default function ExpensesManager() {
               <button
                 onClick={saveRecurring}
                 disabled={saving || !recurringForm.name}
-                className="bg-[#c9a84c] text-black px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#d4b96a] transition-colors disabled:opacity-50"
+                className="px-6 py-2 rounded-lg font-bold text-sm transition-colors disabled:opacity-50"
+                style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
               >
                 {saving ? '...' : t('expenses.add')}
               </button>
               <button
                 onClick={() => setShowRecurringModal(false)}
-                className="text-gray-400 hover:text-white text-sm"
+                className="text-sm"
+                style={{ color: 'var(--text-muted)' }}
               >
                 ✕
               </button>
@@ -499,48 +523,56 @@ export default function ExpensesManager() {
       ══════════════════════════════════════════════ */}
       {showOnetimeModal && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[#1a1a1a] border border-[#c9a84c]/20 rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-lg text-[#c9a84c] font-bold mb-4">
+          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--gold)' }}>
               {t('expenses.add')} — {t('expenses.onetime')}
             </h2>
 
             <div className="space-y-3">
               <div>
-                <label className={labelClass}>{t('expenses.name')}</label>
+                <label htmlFor="input-onetime-name" className={labelClass} style={labelStyle}>{t('expenses.name')}</label>
                 <input
+                  id="input-onetime-name"
                   value={onetimeForm.name}
                   onChange={(e) => setOnetimeForm((f) => ({ ...f, name: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.amount')} (฿)</label>
+                <label htmlFor="input-onetime-amount" className={labelClass} style={labelStyle}>{t('expenses.amount')} (฿)</label>
                 <input
+                  id="input-onetime-amount"
                   type="number"
                   min="0"
                   value={onetimeForm.amount}
                   onChange={(e) => setOnetimeForm((f) => ({ ...f, amount: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.date')}</label>
+                <label htmlFor="input-onetime-date" className={labelClass} style={labelStyle}>{t('expenses.date')}</label>
                 <input
+                  id="input-onetime-date"
                   type="date"
                   value={onetimeForm.date}
                   onChange={(e) => setOnetimeForm((f) => ({ ...f, date: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>{t('expenses.category')}</label>
+                <label htmlFor="select-onetime-category" className={labelClass} style={labelStyle}>{t('expenses.category')}</label>
                 <select
+                  id="select-onetime-category"
                   value={onetimeForm.category}
                   onChange={(e) => setOnetimeForm((f) => ({ ...f, category: e.target.value }))}
                   className={inputClass}
+                  style={inputStyle}
                 >
                   {EXPENSE_CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
@@ -555,13 +587,15 @@ export default function ExpensesManager() {
               <button
                 onClick={saveOnetime}
                 disabled={saving || !onetimeForm.name}
-                className="bg-[#c9a84c] text-black px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#d4b96a] transition-colors disabled:opacity-50"
+                className="px-6 py-2 rounded-lg font-bold text-sm transition-colors disabled:opacity-50"
+                style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
               >
                 {saving ? '...' : t('expenses.add')}
               </button>
               <button
                 onClick={() => setShowOnetimeModal(false)}
-                className="text-gray-400 hover:text-white text-sm"
+                className="text-sm"
+                style={{ color: 'var(--text-muted)' }}
               >
                 ✕
               </button>
@@ -569,6 +603,6 @@ export default function ExpensesManager() {
           </div>
         </div>
       )}
-    </AdminLayout>
+    </>
   )
 }

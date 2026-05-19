@@ -83,7 +83,7 @@ export default function DishCard({ dish, index = 0, onSelect, onQuickAdd }: Dish
         </div>
       )}
 
-      <div className="p-3.5">
+      <div className="p-4">
         <h3 className="font-semibold text-sm leading-snug mb-1 line-clamp-2" style={{ color: 'var(--text-primary)' }}>
           {name}
         </h3>
@@ -99,7 +99,7 @@ export default function DishCard({ dish, index = 0, onSelect, onQuickAdd }: Dish
               e.stopPropagation()
               onQuickAdd(dish)
             }}
-            className="w-9 h-9 rounded-xl flex items-center justify-center text-lg font-bold transition-all duration-200 active:scale-90"
+            className="w-11 h-11 rounded-xl flex items-center justify-center text-lg font-bold transition-all duration-200 active:scale-95"
             style={{
               background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
               color: 'oklch(0.15 0.01 85)',

@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useRealtimeOrders } from '../../hooks/useRealtimeOrders'
 import { ORDER_STATUS_COLORS } from '../../lib/constants'
-import AdminLayout from '../../components/layout/AdminLayout'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 export default function Dashboard() {
@@ -31,34 +30,38 @@ export default function Dashboard() {
   ]
 
   return (
-    <AdminLayout>
-      <h1 className="text-xl text-[#c9a84c] mb-6">{t('adminHome.dashboard')}</h1>
+    <>
+      <h1 className="text-xl mb-8" style={{ color: 'var(--gold)' }}>{t('adminHome.dashboard')}</h1>
 
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {cards.map((card) => (
-          <div key={card.label} className="bg-[#121212] border border-white/5 rounded-xl p-4 text-center">
-            <p className="text-gray-400 text-xs mb-1">{card.label}</p>
+          <div
+            key={card.label}
+            className="rounded-xl p-4 text-center"
+            style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.005 85)' }}
+          >
+            <p className="text-xs mb-1.5" style={{ color: 'var(--text-muted)' }}>{card.label}</p>
             <p className="text-xl font-bold" style={{ color: card.color }}>{card.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="flex gap-2 mb-6 flex-wrap">
+      <div className="flex gap-2.5 mb-8 flex-wrap">
         {Object.entries(statusCounts).map(([status, count]) => (
           <div
             key={status}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-lg"
             style={{ backgroundColor: `${ORDER_STATUS_COLORS[status]}20` }}
           >
-            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: ORDER_STATUS_COLORS[status] }} />
-            <span className="text-xs text-white">{t(`kanban.${status}`)}: {count}</span>
+            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: ORDER_STATUS_COLORS[status] }} />
+            <span className="text-xs" style={{ color: 'var(--text-primary)' }}>{t(`kanban.${status}`)}: {count}</span>
           </div>
         ))}
       </div>
 
       {hourlyData.length > 0 && (
-        <div className="bg-[#121212] border border-white/5 rounded-xl p-4">
-          <h3 className="text-sm text-gray-400 mb-3">{t('dashboard.ordersChart')}</h3>
+        <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.005 85)' }}>
+          <h3 className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{t('dashboard.ordersChart')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={hourlyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#333" />
@@ -70,6 +73,6 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
       )}
-    </AdminLayout>
+    </>
   )
 }

@@ -1,12 +1,14 @@
 import { useTranslation } from 'react-i18next'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabase, isSupabaseConfigured, callEdgeFunction } from '../../lib/supabase'
-import AdminLayout from '../../components/layout/AdminLayout'
 import { getNextFriday } from '../../lib/timezone'
+import { useToast } from '../../hooks/useToast'
+import Toast from '../../components/ui/Toast'
 
 export default function FridayManager() {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
+  const { toast, showToast } = useToast()
   const nextFriday = getNextFriday()
   const fridayStr = nextFriday.toISOString().split('T')[0]
 
@@ -51,7 +53,7 @@ export default function FridayManager() {
       await callEdgeFunction('admin-friday', { action: 'cancel_date', friday_date: fridayStr })
       queryClient.invalidateQueries({ queryKey: ['friday-cancelled'] })
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בעדכון', 'error')
     }
   }
 
@@ -60,19 +62,20 @@ export default function FridayManager() {
       await callEdgeFunction('admin-bookings', { action: 'update_status', id: bookingId, status })
       queryClient.invalidateQueries({ queryKey: ['friday-bookings'] })
     } catch (err) {
-      console.error(err)
+      showToast('שגיאה בעדכון פריט', 'error')
     }
   }
 
   return (
-    <AdminLayout>
-      <h1 className="text-xl text-[#c9a84c] mb-6">{t('adminHome.friday')}</h1>
+    <>
+      {toast && <Toast message={toast.message} type={toast.type} />}
+      <h1 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>{t('adminHome.friday')}</h1>
 
       {/* Cancel Section */}
-      <div className="bg-[#121212] border border-white/5 rounded-xl p-4 mb-6">
+      <div className="rounded-xl p-4 mb-6" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-white text-sm">{t('friday.fridayMenu')}: {fridayStr}</p>
+            <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{t('friday.fridayMenu')}: {fridayStr}</p>
             {isCancelled && <p className="text-red-400 text-xs">{t('friday.cancelled')}</p>}
           </div>
           {!isCancelled && (
@@ -84,31 +87,31 @@ export default function FridayManager() {
       </div>
 
       {/* Friday Menu Items */}
-      <h2 className="text-lg text-[#c9a84c] mb-3">{t('friday.fridayMenu')}</h2>
+      <h2 className="text-lg mb-3" style={{ color: 'var(--gold)' }}>{t('friday.fridayMenu')}</h2>
       <div className="space-y-2 mb-6">
         {menuItems.map((item: any) => (
-          <div key={item.id} className="flex items-center justify-between p-3 bg-[#121212] border border-white/5 rounded-xl">
+          <div key={item.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
             <div>
-              <p className="text-white text-sm">{item.dish?.name_he || item.dish?.name_en}</p>
-              <p className="text-[#c9a84c] text-sm">{item.friday_price}฿</p>
+              <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{item.dish?.name_he || item.dish?.name_en}</p>
+              <p className="text-sm" style={{ color: 'var(--gold)' }}>{item.friday_price}฿</p>
             </div>
             <span className={`px-2 py-0.5 rounded text-[10px] ${item.is_active ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
               {item.is_active ? t('employees.active') : t('employees.inactive')}
             </span>
           </div>
         ))}
-        {menuItems.length === 0 && <p className="text-gray-500 text-center py-4">{t('friday.noMenu')}</p>}
+        {menuItems.length === 0 && <p className="text-center py-4" style={{ color: 'var(--text-muted)' }}>{t('friday.noMenu')}</p>}
       </div>
 
       {/* Bookings */}
-      <h2 className="text-lg text-[#c9a84c] mb-3">{t('friday.bookTitle')}</h2>
+      <h2 className="text-lg mb-3" style={{ color: 'var(--gold)' }}>{t('friday.bookTitle')}</h2>
       <div className="space-y-2">
         {bookings.map((booking: any) => (
-          <div key={booking.id} className="p-4 bg-[#121212] border border-white/5 rounded-xl">
+          <div key={booking.id} className="p-4 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
             <div className="flex items-center justify-between mb-2">
               <div>
-                <p className="text-white text-sm font-medium">{booking.guest_name}</p>
-                <p className="text-gray-500 text-xs">{booking.guest_phone} • {booking.num_guests} {t('friday.numGuests')}</p>
+                <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{booking.guest_name}</p>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{booking.guest_phone} • {booking.num_guests} {t('friday.numGuests')}</p>
               </div>
               <span className={`px-2 py-0.5 rounded text-[10px] ${
                 booking.status === 'confirmed' ? 'bg-green-500/20 text-green-400'
@@ -118,7 +121,7 @@ export default function FridayManager() {
                 {booking.status}
               </span>
             </div>
-            {booking.notes && <p className="text-gray-500 text-xs italic mb-2">{booking.notes}</p>}
+            {booking.notes && <p className="text-xs italic mb-2" style={{ color: 'var(--text-muted)' }}>{booking.notes}</p>}
             {booking.status === 'pending' && (
               <div className="flex gap-2">
                 <button onClick={() => handleBookingStatus(booking.id, 'confirmed')}
@@ -133,8 +136,8 @@ export default function FridayManager() {
             )}
           </div>
         ))}
-        {bookings.length === 0 && <p className="text-gray-500 text-center py-4">{t('common.noResults')}</p>}
+        {bookings.length === 0 && <p className="text-center py-4" style={{ color: 'var(--text-muted)' }}>{t('common.noResults')}</p>}
       </div>
-    </AdminLayout>
+    </>
   )
 }

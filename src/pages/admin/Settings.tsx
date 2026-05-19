@@ -51,9 +51,8 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${
-        checked ? 'bg-[#c9a84c]' : 'bg-[#4a4a4a]'
-      }`}
+      className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200"
+      style={{ backgroundColor: checked ? 'var(--gold)' : '#4a4a4a' }}
     >
       <span
         className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
@@ -67,8 +66,8 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 // ─── Section Wrapper ──────────────────────────────────────────────────────────
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-[#121212] rounded-xl p-5 border border-[#c9a84c]/10">
-      <h2 className="text-[#c9a84c] text-lg font-semibold pb-3 mb-4 border-b border-[#c9a84c]/15">
+    <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.1)' }}>
+      <h2 className="text-lg font-semibold pb-3 mb-4" style={{ color: 'var(--gold)', borderBottom: '1px solid oklch(0.75 0.12 85 / 0.15)' }}>
         {title}
       </h2>
       {children}
@@ -78,7 +77,12 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 // ─── Input ────────────────────────────────────────────────────────────────────
 const inputCls =
-  'bg-[#1a1a1a] border border-[#c9a84c]/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#c9a84c] transition-colors'
+  'rounded-lg px-3 py-2 transition-colors'
+const inputStyle = {
+  backgroundColor: 'var(--dark-lighter)',
+  border: '1px solid oklch(0.75 0.12 85 / 0.3)',
+  color: 'var(--text-primary)',
+}
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function Toast({ message, type }: { message: string; type: 'success' | 'error' }) {
@@ -221,7 +225,6 @@ export default function Settings() {
       if (error) throw error
       showToast(t('settings.saved'), 'success')
     } catch (err) {
-      console.error(err)
       showToast(t('settings.error'), 'error')
     } finally {
       setSaving(false)
@@ -231,7 +234,7 @@ export default function Settings() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="max-w-2xl mx-auto pb-10">
-      <h1 className="text-2xl text-[#c9a84c] font-bold mb-6">{t('settings.title')}</h1>
+      <h1 className="text-2xl font-bold mb-6" style={{ color: 'var(--gold)' }}>{t('settings.title')}</h1>
 
       <div className="space-y-4">
 
@@ -240,20 +243,23 @@ export default function Settings() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Admin PIN */}
             <div>
-              <label className="text-xs text-gray-400 mb-1 block">{t('settings.adminPin')}</label>
+              <label htmlFor="input-admin-pin" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.adminPin')}</label>
               <div className="relative">
                 <input
+                  id="input-admin-pin"
                   type={showAdminPin ? 'text' : 'password'}
                   value={adminPin}
                   onChange={(e) => setAdminPin(e.target.value.replace(/\D/g, '').slice(0, 4))}
                   placeholder="••••"
                   maxLength={4}
                   className={`${inputCls} w-full text-center tracking-[0.5em] pr-10`}
+                  style={inputStyle}
                 />
                 <button
                   type="button"
                   onClick={() => setShowAdminPin((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#c9a84c]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
+                  style={{ color: 'var(--text-muted)' }}
                 >
                   {showAdminPin ? <IconEyeOff /> : <IconEye />}
                 </button>
@@ -262,20 +268,23 @@ export default function Settings() {
 
             {/* Employee PIN */}
             <div>
-              <label className="text-xs text-gray-400 mb-1 block">{t('settings.employeePin')}</label>
+              <label htmlFor="input-employee-pin" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.employeePin')}</label>
               <div className="relative">
                 <input
+                  id="input-employee-pin"
                   type={showEmployeePin ? 'text' : 'password'}
                   value={employeePin}
                   onChange={(e) => setEmployeePin(e.target.value.replace(/\D/g, '').slice(0, 4))}
                   placeholder="••••"
                   maxLength={4}
                   className={`${inputCls} w-full text-center tracking-[0.5em] pr-10`}
+                  style={inputStyle}
                 />
                 <button
                   type="button"
                   onClick={() => setShowEmployeePin((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#c9a84c]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
+                  style={{ color: 'var(--text-muted)' }}
                 >
                   {showEmployeePin ? <IconEyeOff /> : <IconEye />}
                 </button>
@@ -291,7 +300,8 @@ export default function Settings() {
               type="button"
               onClick={handleSetLocation}
               disabled={locating}
-              className="flex items-center gap-2 bg-[#1a1a1a] border border-[#c9a84c]/30 rounded-lg px-4 py-2 text-[#c9a84c] text-sm font-medium hover:border-[#c9a84c] transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.12 85 / 0.3)', color: 'var(--gold)' }}
             >
               <IconMapPin />
               {locating ? '…' : t('settings.setLocation')}
@@ -299,30 +309,32 @@ export default function Settings() {
 
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <span className="text-gray-500 block mb-1">{t('settings.latitude')}</span>
-                <span className="text-white font-mono">
+                <span className="block mb-1" style={{ color: 'var(--text-muted)' }}>{t('settings.latitude')}</span>
+                <span className="font-mono" style={{ color: 'var(--text-primary)' }}>
                   {lat !== null ? lat.toFixed(6) : '—'}
                 </span>
               </div>
               <div>
-                <span className="text-gray-500 block mb-1">{t('settings.longitude')}</span>
-                <span className="text-white font-mono">
+                <span className="block mb-1" style={{ color: 'var(--text-muted)' }}>{t('settings.longitude')}</span>
+                <span className="font-mono" style={{ color: 'var(--text-primary)' }}>
                   {lng !== null ? lng.toFixed(6) : '—'}
                 </span>
               </div>
             </div>
 
             <div>
-              <label className="text-xs text-gray-400 mb-1 block">
+              <label htmlFor="input-radius" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>
                 {t('settings.radius')} (m)
               </label>
               <input
+                id="input-radius"
                 type="number"
                 value={radius}
                 onChange={(e) => setRadius(Number(e.target.value))}
                 min={10}
                 max={500}
                 className={`${inputCls} w-32`}
+                style={inputStyle}
               />
             </div>
           </div>
@@ -332,20 +344,23 @@ export default function Settings() {
         <Section title={t('settings.tables')}>
           <div className="flex flex-wrap items-end gap-6">
             <div>
-              <label className="text-xs text-gray-400 mb-1 block">{t('settings.tableCount')}</label>
+              <label htmlFor="input-table-count" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.tableCount')}</label>
               <input
+                id="input-table-count"
                 type="number"
                 value={tableCount}
                 onChange={(e) => setTableCount(Number(e.target.value))}
                 min={1}
                 max={100}
                 className={`${inputCls} w-24`}
+                style={inputStyle}
               />
             </div>
             <button
               type="button"
               onClick={() => navigate('/admin/qr-codes')}
-              className="flex items-center gap-2 text-sm text-[#c9a84c] border border-[#c9a84c]/30 rounded-lg px-4 py-2 hover:border-[#c9a84c] transition-colors"
+              className="flex items-center gap-2 text-sm rounded-lg px-4 py-2 transition-colors"
+              style={{ color: 'var(--gold)', border: '1px solid oklch(0.75 0.12 85 / 0.3)' }}
             >
               <IconQrCode />
               {t('settings.generateQR')}
@@ -358,7 +373,7 @@ export default function Settings() {
           <div className="space-y-2">
             {DAY_KEYS.map((day) => (
               <div key={day} className="flex items-center gap-3 flex-wrap">
-                <span className="text-white text-sm w-24 flex-shrink-0">
+                <span className="text-sm w-24 flex-shrink-0" style={{ color: 'var(--text-primary)' }}>
                   {t(`settings.days.${day}`)}
                 </span>
                 <input
@@ -366,13 +381,15 @@ export default function Settings() {
                   value={openingHours[day]?.open ?? '11:00'}
                   onChange={(e) => updateOpeningHour(day, 'open', e.target.value)}
                   className={`${inputCls} w-32 text-sm`}
+                  style={inputStyle}
                 />
-                <span className="text-gray-500">—</span>
+                <span style={{ color: 'var(--text-muted)' }}>—</span>
                 <input
                   type="time"
                   value={openingHours[day]?.close ?? '23:00'}
                   onChange={(e) => updateOpeningHour(day, 'close', e.target.value)}
                   className={`${inputCls} w-32 text-sm`}
+                  style={inputStyle}
                 />
               </div>
             ))}
@@ -384,24 +401,28 @@ export default function Settings() {
           <div className="space-y-4">
             {/* Morning */}
             <div>
-              <p className="text-sm text-gray-400 mb-2">{t('settings.morningShift')}</p>
+              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>{t('settings.morningShift')}</p>
               <div className="flex items-center gap-3 flex-wrap">
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">{t('settings.start')}</label>
+                  <label htmlFor="input-morning-start" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.start')}</label>
                   <input
+                    id="input-morning-start"
                     type="time"
                     value={morningStart}
                     onChange={(e) => setMorningStart(e.target.value)}
                     className={`${inputCls} w-32 text-sm`}
+                    style={inputStyle}
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">{t('settings.end')}</label>
+                  <label htmlFor="input-morning-end" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.end')}</label>
                   <input
+                    id="input-morning-end"
                     type="time"
                     value={morningEnd}
                     onChange={(e) => setMorningEnd(e.target.value)}
                     className={`${inputCls} w-32 text-sm`}
+                    style={inputStyle}
                   />
                 </div>
               </div>
@@ -409,24 +430,28 @@ export default function Settings() {
 
             {/* Evening */}
             <div>
-              <p className="text-sm text-gray-400 mb-2">{t('settings.eveningShift')}</p>
+              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>{t('settings.eveningShift')}</p>
               <div className="flex items-center gap-3 flex-wrap">
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">{t('settings.start')}</label>
+                  <label htmlFor="input-evening-start" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.start')}</label>
                   <input
+                    id="input-evening-start"
                     type="time"
                     value={eveningStart}
                     onChange={(e) => setEveningStart(e.target.value)}
                     className={`${inputCls} w-32 text-sm`}
+                    style={inputStyle}
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-500 mb-1 block">{t('settings.end')}</label>
+                  <label htmlFor="input-evening-end" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.end')}</label>
                   <input
+                    id="input-evening-end"
                     type="time"
                     value={eveningEnd}
                     onChange={(e) => setEveningEnd(e.target.value)}
                     className={`${inputCls} w-32 text-sm`}
+                    style={inputStyle}
                   />
                 </div>
               </div>
@@ -438,30 +463,34 @@ export default function Settings() {
         <Section title={t('settings.friday')}>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-white">{t('settings.fridayEnabled')}</span>
+              <span className="text-sm" style={{ color: 'var(--text-primary)' }}>{t('settings.fridayEnabled')}</span>
               <Toggle checked={fridayEnabled} onChange={setFridayEnabled} />
             </div>
 
             <div className="flex items-end gap-6 flex-wrap">
               <div>
-                <label className="text-xs text-gray-400 mb-1 block">{t('settings.switchTime')}</label>
+                <label htmlFor="input-friday-switch-time" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.switchTime')}</label>
                 <input
+                  id="input-friday-switch-time"
                   type="time"
                   value={fridaySwitchTime}
                   onChange={(e) => setFridaySwitchTime(e.target.value)}
                   disabled={!fridayEnabled}
                   className={`${inputCls} w-32 text-sm disabled:opacity-40`}
+                  style={inputStyle}
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-400 mb-1 block">{t('settings.maxGuests')}</label>
+                <label htmlFor="input-friday-max-guests" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.maxGuests')}</label>
                 <input
+                  id="input-friday-max-guests"
                   type="number"
                   value={fridayMaxGuests}
                   onChange={(e) => setFridayMaxGuests(Number(e.target.value))}
                   min={0}
                   disabled={!fridayEnabled}
                   className={`${inputCls} w-24 text-sm disabled:opacity-40`}
+                  style={inputStyle}
                 />
               </div>
             </div>
@@ -471,7 +500,7 @@ export default function Settings() {
         {/* ── Employee Settings ── */}
         <Section title={t('settings.employeeSettings')}>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-white">{t('settings.showSalary')}</span>
+            <span className="text-sm" style={{ color: 'var(--text-primary)' }}>{t('settings.showSalary')}</span>
             <Toggle checked={showSalary} onChange={setShowSalary} />
           </div>
         </Section>
@@ -481,7 +510,8 @@ export default function Settings() {
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="w-full bg-[#c9a84c] text-[#080808] rounded-xl py-3 font-semibold text-base hover:bg-[#d4b96a] transition-colors disabled:opacity-60"
+          className="w-full rounded-xl py-3 font-semibold text-base transition-colors disabled:opacity-60"
+          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
         >
           {saving ? '…' : t('settings.save')}
         </button>

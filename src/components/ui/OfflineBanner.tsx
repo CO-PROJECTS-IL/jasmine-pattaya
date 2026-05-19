@@ -19,7 +19,14 @@ export default function OfflineBanner() {
   if (!isOffline) return null
 
   return (
-    <div className="bg-[#c9a84c]/10 border-b border-[#c9a84c]/30 px-4 py-2 text-center text-sm text-[#c9a84c]">
+    <div
+      className="px-4 py-2 text-center text-sm"
+      style={{
+        backgroundColor: 'oklch(0.75 0.12 85 / 0.1)',
+        borderBottom: '1px solid oklch(0.75 0.12 85 / 0.3)',
+        color: 'var(--gold)',
+      }}
+    >
       {t('common.offline')}
     </div>
   )

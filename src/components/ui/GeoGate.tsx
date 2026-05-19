@@ -17,27 +17,28 @@ export default function GeoGate({ children }: GeoGateProps) {
 
   if (checking) {
     return (
-      <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center">
+      <div className="min-h-screen flex flex-col items-center justify-center" style={{ backgroundColor: 'var(--dark)' }}>
         <LoadingSpinner />
-        <p className="text-gray-400 mt-4">{t('employee.locationRequired')}</p>
+        <p className="mt-4" style={{ color: 'var(--text-muted)' }}>{t('employee.locationRequired')}</p>
       </div>
     )
   }
 
   if (!within) {
     return (
-      <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center" style={{ backgroundColor: 'var(--dark)' }}>
         <div className="text-4xl mb-4">📍</div>
         <h2 className="text-xl text-red-400 mb-2">{t('employee.outOfRange')}</h2>
         {distance !== null && (
-          <p className="text-gray-500 text-sm mb-6">
+          <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
             {distance}m away
           </p>
         )}
         {error && <p className="text-red-400/60 text-xs mb-4">{error}</p>}
         <button
           onClick={checkLocation}
-          className="px-6 py-2 bg-[#c9a84c]/20 text-[#c9a84c] rounded-lg hover:bg-[#c9a84c]/30 transition-colors"
+          className="px-6 py-2 rounded-lg transition-colors"
+          style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}
         >
           {t('common.confirm')}
         </button>
