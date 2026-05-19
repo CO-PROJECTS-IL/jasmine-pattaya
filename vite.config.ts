@@ -23,7 +23,17 @@ export default defineConfig({
         start_url: '/#/',
         icons: [
           {
-            src: 'favicon.svg',
+            src: 'icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'icon.svg',
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any maskable',
@@ -47,6 +57,17 @@ export default defineConfig({
               expiration: {
                 maxEntries: 200,
                 maxAgeSeconds: 7 * 24 * 60 * 60,
+              },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/menu\.in\.th\/storage\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'menu-images',
+              expiration: {
+                maxEntries: 200,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
               },
             },
           },

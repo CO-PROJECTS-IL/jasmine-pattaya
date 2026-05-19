@@ -78,10 +78,11 @@ export default function Menu() {
 
       {isFridayMenuActive ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
-          {fridayItems.map((item: any) => (
+          {fridayItems.map((item: any, i: number) => (
             <DishCard
               key={item.id}
               dish={{ ...item.dish, price: item.friday_price }}
+              index={i}
               onSelect={setSelectedDish}
               onQuickAdd={handleQuickAdd}
             />
@@ -101,10 +102,11 @@ export default function Menu() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
-            {activeDishes.map((dish) => (
+            {activeDishes.map((dish, i) => (
               <DishCard
                 key={dish.id}
                 dish={dish}
+                index={i}
                 onSelect={setSelectedDish}
                 onQuickAdd={handleQuickAdd}
               />

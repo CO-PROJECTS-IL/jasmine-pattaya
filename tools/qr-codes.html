@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Jasmine Restaurant - QR Codes</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f5f5; }
+
+    .header {
+      text-align: center;
+      padding: 30px;
+      background: #080808;
+      color: #c9a84c;
+    }
+    .header h1 { font-size: 28px; margin-bottom: 8px; }
+    .header p { color: #999; font-size: 14px; }
+    .header button {
+      margin-top: 15px;
+      padding: 10px 30px;
+      background: #c9a84c;
+      color: #080808;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .header button:hover { background: #d4b96a; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .qr-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      page-break-inside: avoid;
+    }
+    .qr-card .table-number {
+      font-size: 32px;
+      font-weight: bold;
+      color: #c9a84c;
+      margin-bottom: 5px;
+    }
+    .qr-card .table-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .qr-card canvas { display: block; margin: 0 auto 10px; }
+    .qr-card .brand {
+      font-size: 18px;
+      font-weight: bold;
+      color: #080808;
+      margin-bottom: 2px;
+    }
+    .qr-card .subtitle {
+      font-size: 11px;
+      color: #999;
+    }
+
+    @media print {
+      .header { display: none; }
+      body { background: white; }
+      .grid { padding: 10px; gap: 15px; }
+      .qr-card { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Jasmine Restaurant - QR Codes</h1>
+    <p>30 QR codes for tables — scan to open the menu</p>
+    <button onclick="window.print()">Print All QR Codes</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const BASE_URL = 'https://co-projects-il.github.io/jasmine-pattaya/#/?table=';
+    const TOTAL_TABLES = 30;
+    const grid = document.getElementById('grid');
+
+    for (let i = 1; i <= TOTAL_TABLES; i++) {
+      const url = BASE_URL + i;
+      const qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+
+      const card = document.createElement('div');
+      card.className = 'qr-card';
+      card.innerHTML = `
+        <div class="table-number">${i}</div>
+        <div class="table-label">TABLE / שולחן</div>
+        <div id="qr-${i}"></div>
+        <div class="brand">Jasmine | יסמין</div>
+        <div class="subtitle">Scan to order | סרקו להזמנה</div>
+      `;
+      grid.appendChild(card);
+
+      const img = document.createElement('img');
+      img.src = qr.createDataURL(6, 4);
+      img.style.display = 'block';
+      img.style.margin = '0 auto 10px';
+      card.querySelector(`#qr-${i}`).appendChild(img);
+    }
+  </script>
+</body>
+</html>

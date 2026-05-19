@@ -6,6 +6,7 @@ import TableEntry from './pages/customer/TableEntry'
 import Menu from './pages/customer/Menu'
 import OrderConfirmation from './pages/customer/OrderConfirmation'
 import FridayDinner from './pages/customer/FridayDinner'
+import Reserve from './pages/customer/Reserve'
 
 const StaffLogin = lazy(() => import('./pages/staff/StaffLogin'))
 const EmployeeLayout = lazy(() => import('./components/layout/EmployeeLayout'))
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/" element={<TableEntry />} />
           <Route path="/menu" element={<CustomerLayout><Menu /></CustomerLayout>} />
           <Route path="/order-confirmation" element={<CustomerLayout><OrderConfirmation /></CustomerLayout>} />
+          <Route path="/reserve" element={<CustomerLayout><Reserve /></CustomerLayout>} />
           <Route path="/friday-dinner" element={<CustomerLayout><FridayDinner /></CustomerLayout>} />
 
           {/* Staff Login */}

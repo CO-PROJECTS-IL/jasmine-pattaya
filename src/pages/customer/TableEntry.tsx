@@ -44,6 +44,13 @@ export default function TableEntry() {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
       style={{ backgroundColor: 'oklch(0.12 0.005 85)' }}
     >
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(https://cdn.pixabay.com/photo/2016/07/29/14/44/pattaya-1553390_1280.jpg)',
+          filter: 'brightness(0.25) saturate(0.6)',
+        }}
+      />
       <div className="warm-glow absolute inset-0 pointer-events-none" />
 
       <div className="absolute top-5 end-5 z-10">
@@ -52,26 +59,16 @@ export default function TableEntry() {
 
       <div className="text-center mb-14 animate-fade-in relative z-10">
         <div className="mb-6 flex justify-center">
-          <div
-            className="w-16 h-px"
-            style={{ background: 'linear-gradient(90deg, transparent, oklch(0.75 0.12 85 / 0.5), transparent)' }}
+          <img
+            src={`${import.meta.env.BASE_URL}logo.svg`}
+            alt="Jasmine Restaurant"
+            className="w-48 h-48 md:w-56 md:h-56 drop-shadow-2xl"
           />
         </div>
 
-        <h1 className="gold-shimmer text-7xl md:text-8xl font-black mb-4 leading-none tracking-tight">
-          {t('table.title')}
-        </h1>
-
-        <p className="text-lg md:text-xl font-light" style={{ color: 'oklch(0.60 0.01 85)' }}>
+        <p className="text-lg md:text-xl font-light" style={{ color: 'oklch(0.70 0.01 85)' }}>
           {t('table.subtitle')}
         </p>
-
-        <div className="mt-6 flex justify-center">
-          <div
-            className="w-16 h-px"
-            style={{ background: 'linear-gradient(90deg, transparent, oklch(0.75 0.12 85 / 0.5), transparent)' }}
-          />
-        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-5 animate-slide-up relative z-10">

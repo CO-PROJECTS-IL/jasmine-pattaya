@@ -3,6 +3,7 @@ import type { Dish } from '../../lib/types'
 
 interface DishCardProps {
   dish: Dish
+  index?: number
   onSelect: (dish: Dish) => void
   onQuickAdd: (dish: Dish) => void
 }
@@ -18,18 +19,19 @@ function getDishDescription(dish: Dish, lang: string) {
   return dish.description_en
 }
 
-export default function DishCard({ dish, onSelect, onQuickAdd }: DishCardProps) {
+export default function DishCard({ dish, index = 0, onSelect, onQuickAdd }: DishCardProps) {
   const { i18n, t } = useTranslation()
   const name = getDishName(dish, i18n.language)
   const desc = getDishDescription(dish, i18n.language)
 
   return (
     <div
-      className="rounded-2xl overflow-hidden cursor-pointer group transition-all duration-300 hover:translate-y-[-2px]"
+      className="rounded-2xl overflow-hidden cursor-pointer group transition-all duration-300 hover:translate-y-[-2px] animate-card-in"
       style={{
         backgroundColor: 'oklch(0.18 0.005 85)',
         border: '1px solid oklch(0.28 0.005 85)',
         boxShadow: '0 2px 8px oklch(0 0 0 / 0.3)',
+        animationDelay: `${index * 60}ms`,
       }}
       onClick={() => onSelect(dish)}
       onMouseEnter={(e) => {

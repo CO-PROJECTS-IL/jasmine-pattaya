@@ -18,6 +18,8 @@
   },
   "nav": {
     "menu": "תפריט",
+    "reserve": "הזמן שולחן",
+    "navigate": "ניווט",
     "admin": "ניהול"
   },
   "table": {
@@ -258,6 +260,20 @@
     "confirmDelete": "האם למחוק?",
     "noRecurring": "אין הוצאות חוזרות",
     "noOnetime": "אין הוצאות חד-פעמיות"
+  },
+  "reserve": {
+    "title": "הזמנת שולחן",
+    "date": "תאריך",
+    "time": "שעה",
+    "guests": "מספר סועדים",
+    "name": "שם מלא",
+    "phone": "טלפון",
+    "submit": "שלח הזמנה",
+    "success": "ההזמנה נשלחה בהצלחה!",
+    "successMsg": "ניצור איתך קשר לאישור",
+    "newReservation": "הזמנה חדשה",
+    "selectDate": "בחר תאריך",
+    "selectTime": "בחר שעה"
   },
   "status": {
     "new": "חדשה",

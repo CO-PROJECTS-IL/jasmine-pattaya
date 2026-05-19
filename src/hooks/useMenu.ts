@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
 import type { Category, Dish } from '../lib/types'
@@ -54,5 +55,11 @@ export function useMenu() {
   const getDishesByCategory = (categoryId: string) =>
     dishes.filter((d) => d.category_id === categoryId)
 
-  return { categories, dishes, getDishesByCategory, isLoading: catsLoading || dishesLoading }
+  const nonEmptyCategories = useMemo(() => {
+    if (!dishes.length) return categories
+    const categoryIdsWithDishes = new Set(dishes.map((d) => d.category_id))
+    return categories.filter((c) => categoryIdsWithDishes.has(c.id))
+  }, [categories, dishes])
+
+  return { categories: nonEmptyCategories, dishes, getDishesByCategory, isLoading: catsLoading || dishesLoading }
 }

@@ -18,6 +18,8 @@
   },
   "nav": {
     "menu": "Menu",
+    "reserve": "Reserve",
+    "navigate": "Navigate",
     "admin": "Admin"
   },
   "table": {
@@ -258,6 +260,20 @@
     "confirmDelete": "Delete this expense?",
     "noRecurring": "No recurring expenses",
     "noOnetime": "No one-time expenses"
+  },
+  "reserve": {
+    "title": "Reserve a Table",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Number of Guests",
+    "name": "Full Name",
+    "phone": "Phone",
+    "submit": "Submit Reservation",
+    "success": "Reservation submitted!",
+    "successMsg": "We'll contact you to confirm",
+    "newReservation": "New Reservation",
+    "selectDate": "Select date",
+    "selectTime": "Select time"
   },
   "status": {
     "new": "New",
