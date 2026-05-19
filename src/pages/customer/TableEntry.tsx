@@ -41,18 +41,43 @@ export default function TableEntry() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] flex flex-col items-center justify-center px-4">
-      <div className="absolute top-4 end-4">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
+      style={{ backgroundColor: 'oklch(0.12 0.005 85)' }}
+    >
+      <div className="warm-glow absolute inset-0 pointer-events-none" />
+
+      <div className="absolute top-5 end-5 z-10">
         <LanguageSwitcher />
       </div>
 
-      <div className="text-center mb-10 animate-fade-in">
-        <h1 className="text-5xl md:text-6xl text-[#c9a84c] mb-3">{t('table.title')}</h1>
-        <p className="text-gray-400 text-lg">{t('table.subtitle')}</p>
+      <div className="text-center mb-14 animate-fade-in relative z-10">
+        <div className="mb-6 flex justify-center">
+          <div
+            className="w-16 h-px"
+            style={{ background: 'linear-gradient(90deg, transparent, oklch(0.75 0.12 85 / 0.5), transparent)' }}
+          />
+        </div>
+
+        <h1 className="gold-shimmer text-7xl md:text-8xl font-black mb-4 leading-none tracking-tight">
+          {t('table.title')}
+        </h1>
+
+        <p className="text-lg md:text-xl font-light" style={{ color: 'oklch(0.60 0.01 85)' }}>
+          {t('table.subtitle')}
+        </p>
+
+        <div className="mt-6 flex justify-center">
+          <div
+            className="w-16 h-px"
+            style={{ background: 'linear-gradient(90deg, transparent, oklch(0.75 0.12 85 / 0.5), transparent)' }}
+          />
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="w-full max-w-xs flex flex-col gap-4 animate-slide-up">
-        <label className="text-sm text-gray-400 text-center">{t('table.enterTable')}</label>
+      <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-5 animate-slide-up relative z-10">
+        <label className="text-sm text-center font-medium" style={{ color: 'oklch(0.55 0.01 85)' }}>
+          {t('table.enterTable')}
+        </label>
         <input
           type="number"
           inputMode="numeric"
@@ -64,12 +89,23 @@ export default function TableEntry() {
             setError('')
           }}
           placeholder={t('table.placeholder')}
-          className="w-full px-4 py-3 bg-[#1a1a1a] border border-[#c9a84c]/30 rounded-xl text-center text-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#c9a84c] transition-colors"
+          className="w-full px-5 py-4 rounded-2xl text-center text-2xl font-semibold placeholder-gray-700 focus:outline-none transition-all duration-300"
+          style={{
+            backgroundColor: 'oklch(0.18 0.005 85)',
+            border: '1px solid oklch(0.75 0.12 85 / 0.2)',
+            color: 'var(--text-primary)',
+          }}
+          onFocus={(e) => e.target.style.borderColor = 'oklch(0.75 0.12 85 / 0.6)'}
+          onBlur={(e) => e.target.style.borderColor = 'oklch(0.75 0.12 85 / 0.2)'}
         />
         {error && <p className="text-red-400 text-sm text-center">{error}</p>}
         <button
           type="submit"
-          className="w-full py-3 bg-[#c9a84c] text-[#080808] rounded-xl text-lg font-semibold hover:bg-[#d4b96a] active:bg-[#a88a3a] transition-colors"
+          className="w-full py-4 rounded-2xl text-lg font-bold tracking-wide transition-all duration-200 active:scale-[0.98]"
+          style={{
+            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+            color: 'oklch(0.15 0.01 85)',
+          }}
         >
           {t('table.submit')}
         </button>
@@ -77,7 +113,8 @@ export default function TableEntry() {
 
       <button
         onClick={() => navigate('/staff')}
-        className="fixed bottom-4 right-4 p-2 text-white/20 hover:text-white/40 transition-colors"
+        className="fixed bottom-4 right-4 p-2 transition-colors"
+        style={{ color: 'oklch(0.95 0 0 / 0.15)' }}
         aria-label="Staff"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

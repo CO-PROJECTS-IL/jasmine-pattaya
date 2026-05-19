@@ -15,11 +15,18 @@ export default function LanguageSwitcher() {
         <button
           key={lang.code}
           onClick={() => setLanguage(lang.code)}
-          className={`px-2.5 py-1 rounded text-sm font-medium transition-colors ${
+          className="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-200"
+          style={
             currentLang === lang.code
-              ? 'bg-[#c9a84c] text-[#080808]'
-              : 'bg-[#1a1a1a] text-gray-400 hover:text-white'
-          }`}
+              ? {
+                  background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+                  color: 'oklch(0.15 0.01 85)',
+                }
+              : {
+                  backgroundColor: 'oklch(0.20 0.005 85)',
+                  color: 'oklch(0.55 0.01 85)',
+                }
+          }
         >
           {lang.label}
         </button>

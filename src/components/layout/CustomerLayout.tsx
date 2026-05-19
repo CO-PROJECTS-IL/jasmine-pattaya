@@ -13,11 +13,16 @@ export default function CustomerLayout({ children }: CustomerLayoutProps) {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-[#080808]">
+    <div className="min-h-screen" style={{ backgroundColor: 'oklch(0.12 0.005 85)' }}>
       <InstallPrompt />
-      <header className="sticky top-0 z-30 bg-[#121212] border-b border-[#1a1a1a]">
-        <div className="flex items-center justify-between px-4 py-3 max-w-lg mx-auto">
-          <h1 className="text-xl text-[#c9a84c]">{t('common.appName')}</h1>
+      <header
+        className="sticky top-0 z-30 gold-border-glow backdrop-blur-md"
+        style={{ backgroundColor: 'oklch(0.14 0.005 85 / 0.92)' }}
+      >
+        <div className="flex items-center justify-between px-4 py-3.5 max-w-lg mx-auto">
+          <h1 className="text-xl font-bold tracking-tight" style={{ color: 'var(--gold)' }}>
+            {t('common.appName')}
+          </h1>
           <LanguageSwitcher />
         </div>
       </header>

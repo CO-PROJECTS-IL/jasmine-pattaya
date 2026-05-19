@@ -31,7 +31,7 @@ export default function CategoryTabs({ categories, activeId, onSelect }: Categor
   return (
     <div
       ref={scrollRef}
-      className="flex gap-2 overflow-x-auto no-scrollbar py-2 px-1"
+      className="flex gap-2 overflow-x-auto no-scrollbar py-3 px-3"
     >
       {categories.map((cat) => {
         const isActive = cat.id === activeId
@@ -40,11 +40,16 @@ export default function CategoryTabs({ categories, activeId, onSelect }: Categor
             key={cat.id}
             ref={isActive ? activeRef : null}
             onClick={() => onSelect(cat.id)}
-            className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
-              isActive
-                ? 'bg-[#c9a84c] text-black'
-                : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]'
-            }`}
+            className="shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 whitespace-nowrap"
+            style={isActive ? {
+              background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+              color: 'oklch(0.15 0.01 85)',
+              boxShadow: '0 2px 12px oklch(0.75 0.12 85 / 0.25)',
+            } : {
+              backgroundColor: 'oklch(0.20 0.005 85)',
+              color: 'oklch(0.70 0.01 85)',
+              border: '1px solid oklch(0.28 0.005 85)',
+            }}
           >
             {getCategoryName(cat, i18n.language)}
           </button>

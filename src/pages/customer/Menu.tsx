@@ -65,13 +65,19 @@ export default function Menu() {
   return (
     <div className="pb-24">
       {isFridayMenuActive && (
-        <div className="bg-[#c9a84c] text-[#080808] text-center py-2 px-4 font-semibold text-sm">
+        <div
+          className="text-center py-2.5 px-4 font-bold text-sm"
+          style={{
+            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+            color: 'oklch(0.15 0.01 85)',
+          }}
+        >
           {t('menu.fridayMenuActive')}
         </div>
       )}
 
       {isFridayMenuActive ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
           {fridayItems.map((item: any) => (
             <DishCard
               key={item.id}
@@ -83,7 +89,10 @@ export default function Menu() {
         </div>
       ) : (
         <>
-          <div className="sticky top-0 z-20 bg-[#080808] border-b border-white/5">
+          <div
+            className="sticky top-[52px] z-20 gold-border-glow"
+            style={{ backgroundColor: 'oklch(0.12 0.005 85 / 0.95)', backdropFilter: 'blur(12px)' }}
+          >
             <CategoryTabs
               categories={categories}
               activeId={activeCategory}
@@ -91,7 +100,7 @@ export default function Menu() {
             />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
             {activeDishes.map((dish) => (
               <DishCard
                 key={dish.id}
@@ -103,7 +112,9 @@ export default function Menu() {
           </div>
 
           {activeDishes.length === 0 && (
-            <p className="text-gray-500 text-center py-12">{t('menu.emptyCategory')}</p>
+            <p className="text-center py-16 text-sm" style={{ color: 'var(--text-muted)' }}>
+              {t('menu.emptyCategory')}
+            </p>
           )}
         </>
       )}
@@ -119,10 +130,21 @@ export default function Menu() {
       {cartCount > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className="fixed bottom-20 end-4 z-30 w-14 h-14 rounded-full bg-[#c9a84c] text-black flex items-center justify-center shadow-lg shadow-[#c9a84c]/20 hover:bg-[#d4b96a] transition-colors animate-pulse-gold"
+          className="fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 animate-pulse-gold active:scale-90"
+          style={{
+            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
+            color: 'oklch(0.15 0.01 85)',
+            boxShadow: '0 4px 20px oklch(0.75 0.12 85 / 0.3)',
+          }}
         >
-          <span className="text-xl">🛒</span>
-          <span className="absolute -top-1 -end-1 w-6 h-6 rounded-full bg-red-600 text-white text-xs flex items-center justify-center font-bold">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" />
+            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+          </svg>
+          <span
+            className="absolute -top-1.5 -end-1.5 w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold"
+            style={{ backgroundColor: 'oklch(0.55 0.22 25)', color: 'oklch(0.98 0 0)' }}
+          >
             {cartCount}
           </span>
         </button>
