@@ -8,7 +8,7 @@ async function fetchTodayOrders(): Promise<Order[]> {
   const today = new Date().toISOString().split('T')[0]
   const { data, error } = await supabase
     .from('orders')
-    .select('*, items:order_items(*)')
+    .select('*, items:order_items(*, dish:dishes(name_he, name_en, name_th))')
     .gte('created_at', `${today}T00:00:00`)
     .order('created_at', { ascending: false })
   if (error) throw error

@@ -50,6 +50,7 @@ export interface OrderItem {
   quantity: number
   price_at_order: number
   notes: string
+  dish?: { name_he: string; name_en: string; name_th: string }
 }
 
 export interface Employee {

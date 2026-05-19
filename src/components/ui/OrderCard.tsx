@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Order, OrderStatus, OrderItem } from '../../lib/types'
 
+function getDishName(item: OrderItem, lang: string): string {
+  if (!item.dish) return item.dish_id.slice(0, 8)
+  if (lang === 'he') return item.dish.name_he
+  if (lang === 'th') return item.dish.name_th
+  return item.dish.name_en
+}
+
 interface OrderCardProps {
   order: Order
   onUpdateStatus: (orderId: string, status: OrderStatus) => void
@@ -34,7 +41,7 @@ function getNextStatus(current: OrderStatus): OrderStatus | null {
 }
 
 export default function OrderCard({ order, onUpdateStatus }: OrderCardProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [minutesAgo, setMinutesAgo] = useState(getMinutesAgo(order.created_at))
 
   useEffect(() => {
@@ -92,7 +99,7 @@ export default function OrderCard({ order, onUpdateStatus }: OrderCardProps) {
           <div key={item.id} className="flex justify-between text-sm">
             <span className="text-white">
               {item.quantity}x{' '}
-              {item.dish_id}
+              {getDishName(item, i18n.language)}
             </span>
           </div>
         ))}

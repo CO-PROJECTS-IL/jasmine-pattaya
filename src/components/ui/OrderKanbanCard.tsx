@@ -1,6 +1,13 @@
 import { useTranslation } from 'react-i18next'
 import { ORDER_STATUSES } from '../../lib/constants'
-import type { Order, OrderStatus } from '../../lib/types'
+import type { Order, OrderStatus, OrderItem } from '../../lib/types'
+
+function getDishName(item: OrderItem, lang: string): string {
+  if (!item.dish) return item.dish_id.slice(0, 8)
+  if (lang === 'he') return item.dish.name_he
+  if (lang === 'th') return item.dish.name_th
+  return item.dish.name_en
+}
 
 interface Props {
   order: Order
@@ -8,7 +15,7 @@ interface Props {
 }
 
 export default function OrderKanbanCard({ order, onStatusChange }: Props) {
-  useTranslation()
+  const { i18n } = useTranslation()
   const currentIndex = ORDER_STATUSES.indexOf(order.status as any)
   const canAdvance = currentIndex < ORDER_STATUSES.length - 1
   const canRevert = currentIndex > 0
@@ -26,7 +33,7 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
 
       {order.items?.map((item) => (
         <div key={item.id} className="text-sm flex justify-between" style={{ color: 'var(--text-secondary)' }}>
-          <span>{item.quantity}x {item.dish_id}</span>
+          <span>{item.quantity}x {getDishName(item, i18n.language)}</span>
           <span style={{ color: 'var(--text-muted)' }}>{item.price_at_order}฿</span>
         </div>
       ))}
