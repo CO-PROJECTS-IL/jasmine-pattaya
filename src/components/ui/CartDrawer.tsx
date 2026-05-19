@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCartStore } from '../../stores/cartStore'
 import { useNavigate } from 'react-router-dom'
 import { callEdgeFunction } from '../../lib/supabase'
+import { queueOrder } from '../../lib/offline-queue'
 
 interface CartDrawerProps {
   isOpen: boolean
@@ -48,20 +49,38 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     if (items.length === 0 || submitting) return
     setSubmitting(true)
     setError('')
+
+    const orderData = {
+      table_number: tableNumber,
+      items: items.map((i) => ({
+        dish_id: i.dishId,
+        quantity: i.quantity,
+        notes: '',
+      })),
+      notes: orderNotes,
+      created_by: 'customer',
+    }
+
     try {
-      const result = await callEdgeFunction('submit-order', {
-        table_number: tableNumber,
-        items: items.map((i) => ({
-          dish_id: i.dishId,
-          quantity: i.quantity,
-          notes: '',
-        })),
-        notes: orderNotes,
-        created_by: 'customer',
-      })
+      if (!navigator.onLine) {
+        await queueOrder(orderData)
+        onClose()
+        navigate('/order-confirmation', { state: { orderId: 'offline-' + Date.now(), total: getTotal() } })
+        return
+      }
+      const result = await callEdgeFunction('submit-order', orderData)
       onClose()
       navigate('/order-confirmation', { state: { orderId: result.order_id, total: result.total } })
     } catch (err) {
+      // If network error, queue it
+      if (!navigator.onLine || (err instanceof TypeError && err.message.includes('fetch'))) {
+        try {
+          await queueOrder(orderData)
+          onClose()
+          navigate('/order-confirmation', { state: { orderId: 'offline-' + Date.now(), total: getTotal() } })
+          return
+        } catch {}
+      }
       setError(err instanceof Error ? err.message : t('common.error'))
     }
     setSubmitting(false)
