@@ -36,7 +36,7 @@ function getDateRange(range: DateRange, customStart?: string, customEnd?: string
   return { start: customStart ?? fmt(now), end: customEnd ?? fmt(now) }
 }
 
-const PIE_COLORS = ['#c9a84c', '#f59e0b', '#ef4444']
+const PIE_COLORS = ['#c69038', '#f59e0b', '#ef4444']
 
 export default function ReportsPage() {
   const { t } = useTranslation()
@@ -169,11 +169,11 @@ export default function ReportsPage() {
               <XAxis dataKey="date" tick={{ fill: '#888', fontSize: 10 }} />
               <YAxis tick={{ fill: '#888', fontSize: 10 }} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c9a84c33', borderRadius: 8 }}
-                labelStyle={{ color: '#c9a84c' }}
+                contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c6903833', borderRadius: 8 }}
+                labelStyle={{ color: '#c69038' }}
                 itemStyle={{ color: '#fff' }}
               />
-              <Bar dataKey="amount" fill="#c9a84c" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="amount" fill="#c69038" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -199,7 +199,7 @@ export default function ReportsPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c9a84c33', borderRadius: 8 }}
+                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c6903833', borderRadius: 8 }}
                   itemStyle={{ color: '#fff' }}
                   formatter={(value: any) => [`฿${Number(value).toLocaleString()}`, '']}
                 />
@@ -220,16 +220,16 @@ export default function ReportsPage() {
                 <XAxis dataKey="date" tick={{ fill: '#888', fontSize: 10 }} />
                 <YAxis tick={{ fill: '#888', fontSize: 10 }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c9a84c33', borderRadius: 8 }}
-                  labelStyle={{ color: '#c9a84c' }}
+                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c6903833', borderRadius: 8 }}
+                  labelStyle={{ color: '#c69038' }}
                   itemStyle={{ color: '#fff' }}
                 />
                 <Line
                   type="monotone"
                   dataKey="amount"
-                  stroke="#c9a84c"
+                  stroke="#c69038"
                   strokeWidth={2}
-                  dot={{ fill: '#c9a84c', r: 3 }}
+                  dot={{ fill: '#c69038', r: 3 }}
                   activeDot={{ r: 5 }}
                 />
               </LineChart>

@@ -24,7 +24,7 @@ export default function Dashboard() {
   })).filter((d) => d.orders > 0)
 
   const cards = [
-    { label: t('dashboard.todayOrders'), value: orders.length, color: '#c9a84c' },
+    { label: t('dashboard.todayOrders'), value: orders.length, color: '#c69038' },
     { label: t('dashboard.todayRevenue'), value: `${totalRevenue}฿`, color: '#22c55e' },
     { label: t('dashboard.avgOrder'), value: `${avgOrder}฿`, color: '#3b82f6' },
   ]
@@ -68,7 +68,7 @@ export default function Dashboard() {
               <XAxis dataKey="hour" tick={{ fill: '#888', fontSize: 10 }} />
               <YAxis tick={{ fill: '#888', fontSize: 10 }} />
               <Tooltip contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: 8 }} />
-              <Bar dataKey="orders" fill="#c9a84c" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="orders" fill="#c69038" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
