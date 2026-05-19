@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { useMenu } from '../../hooks/useMenu'
@@ -19,7 +19,13 @@ export default function Menu() {
   const cartItems = useCartStore((s) => s.items)
   const { isFridayMenuActive } = useFridayStatus()
 
-  const [activeCategory, setActiveCategory] = useState(categories[0]?.id ?? null)
+  const [activeCategory, setActiveCategory] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (categories.length > 0 && !activeCategory) {
+      setActiveCategory(categories[0].id)
+    }
+  }, [categories, activeCategory])
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
   const [cartOpen, setCartOpen] = useState(false)
 
