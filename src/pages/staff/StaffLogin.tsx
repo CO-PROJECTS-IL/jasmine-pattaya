@@ -68,6 +68,13 @@ export default function StaffLogin() {
         {t('staff.employeeLogin')}
       </button>
       <button
+        onClick={() => navigate('/kitchen')}
+        className="w-64 py-4 bg-white/5 rounded-xl text-lg font-medium hover:bg-white/10 transition-colors"
+        style={{ border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-secondary)' }}
+      >
+        {t('kitchen.title')}
+      </button>
+      <button
         onClick={() => navigate('/')}
         className="mt-4 text-sm"
         style={{ color: 'var(--text-muted)' }}
