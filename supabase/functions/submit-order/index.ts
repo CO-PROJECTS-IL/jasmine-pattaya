@@ -98,7 +98,7 @@ Deno.serve(async (req) => {
       .insert({
         table_number,
         total,
-        notes: notes || null,
+        notes: notes || '',
         created_by: created_by || 'customer',
         status: 'new',
       })

@@ -1,20 +1,21 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useCartStore } from '../../stores/cartStore'
 
 export default function OrderConfirmation() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { items, tableNumber, getTotal, clear } = useCartStore()
+  const location = useLocation()
+  const { tableNumber, clear } = useCartStore()
 
-  const orderId = useMemo(() => `J-${Date.now().toString(36).toUpperCase()}`, [])
-  const total = getTotal()
+  const state = location.state as { orderId?: string; total?: number } | null
+  const rawId = state?.orderId || ''
+  const orderId = rawId ? `J-${rawId.slice(0, 8).toUpperCase()}` : '—'
+  const total = state?.total || 0
 
   useEffect(() => {
-    if (items.length === 0) return
-    const timer = setTimeout(() => clear(), 100)
-    return () => clearTimeout(timer)
+    clear()
   }, [])
 
   return (

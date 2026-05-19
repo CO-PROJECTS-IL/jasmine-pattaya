@@ -24,8 +24,8 @@ export async function callEdgeFunction(name: string, body?: Record<string, unkno
     body: body ? JSON.stringify(body) : undefined,
   })
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ message: 'Unknown error' }))
-    throw new Error(err.message || `Edge function error: ${res.status}`)
+    const err = await res.json().catch(() => ({ error: 'Unknown error' }))
+    throw new Error(err.error || err.message || `Edge function error: ${res.status}`)
   }
   return res.json()
 }

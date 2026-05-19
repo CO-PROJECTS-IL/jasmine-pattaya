@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCartStore } from '../../stores/cartStore'
 import { useNavigate } from 'react-router-dom'
+import { callEdgeFunction } from '../../lib/supabase'
 
 interface CartDrawerProps {
   isOpen: boolean
@@ -22,6 +23,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
   const total = getTotal()
   const drawerRef = useRef<HTMLDivElement>(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     if (!isOpen) return
@@ -41,9 +44,27 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     return () => document.removeEventListener('keydown', trap)
   }, [isOpen, onClose])
 
-  const handleSubmit = () => {
-    onClose()
-    navigate('/order-confirmation')
+  const handleSubmit = async () => {
+    if (items.length === 0 || submitting) return
+    setSubmitting(true)
+    setError('')
+    try {
+      const result = await callEdgeFunction('submit-order', {
+        table_number: tableNumber,
+        items: items.map((i) => ({
+          dish_id: i.dishId,
+          quantity: i.quantity,
+          notes: '',
+        })),
+        notes: orderNotes,
+        created_by: 'customer',
+      })
+      onClose()
+      navigate('/order-confirmation', { state: { orderId: result.order_id, total: result.total } })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t('common.error'))
+    }
+    setSubmitting(false)
   }
 
   return (
@@ -162,15 +183,19 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               <span style={{ color: 'var(--text-primary)' }}>{t('cart.total')}</span>
               <span style={{ color: 'var(--gold)' }}>฿{total}</span>
             </div>
+            {error && (
+              <p className="text-sm text-center" style={{ color: 'oklch(0.65 0.15 25)' }}>{error}</p>
+            )}
             <button
               onClick={handleSubmit}
-              className="w-full py-4 rounded-2xl font-bold text-lg transition-all duration-200 active:scale-[0.98]"
+              disabled={submitting}
+              className="w-full py-4 rounded-2xl font-bold text-lg transition-all duration-200 active:scale-[0.98] disabled:opacity-50"
               style={{
                 background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
                 color: 'oklch(0.15 0.01 85)',
               }}
             >
-              {t('cart.submit')}
+              {submitting ? t('common.loading') : t('cart.submit')}
             </button>
           </div>
         )}
