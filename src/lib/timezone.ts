@@ -10,13 +10,29 @@ export function isFriday(): boolean {
   return nowInThailand().getDay() === 5
 }
 
-export function isPastFridaySwitchTime(switchTime: string): boolean {
-  if (!isFriday()) return false
+export function isDayOfWeek(day: number): boolean {
+  return nowInThailand().getDay() === day
+}
+
+export function isPastSwitchTime(switchTime: string): boolean {
   const now = nowInThailand()
   const [hours, minutes] = switchTime.split(':').map(Number)
   const switchDate = new Date(now)
   switchDate.setHours(hours, minutes, 0, 0)
   return now >= switchDate
+}
+
+export function isPastFridaySwitchTime(switchTime: string): boolean {
+  if (!isFriday()) return false
+  return isPastSwitchTime(switchTime)
+}
+
+export function getTodayDateStr(): string {
+  const now = nowInThailand()
+  const y = now.getFullYear()
+  const m = String(now.getMonth() + 1).padStart(2, '0')
+  const d = String(now.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
 }
 
 export function formatThaiDate(dateStr: string): string {

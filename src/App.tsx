@@ -25,6 +25,7 @@ const EmployeeManager = lazy(() => import('./pages/admin/EmployeeManager'))
 const EmployeeDetail = lazy(() => import('./pages/admin/EmployeeDetail'))
 const ScheduleManager = lazy(() => import('./pages/admin/ScheduleManager'))
 const FridayManager = lazy(() => import('./pages/admin/FridayManager'))
+const SpecialMenuManager = lazy(() => import('./pages/admin/SpecialMenuManager'))
 const ReportsPage = lazy(() => import('./pages/admin/ReportsPage'))
 const ExpensesManager = lazy(() => import('./pages/admin/ExpensesManager'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
@@ -113,6 +114,7 @@ export default function App() {
           <Route path="/admin/employees/:id" element={<AdminPage><EmployeeDetail /></AdminPage>} />
           <Route path="/admin/schedule" element={<AdminPage><ScheduleManager /></AdminPage>} />
           <Route path="/admin/friday" element={<AdminPage><FridayManager /></AdminPage>} />
+          <Route path="/admin/special-menus" element={<AdminPage><SpecialMenuManager /></AdminPage>} />
           <Route path="/admin/reports" element={<AdminPage><ReportsPage /></AdminPage>} />
           <Route path="/admin/expenses" element={<AdminPage><ExpensesManager /></AdminPage>} />
           <Route path="/admin/settings" element={<AdminPage><Settings /></AdminPage>} />

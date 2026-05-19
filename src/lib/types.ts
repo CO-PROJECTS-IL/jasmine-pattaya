@@ -117,6 +117,42 @@ export interface FridayBookingItem {
   quantity: number
 }
 
+export type SpecialMenuScheduleType = 'recurring' | 'specific_date'
+
+export interface SpecialMenu {
+  id: string
+  name_he: string
+  name_en: string
+  name_th: string
+  schedule_type: SpecialMenuScheduleType
+  day_of_week: number | null
+  specific_date: string | null
+  switch_time: string
+  max_guests: number | null
+  is_enabled: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
+  items?: SpecialMenuItem[]
+}
+
+export interface SpecialMenuItem {
+  id: string
+  special_menu_id: string
+  dish_id: string
+  override_price: number | null
+  sort_order: number
+  is_active: boolean
+  dish?: Dish
+}
+
+export interface SpecialMenuCancelledDate {
+  id: string
+  special_menu_id: string
+  cancelled_date: string
+  reason: string
+}
+
 export interface ExpenseRecurring {
   id: string
   name: string

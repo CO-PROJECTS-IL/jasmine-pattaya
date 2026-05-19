@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useQuery } from '@tanstack/react-query'
 import { useMenu } from '../../hooks/useMenu'
 import { useCartStore } from '../../stores/cartStore'
-import { useFridayStatus } from '../../hooks/useFridayStatus'
-import { supabase, isSupabaseConfigured } from '../../lib/supabase'
+import { useActiveSpecialMenu } from '../../hooks/useActiveSpecialMenu'
 import { getDishName } from '../../lib/dish-utils'
 import CategoryTabs from '../../components/ui/CategoryTabs'
 import DishCard from '../../components/ui/DishCard'
@@ -20,7 +18,7 @@ export default function Menu() {
   const { categories, getDishesByCategory, isLoading } = useMenu()
   const addItem = useCartStore((s) => s.addItem)
   const cartItems = useCartStore((s) => s.items)
-  const { isFridayMenuActive } = useFridayStatus()
+  const { activeMenu } = useActiveSpecialMenu()
 
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
@@ -39,21 +37,6 @@ export default function Menu() {
 
   const activeDishes = activeCategory ? getDishesByCategory(activeCategory) : []
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0)
-
-  const { data: fridayItems = [] } = useQuery({
-    queryKey: ['friday-menu'],
-    queryFn: async () => {
-      if (!isSupabaseConfigured) return []
-      const { data, error } = await supabase
-        .from('friday_menu')
-        .select('*, dish:dishes(*)')
-        .eq('is_active', true)
-        .order('sort_order')
-      if (error) throw error
-      return data
-    },
-    enabled: isFridayMenuActive,
-  })
 
   const showToast = useCallback((dish: Dish) => {
     setToastDish(getDishName(dish, i18n.language))
@@ -93,7 +76,7 @@ export default function Menu() {
 
   return (
     <div className="pb-24" style={{ maxWidth: '1024px', marginInline: 'auto' }}>
-      {isFridayMenuActive && (
+      {activeMenu && (
         <div
           className="text-center py-2.5 px-4 font-bold text-xs uppercase tracking-widest"
           style={{
@@ -102,16 +85,16 @@ export default function Menu() {
             letterSpacing: '0.12em',
           }}
         >
-          {t('menu.fridayMenuActive')}
+          {activeMenu.name_he}
         </div>
       )}
 
-      {isFridayMenuActive ? (
-        <div className="px-4 sm:px-6">
-          {fridayItems.map((item: any) => (
+      {activeMenu ? (
+        <div className="px-4 sm:px-6 pt-4">
+          {activeMenu.menuItems.map((item) => (
             <DishCard
               key={item.id}
-              dish={{ ...item.dish, price: item.friday_price }}
+              dish={{ ...item.dish!, price: item.override_price ?? item.dish!.price }}
               onSelect={setSelectedDish}
               onQuickAdd={handleQuickAdd}
               onImageZoom={handleImageZoom}
