@@ -236,6 +236,8 @@
     "save": "Save",
     "saved": "Saved successfully",
     "error": "Error saving",
+    "loyaltyClub": "Loyalty Club",
+    "loyaltyEnabled": "Loyalty Club Active",
     "days": {
       "sunday": "Sunday",
       "monday": "Monday",
@@ -264,6 +266,20 @@
     "noRecurring": "No recurring expenses",
     "noOnetime": "No one-time expenses"
   },
+  "loyalty": {
+    "title": "Loyalty Club",
+    "navTitle": "Club",
+    "subtitle": "Join our club and enjoy special benefits",
+    "name": "Full Name",
+    "namePlaceholder": "Enter full name",
+    "phone": "Phone",
+    "email": "Email (optional)",
+    "emailPlaceholder": "your@email.com",
+    "join": "Join Club",
+    "alreadyMember": "Already a member!",
+    "welcomeTitle": "Welcome to the Club!",
+    "welcomeMsg": "Enjoy special benefits on your next visit"
+  },
   "reserve": {
     "title": "Reserve a Table",
     "date": "Date",
@@ -277,6 +293,14 @@
     "newReservation": "New Reservation",
     "selectDate": "Select date",
     "selectTime": "Select time"
+  },
+  "kitchen": {
+    "title": "Kitchen Display",
+    "table": "Table",
+    "minutesAgo": "min",
+    "notes": "Notes",
+    "markPreparing": "Start Preparing",
+    "markReady": "Ready"
   },
   "status": {
     "new": "New",

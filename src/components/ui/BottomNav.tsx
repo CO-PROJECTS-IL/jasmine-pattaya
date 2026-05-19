@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useSettings } from '../../hooks/useSettings'
 
 function MenuIcon({ active }: { active: boolean }) {
   return (
@@ -33,6 +34,14 @@ function ReserveIcon({ active }: { active: boolean }) {
   )
 }
 
+function LoyaltyIcon({ active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  )
+}
+
 function NavIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -44,6 +53,7 @@ function NavIcon() {
 
 export default function BottomNav() {
   const { t } = useTranslation()
+  const { data: settings } = useSettings()
 
   const GOOGLE_MAPS_URL = 'https://www.google.com/maps/dir/?api=1&destination=12.926818,100.877022&destination_place_id=ChIJExample&travelmode=driving'
 
@@ -52,6 +62,10 @@ export default function BottomNav() {
     { to: '/reserve', label: t('nav.reserve'), Icon: ReserveIcon },
     { to: '/friday-dinner', label: t('friday.title'), Icon: CandleIcon },
   ]
+
+  if (settings?.loyalty_enabled) {
+    tabs.push({ to: '/loyalty', label: t('loyalty.navTitle'), Icon: LoyaltyIcon })
+  }
 
   return (
     <nav

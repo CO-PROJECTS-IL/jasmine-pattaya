@@ -8,6 +8,7 @@ import OrderConfirmation from './pages/customer/OrderConfirmation'
 import FridayDinner from './pages/customer/FridayDinner'
 import Reserve from './pages/customer/Reserve'
 
+const LoyaltyClub = lazy(() => import('./pages/customer/LoyaltyClub'))
 const StaffLogin = lazy(() => import('./pages/staff/StaffLogin'))
 const EmployeeLayout = lazy(() => import('./components/layout/EmployeeLayout'))
 const EmployeeDashboard = lazy(() => import('./pages/employee/EmployeeDashboard'))
@@ -27,6 +28,8 @@ const ReportsPage = lazy(() => import('./pages/admin/ReportsPage'))
 const ExpensesManager = lazy(() => import('./pages/admin/ExpensesManager'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const QRCodes = lazy(() => import('./pages/admin/QRCodes'))
+const KitchenLogin = lazy(() => import('./pages/kitchen/KitchenLogin'))
+const KitchenBoard = lazy(() => import('./pages/kitchen/KitchenBoard'))
 
 function LazyFallback() {
   return (
@@ -67,9 +70,18 @@ export default function App() {
           <Route path="/order-confirmation" element={<CustomerLayout><OrderConfirmation /></CustomerLayout>} />
           <Route path="/reserve" element={<CustomerLayout><Reserve /></CustomerLayout>} />
           <Route path="/friday-dinner" element={<CustomerLayout><FridayDinner /></CustomerLayout>} />
+          <Route path="/loyalty" element={<CustomerLayout><LoyaltyClub /></CustomerLayout>} />
 
           {/* Staff Login */}
           <Route path="/staff" element={<StaffLogin />} />
+
+          {/* Kitchen */}
+          <Route path="/kitchen" element={<KitchenLogin />} />
+          <Route path="/kitchen/board" element={
+            <ProtectedRoute requiredRole="employee" loginPath="/kitchen">
+              <KitchenBoard />
+            </ProtectedRoute>
+          } />
 
           {/* Employee */}
           <Route path="/employee" element={

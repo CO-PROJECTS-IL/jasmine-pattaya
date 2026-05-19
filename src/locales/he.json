@@ -236,6 +236,8 @@
     "save": "שמור",
     "saved": "נשמר בהצלחה",
     "error": "שגיאה בשמירה",
+    "loyaltyClub": "מועדון לקוחות",
+    "loyaltyEnabled": "מועדון לקוחות פעיל",
     "days": {
       "sunday": "ראשון",
       "monday": "שני",
@@ -264,6 +266,20 @@
     "noRecurring": "אין הוצאות חוזרות",
     "noOnetime": "אין הוצאות חד-פעמיות"
   },
+  "loyalty": {
+    "title": "מועדון לקוחות",
+    "navTitle": "מועדון",
+    "subtitle": "הצטרפו למועדון ותיהנו מהטבות מיוחדות",
+    "name": "שם מלא",
+    "namePlaceholder": "הכנס שם מלא",
+    "phone": "טלפון",
+    "email": "אימייל (לא חובה)",
+    "emailPlaceholder": "your@email.com",
+    "join": "הצטרף למועדון",
+    "alreadyMember": "כבר רשום במועדון!",
+    "welcomeTitle": "ברוכים הבאים למועדון!",
+    "welcomeMsg": "תיהנו מהטבות מיוחדות בביקור הבא"
+  },
   "reserve": {
     "title": "הזמנת שולחן",
     "date": "תאריך",
@@ -277,6 +293,14 @@
     "newReservation": "הזמנה חדשה",
     "selectDate": "בחר תאריך",
     "selectTime": "בחר שעה"
+  },
+  "kitchen": {
+    "title": "מסך מטבח",
+    "table": "שולחן",
+    "minutesAgo": "דק'",
+    "notes": "הערות",
+    "markPreparing": "התחל הכנה",
+    "markReady": "מוכן"
   },
   "status": {
     "new": "חדשה",

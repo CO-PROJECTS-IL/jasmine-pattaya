@@ -18,6 +18,7 @@ const DEFAULT_SETTINGS: Settings = {
   show_employee_salary: true,
   friday_max_guests: null,
   friday_enabled: true,
+  loyalty_enabled: false,
 }
 
 async function fetchSettings(): Promise<Settings> {

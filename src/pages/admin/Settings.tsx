@@ -136,6 +136,9 @@ export default function Settings() {
   const [fridaySwitchTime, setFridaySwitchTime] = useState('14:00')
   const [fridayMaxGuests, setFridayMaxGuests] = useState<number>(50)
 
+  // Loyalty
+  const [loyaltyEnabled, setLoyaltyEnabled] = useState(false)
+
   // Employee settings
   const [showSalary, setShowSalary] = useState(true)
 
@@ -172,6 +175,7 @@ export default function Settings() {
     setFridaySwitchTime(settings.friday_switch_time ?? '14:00')
     setFridayMaxGuests(settings.friday_max_guests ?? 50)
     setShowSalary(settings.show_employee_salary ?? true)
+    setLoyaltyEnabled(settings.loyalty_enabled ?? false)
   }, [settings])
 
   // ── Helpers ────────────────────────────────────────────────────────────────
@@ -219,6 +223,7 @@ export default function Settings() {
         friday_switch_time: fridaySwitchTime,
         friday_max_guests: fridayMaxGuests,
         show_employee_salary: showSalary,
+        loyalty_enabled: loyaltyEnabled,
       }
 
       const { error } = await supabase.functions.invoke('admin-settings', { body })
@@ -494,6 +499,14 @@ export default function Settings() {
                 />
               </div>
             </div>
+          </div>
+        </Section>
+
+        {/* ── Loyalty Club ── */}
+        <Section title={t('settings.loyaltyClub')}>
+          <div className="flex items-center justify-between">
+            <span className="text-sm" style={{ color: 'var(--text-primary)' }}>{t('settings.loyaltyEnabled')}</span>
+            <Toggle checked={loyaltyEnabled} onChange={setLoyaltyEnabled} />
           </div>
         </Section>
 

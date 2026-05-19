@@ -236,6 +236,8 @@
     "save": "บันทึก",
     "saved": "บันทึกสำเร็จ",
     "error": "เกิดข้อผิดพลาด",
+    "loyaltyClub": "สมาชิกคลับ",
+    "loyaltyEnabled": "สมาชิกคลับเปิดใช้งาน",
     "days": {
       "sunday": "วันอาทิตย์",
       "monday": "วันจันทร์",
@@ -264,6 +266,20 @@
     "noRecurring": "ไม่มีค่าใช้จ่ายประจำ",
     "noOnetime": "ไม่มีค่าใช้จ่ายครั้งเดียว"
   },
+  "loyalty": {
+    "title": "สมาชิกคลับ",
+    "navTitle": "คลับ",
+    "subtitle": "สมัครสมาชิกเพื่อรับสิทธิพิเศษ",
+    "name": "ชื่อเต็ม",
+    "namePlaceholder": "กรอกชื่อเต็ม",
+    "phone": "โทรศัพท์",
+    "email": "อีเมล (ไม่บังคับ)",
+    "emailPlaceholder": "your@email.com",
+    "join": "สมัครสมาชิก",
+    "alreadyMember": "เป็นสมาชิกอยู่แล้ว!",
+    "welcomeTitle": "ยินดีต้อนรับสู่คลับ!",
+    "welcomeMsg": "รับสิทธิพิเศษในการมาครั้งถัดไป"
+  },
   "reserve": {
     "title": "จองโต๊ะ",
     "date": "วันที่",
@@ -277,6 +293,14 @@
     "newReservation": "จองใหม่",
     "selectDate": "เลือกวันที่",
     "selectTime": "เลือกเวลา"
+  },
+  "kitchen": {
+    "title": "หน้าจอครัว",
+    "table": "โต๊ะ",
+    "minutesAgo": "นาที",
+    "notes": "หมายเหตุ",
+    "markPreparing": "เริ่มเตรียม",
+    "markReady": "พร้อม"
   },
   "status": {
     "new": "ใหม่",
