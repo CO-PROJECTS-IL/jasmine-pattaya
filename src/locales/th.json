@@ -157,7 +157,9 @@
     "vegetarian": "มังสวิรัติ",
     "save": "บันทึก",
     "delete": "ลบ",
-    "confirmDelete": "ลบเมนูนี้?"
+    "confirmDelete": "ลบเมนูนี้?",
+    "imageError": "เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ",
+    "saveError": "เกิดข้อผิดพลาดในการบันทึก"
   },
   "employees": {
     "addEmployee": "เพิ่มพนักงาน",

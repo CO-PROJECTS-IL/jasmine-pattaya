@@ -157,7 +157,9 @@
     "vegetarian": "צמחוני",
     "save": "שמור",
     "delete": "מחק",
-    "confirmDelete": "האם למחוק את המנה?"
+    "confirmDelete": "האם למחוק את המנה?",
+    "imageError": "שגיאה בהעלאת תמונה",
+    "saveError": "שגיאה בשמירה"
   },
   "employees": {
     "addEmployee": "הוסף עובד",

@@ -33,6 +33,7 @@ jobs:
         env:
           VITE_SUPABASE_URL: https://uvidgodkpgipzynpyrvc.supabase.co
           VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2aWRnb2RrcGdpcHp5bnB5cnZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMzEzMjQsImV4cCI6MjA5NDcwNzMyNH0.nQ2VbcH88-8GEM8yyHo5iLHznHJo0ytBhXrqhq_nqd8
+          VITE_CLOUDINARY_CLOUD_NAME: drfbiuokx
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

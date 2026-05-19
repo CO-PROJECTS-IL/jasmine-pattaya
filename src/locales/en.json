@@ -157,7 +157,9 @@
     "vegetarian": "Vegetarian",
     "save": "Save",
     "delete": "Delete",
-    "confirmDelete": "Delete this dish?"
+    "confirmDelete": "Delete this dish?",
+    "imageError": "Error uploading image",
+    "saveError": "Error saving"
   },
   "employees": {
     "addEmployee": "Add Employee",

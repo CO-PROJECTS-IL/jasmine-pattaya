@@ -72,7 +72,7 @@ export default function DishEditor() {
       const url = await uploadImage(file)
       setForm((f) => ({ ...f, image_url: url }))
     } catch (err) {
-      showToast('שגיאה בהעלאת תמונה', 'error')
+      showToast(t('menuManage.imageError'), 'error')
     }
   }
 
@@ -86,7 +86,7 @@ export default function DishEditor() {
       })
       navigate('/admin/menu')
     } catch (err) {
-      showToast('שגיאה בשמירה', 'error')
+      showToast(t('menuManage.saveError'), 'error')
     }
     setSaving(false)
   }
