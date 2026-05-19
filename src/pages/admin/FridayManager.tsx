@@ -72,7 +72,7 @@ export default function FridayManager() {
       <h1 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>{t('adminHome.friday')}</h1>
 
       {/* Cancel Section */}
-      <div className="rounded-xl p-4 mb-6" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+      <div className="rounded-xl p-4 mb-6" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{t('friday.fridayMenu')}: {fridayStr}</p>
@@ -90,7 +90,7 @@ export default function FridayManager() {
       <h2 className="text-lg mb-3" style={{ color: 'var(--gold)' }}>{t('friday.fridayMenu')}</h2>
       <div className="space-y-2 mb-6">
         {menuItems.map((item: any) => (
-          <div key={item.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+          <div key={item.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
             <div>
               <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{item.dish?.name_he || item.dish?.name_en}</p>
               <p className="text-sm" style={{ color: 'var(--gold)' }}>{item.friday_price}฿</p>
@@ -107,7 +107,7 @@ export default function FridayManager() {
       <h2 className="text-lg mb-3" style={{ color: 'var(--gold)' }}>{t('friday.bookTitle')}</h2>
       <div className="space-y-2">
         {bookings.map((booking: any) => (
-          <div key={booking.id} className="p-4 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+          <div key={booking.id} className="p-4 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
             <div className="flex items-center justify-between mb-2">
               <div>
                 <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{booking.guest_name}</p>

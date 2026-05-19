@@ -72,7 +72,6 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
       onClose()
       navigate('/order-confirmation', { state: { orderId: result.order_id, total: result.total } })
     } catch (err) {
-      // If network error, queue it
       if (!navigator.onLine || (err instanceof TypeError && err.message.includes('fetch'))) {
         try {
           await queueOrder(orderData)
@@ -100,14 +99,14 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           isOpen ? 'translate-y-0' : 'translate-y-full'
         }`}
         style={{
-          backgroundColor: 'oklch(0.16 0.005 85)',
-          borderTop: '1px solid oklch(0.75 0.12 85 / 0.2)',
+          backgroundColor: 'oklch(0.16 0.008 60)',
+          borderTop: '1px solid oklch(0.75 0.14 60 / 0.2)',
           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         <div
           className="flex items-center justify-between p-5"
-          style={{ borderBottom: '1px solid oklch(0.28 0.005 85)' }}
+          style={{ borderBottom: '1px solid oklch(0.28 0.008 60)' }}
         >
           <h2 className="text-lg font-bold" style={{ color: 'var(--gold)' }}>
             {t('cart.title')} {tableNumber && `· ${t('cart.table')} ${tableNumber}`}
@@ -136,7 +135,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               <div
                 key={item.dishId}
                 className="flex items-center gap-3 rounded-2xl p-4"
-                style={{ backgroundColor: 'oklch(0.20 0.005 85)' }}
+                style={{ backgroundColor: 'oklch(0.20 0.008 60)' }}
               >
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
@@ -150,7 +149,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   <button
                     onClick={() => updateQuantity(item.dishId, item.quantity - 1)}
                     className="w-11 h-11 rounded-xl flex items-center justify-center text-sm transition-all active:scale-95"
-                    style={{ backgroundColor: 'oklch(0.26 0.005 85)', color: 'var(--text-primary)' }}
+                    style={{ backgroundColor: 'oklch(0.26 0.008 60)', color: 'var(--text-primary)' }}
                     aria-label={t('cart.removeItem')}
                   >
                     -
@@ -161,7 +160,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   <button
                     onClick={() => updateQuantity(item.dishId, item.quantity + 1)}
                     className="w-11 h-11 rounded-xl flex items-center justify-center text-sm transition-all active:scale-95"
-                    style={{ backgroundColor: 'oklch(0.26 0.005 85)', color: 'var(--text-primary)' }}
+                    style={{ backgroundColor: 'oklch(0.26 0.008 60)', color: 'var(--text-primary)' }}
                     aria-label={`${t('cart.quantity')} +1`}
                   >
                     +
@@ -186,18 +185,18 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               placeholder={t('cart.notesPlaceholder')}
               className="w-full rounded-2xl p-4 text-sm resize-none h-20 transition-all"
               style={{
-                backgroundColor: 'oklch(0.20 0.005 85)',
-                border: '1px solid oklch(0.28 0.005 85)',
+                backgroundColor: 'oklch(0.20 0.008 60)',
+                border: '1px solid oklch(0.28 0.008 60)',
                 color: 'var(--text-primary)',
               }}
-              onFocus={(e) => e.target.style.borderColor = 'oklch(0.75 0.12 85 / 0.3)'}
-              onBlur={(e) => e.target.style.borderColor = 'oklch(0.28 0.005 85)'}
+              onFocus={(e) => e.target.style.borderColor = 'oklch(0.75 0.14 60 / 0.3)'}
+              onBlur={(e) => e.target.style.borderColor = 'oklch(0.28 0.008 60)'}
             />
           )}
         </div>
 
         {items.length > 0 && (
-          <div className="p-5 space-y-4" style={{ borderTop: '1px solid oklch(0.28 0.005 85)' }}>
+          <div className="p-5 space-y-4" style={{ borderTop: '1px solid oklch(0.28 0.008 60)' }}>
             <div className="flex justify-between text-lg font-bold">
               <span style={{ color: 'var(--text-primary)' }}>{t('cart.total')}</span>
               <span style={{ color: 'var(--gold)' }}>฿{total}</span>
@@ -210,8 +209,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               disabled={submitting}
               className="w-full py-4 rounded-2xl font-bold text-lg transition-all duration-200 active:scale-[0.98] disabled:opacity-50"
               style={{
-                background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
-                color: 'oklch(0.15 0.01 85)',
+                background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
+                color: 'oklch(0.15 0.012 60)',
               }}
             >
               {submitting ? t('common.loading') : t('cart.submit')}

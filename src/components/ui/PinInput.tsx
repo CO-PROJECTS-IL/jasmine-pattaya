@@ -35,7 +35,7 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
           <div
             key={i}
             className="w-12 h-12 rounded-lg flex items-center justify-center text-xl"
-            style={{ border: '2px solid oklch(0.75 0.12 85 / 0.4)', backgroundColor: 'var(--dark-lighter)' }}
+            style={{ border: '2px solid oklch(0.75 0.14 60 / 0.4)', backgroundColor: 'var(--dark-lighter)' }}
           >
             {pin[i] ? '•' : ''}
           </div>

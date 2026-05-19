@@ -4,7 +4,7 @@ import { useSettings } from '../../hooks/useSettings'
 
 function MenuIcon({ active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 19h16M4 15h16M4 11h16M4 7h16" />
     </svg>
   )
@@ -12,7 +12,7 @@ function MenuIcon({ active }: { active: boolean }) {
 
 function CandleIcon({ active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M9 2c0 0-2 3-2 5s1.5 3 2 3 2-1 2-3-2-5-2-5z" />
       <rect x="7" y="10" width="4" height="11" rx="1" />
       <path d="M17 5c0 0-2 3-2 5s1.5 3 2 3 2-1 2-3-2-5-2-5z" />
@@ -24,7 +24,7 @@ function CandleIcon({ active }: { active: boolean }) {
 
 function OrdersIcon({ active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
       <rect x="9" y="3" width="6" height="4" rx="1" />
       <path d="M9 12h6M9 16h4" />
@@ -34,7 +34,7 @@ function OrdersIcon({ active }: { active: boolean }) {
 
 function ReserveIcon({ active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="4" width="18" height="18" rx="2" />
       <line x1="16" y1="2" x2="16" y2="6" />
       <line x1="8" y1="2" x2="8" y2="6" />
@@ -46,7 +46,7 @@ function ReserveIcon({ active }: { active: boolean }) {
 
 function LoyaltyIcon({ active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2.2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
     </svg>
   )
@@ -54,7 +54,7 @@ function LoyaltyIcon({ active }: { active: boolean }) {
 
 function NavIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
       <circle cx="12" cy="9" r="2.5" />
     </svg>
@@ -80,11 +80,11 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 inset-x-0 z-40 backdrop-blur-md"
+      className="fixed bottom-0 inset-x-0 z-40"
       style={{
-        backgroundColor: 'oklch(0.12 0.005 85 / 0.95)',
-        borderTop: '1px solid oklch(0.75 0.12 85 / 0.12)',
-        boxShadow: '0 -4px 20px oklch(0 0 0 / 0.3)',
+        backgroundColor: 'oklch(0.06 0.008 60 / 0.97)',
+        backdropFilter: 'blur(20px) saturate(1.2)',
+        borderTop: '1px solid oklch(0.20 0.01 60 / 0.4)',
       }}
     >
       <div className="flex justify-around max-w-lg mx-auto">
@@ -92,9 +92,9 @@ export default function BottomNav() {
           <NavLink
             key={tab.to}
             to={tab.to}
-            className="relative flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs"
+            className="relative flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3"
             style={({ isActive }) => ({
-              color: isActive ? 'oklch(0.75 0.12 85)' : 'oklch(0.50 0.01 85)',
+              color: isActive ? 'oklch(0.75 0.14 60)' : 'oklch(0.40 0.012 60)',
               transition: 'color 0.2s',
             })}
             aria-label={tab.label}
@@ -103,12 +103,14 @@ export default function BottomNav() {
               <>
                 {isActive && (
                   <span
-                    className="absolute top-0 inset-x-3 h-0.5 rounded-b-full"
-                    style={{ backgroundColor: 'var(--gold)', opacity: 0.8 }}
+                    className="absolute top-0 inset-x-4 h-[2px] rounded-b-full"
+                    style={{ backgroundColor: 'oklch(0.75 0.14 60)' }}
                   />
                 )}
                 <tab.Icon active={isActive} />
-                <span className={`mt-1 ${isActive ? 'font-semibold' : ''}`}>{tab.label}</span>
+                <span className={`mt-1 text-[10px] tracking-wide ${isActive ? 'font-bold' : 'font-medium'}`}>
+                  {tab.label}
+                </span>
               </>
             )}
           </NavLink>
@@ -117,12 +119,12 @@ export default function BottomNav() {
           href={GOOGLE_MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs"
-          style={{ color: 'oklch(0.50 0.01 85)', transition: 'color 0.2s' }}
+          className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3"
+          style={{ color: 'oklch(0.40 0.012 60)', transition: 'color 0.2s' }}
           aria-label={t('nav.navigate')}
         >
           <NavIcon />
-          <span className="mt-1">{t('nav.navigate')}</span>
+          <span className="mt-1 text-[10px] tracking-wide font-medium">{t('nav.navigate')}</span>
         </a>
       </div>
     </nav>

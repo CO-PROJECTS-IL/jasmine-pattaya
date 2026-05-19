@@ -59,8 +59,8 @@ export default function Reserve() {
           }}
           className="px-8 py-3 rounded-2xl font-semibold transition-all active:scale-[0.98]"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
-            color: 'oklch(0.15 0.01 85)',
+            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
+            color: 'oklch(0.15 0.012 60)',
           }}
         >
           {t('reserve.newReservation')}
@@ -89,8 +89,8 @@ export default function Reserve() {
             onChange={(e) => setDate(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
-              backgroundColor: 'oklch(0.18 0.005 85)',
-              border: '1px solid oklch(0.28 0.005 85)',
+              backgroundColor: 'oklch(0.18 0.008 60)',
+              border: '1px solid oklch(0.28 0.008 60)',
               color: 'var(--text-primary)',
               colorScheme: 'dark',
             }}
@@ -112,11 +112,11 @@ export default function Reserve() {
                   time === slot
                     ? {
                         backgroundColor: 'var(--gold)',
-                        color: 'oklch(0.15 0.01 85)',
+                        color: 'oklch(0.15 0.012 60)',
                       }
                     : {
-                        backgroundColor: 'oklch(0.18 0.005 85)',
-                        border: '1px solid oklch(0.28 0.005 85)',
+                        backgroundColor: 'oklch(0.18 0.008 60)',
+                        border: '1px solid oklch(0.28 0.008 60)',
                         color: 'var(--text-secondary)',
                       }
                 }
@@ -142,11 +142,11 @@ export default function Reserve() {
                   guests === n
                     ? {
                         backgroundColor: 'var(--gold)',
-                        color: 'oklch(0.15 0.01 85)',
+                        color: 'oklch(0.15 0.012 60)',
                       }
                     : {
-                        backgroundColor: 'oklch(0.18 0.005 85)',
-                        border: '1px solid oklch(0.28 0.005 85)',
+                        backgroundColor: 'oklch(0.18 0.008 60)',
+                        border: '1px solid oklch(0.28 0.008 60)',
                         color: 'var(--text-secondary)',
                       }
                 }
@@ -169,8 +169,8 @@ export default function Reserve() {
             onChange={(e) => setName(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
-              backgroundColor: 'oklch(0.18 0.005 85)',
-              border: '1px solid oklch(0.28 0.005 85)',
+              backgroundColor: 'oklch(0.18 0.008 60)',
+              border: '1px solid oklch(0.28 0.008 60)',
               color: 'var(--text-primary)',
             }}
           />
@@ -188,8 +188,8 @@ export default function Reserve() {
             onChange={(e) => setPhone(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
-              backgroundColor: 'oklch(0.18 0.005 85)',
-              border: '1px solid oklch(0.28 0.005 85)',
+              backgroundColor: 'oklch(0.18 0.008 60)',
+              border: '1px solid oklch(0.28 0.008 60)',
               color: 'var(--text-primary)',
             }}
           />
@@ -200,8 +200,8 @@ export default function Reserve() {
           disabled={!date || !time || !name || !phone}
           className="w-full py-4 rounded-2xl font-bold text-lg transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
-            color: 'oklch(0.15 0.01 85)',
+            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
+            color: 'oklch(0.15 0.012 60)',
           }}
         >
           {t('reserve.submit')}

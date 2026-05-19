@@ -39,7 +39,7 @@ export default function QRCodes() {
             <div
               key={num}
               className="rounded-xl p-4 flex flex-col items-center gap-2 print:border print:border-gray-300 print:bg-white print:rounded-lg"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.25 0.005 85)' }}
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.25 0.008 60)' }}
             >
               <img
                 src={qrImageUrl(url)}

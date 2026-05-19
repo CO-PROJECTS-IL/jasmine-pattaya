@@ -42,7 +42,7 @@ export default function TableEntry() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
-      style={{ backgroundColor: 'oklch(0.12 0.005 85)' }}
+      style={{ backgroundColor: 'oklch(0.12 0.008 60)' }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -66,13 +66,13 @@ export default function TableEntry() {
           />
         </div>
 
-        <p className="text-lg md:text-xl font-light" style={{ color: 'oklch(0.70 0.01 85)' }}>
+        <p className="text-lg md:text-xl font-light" style={{ color: 'oklch(0.70 0.012 60)' }}>
           {t('table.subtitle')}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-5 animate-slide-up relative z-10">
-        <label htmlFor="input-table-number" className="text-sm text-center font-medium" style={{ color: 'oklch(0.55 0.01 85)' }}>
+        <label htmlFor="input-table-number" className="text-sm text-center font-medium" style={{ color: 'oklch(0.55 0.012 60)' }}>
           {t('table.enterTable')}
         </label>
         <input
@@ -89,20 +89,20 @@ export default function TableEntry() {
           placeholder={t('table.placeholder')}
           className="w-full px-5 py-4 rounded-2xl text-center text-2xl font-semibold placeholder-gray-500 transition-all duration-300"
           style={{
-            backgroundColor: 'oklch(0.18 0.005 85)',
-            border: '1px solid oklch(0.75 0.12 85 / 0.2)',
+            backgroundColor: 'oklch(0.18 0.008 60)',
+            border: '1px solid oklch(0.75 0.14 60 / 0.2)',
             color: 'var(--text-primary)',
           }}
-          onFocus={(e) => e.target.style.borderColor = 'oklch(0.75 0.12 85 / 0.6)'}
-          onBlur={(e) => e.target.style.borderColor = 'oklch(0.75 0.12 85 / 0.2)'}
+          onFocus={(e) => e.target.style.borderColor = 'oklch(0.75 0.14 60 / 0.6)'}
+          onBlur={(e) => e.target.style.borderColor = 'oklch(0.75 0.14 60 / 0.2)'}
         />
         {error && <p className="text-red-400 text-sm text-center">{error}</p>}
         <button
           type="submit"
           className="w-full py-4 rounded-2xl text-lg font-bold tracking-wide transition-all duration-200 active:scale-[0.98]"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
-            color: 'oklch(0.15 0.01 85)',
+            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
+            color: 'oklch(0.15 0.012 60)',
           }}
         >
           {t('table.submit')}

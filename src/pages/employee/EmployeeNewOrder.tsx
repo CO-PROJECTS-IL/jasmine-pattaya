@@ -36,7 +36,7 @@ export default function EmployeeNewOrder() {
               key={num}
               onClick={() => setSelectedTable(num)}
               className="py-3 rounded-lg text-lg transition-colors"
-              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
+              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-primary)' }}
             >
               {num}
             </button>
@@ -101,7 +101,7 @@ export default function EmployeeNewOrder() {
             className="whitespace-nowrap px-3 py-1.5 rounded-lg text-sm transition-colors"
             style={
               currentCategory === cat.id
-                ? { backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)', border: '1px solid oklch(0.75 0.12 85 / 0.3)' }
+                ? { backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)', border: '1px solid oklch(0.75 0.14 60 / 0.3)' }
                 : { backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', border: '1px solid transparent' }
             }
           >
@@ -113,7 +113,7 @@ export default function EmployeeNewOrder() {
       {/* Dishes */}
       <div className="space-y-2 mb-4">
         {currentDishes.map((dish) => (
-          <div key={dish.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+          <div key={dish.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
             <div>
               <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{(dish as any)[langKey]}</p>
               <p className="text-sm" style={{ color: 'var(--gold)' }}>{dish.price}฿</p>
@@ -121,7 +121,7 @@ export default function EmployeeNewOrder() {
             <button
               onClick={() => handleAdd(dish)}
               className="px-3 py-1 rounded-lg text-sm"
-              style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}
+              style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}
             >
               +
             </button>
@@ -131,7 +131,7 @@ export default function EmployeeNewOrder() {
 
       {/* Cart summary */}
       {items.length > 0 && (
-        <div className="fixed bottom-0 inset-x-0 p-4 z-40" style={{ backgroundColor: 'var(--dark-light)', borderTop: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+        <div className="fixed bottom-0 inset-x-0 p-4 z-40" style={{ backgroundColor: 'var(--dark-light)', borderTop: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
           <div className="max-w-lg mx-auto">
             <div className="flex items-center justify-between mb-3">
               <span style={{ color: 'var(--text-muted)' }}>{items.length} {t('cart.quantity')}</span>

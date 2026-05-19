@@ -45,7 +45,7 @@ export default function AdminHome() {
               key={btn.key}
               onClick={() => navigate(btn.path)}
               className="flex flex-col items-center justify-center gap-2 p-6 rounded-xl hover:opacity-90 transition-all"
-              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.15)' }}
+              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.15)' }}
             >
               {btn.icon}
               <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{t(`adminHome.${btn.key}`)}</span>

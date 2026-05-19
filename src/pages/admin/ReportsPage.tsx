@@ -82,7 +82,7 @@ export default function ReportsPage() {
 
   const chartInputStyle = {
     backgroundColor: 'var(--dark-light)',
-    border: '1px solid oklch(0.75 0.12 85 / 0.3)',
+    border: '1px solid oklch(0.75 0.14 60 / 0.3)',
     color: 'var(--text-primary)',
   }
 
@@ -94,7 +94,7 @@ export default function ReportsPage() {
       style={
         range === key
           ? { backgroundColor: 'var(--gold)', color: 'var(--dark)' }
-          : { backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)', color: 'var(--text-muted)' }
+          : { backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)', color: 'var(--text-muted)' }
       }
     >
       {label}
@@ -139,15 +139,15 @@ export default function ReportsPage() {
 
       {/* Summary cards */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.revenue')}</p>
           <p className="text-xl font-bold text-green-400">฿{reportData.revenue.toLocaleString()}</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.expenses')}</p>
           <p className="text-xl font-bold text-red-400">฿{totalExpenses.toLocaleString()}</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.netProfit')}</p>
           <p
             className="text-xl font-bold"
@@ -161,7 +161,7 @@ export default function ReportsPage() {
       {/* Charts — Recharts hex values kept as-is */}
       <div className="space-y-4">
         {/* Revenue over time */}
-        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
           <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.revenueOverTime')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={reportData.dailyRevenue}>
@@ -181,7 +181,7 @@ export default function ReportsPage() {
         {/* Expenses by category + Profit trend side by side */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Expenses by category — PieChart */}
-          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
             <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.expensesByCategory')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
@@ -212,7 +212,7 @@ export default function ReportsPage() {
           </div>
 
           {/* Profit trend — LineChart */}
-          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
             <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.profitTrend')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={reportData.dailyProfit}>

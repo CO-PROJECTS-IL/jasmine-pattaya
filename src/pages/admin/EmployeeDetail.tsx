@@ -93,7 +93,7 @@ export default function EmployeeDetail() {
 
   const inputStyle = {
     backgroundColor: 'var(--dark-lighter)',
-    border: '1px solid oklch(0.30 0.005 85)',
+    border: '1px solid oklch(0.30 0.008 60)',
     color: 'var(--text-primary)',
   }
 
@@ -105,7 +105,7 @@ export default function EmployeeDetail() {
 
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)' }}>
+          <div className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)' }}>
             {form.photo_url ? (
               <img src={form.photo_url} alt="" className="w-full h-full object-cover" />
             ) : (

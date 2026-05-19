@@ -36,7 +36,7 @@ const STATUS_COLORS: Record<OrderStatus, { bg: string; text: string; border: str
   preparing: { bg: 'oklch(0.30 0.10 60 / 0.3)',  text: 'oklch(0.80 0.14 60)',  border: 'oklch(0.60 0.14 60 / 0.5)' },
   ready:     { bg: 'oklch(0.25 0.10 145 / 0.3)', text: 'oklch(0.70 0.15 145)', border: 'oklch(0.55 0.15 145 / 0.5)' },
   served:    { bg: 'oklch(0.25 0.10 230 / 0.3)', text: 'oklch(0.70 0.12 230)', border: 'oklch(0.55 0.12 230 / 0.5)' },
-  paid:      { bg: 'oklch(0.22 0.005 85 / 0.3)', text: 'oklch(0.55 0.01 85)',  border: 'oklch(0.40 0.01 85 / 0.5)' },
+  paid:      { bg: 'oklch(0.22 0.008 60 / 0.3)', text: 'oklch(0.55 0.012 60)',  border: 'oklch(0.40 0.012 60 / 0.5)' },
 }
 
 function getDishName(dish: Dish | null, lang: string): string {
@@ -97,7 +97,7 @@ export default function OrderHistory() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-6 text-center animate-slide-up">
         <div
           className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
-          style={{ backgroundColor: 'oklch(0.22 0.005 85)' }}
+          style={{ backgroundColor: 'oklch(0.22 0.008 60)' }}
         >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)' }}>
             <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -145,7 +145,7 @@ export default function OrderHistory() {
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
-            style={{ backgroundColor: 'oklch(0.18 0.005 85)' }}
+            style={{ backgroundColor: 'oklch(0.18 0.008 60)' }}
           >
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)' }}>
               <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
@@ -167,7 +167,7 @@ export default function OrderHistory() {
                 className="rounded-2xl p-4"
                 style={{
                   backgroundColor: 'var(--dark-lighter)',
-                  border: '1px solid oklch(0.75 0.12 85 / 0.08)',
+                  border: '1px solid oklch(0.75 0.14 60 / 0.08)',
                 }}
               >
                 {/* Order header */}
@@ -194,7 +194,7 @@ export default function OrderHistory() {
                       <div className="flex items-center gap-2 min-w-0">
                         <span
                           className="flex-shrink-0 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold"
-                          style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.15)', color: 'var(--gold)' }}
+                          style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.15)', color: 'var(--gold)' }}
                         >
                           {item.quantity}
                         </span>
@@ -210,7 +210,7 @@ export default function OrderHistory() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px mb-3" style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.08)' }} />
+                <div className="h-px mb-3" style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.08)' }} />
 
                 {/* Total */}
                 <div className="flex items-center justify-between">

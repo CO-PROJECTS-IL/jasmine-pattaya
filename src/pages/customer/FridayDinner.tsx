@@ -127,7 +127,7 @@ export default function FridayDinner() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full px-4 py-3 rounded-xl placeholder-gray-500"
-          style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
+          style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-primary)' }}
         />
         <input
           type="tel"
@@ -135,7 +135,7 @@ export default function FridayDinner() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="w-full px-4 py-3 rounded-xl placeholder-gray-500"
-          style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.005 85)', color: 'var(--text-primary)' }}
+          style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-primary)' }}
         />
         <div className="flex items-center gap-3">
           <label className="text-sm" style={{ color: 'var(--text-muted)' }}>{t('friday.numGuests')}</label>
@@ -150,7 +150,7 @@ export default function FridayDinner() {
       <h2 className="text-lg mb-3" style={{ color: 'var(--gold)' }}>{t('friday.selectDishes')}</h2>
       <div className="space-y-2 mb-6">
         {menuItems.map((item: any) => (
-          <div key={item.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+          <div key={item.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
             <div>
               <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{item.dish?.name_he || item.dish?.name_en}</p>
               <p className="text-sm" style={{ color: 'var(--gold)' }}>{item.friday_price}฿</p>
@@ -166,7 +166,7 @@ export default function FridayDinner() {
               <button
                 onClick={() => updateQuantity(item.id, 1)}
                 className="w-11 h-11 rounded-lg text-sm active:scale-95 transition-all"
-                style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}
+                style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}
                 aria-label={`${t('cart.quantity')} +1`}
               >+</button>
             </div>

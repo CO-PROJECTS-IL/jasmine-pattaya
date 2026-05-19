@@ -34,7 +34,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/70" onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0" style={{ backgroundColor: 'oklch(0.05 0.008 60 / 0.7)' }} onClick={onClose} aria-hidden="true" />
       <div
         ref={dialogRef}
         role="dialog"
@@ -42,8 +42,8 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
         aria-label={title}
         className="relative w-full max-w-md rounded-xl p-6 z-10"
         style={{
-          backgroundColor: 'oklch(0.16 0.005 85)',
-          border: '1px solid oklch(0.75 0.12 85 / 0.2)',
+          backgroundColor: 'oklch(0.16 0.008 60)',
+          border: '1px solid oklch(0.75 0.14 60 / 0.2)',
         }}
       >
         <div className="flex items-center justify-between mb-4">

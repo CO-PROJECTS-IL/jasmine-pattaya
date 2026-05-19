@@ -2,17 +2,17 @@
 @import "tailwindcss";
 
 :root {
-  --gold: oklch(0.75 0.12 85);
-  --gold-light: oklch(0.80 0.10 85);
-  --gold-dark: oklch(0.62 0.11 85);
-  --gold-glow: oklch(0.75 0.12 85 / 0.15);
-  --dark: oklch(0.12 0.005 85);
-  --dark-light: oklch(0.16 0.005 85);
-  --dark-lighter: oklch(0.20 0.005 85);
-  --dark-surface: oklch(0.22 0.008 85);
-  --text-primary: oklch(0.95 0.005 85);
-  --text-secondary: oklch(0.65 0.01 85);
-  --text-muted: oklch(0.50 0.01 85);
+  --gold: oklch(0.75 0.14 60);
+  --gold-light: oklch(0.82 0.11 60);
+  --gold-dark: oklch(0.62 0.13 60);
+  --gold-glow: oklch(0.75 0.14 60 / 0.12);
+  --dark: oklch(0.08 0.008 60);
+  --dark-light: oklch(0.12 0.008 60);
+  --dark-lighter: oklch(0.16 0.008 60);
+  --dark-surface: oklch(0.18 0.01 60);
+  --text-primary: oklch(0.95 0.008 60);
+  --text-secondary: oklch(0.60 0.015 60);
+  --text-muted: oklch(0.42 0.012 60);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -95,8 +95,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.75 0.12 85 / 0.4); }
-  50% { box-shadow: 0 0 0 10px oklch(0.75 0.12 85 / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.75 0.14 60 / 0.4); }
+  50% { box-shadow: 0 0 0 10px oklch(0.75 0.14 60 / 0); }
 }
 
 .animate-pulse-gold {
@@ -106,14 +106,14 @@ h1, h2, h3, h4, h5, h6 {
 .warm-glow {
   background: radial-gradient(
     ellipse 60% 50% at 50% 45%,
-    oklch(0.75 0.12 85 / 0.06) 0%,
+    oklch(0.75 0.14 60 / 0.06) 0%,
     transparent 70%
   );
 }
 
 .gold-border-glow {
-  border-bottom: 1px solid oklch(0.75 0.12 85 / 0.15);
-  box-shadow: 0 1px 12px oklch(0.75 0.12 85 / 0.05);
+  border-bottom: 1px solid oklch(0.75 0.14 60 / 0.15);
+  box-shadow: 0 1px 12px oklch(0.75 0.14 60 / 0.05);
 }
 
 @keyframes scaleCheck {
@@ -140,12 +140,21 @@ h1, h2, h3, h4, h5, h6 {
   100% { background-position: 200% 0; }
 }
 
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .animate-shimmer {
   background: linear-gradient(
     90deg,
-    oklch(0.18 0.005 85) 25%,
-    oklch(0.22 0.008 85) 50%,
-    oklch(0.18 0.005 85) 75%
+    oklch(0.18 0.008 60) 25%,
+    oklch(0.22 0.01 60) 50%,
+    oklch(0.18 0.008 60) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;

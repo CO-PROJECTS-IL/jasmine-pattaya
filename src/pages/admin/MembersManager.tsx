@@ -108,7 +108,7 @@ export default function MembersManager() {
             style={{
               backgroundColor: 'var(--dark-lighter)',
               color: 'var(--text-primary)',
-              border: '1px solid oklch(0.25 0.005 85)',
+              border: '1px solid oklch(0.25 0.008 60)',
             }}
           />
         </div>
@@ -129,11 +129,11 @@ export default function MembersManager() {
           {t('members.noMembers')}
         </div>
       ) : (
-        <div className="rounded-xl overflow-hidden" style={{ border: '1px solid oklch(0.25 0.005 85)' }}>
+        <div className="rounded-xl overflow-hidden" style={{ border: '1px solid oklch(0.25 0.008 60)' }}>
           {/* Header */}
           <div
             className="grid grid-cols-4 px-4 py-2 text-xs font-medium"
-            style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.1)', color: 'var(--text-muted)' }}
+            style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.1)', color: 'var(--text-muted)' }}
           >
             <span>{t('members.name')}</span>
             <span>{t('members.phone')}</span>
@@ -142,7 +142,7 @@ export default function MembersManager() {
           </div>
 
           {/* Rows */}
-          <div className="divide-y" style={{ borderColor: 'oklch(0.25 0.005 85)' }}>
+          <div className="divide-y" style={{ borderColor: 'oklch(0.25 0.008 60)' }}>
             {filtered.map((member) => (
               <div
                 key={member.id}
@@ -152,7 +152,7 @@ export default function MembersManager() {
                 <div className="flex items-center gap-2 min-w-0">
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                    style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}
+                    style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}
                   >
                     {member.full_name.charAt(0)}
                   </div>

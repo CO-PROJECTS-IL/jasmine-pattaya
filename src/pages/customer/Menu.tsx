@@ -1,19 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { useMenu } from '../../hooks/useMenu'
 import { useCartStore } from '../../stores/cartStore'
 import { useFridayStatus } from '../../hooks/useFridayStatus'
 import { supabase, isSupabaseConfigured } from '../../lib/supabase'
+import { getDishName } from '../../lib/dish-utils'
 import CategoryTabs from '../../components/ui/CategoryTabs'
 import DishCard from '../../components/ui/DishCard'
 import DishDetail from '../../components/ui/DishDetail'
 import DishCardSkeleton from '../../components/ui/DishCardSkeleton'
 import CartDrawer from '../../components/ui/CartDrawer'
+import CartToast from '../../components/ui/CartToast'
+import ImageLightbox from '../../components/ui/ImageLightbox'
 import type { Dish } from '../../lib/types'
 
 export default function Menu() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { categories, getDishesByCategory, isLoading } = useMenu()
   const addItem = useCartStore((s) => s.addItem)
   const cartItems = useCartStore((s) => s.items)
@@ -28,6 +31,11 @@ export default function Menu() {
   }, [categories, activeCategory])
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
   const [cartOpen, setCartOpen] = useState(false)
+  const [toastDish, setToastDish] = useState('')
+  const [toastVisible, setToastVisible] = useState(false)
+  const [justAdded, setJustAdded] = useState(false)
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
+  const [lightboxAlt, setLightboxAlt] = useState('')
 
   const activeDishes = activeCategory ? getDishesByCategory(activeCategory) : []
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0)
@@ -47,6 +55,13 @@ export default function Menu() {
     enabled: isFridayMenuActive,
   })
 
+  const showToast = useCallback((dish: Dish) => {
+    setToastDish(getDishName(dish, i18n.language))
+    setToastVisible(true)
+    setJustAdded(true)
+    setTimeout(() => setJustAdded(false), 600)
+  }, [i18n.language])
+
   const handleQuickAdd = (dish: Dish) => {
     if (dish.price === 0) return
     addItem({
@@ -56,6 +71,7 @@ export default function Menu() {
       nameTh: dish.name_th,
       price: dish.price,
     })
+    showToast(dish)
   }
 
   const handleAddFromDetail = (dish: Dish, quantity: number) => {
@@ -67,16 +83,23 @@ export default function Menu() {
       price: dish.price,
       quantity,
     })
+    showToast(dish)
+  }
+
+  const handleImageZoom = (src: string, alt: string) => {
+    setLightboxSrc(src)
+    setLightboxAlt(alt)
   }
 
   return (
     <div className="pb-24" style={{ maxWidth: '1024px', marginInline: 'auto' }}>
       {isFridayMenuActive && (
         <div
-          className="text-center py-3 px-4 font-bold text-sm"
+          className="text-center py-2.5 px-4 font-bold text-xs uppercase tracking-widest"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
-            color: 'oklch(0.15 0.01 85)',
+            backgroundColor: 'oklch(0.75 0.14 60)',
+            color: 'oklch(0.10 0.012 60)',
+            letterSpacing: '0.12em',
           }}
         >
           {t('menu.fridayMenuActive')}
@@ -84,61 +107,60 @@ export default function Menu() {
       )}
 
       {isFridayMenuActive ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4">
-          {fridayItems.map((item: any, i: number) => (
+        <div className="px-4 sm:px-6">
+          {fridayItems.map((item: any) => (
             <DishCard
               key={item.id}
               dish={{ ...item.dish, price: item.friday_price }}
-              index={i}
               onSelect={setSelectedDish}
               onQuickAdd={handleQuickAdd}
+              onImageZoom={handleImageZoom}
             />
           ))}
         </div>
       ) : (
         <>
           <div
-            className="sticky top-[52px] z-20 gold-border-glow"
-            style={{ backgroundColor: 'oklch(0.12 0.005 85 / 0.95)', backdropFilter: 'blur(12px)' }}
+            className="sticky top-[49px] z-20"
+            style={{
+              backgroundColor: 'oklch(0.08 0.008 60 / 0.95)',
+              backdropFilter: 'blur(20px)',
+              borderBottom: '1px solid oklch(0.20 0.01 60 / 0.5)',
+            }}
           >
-            <div>
-              <CategoryTabs
-                categories={categories}
-                activeId={activeCategory}
-                onSelect={setActiveCategory}
-              />
-            </div>
+            <CategoryTabs
+              categories={categories}
+              activeId={activeCategory}
+              onSelect={setActiveCategory}
+            />
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4">
+            <div className="px-4 sm:px-6 space-y-0">
               {Array.from({ length: 6 }).map((_, i) => (
                 <DishCardSkeleton key={i} />
               ))}
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4">
-                {activeDishes.map((dish, i) => (
+              <div className="px-4 sm:px-6 pt-2">
+                {activeDishes.map((dish) => (
                   <DishCard
                     key={dish.id}
                     dish={dish}
-                    index={i}
                     onSelect={setSelectedDish}
                     onQuickAdd={handleQuickAdd}
+                    onImageZoom={handleImageZoom}
                   />
                 ))}
               </div>
 
               {activeDishes.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)', marginBottom: 16 }}>
-                    <path d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12" />
-                  </svg>
-                  <p className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
+                <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
+                  <p className="text-sm font-medium mb-1" style={{ color: 'oklch(0.45 0.012 60)' }}>
                     {t('menu.emptyCategory')}
                   </p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                  <p className="text-xs" style={{ color: 'oklch(0.35 0.012 60)' }}>
                     {t('menu.tryOtherCategory')}
                   </p>
                 </div>
@@ -154,16 +176,28 @@ export default function Menu() {
         onAddToCart={handleAddFromDetail}
       />
 
+      <ImageLightbox
+        src={lightboxSrc}
+        alt={lightboxAlt}
+        onClose={() => setLightboxSrc(null)}
+      />
+
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+
+      <CartToast
+        visible={toastVisible}
+        dishName={toastDish}
+        onHide={() => setToastVisible(false)}
+      />
 
       {cartCount > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className="fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 animate-pulse-gold active:scale-90"
+          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90${justAdded ? ' animate-pulse-gold' : ''}`}
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.12 85), oklch(0.78 0.10 85))',
-            color: 'oklch(0.15 0.01 85)',
-            boxShadow: '0 4px 20px oklch(0.75 0.12 85 / 0.3)',
+            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
+            color: 'oklch(0.15 0.012 60)',
+            boxShadow: '0 4px 20px oklch(0.75 0.14 60 / 0.3)',
           }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -171,8 +205,9 @@ export default function Menu() {
             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
           </svg>
           <span
-            className="absolute -top-1.5 -end-1.5 w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold"
+            className={`absolute -top-1.5 -end-1.5 w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold${justAdded ? ' animate-scale-check' : ''}`}
             style={{ backgroundColor: 'oklch(0.55 0.22 25)', color: 'oklch(0.98 0 0)' }}
+            aria-label={`${cartCount} ${t('cart.items')}`}
           >
             {cartCount}
           </span>

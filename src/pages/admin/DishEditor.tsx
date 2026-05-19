@@ -95,7 +95,7 @@ export default function DishEditor() {
 
   const inputStyle = {
     backgroundColor: 'var(--dark-lighter)',
-    border: '1px solid oklch(0.30 0.005 85)',
+    border: '1px solid oklch(0.30 0.008 60)',
     color: 'var(--text-primary)',
   }
 

@@ -56,8 +56,8 @@ export default function LoyaltyClub() {
   }
 
   const inputStyle = {
-    backgroundColor: 'oklch(0.20 0.005 85)',
-    border: '1px solid oklch(0.28 0.005 85)',
+    backgroundColor: 'oklch(0.20 0.008 60)',
+    border: '1px solid oklch(0.28 0.008 60)',
     color: 'var(--text-primary)',
   }
 

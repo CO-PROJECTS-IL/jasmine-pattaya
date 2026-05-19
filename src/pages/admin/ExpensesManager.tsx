@@ -12,7 +12,7 @@ const inputClass =
   'w-full rounded-lg px-3 py-2 text-sm'
 const inputStyle = {
   backgroundColor: 'var(--dark-light)',
-  border: '1px solid oklch(0.75 0.12 85 / 0.3)',
+  border: '1px solid oklch(0.75 0.14 60 / 0.3)',
   color: 'var(--text-primary)',
 }
 const labelClass = 'block text-xs mb-1'
@@ -242,7 +242,7 @@ export default function ExpensesManager() {
       </div>
 
       {/* Tabs */}
-      <div className="flex mb-5" style={{ borderBottom: '1px solid oklch(0.30 0.005 85)' }}>
+      <div className="flex mb-5" style={{ borderBottom: '1px solid oklch(0.30 0.008 60)' }}>
         {(['recurring', 'onetime'] as Tab[]).map((key) => (
           <button
             key={key}
@@ -265,7 +265,7 @@ export default function ExpensesManager() {
           {recurring.length === 0 ? (
             <p className="text-center py-12" style={{ color: 'var(--text-muted)' }}>{t('expenses.noRecurring')}</p>
           ) : (
-            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
               <table className="w-full text-sm">
                 <thead>
                   <tr style={{ backgroundColor: 'var(--dark-light)' }}>
@@ -282,7 +282,7 @@ export default function ExpensesManager() {
                     <tr
                       key={exp.id}
                       className="hover:bg-white/5 transition-colors"
-                      style={{ borderTop: '1px solid oklch(0.25 0.005 85)' }}
+                      style={{ borderTop: '1px solid oklch(0.25 0.008 60)' }}
                     >
                       <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{exp.name}</td>
                       <td className="px-4 py-3 font-medium" style={{ color: 'var(--gold)' }}>
@@ -354,7 +354,7 @@ export default function ExpensesManager() {
           {onetime.length === 0 ? (
             <p className="text-center py-12" style={{ color: 'var(--text-muted)' }}>{t('expenses.noOnetime')}</p>
           ) : (
-            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
               <table className="w-full text-sm">
                 <thead>
                   <tr style={{ backgroundColor: 'var(--dark-light)' }}>
@@ -370,7 +370,7 @@ export default function ExpensesManager() {
                     <tr
                       key={exp.id}
                       className="hover:bg-white/5 transition-colors"
-                      style={{ borderTop: '1px solid oklch(0.25 0.005 85)' }}
+                      style={{ borderTop: '1px solid oklch(0.25 0.008 60)' }}
                     >
                       <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{exp.name}</td>
                       <td className="px-4 py-3 font-medium" style={{ color: 'var(--gold)' }}>
@@ -418,7 +418,7 @@ export default function ExpensesManager() {
       ══════════════════════════════════════════════ */}
       {showRecurringModal && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
             <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--gold)' }}>
               {editingRecurring ? t('expenses.edit') : t('expenses.add')} — {t('expenses.recurring')}
             </h2>
@@ -523,7 +523,7 @@ export default function ExpensesManager() {
       ══════════════════════════════════════════════ */}
       {showOnetimeModal && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.12 85 / 0.2)' }}>
+          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
             <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--gold)' }}>
               {t('expenses.add')} — {t('expenses.onetime')}
             </h2>

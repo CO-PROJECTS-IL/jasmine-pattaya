@@ -38,7 +38,7 @@ export default function Dashboard() {
           <div
             key={card.label}
             className="rounded-xl p-4 text-center"
-            style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.005 85)' }}
+            style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 60)' }}
           >
             <p className="text-xs mb-1.5" style={{ color: 'var(--text-muted)' }}>{card.label}</p>
             <p className="text-xl font-bold" style={{ color: card.color }}>{card.value}</p>
@@ -60,7 +60,7 @@ export default function Dashboard() {
       </div>
 
       {hourlyData.length > 0 && (
-        <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.005 85)' }}>
+        <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 60)' }}>
           <h3 className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{t('dashboard.ordersChart')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={hourlyData}>

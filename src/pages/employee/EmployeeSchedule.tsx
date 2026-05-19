@@ -53,7 +53,7 @@ export default function EmployeeSchedule() {
             const dayName = DAYS[date.getDay()]
             const dateStr = date.toLocaleDateString()
             return (
-              <div key={shift.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}>
+              <div key={shift.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
                 <div>
                   <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{dayName} {dateStr}</p>
                   {shift.shift_type === 'custom' && shift.custom_start && shift.custom_end && (

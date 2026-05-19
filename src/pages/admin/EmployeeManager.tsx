@@ -37,9 +37,9 @@ export default function EmployeeManager() {
             key={emp.id}
             onClick={() => navigate(`/admin/employees/${emp.id}`)}
             className="flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-colors"
-            style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.005 85)' }}
+            style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}
           >
-            <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg" style={{ backgroundColor: 'oklch(0.75 0.12 85 / 0.2)', color: 'var(--gold)' }}>
+            <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg" style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}>
               {emp.full_name.charAt(0)}
             </div>
             <div className="flex-1 min-w-0">

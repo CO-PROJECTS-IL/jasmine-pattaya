@@ -42,7 +42,7 @@ export default function InstallPrompt() {
       className="fixed top-0 inset-x-0 z-50 px-4 py-3 flex items-center justify-between gap-3"
       style={{
         background: 'linear-gradient(to bottom, var(--dark-lighter), var(--dark-light))',
-        borderBottom: '1px solid oklch(0.75 0.12 85 / 0.3)',
+        borderBottom: '1px solid oklch(0.75 0.14 60 / 0.3)',
       }}
     >
       <div className="flex-1 min-w-0">

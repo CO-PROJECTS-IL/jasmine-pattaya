@@ -66,8 +66,8 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 // ─── Section Wrapper ──────────────────────────────────────────────────────────
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.12 85 / 0.1)' }}>
-      <h2 className="text-lg font-semibold pb-3 mb-4" style={{ color: 'var(--gold)', borderBottom: '1px solid oklch(0.75 0.12 85 / 0.15)' }}>
+    <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.1)' }}>
+      <h2 className="text-lg font-semibold pb-3 mb-4" style={{ color: 'var(--gold)', borderBottom: '1px solid oklch(0.75 0.14 60 / 0.15)' }}>
         {title}
       </h2>
       {children}
@@ -80,7 +80,7 @@ const inputCls =
   'rounded-lg px-3 py-2 transition-colors'
 const inputStyle = {
   backgroundColor: 'var(--dark-lighter)',
-  border: '1px solid oklch(0.75 0.12 85 / 0.3)',
+  border: '1px solid oklch(0.75 0.14 60 / 0.3)',
   color: 'var(--text-primary)',
 }
 
@@ -306,7 +306,7 @@ export default function Settings() {
               onClick={handleSetLocation}
               disabled={locating}
               className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.12 85 / 0.3)', color: 'var(--gold)' }}
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.14 60 / 0.3)', color: 'var(--gold)' }}
             >
               <IconMapPin />
               {locating ? '…' : t('settings.setLocation')}
@@ -365,7 +365,7 @@ export default function Settings() {
               type="button"
               onClick={() => navigate('/admin/qr-codes')}
               className="flex items-center gap-2 text-sm rounded-lg px-4 py-2 transition-colors"
-              style={{ color: 'var(--gold)', border: '1px solid oklch(0.75 0.12 85 / 0.3)' }}
+              style={{ color: 'var(--gold)', border: '1px solid oklch(0.75 0.14 60 / 0.3)' }}
             >
               <IconQrCode />
               {t('settings.generateQR')}

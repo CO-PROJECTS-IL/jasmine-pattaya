@@ -20,11 +20,11 @@ export default function LanguageSwitcher() {
             currentLang === lang.code
               ? {
                   backgroundColor: 'var(--gold)',
-                  color: 'oklch(0.15 0.01 85)',
+                  color: 'oklch(0.15 0.012 60)',
                 }
               : {
-                  backgroundColor: 'oklch(0.20 0.005 85)',
-                  color: 'oklch(0.55 0.01 85)',
+                  backgroundColor: 'oklch(0.20 0.008 60)',
+                  color: 'oklch(0.55 0.012 60)',
                 }
           }
         >
