@@ -18,7 +18,7 @@ export default function TableEntry() {
   const tableMax = settings?.table_count || 30
 
   useEffect(() => {
-    const params = new URLSearchParams(location.hash.replace('#/', '').split('?')[1] || '')
+    const params = new URLSearchParams(location.search)
     const tableParam = params.get('table')
     if (tableParam) {
       const num = parseInt(tableParam, 10)
@@ -27,7 +27,7 @@ export default function TableEntry() {
         navigate('/menu')
       }
     }
-  }, [location.hash, navigate, setTable, tableMin, tableMax])
+  }, [location.search, navigate, setTable, tableMin, tableMax])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

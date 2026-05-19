@@ -112,7 +112,9 @@
     "employees": "ניהול עובדים",
     "schedule": "תכנית עבודה",
     "friday": "ארוחת שישי",
+    "expenses": "הוצאות",
     "reports": "דוחות כספיים",
+    "qrCodes": "קודי QR",
     "settings": "הגדרות"
   },
   "admin": {

@@ -112,7 +112,9 @@
     "employees": "Employee Management",
     "schedule": "Work Schedule",
     "friday": "Friday Dinner",
+    "expenses": "Expenses",
     "reports": "Financial Reports",
+    "qrCodes": "QR Codes",
     "settings": "Settings"
   },
   "admin": {

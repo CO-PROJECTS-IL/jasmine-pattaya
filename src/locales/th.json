@@ -112,7 +112,9 @@
     "employees": "จัดการพนักงาน",
     "schedule": "ตารางงาน",
     "friday": "อาหารค่ำวันศุกร์",
+    "expenses": "ค่าใช้จ่าย",
     "reports": "รายงานการเงิน",
+    "qrCodes": "QR Codes",
     "settings": "ตั้งค่า"
   },
   "admin": {
