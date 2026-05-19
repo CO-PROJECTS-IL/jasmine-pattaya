@@ -70,7 +70,7 @@ export default function Menu() {
   }
 
   return (
-    <div className="pb-24">
+    <div className="pb-24" style={{ maxWidth: '1024px', marginInline: 'auto' }}>
       {isFridayMenuActive && (
         <div
           className="text-center py-3 px-4 font-bold text-sm"
@@ -84,7 +84,7 @@ export default function Menu() {
       )}
 
       {isFridayMenuActive ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4">
           {fridayItems.map((item: any, i: number) => (
             <DishCard
               key={item.id}
@@ -101,22 +101,24 @@ export default function Menu() {
             className="sticky top-[52px] z-20 gold-border-glow"
             style={{ backgroundColor: 'oklch(0.12 0.005 85 / 0.95)', backdropFilter: 'blur(12px)' }}
           >
-            <CategoryTabs
-              categories={categories}
-              activeId={activeCategory}
-              onSelect={setActiveCategory}
-            />
+            <div>
+              <CategoryTabs
+                categories={categories}
+                activeId={activeCategory}
+                onSelect={setActiveCategory}
+              />
+            </div>
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4">
               {Array.from({ length: 6 }).map((_, i) => (
                 <DishCardSkeleton key={i} />
               ))}
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4">
                 {activeDishes.map((dish, i) => (
                   <DishCard
                     key={dish.id}

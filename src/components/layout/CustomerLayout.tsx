@@ -19,7 +19,7 @@ export default function CustomerLayout({ children }: CustomerLayoutProps) {
         className="sticky top-0 z-30 gold-border-glow backdrop-blur-md"
         style={{ backgroundColor: 'oklch(0.14 0.005 85 / 0.92)' }}
       >
-        <div className="flex items-center justify-between px-4 py-3 max-w-lg mx-auto">
+        <div className="flex items-center justify-between px-4 py-3 max-w-5xl mx-auto">
           <h1 className="text-xl font-bold tracking-tight" style={{ color: 'var(--gold)' }}>
             {t('common.appName')}
           </h1>
@@ -28,7 +28,7 @@ export default function CustomerLayout({ children }: CustomerLayoutProps) {
       </header>
 
       <OfflineBanner />
-      <main className="pb-20 max-w-2xl mx-auto animate-fade-in">{children}</main>
+      <main className="pb-20 animate-page-in">{children}</main>
       <BottomNav />
     </div>
   )

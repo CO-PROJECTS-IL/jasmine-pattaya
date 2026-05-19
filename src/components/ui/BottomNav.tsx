@@ -82,8 +82,9 @@ export default function BottomNav() {
     <nav
       className="fixed bottom-0 inset-x-0 z-40 backdrop-blur-md"
       style={{
-        backgroundColor: 'oklch(0.14 0.005 85 / 0.92)',
+        backgroundColor: 'oklch(0.12 0.005 85 / 0.95)',
         borderTop: '1px solid oklch(0.75 0.12 85 / 0.12)',
+        boxShadow: '0 -4px 20px oklch(0 0 0 / 0.3)',
       }}
     >
       <div className="flex justify-around max-w-lg mx-auto">
@@ -91,14 +92,21 @@ export default function BottomNav() {
           <NavLink
             key={tab.to}
             to={tab.to}
-            className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs transition-all duration-200"
+            className="relative flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs"
             style={({ isActive }) => ({
               color: isActive ? 'oklch(0.75 0.12 85)' : 'oklch(0.50 0.01 85)',
+              transition: 'color 0.2s',
             })}
             aria-label={tab.label}
           >
             {({ isActive }) => (
               <>
+                {isActive && (
+                  <span
+                    className="absolute top-0 inset-x-3 h-0.5 rounded-b-full"
+                    style={{ backgroundColor: 'var(--gold)', opacity: 0.8 }}
+                  />
+                )}
                 <tab.Icon active={isActive} />
                 <span className={`mt-1 ${isActive ? 'font-semibold' : ''}`}>{tab.label}</span>
               </>
@@ -109,8 +117,8 @@ export default function BottomNav() {
           href={GOOGLE_MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs transition-all duration-200"
-          style={{ color: 'oklch(0.50 0.01 85)' }}
+          className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3 text-xs"
+          style={{ color: 'oklch(0.50 0.01 85)', transition: 'color 0.2s' }}
           aria-label={t('nav.navigate')}
         >
           <NavIcon />
