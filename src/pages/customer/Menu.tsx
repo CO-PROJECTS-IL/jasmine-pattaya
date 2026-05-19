@@ -121,11 +121,11 @@ export default function Menu() {
       ) : (
         <>
           <div
-            className="sticky top-[49px] z-20"
+            className="sticky top-[49px] z-20 pb-2"
             style={{
               backgroundColor: 'oklch(0.08 0.008 60 / 0.95)',
               backdropFilter: 'blur(20px)',
-              borderBottom: '1px solid oklch(0.20 0.01 60 / 0.5)',
+              borderBottom: '1px solid oklch(0.20 0.01 60 / 0.3)',
             }}
           >
             <CategoryTabs
@@ -136,14 +136,14 @@ export default function Menu() {
           </div>
 
           {isLoading ? (
-            <div className="px-4 sm:px-6 space-y-0">
+            <div className="px-4 sm:px-6 pt-4 space-y-0">
               {Array.from({ length: 6 }).map((_, i) => (
                 <DishCardSkeleton key={i} />
               ))}
             </div>
           ) : (
             <>
-              <div className="px-4 sm:px-6 pt-2">
+              <div className="px-4 sm:px-6 pt-4">
                 {activeDishes.map((dish) => (
                   <DishCard
                     key={dish.id}
