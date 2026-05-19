@@ -34,7 +34,7 @@ export default function DishCard({ dish, onSelect, onQuickAdd, onImageZoom }: Di
 
   return (
     <div
-      className="flex gap-4 p-4 rounded-2xl cursor-pointer group mb-5"
+      className="flex gap-4 p-4 rounded-2xl cursor-pointer group mb-6"
       style={{
         backgroundColor: 'oklch(0.11 0.008 60)',
         transition: 'background-color 0.2s',

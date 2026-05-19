@@ -11,7 +11,7 @@ export default function OrdersManager() {
 
   const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
     try {
-      await callEdgeFunction('update-order-status', { orderId, status: newStatus })
+      await callEdgeFunction('update-order-status', { order_id: orderId, status: newStatus })
     } catch (err) {
       showToast('שגיאה בעדכון סטטוס', 'error')
     }

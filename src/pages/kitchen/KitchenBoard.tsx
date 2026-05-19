@@ -8,7 +8,7 @@ export default function KitchenBoard() {
 
   const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
     try {
-      await callEdgeFunction('update-order-status', { orderId, status: newStatus })
+      await callEdgeFunction('update-order-status', { order_id: orderId, status: newStatus })
     } catch {}
   }
 

@@ -1,7 +1,7 @@
 export default function DishCardSkeleton() {
   return (
     <div
-      className="flex gap-4 p-4 rounded-2xl mb-5"
+      className="flex gap-4 p-4 rounded-2xl mb-6"
       style={{ backgroundColor: 'oklch(0.11 0.008 60)' }}
     >
       <div className="shrink-0 w-[96px] h-[96px] rounded-xl animate-shimmer" />

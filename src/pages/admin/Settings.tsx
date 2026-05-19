@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 import { useSettings } from '../../hooks/useSettings'
 import { supabase } from '../../lib/supabase'
 import { getCurrentPosition } from '../../lib/geo'
@@ -103,6 +104,7 @@ function Toast({ message, type }: { message: string; type: 'success' | 'error' }
 export default function Settings() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const { data: settings } = useSettings()
 
   // PINs
@@ -228,6 +230,7 @@ export default function Settings() {
 
       const { error } = await supabase.functions.invoke('admin-settings', { body })
       if (error) throw error
+      queryClient.invalidateQueries({ queryKey: ['settings'] })
       showToast(t('settings.saved'), 'success')
     } catch (err) {
       showToast(t('settings.error'), 'error')
