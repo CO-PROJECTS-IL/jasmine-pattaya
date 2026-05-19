@@ -54,7 +54,8 @@
     "submit": "שלח הזמנה",
     "clear": "נקה הזמנה",
     "removeItem": "הסר פריט",
-    "quantity": "כמות"
+    "quantity": "כמות",
+    "items": "פריטים"
   },
   "order": {
     "confirmation": "אישור הזמנה",

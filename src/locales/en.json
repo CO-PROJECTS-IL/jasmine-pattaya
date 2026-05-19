@@ -54,7 +54,8 @@
     "submit": "Submit Order",
     "clear": "Clear Order",
     "removeItem": "Remove item",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "items": "items"
   },
   "order": {
     "confirmation": "Order Confirmation",
