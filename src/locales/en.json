@@ -105,6 +105,18 @@
     "served": "Served",
     "paid": "Paid"
   },
+  "members": {
+    "title": "Loyalty Club Members",
+    "search": "Search by name or phone",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "joinDate": "Join Date",
+    "total": "Total members",
+    "export": "Export CSV",
+    "noMembers": "No members found",
+    "exportSuccess": "File downloaded successfully"
+  },
   "adminHome": {
     "dashboard": "Dashboard",
     "orders": "Orders",
@@ -115,7 +127,8 @@
     "expenses": "Expenses",
     "reports": "Financial Reports",
     "qrCodes": "QR Codes",
-    "settings": "Settings"
+    "settings": "Settings",
+    "members": "Loyalty Club Members"
   },
   "admin": {
     "title": "Admin",
@@ -307,5 +320,12 @@
     "preparing": "Preparing",
     "served": "Served",
     "paid": "Paid"
+  },
+  "orderHistory": {
+    "title": "My Orders",
+    "noTable": "Scan the QR code on your table to view orders",
+    "noOrders": "No orders yet today",
+    "orderAt": "Order at",
+    "total": "Total"
   }
 }

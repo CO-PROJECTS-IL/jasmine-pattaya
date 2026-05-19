@@ -105,6 +105,18 @@
     "served": "הוגשה",
     "paid": "שולמה"
   },
+  "members": {
+    "title": "חברי מועדון",
+    "search": "חפש לפי שם או טלפון",
+    "name": "שם",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "joinDate": "תאריך הצטרפות",
+    "total": "סה\"כ חברים",
+    "export": "ייצוא CSV",
+    "noMembers": "לא נמצאו חברים",
+    "exportSuccess": "הקובץ הורד בהצלחה"
+  },
   "adminHome": {
     "dashboard": "דשבורד",
     "orders": "הזמנות",
@@ -115,7 +127,8 @@
     "expenses": "הוצאות",
     "reports": "דוחות כספיים",
     "qrCodes": "קודי QR",
-    "settings": "הגדרות"
+    "settings": "הגדרות",
+    "members": "חברי מועדון"
   },
   "admin": {
     "title": "ניהול",
@@ -307,5 +320,12 @@
     "preparing": "בהכנה",
     "served": "הוגשה",
     "paid": "שולמה"
+  },
+  "orderHistory": {
+    "title": "ההזמנות שלי",
+    "noTable": "סרוק את קוד ה-QR על השולחן כדי לצפות בהזמנות",
+    "noOrders": "אין הזמנות עדיין להיום",
+    "orderAt": "הזמנה ב-",
+    "total": "סה\"כ"
   }
 }

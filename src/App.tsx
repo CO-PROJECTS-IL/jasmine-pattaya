@@ -8,6 +8,7 @@ import OrderConfirmation from './pages/customer/OrderConfirmation'
 import FridayDinner from './pages/customer/FridayDinner'
 import Reserve from './pages/customer/Reserve'
 
+const OrderHistory = lazy(() => import('./pages/customer/OrderHistory'))
 const LoyaltyClub = lazy(() => import('./pages/customer/LoyaltyClub'))
 const StaffLogin = lazy(() => import('./pages/staff/StaffLogin'))
 const EmployeeLayout = lazy(() => import('./components/layout/EmployeeLayout'))
@@ -28,6 +29,7 @@ const ReportsPage = lazy(() => import('./pages/admin/ReportsPage'))
 const ExpensesManager = lazy(() => import('./pages/admin/ExpensesManager'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const QRCodes = lazy(() => import('./pages/admin/QRCodes'))
+const MembersManager = lazy(() => import('./pages/admin/MembersManager'))
 const KitchenLogin = lazy(() => import('./pages/kitchen/KitchenLogin'))
 const KitchenBoard = lazy(() => import('./pages/kitchen/KitchenBoard'))
 
@@ -70,6 +72,7 @@ export default function App() {
           <Route path="/order-confirmation" element={<CustomerLayout><OrderConfirmation /></CustomerLayout>} />
           <Route path="/reserve" element={<CustomerLayout><Reserve /></CustomerLayout>} />
           <Route path="/friday-dinner" element={<CustomerLayout><FridayDinner /></CustomerLayout>} />
+          <Route path="/orders" element={<CustomerLayout><OrderHistory /></CustomerLayout>} />
           <Route path="/loyalty" element={<CustomerLayout><LoyaltyClub /></CustomerLayout>} />
 
           {/* Staff Login */}
@@ -114,6 +117,7 @@ export default function App() {
           <Route path="/admin/expenses" element={<AdminPage><ExpensesManager /></AdminPage>} />
           <Route path="/admin/settings" element={<AdminPage><Settings /></AdminPage>} />
           <Route path="/admin/qr-codes" element={<AdminPage><QRCodes /></AdminPage>} />
+          <Route path="/admin/members" element={<AdminPage><MembersManager /></AdminPage>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

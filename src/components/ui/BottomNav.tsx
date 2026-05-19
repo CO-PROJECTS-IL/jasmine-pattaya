@@ -22,6 +22,16 @@ function CandleIcon({ active }: { active: boolean }) {
   )
 }
 
+function OrdersIcon({ active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+      <rect x="9" y="3" width="6" height="4" rx="1" />
+      <path d="M9 12h6M9 16h4" />
+    </svg>
+  )
+}
+
 function ReserveIcon({ active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={active ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -59,6 +69,7 @@ export default function BottomNav() {
 
   const tabs = [
     { to: '/menu', label: t('nav.menu'), Icon: MenuIcon },
+    { to: '/orders', label: t('orderHistory.title'), Icon: OrdersIcon },
     { to: '/reserve', label: t('nav.reserve'), Icon: ReserveIcon },
     { to: '/friday-dinner', label: t('friday.title'), Icon: CandleIcon },
   ]
