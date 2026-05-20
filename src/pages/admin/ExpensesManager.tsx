@@ -77,8 +77,8 @@ export default function ExpensesManager() {
           supabase.functions.invoke('admin-expenses', { body: { type: 'recurring', action: 'list' } }),
           supabase.functions.invoke('admin-expenses', { body: { type: 'onetime', action: 'list' } }),
         ])
-        if (rec) setRecurring(rec)
-        if (one) setOnetime(one)
+        if (Array.isArray(rec)) setRecurring(rec)
+        if (Array.isArray(one)) setOnetime(one)
       } catch {
         // edge function not yet deployed — start with empty lists
       }
