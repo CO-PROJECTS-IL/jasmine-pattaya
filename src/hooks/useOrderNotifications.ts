@@ -19,7 +19,7 @@ const NOTIFICATION_MESSAGES: Record<string, { he: string; en: string; th: string
   },
 }
 
-const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJExample'
+const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJ88nAUgmWAjER09Qwva2f6Sg'
 
 function getStoredOrderId(): string | null {
   return sessionStorage.getItem('jasmine-active-order')
