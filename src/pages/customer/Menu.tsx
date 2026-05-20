@@ -102,7 +102,7 @@ export default function Menu() {
           ))}
         </div>
       ) : (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           {/* Sidebar — visible on md+ */}
           <aside
             className="hidden md:block sticky top-[49px] self-start w-48 shrink-0 overflow-y-auto"
