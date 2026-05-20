@@ -20,7 +20,7 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/#/',
+        start_url: '/jasmine-pattaya/#/',
         icons: [
           {
             src: 'icon-192.png',

@@ -102,13 +102,13 @@ export default function Menu() {
           ))}
         </div>
       ) : (
-        <>
-          <div
-            className="sticky top-[49px] z-20 pb-2"
+        <div className="flex">
+          {/* Sidebar — visible on md+ */}
+          <aside
+            className="hidden md:block sticky top-[49px] self-start w-48 shrink-0 overflow-y-auto"
             style={{
-              backgroundColor: 'oklch(1 0 0 / 0.95)',
-              backdropFilter: 'blur(20px)',
-              borderBottom: '1px solid oklch(0.92 0.005 255 / 0.5)',
+              maxHeight: 'calc(100vh - 49px)',
+              borderInlineEnd: '1px solid oklch(0.92 0.005 255)',
             }}
           >
             <CategoryTabs
@@ -116,41 +116,75 @@ export default function Menu() {
               activeId={activeCategory}
               onSelect={setActiveCategory}
             />
+          </aside>
+
+          {/* Mobile horizontal tabs — visible below md */}
+          <div
+            className="md:hidden sticky top-[49px] z-20 w-full overflow-x-auto no-scrollbar"
+            style={{
+              backgroundColor: 'oklch(1 0 0 / 0.95)',
+              backdropFilter: 'blur(20px)',
+              borderBottom: '1px solid oklch(0.92 0.005 255 / 0.5)',
+            }}
+          >
+            <div className="flex gap-1 px-4 py-1">
+              {categories.map((cat) => {
+                const isActive = cat.id === activeCategory
+                const name = i18n.language === 'he' ? cat.name_he : i18n.language === 'th' ? cat.name_th : cat.name_en
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className="shrink-0 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-lg transition-colors"
+                    style={{
+                      color: isActive ? 'var(--accent)' : 'oklch(0.55 0.01 255)',
+                      backgroundColor: isActive ? 'oklch(0.45 0.16 255 / 0.08)' : 'transparent',
+                      fontWeight: isActive ? 600 : 400,
+                    }}
+                  >
+                    {name}
+                  </button>
+                )
+              })}
+            </div>
           </div>
 
-          {isLoading ? (
-            <div className="px-4 sm:px-6 pt-4 space-y-0">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <DishCardSkeleton key={i} />
-              ))}
-            </div>
-          ) : (
-            <>
-              <div key={activeCategory} className="dish-list px-4 sm:px-6 pt-4">
-                {activeDishes.map((dish) => (
-                  <DishCard
-                    key={dish.id}
-                    dish={dish}
-                    onSelect={setSelectedDish}
-                    onQuickAdd={handleQuickAdd}
-                    onImageZoom={handleImageZoom}
-                  />
+          {/* Dishes */}
+          <div className="flex-1 min-w-0">
+            {isLoading ? (
+              <div className="px-4 sm:px-6 pt-4 space-y-0">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <DishCardSkeleton key={i} />
                 ))}
               </div>
-
-              {activeDishes.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
-                  <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
-                    {t('menu.emptyCategory')}
-                  </p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    {t('menu.tryOtherCategory')}
-                  </p>
+            ) : (
+              <>
+                <div key={activeCategory} className="dish-list px-4 sm:px-6 pt-4">
+                  {activeDishes.map((dish) => (
+                    <DishCard
+                      key={dish.id}
+                      dish={dish}
+                      onSelect={setSelectedDish}
+                      onQuickAdd={handleQuickAdd}
+                      onImageZoom={handleImageZoom}
+                    />
+                  ))}
                 </div>
-              )}
-            </>
-          )}
-        </>
+
+                {activeDishes.length === 0 && (
+                  <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
+                    <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
+                      {t('menu.emptyCategory')}
+                    </p>
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                      {t('menu.tryOtherCategory')}
+                    </p>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
       )}
 
       <DishDetail
