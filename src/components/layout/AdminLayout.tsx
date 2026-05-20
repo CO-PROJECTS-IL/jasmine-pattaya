@@ -2,6 +2,7 @@ import { type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from '../ui/LanguageSwitcher'
+import ErrorBoundary from '../ui/ErrorBoundary'
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const { t } = useTranslation()
@@ -21,7 +22,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <LanguageSwitcher />
         </div>
       </header>
-      <main className="p-4 md:p-6 max-w-4xl mx-auto">{children}</main>
+      <main className="p-4 md:p-6 max-w-4xl mx-auto">
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </main>
     </div>
   )
 }

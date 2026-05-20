@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import GeoGate from '../ui/GeoGate'
 import LanguageSwitcher from '../ui/LanguageSwitcher'
 import OfflineBanner from '../ui/OfflineBanner'
+import ErrorBoundary from '../ui/ErrorBoundary'
 import { useAuthStore } from '../../stores/authStore'
 
 export default function EmployeeLayout() {
@@ -52,7 +53,7 @@ export default function EmployeeLayout() {
           </div>
         </header>
         <main className="p-4 max-w-4xl mx-auto">
-          <Outlet />
+          <ErrorBoundary><Outlet /></ErrorBoundary>
         </main>
       </div>
     </GeoGate>

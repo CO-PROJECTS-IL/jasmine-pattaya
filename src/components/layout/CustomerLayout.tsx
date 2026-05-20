@@ -4,6 +4,7 @@ import LanguageSwitcher from '../ui/LanguageSwitcher'
 import OfflineBanner from '../ui/OfflineBanner'
 import BottomNav from '../ui/BottomNav'
 import InstallPrompt from '../ui/InstallPrompt'
+import ErrorBoundary from '../ui/ErrorBoundary'
 
 interface CustomerLayoutProps {
   children: ReactNode
@@ -38,7 +39,9 @@ export default function CustomerLayout({ children }: CustomerLayoutProps) {
       </header>
 
       <OfflineBanner />
-      <main className="pb-20 animate-page-in">{children}</main>
+      <main className="pb-20 animate-page-in">
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </main>
       <BottomNav />
     </div>
   )
