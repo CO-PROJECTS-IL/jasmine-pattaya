@@ -27,14 +27,14 @@ export default function ImageLightbox({ src, alt, onClose }: ImageLightboxProps)
     <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={onClose}>
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: 'oklch(0.03 0.008 60 / 0.92)', backdropFilter: 'blur(8px)' }}
+        style={{ backgroundColor: 'oklch(0.03 0.008 255 / 0.92)', backdropFilter: 'blur(8px)' }}
       />
       <button
         onClick={onClose}
         className="absolute top-4 end-4 z-10 w-10 h-10 rounded-full flex items-center justify-center text-xl"
         style={{
-          backgroundColor: 'oklch(0.15 0.008 60 / 0.8)',
-          color: 'oklch(0.80 0.012 60)',
+          backgroundColor: 'oklch(0.15 0.008 255 / 0.8)',
+          color: 'oklch(0.80 0.012 255)',
         }}
       >
         &times;

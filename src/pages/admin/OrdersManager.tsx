@@ -20,7 +20,7 @@ export default function OrdersManager() {
   return (
     <>
       {toast && <Toast message={toast.message} type={toast.type} />}
-      <h1 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>{t('adminHome.orders')}</h1>
+      <h1 className="text-xl mb-6" style={{ color: 'var(--accent)' }}>{t('adminHome.orders')}</h1>
       <KanbanBoard onStatusChange={handleStatusChange} />
     </>
   )

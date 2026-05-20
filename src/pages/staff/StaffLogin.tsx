@@ -32,7 +32,7 @@ export default function StaffLogin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4" style={{ backgroundColor: 'var(--dark)' }}>
         <div className="absolute top-4 right-4"><LanguageSwitcher /></div>
-        <h1 className="text-2xl mb-2" style={{ color: 'var(--gold)' }}>
+        <h1 className="text-2xl mb-2" style={{ color: 'var(--accent)' }}>
           {mode === 'admin' ? t('staff.adminLogin') : t('staff.employeeLogin')}
         </h1>
         <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>{t('staff.enterPin')}</p>
@@ -52,25 +52,25 @@ export default function StaffLogin() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-6" style={{ backgroundColor: 'var(--dark)' }}>
       <div className="absolute top-4 right-4"><LanguageSwitcher /></div>
-      <h1 className="text-3xl mb-4" style={{ color: 'var(--gold)' }}>{t('staff.title')}</h1>
+      <h1 className="text-3xl mb-4" style={{ color: 'var(--accent)' }}>{t('staff.title')}</h1>
       <button
         onClick={() => setMode('admin')}
         className="w-64 py-4 rounded-xl text-lg font-medium transition-colors"
-        style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.1)', border: '1px solid oklch(0.75 0.14 60 / 0.3)', color: 'var(--gold)' }}
+        style={{ backgroundColor: 'oklch(0.55 0.14 255 / 0.1)', border: '1px solid oklch(0.55 0.14 255 / 0.3)', color: 'var(--accent)' }}
       >
         {t('staff.adminLogin')}
       </button>
       <button
         onClick={() => setMode('employee')}
         className="w-64 py-4 bg-white/5 rounded-xl text-lg font-medium hover:bg-white/10 transition-colors"
-        style={{ border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-secondary)' }}
+        style={{ border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-secondary)' }}
       >
         {t('staff.employeeLogin')}
       </button>
       <button
         onClick={() => navigate('/kitchen')}
         className="w-64 py-4 bg-white/5 rounded-xl text-lg font-medium hover:bg-white/10 transition-colors"
-        style={{ border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-secondary)' }}
+        style={{ border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-secondary)' }}
       >
         {t('kitchen.title')}
       </button>

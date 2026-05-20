@@ -95,13 +95,13 @@ export default function DishEditor() {
 
   const inputStyle = {
     backgroundColor: 'var(--dark-lighter)',
-    border: '1px solid oklch(0.30 0.008 60)',
+    border: '1px solid oklch(0.30 0.008 255)',
     color: 'var(--text-primary)',
   }
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>
+      <h2 className="text-xl mb-6" style={{ color: 'var(--accent)' }}>
         {isNew ? t('menuManage.addDish') : t('menuManage.editDish')}
       </h2>
 
@@ -179,7 +179,7 @@ export default function DishEditor() {
                 type="checkbox"
                 checked={(form as any)[key]}
                 onChange={(e) => update(key, e.target.checked)}
-                style={{ accentColor: 'var(--gold)' }}
+                style={{ accentColor: 'var(--accent)' }}
               />
               {label}
             </label>
@@ -198,7 +198,7 @@ export default function DishEditor() {
             onClick={handleSave}
             disabled={saving || !form.name_he}
             className="flex-1 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
-            style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+            style={{ backgroundColor: 'var(--accent)', color: 'white' }}
           >
             {saving ? t('common.loading') : t('common.save')}
           </button>

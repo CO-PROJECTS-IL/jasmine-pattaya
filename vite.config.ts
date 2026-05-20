@@ -16,8 +16,8 @@ export default defineConfig({
       manifest: {
         name: 'יסמין - Jasmine Restaurant',
         short_name: 'יסמין',
-        theme_color: '#c69038',
-        background_color: '#080808',
+        theme_color: '#1a56db',
+        background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/#/',

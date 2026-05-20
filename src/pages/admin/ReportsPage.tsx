@@ -36,7 +36,7 @@ function getDateRange(range: DateRange, customStart?: string, customEnd?: string
   return { start: customStart ?? fmt(now), end: customEnd ?? fmt(now) }
 }
 
-const PIE_COLORS = ['#c69038', '#f59e0b', '#ef4444']
+const PIE_COLORS = ['#1a56db', '#f59e0b', '#ef4444']
 
 export default function ReportsPage() {
   const { t } = useTranslation()
@@ -82,7 +82,7 @@ export default function ReportsPage() {
 
   const chartInputStyle = {
     backgroundColor: 'var(--dark-light)',
-    border: '1px solid oklch(0.75 0.14 60 / 0.3)',
+    border: '1px solid oklch(0.55 0.14 255 / 0.3)',
     color: 'var(--text-primary)',
   }
 
@@ -93,8 +93,8 @@ export default function ReportsPage() {
       className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
       style={
         range === key
-          ? { backgroundColor: 'var(--gold)', color: 'var(--dark)' }
-          : { backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)', color: 'var(--text-muted)' }
+          ? { backgroundColor: 'var(--accent)', color: 'white' }
+          : { backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)', color: 'var(--text-muted)' }
       }
     >
       {label}
@@ -103,7 +103,7 @@ export default function ReportsPage() {
 
   return (
     <>
-      <h1 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>{t('reports.title')}</h1>
+      <h1 className="text-xl mb-6" style={{ color: 'var(--accent)' }}>{t('reports.title')}</h1>
 
       {/* Date range filter */}
       <div className="flex flex-wrap gap-2 mb-6 items-center">
@@ -139,19 +139,19 @@ export default function ReportsPage() {
 
       {/* Summary cards */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.revenue')}</p>
           <p className="text-xl font-bold text-green-400">฿{reportData.revenue.toLocaleString()}</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.expenses')}</p>
           <p className="text-xl font-bold text-red-400">฿{totalExpenses.toLocaleString()}</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.netProfit')}</p>
           <p
             className="text-xl font-bold"
-            style={{ color: netProfit >= 0 ? 'var(--gold)' : '#ef4444' }}
+            style={{ color: netProfit >= 0 ? 'var(--accent)' : '#ef4444' }}
           >
             ฿{netProfit.toLocaleString()}
           </p>
@@ -161,7 +161,7 @@ export default function ReportsPage() {
       {/* Charts — Recharts hex values kept as-is */}
       <div className="space-y-4">
         {/* Revenue over time */}
-        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
           <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.revenueOverTime')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={reportData.dailyRevenue}>
@@ -169,11 +169,11 @@ export default function ReportsPage() {
               <XAxis dataKey="date" tick={{ fill: '#888', fontSize: 10 }} />
               <YAxis tick={{ fill: '#888', fontSize: 10 }} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c6903833', borderRadius: 8 }}
-                labelStyle={{ color: '#c69038' }}
+                contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #1a56db33', borderRadius: 8 }}
+                labelStyle={{ color: '#1a56db' }}
                 itemStyle={{ color: '#fff' }}
               />
-              <Bar dataKey="amount" fill="#c69038" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="amount" fill="#1a56db" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -181,7 +181,7 @@ export default function ReportsPage() {
         {/* Expenses by category + Profit trend side by side */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Expenses by category — PieChart */}
-          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
             <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.expensesByCategory')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
@@ -199,7 +199,7 @@ export default function ReportsPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c6903833', borderRadius: 8 }}
+                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #1a56db33', borderRadius: 8 }}
                   itemStyle={{ color: '#fff' }}
                   formatter={(value: any) => [`฿${Number(value).toLocaleString()}`, '']}
                 />
@@ -212,7 +212,7 @@ export default function ReportsPage() {
           </div>
 
           {/* Profit trend — LineChart */}
-          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
             <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.profitTrend')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={reportData.dailyProfit}>
@@ -220,16 +220,16 @@ export default function ReportsPage() {
                 <XAxis dataKey="date" tick={{ fill: '#888', fontSize: 10 }} />
                 <YAxis tick={{ fill: '#888', fontSize: 10 }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #c6903833', borderRadius: 8 }}
-                  labelStyle={{ color: '#c69038' }}
+                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #1a56db33', borderRadius: 8 }}
+                  labelStyle={{ color: '#1a56db' }}
                   itemStyle={{ color: '#fff' }}
                 />
                 <Line
                   type="monotone"
                   dataKey="amount"
-                  stroke="#c69038"
+                  stroke="#1a56db"
                   strokeWidth={2}
-                  dot={{ fill: '#c69038', r: 3 }}
+                  dot={{ fill: '#1a56db', r: 3 }}
                   activeDot={{ r: 5 }}
                 />
               </LineChart>

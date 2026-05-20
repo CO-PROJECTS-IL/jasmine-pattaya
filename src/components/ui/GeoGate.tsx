@@ -37,14 +37,14 @@ export default function GeoGate({ children }: GeoGateProps) {
           <button
             onClick={checkLocation}
             className="px-6 py-2 rounded-lg transition-colors"
-            style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}
+            style={{ backgroundColor: 'oklch(0.45 0.16 255 / 0.2)', color: 'var(--accent)' }}
           >
             {t('common.confirm')}
           </button>
           <button
             onClick={() => setBypassed(true)}
             className="px-6 py-2 rounded-lg transition-colors"
-            style={{ backgroundColor: 'oklch(0.25 0.008 60)', color: 'var(--text-muted)' }}
+            style={{ backgroundColor: 'oklch(0.25 0.008 255)', color: 'var(--text-muted)' }}
           >
             {t('common.close')}
           </button>

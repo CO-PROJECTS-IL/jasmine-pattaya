@@ -24,21 +24,21 @@ export default function Dashboard() {
   })).filter((d) => d.orders > 0)
 
   const cards = [
-    { label: t('dashboard.todayOrders'), value: orders.length, color: '#c69038' },
+    { label: t('dashboard.todayOrders'), value: orders.length, color: '#1a56db' },
     { label: t('dashboard.todayRevenue'), value: `${totalRevenue}฿`, color: '#22c55e' },
     { label: t('dashboard.avgOrder'), value: `${avgOrder}฿`, color: '#3b82f6' },
   ]
 
   return (
     <>
-      <h1 className="text-xl mb-8" style={{ color: 'var(--gold)' }}>{t('adminHome.dashboard')}</h1>
+      <h1 className="text-xl mb-8" style={{ color: 'var(--accent)' }}>{t('adminHome.dashboard')}</h1>
 
       <div className="grid grid-cols-3 gap-4 mb-8">
         {cards.map((card) => (
           <div
             key={card.label}
             className="rounded-xl p-4 text-center"
-            style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 60)' }}
+            style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 255)' }}
           >
             <p className="text-xs mb-1.5" style={{ color: 'var(--text-muted)' }}>{card.label}</p>
             <p className="text-xl font-bold" style={{ color: card.color }}>{card.value}</p>
@@ -60,7 +60,7 @@ export default function Dashboard() {
       </div>
 
       {hourlyData.length > 0 && (
-        <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 60)' }}>
+        <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 255)' }}>
           <h3 className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{t('dashboard.ordersChart')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={hourlyData}>
@@ -68,7 +68,7 @@ export default function Dashboard() {
               <XAxis dataKey="hour" tick={{ fill: '#888', fontSize: 10 }} />
               <YAxis tick={{ fill: '#888', fontSize: 10 }} />
               <Tooltip contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: 8 }} />
-              <Bar dataKey="orders" fill="#c69038" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="orders" fill="#1a56db" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

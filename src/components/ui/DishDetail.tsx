@@ -42,15 +42,13 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: 'oklch(0.03 0.008 60 / 0.85)', backdropFilter: 'blur(4px)' }}
+        style={{ backgroundColor: 'oklch(0.20 0.01 255 / 0.5)', backdropFilter: 'blur(4px)' }}
         onClick={onClose}
       />
       <div
-        className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto animate-slide-up"
+        className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto animate-slide-up bg-white"
         style={{
-          backgroundColor: 'oklch(0.12 0.008 60)',
-          border: '1px solid oklch(0.22 0.01 60)',
-          boxShadow: '0 -8px 40px oklch(0 0 0 / 0.6)',
+          boxShadow: '0 -8px 40px oklch(0.20 0.02 60 / 0.15)',
         }}
       >
         {dish.image_url ? (
@@ -62,14 +60,14 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
             />
             <div
               className="absolute inset-0"
-              style={{ background: 'linear-gradient(to top, oklch(0.12 0.008 60) 0%, oklch(0.12 0.008 60 / 0.3) 40%, transparent 70%)' }}
+              style={{ background: 'linear-gradient(to top, white 0%, oklch(1 0 0 / 0.3) 40%, transparent 70%)' }}
             />
             <button
               onClick={onClose}
-              className="absolute top-3 end-3 w-8 h-8 rounded-lg flex items-center justify-center text-lg"
+              className="absolute top-3 end-3 w-8 h-8 rounded-full flex items-center justify-center text-lg"
               style={{
-                backgroundColor: 'oklch(0.08 0.008 60 / 0.7)',
-                color: 'oklch(0.80 0.012 60)',
+                backgroundColor: 'oklch(1 0 0 / 0.8)',
+                color: 'oklch(0.40 0.01 255)',
                 backdropFilter: 'blur(8px)',
               }}
             >
@@ -78,7 +76,7 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
             {dish.is_kosher && (
               <span
                 className="absolute top-3 start-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md"
-                style={{ backgroundColor: 'oklch(0.45 0.12 145 / 0.9)', color: 'oklch(0.95 0 0)' }}
+                style={{ backgroundColor: 'oklch(0.55 0.14 150 / 0.9)', color: 'white' }}
               >
                 {t('menu.kosher')}
               </span>
@@ -88,8 +86,8 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
           <div className="flex justify-end p-4">
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-lg"
-              style={{ backgroundColor: 'oklch(0.18 0.008 60)', color: 'oklch(0.60 0.015 60)' }}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-lg"
+              style={{ backgroundColor: 'oklch(0.95 0.004 255)', color: 'oklch(0.55 0.01 255)' }}
             >
               &times;
             </button>
@@ -99,35 +97,47 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
         <div className="p-5 sm:p-6">
           <h2
             className="text-xl font-black mb-1.5"
-            style={{ color: 'oklch(0.97 0.008 60)', letterSpacing: '-0.01em' }}
+            style={{
+              color: 'var(--text-primary)',
+              fontFamily: "'Frank Ruhl Libre', serif",
+              letterSpacing: '-0.01em',
+            }}
           >
             {name}
           </h2>
           {desc && (
-            <p className="text-sm mb-5 leading-relaxed" style={{ color: 'oklch(0.50 0.012 60)' }}>
+            <p className="text-sm mb-5 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               {desc}
             </p>
           )}
 
-          <div className="text-lg font-bold mb-8" style={{ color: 'var(--gold)' }}>
+          <div className="text-lg font-bold mb-8" style={{ color: 'var(--accent)' }}>
             {dish.price > 0 ? `฿${dish.price}` : t('menu.askPrice')}
           </div>
 
           <div className="flex items-center justify-center gap-6 mb-8">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-11 h-11 rounded-xl text-lg flex items-center justify-center transition-all duration-200 active:scale-90"
-              style={{ backgroundColor: 'oklch(0.18 0.008 60)', color: 'oklch(0.70 0.012 60)' }}
+              className="w-11 h-11 rounded-full text-lg flex items-center justify-center transition-all duration-200 active:scale-90"
+              style={{
+                border: '1.5px solid oklch(0.92 0.005 255)',
+                color: 'var(--text-secondary)',
+                backgroundColor: 'white',
+              }}
             >
               -
             </button>
-            <span className="text-2xl font-black w-8 text-center" style={{ color: 'oklch(0.95 0.008 60)' }}>
+            <span className="text-2xl font-black w-8 text-center" style={{ color: 'var(--text-primary)' }}>
               {quantity}
             </span>
             <button
               onClick={() => setQuantity(quantity + 1)}
-              className="w-11 h-11 rounded-xl text-lg flex items-center justify-center transition-all duration-200 active:scale-90"
-              style={{ backgroundColor: 'oklch(0.18 0.008 60)', color: 'oklch(0.70 0.012 60)' }}
+              className="w-11 h-11 rounded-full text-lg flex items-center justify-center transition-all duration-200 active:scale-90"
+              style={{
+                border: '1.5px solid oklch(0.92 0.005 255)',
+                color: 'var(--text-secondary)',
+                backgroundColor: 'white',
+              }}
             >
               +
             </button>
@@ -138,8 +148,8 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
             disabled={dish.price === 0}
             className="w-full py-3.5 rounded-xl font-bold text-base tracking-wide transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
             style={{
-              backgroundColor: 'oklch(0.75 0.14 60)',
-              color: 'oklch(0.10 0.012 60)',
+              backgroundColor: 'var(--accent)',
+              color: 'white',
             }}
           >
             {t('menu.addToCart')} · ฿{dish.price * quantity}

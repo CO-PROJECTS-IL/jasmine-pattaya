@@ -26,7 +26,7 @@ export default function KitchenLogin() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center" style={{ backgroundColor: 'var(--dark)' }}>
-      <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--gold)' }}>{t('kitchen.title')}</h1>
+      <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--accent)' }}>{t('kitchen.title')}</h1>
       <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>{t('staff.enterPin')}</p>
       <PinInput onSubmit={handlePin} title="" loading={loading} />
       {error && <p className="text-red-400 mt-4 text-sm">{error}</p>}

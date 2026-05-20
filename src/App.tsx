@@ -38,7 +38,7 @@ const KitchenBoard = lazy(() => import('./pages/kitchen/KitchenBoard'))
 function LazyFallback() {
   return (
     <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
-      <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--gold)', borderTopColor: 'transparent' }} />
+      <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
     </div>
   )
 }

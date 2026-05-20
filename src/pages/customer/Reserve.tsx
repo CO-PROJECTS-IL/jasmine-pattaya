@@ -41,13 +41,13 @@ export default function Reserve() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
-          style={{ backgroundColor: 'oklch(0.55 0.15 145 / 0.15)' }}
+          style={{ backgroundColor: 'oklch(0.55 0.14 150 / 0.1)' }}
         >
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="oklch(0.65 0.15 145)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="oklch(0.55 0.14 150)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--gold)' }}>{t('reserve.success')}</h2>
+        <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--accent)' }}>{t('reserve.success')}</h2>
         <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>{t('reserve.successMsg')}</p>
         <button
           onClick={() => {
@@ -59,8 +59,8 @@ export default function Reserve() {
           }}
           className="px-8 py-3 rounded-2xl font-semibold transition-all active:scale-[0.98]"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
-            color: 'oklch(0.15 0.012 60)',
+            backgroundColor: 'var(--accent)',
+            color: 'white',
           }}
         >
           {t('reserve.newReservation')}
@@ -71,7 +71,7 @@ export default function Reserve() {
 
   return (
     <div className="px-4 py-6 max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--gold)' }}>
+      <h1 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--accent)' }}>
         {t('reserve.title')}
       </h1>
 
@@ -89,10 +89,9 @@ export default function Reserve() {
             onChange={(e) => setDate(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
-              backgroundColor: 'oklch(0.18 0.008 60)',
-              border: '1px solid oklch(0.28 0.008 60)',
+              backgroundColor: 'white',
+              border: '1.5px solid oklch(0.92 0.005 255)',
               color: 'var(--text-primary)',
-              colorScheme: 'dark',
             }}
           />
         </div>
@@ -111,12 +110,12 @@ export default function Reserve() {
                 style={
                   time === slot
                     ? {
-                        backgroundColor: 'var(--gold)',
-                        color: 'oklch(0.15 0.012 60)',
+                        backgroundColor: 'var(--accent)',
+                        color: 'white',
                       }
                     : {
-                        backgroundColor: 'oklch(0.18 0.008 60)',
-                        border: '1px solid oklch(0.28 0.008 60)',
+                        backgroundColor: 'white',
+                        border: '1.5px solid oklch(0.92 0.005 255)',
                         color: 'var(--text-secondary)',
                       }
                 }
@@ -141,12 +140,12 @@ export default function Reserve() {
                 style={
                   guests === n
                     ? {
-                        backgroundColor: 'var(--gold)',
-                        color: 'oklch(0.15 0.012 60)',
+                        backgroundColor: 'var(--accent)',
+                        color: 'white',
                       }
                     : {
-                        backgroundColor: 'oklch(0.18 0.008 60)',
-                        border: '1px solid oklch(0.28 0.008 60)',
+                        backgroundColor: 'white',
+                        border: '1.5px solid oklch(0.92 0.005 255)',
                         color: 'var(--text-secondary)',
                       }
                 }
@@ -169,8 +168,8 @@ export default function Reserve() {
             onChange={(e) => setName(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
-              backgroundColor: 'oklch(0.18 0.008 60)',
-              border: '1px solid oklch(0.28 0.008 60)',
+              backgroundColor: 'white',
+              border: '1.5px solid oklch(0.92 0.005 255)',
               color: 'var(--text-primary)',
             }}
           />
@@ -188,8 +187,8 @@ export default function Reserve() {
             onChange={(e) => setPhone(e.target.value)}
             className="w-full px-4 py-3 rounded-2xl text-sm transition-all"
             style={{
-              backgroundColor: 'oklch(0.18 0.008 60)',
-              border: '1px solid oklch(0.28 0.008 60)',
+              backgroundColor: 'white',
+              border: '1.5px solid oklch(0.92 0.005 255)',
               color: 'var(--text-primary)',
             }}
           />
@@ -200,8 +199,8 @@ export default function Reserve() {
           disabled={!date || !time || !name || !phone}
           className="w-full py-4 rounded-2xl font-bold text-lg transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
-            color: 'oklch(0.15 0.012 60)',
+            backgroundColor: 'var(--accent)',
+            color: 'white',
           }}
         >
           {t('reserve.submit')}

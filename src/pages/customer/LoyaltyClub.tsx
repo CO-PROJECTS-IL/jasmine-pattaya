@@ -44,10 +44,13 @@ export default function LoyaltyClub() {
   if (joined) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-6 text-center animate-slide-up">
-        <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6">
-          <span className="text-4xl text-green-400">✓</span>
+        <div
+          className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+          style={{ backgroundColor: 'oklch(0.55 0.14 150 / 0.1)' }}
+        >
+          <span className="text-4xl" style={{ color: 'oklch(0.55 0.14 150)' }}>✓</span>
         </div>
-        <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--gold)' }}>
+        <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--accent)' }}>
           {t('loyalty.welcomeTitle')}
         </h1>
         <p style={{ color: 'var(--text-muted)' }}>{t('loyalty.welcomeMsg')}</p>
@@ -56,14 +59,14 @@ export default function LoyaltyClub() {
   }
 
   const inputStyle = {
-    backgroundColor: 'oklch(0.20 0.008 60)',
-    border: '1px solid oklch(0.28 0.008 60)',
+    backgroundColor: 'white',
+    border: '1.5px solid oklch(0.92 0.005 255)',
     color: 'var(--text-primary)',
   }
 
   return (
     <div className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-2 text-center" style={{ color: 'var(--gold)' }}>
+      <h1 className="text-2xl font-bold mb-2 text-center" style={{ color: 'var(--accent)' }}>
         {t('loyalty.title')}
       </h1>
       <p className="text-center mb-8" style={{ color: 'var(--text-muted)' }}>
@@ -106,17 +109,17 @@ export default function LoyaltyClub() {
         </div>
 
         {alreadyMember && (
-          <p className="text-sm text-center" style={{ color: 'var(--gold)' }}>{t('loyalty.alreadyMember')}</p>
+          <p className="text-sm text-center" style={{ color: 'var(--accent)' }}>{t('loyalty.alreadyMember')}</p>
         )}
         {error && (
-          <p className="text-sm text-center" style={{ color: 'oklch(0.65 0.15 25)' }}>{error}</p>
+          <p className="text-sm text-center" style={{ color: 'oklch(0.55 0.18 25)' }}>{error}</p>
         )}
 
         <button
           onClick={handleSubmit}
           disabled={submitting || !name || !phone}
           className="w-full py-3 rounded-xl font-bold transition-colors disabled:opacity-50"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           {submitting ? t('common.loading') : t('loyalty.join')}
         </button>

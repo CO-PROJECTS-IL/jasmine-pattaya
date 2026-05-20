@@ -25,9 +25,9 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
   )
 
   return (
-    <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 60)' }}>
+    <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)' }}>
       <div className="flex justify-between items-center mb-2">
-        <span className="font-bold text-lg" style={{ color: 'var(--gold)' }}>#{order.table_number}</span>
+        <span className="font-bold text-lg" style={{ color: 'var(--accent)' }}>#{order.table_number}</span>
         <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{minutesAgo}m</span>
       </div>
 
@@ -56,7 +56,7 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
           <button
             onClick={() => onStatusChange(order.id, ORDER_STATUSES[currentIndex + 1] as OrderStatus)}
             className="flex-1 py-1.5 text-xs rounded font-medium transition-colors"
-            style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}
+            style={{ backgroundColor: 'oklch(0.45 0.16 255 / 0.2)', color: 'var(--accent)' }}
           >
             ▶
           </button>

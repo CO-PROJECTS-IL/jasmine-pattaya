@@ -34,7 +34,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0" style={{ backgroundColor: 'oklch(0.05 0.008 60 / 0.7)' }} onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0" style={{ backgroundColor: 'oklch(0.05 0.008 255 / 0.4)' }} onClick={onClose} aria-hidden="true" />
       <div
         ref={dialogRef}
         role="dialog"
@@ -42,16 +42,17 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
         aria-label={title}
         className="relative w-full max-w-md rounded-xl p-6 z-10"
         style={{
-          backgroundColor: 'oklch(0.16 0.008 60)',
-          border: '1px solid oklch(0.75 0.14 60 / 0.2)',
+          backgroundColor: 'oklch(0.98 0.005 255)',
+          border: '1px solid oklch(0.88 0.02 255)',
+          color: 'oklch(0.25 0.02 255)',
         }}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl" style={{ color: 'var(--gold)' }}>{title}</h2>
+          <h2 className="text-xl" style={{ color: 'var(--accent)' }}>{title}</h2>
           <button
             onClick={onClose}
             className="w-11 h-11 flex items-center justify-center text-2xl rounded-xl transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'oklch(0.45 0.02 255)' }}
             aria-label={t('common.close')}
           >
             &times;

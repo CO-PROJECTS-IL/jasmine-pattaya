@@ -28,14 +28,14 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h2 className="text-2xl" style={{ color: 'var(--gold)' }}>{title}</h2>
+      <h2 className="text-2xl" style={{ color: 'var(--accent)' }}>{title}</h2>
 
       <div className="flex gap-3">
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
             className="w-12 h-12 rounded-lg flex items-center justify-center text-xl"
-            style={{ border: '2px solid oklch(0.75 0.14 60 / 0.4)', backgroundColor: 'var(--dark-lighter)' }}
+            style={{ border: '2px solid oklch(0.45 0.16 255 / 0.4)', backgroundColor: 'var(--dark-lighter)' }}
           >
             {pin[i] ? '•' : ''}
           </div>
@@ -43,7 +43,7 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
       </div>
 
       {loading && (
-        <div className="w-6 h-6 rounded-full animate-spin" style={{ border: '2px solid var(--gold)', borderTopColor: 'transparent' }} />
+        <div className="w-6 h-6 rounded-full animate-spin" style={{ border: '2px solid var(--accent)', borderTopColor: 'transparent' }} />
       )}
 
       <div className="grid grid-cols-3 gap-3 w-64" dir="ltr">

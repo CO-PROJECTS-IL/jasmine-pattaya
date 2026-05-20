@@ -42,7 +42,7 @@ export default function EmployeeSchedule() {
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl mb-4" style={{ color: 'var(--gold)' }}>{t('employee.myShifts')}</h2>
+      <h2 className="text-xl mb-4" style={{ color: 'var(--accent)' }}>{t('employee.myShifts')}</h2>
 
       {shifts.length === 0 ? (
         <p className="text-center py-8" style={{ color: 'var(--text-muted)' }}>{t('common.noResults')}</p>
@@ -53,7 +53,7 @@ export default function EmployeeSchedule() {
             const dayName = DAYS[date.getDay()]
             const dateStr = date.toLocaleDateString()
             return (
-              <div key={shift.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
+              <div key={shift.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}>
                 <div>
                   <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{dayName} {dateStr}</p>
                   {shift.shift_type === 'custom' && shift.custom_start && shift.custom_end && (

@@ -36,10 +36,13 @@ export default function OrderConfirmation() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] p-6 text-center animate-slide-up">
-      <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6">
-        <span className="text-4xl text-green-400">✓</span>
+      <div
+        className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+        style={{ backgroundColor: 'oklch(0.55 0.14 150 / 0.12)' }}
+      >
+        <span className="text-4xl" style={{ color: 'oklch(0.55 0.14 150)' }}>✓</span>
       </div>
-      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--gold)' }}>
+      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--accent)' }}>
         {t('order.thankYou')}
       </h1>
       <p className="mb-6" style={{ color: 'var(--text-muted)' }}>
@@ -54,7 +57,7 @@ export default function OrderConfirmation() {
 
       {total > 0 && (
         <div className="mb-8 text-center">
-          <p className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>฿{total}</p>
+          <p className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>฿{total}</p>
           <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t('order.excludingService')}</p>
         </div>
       )}
@@ -64,16 +67,16 @@ export default function OrderConfirmation() {
           onClick={handleEnableNotifications}
           className="mb-6 px-5 py-3 rounded-xl text-sm font-medium transition-colors"
           style={{
-            backgroundColor: 'oklch(0.75 0.14 60 / 0.15)',
-            color: 'var(--gold)',
-            border: '1px solid oklch(0.75 0.14 60 / 0.3)',
+            backgroundColor: 'oklch(0.45 0.16 255 / 0.08)',
+            color: 'var(--accent)',
+            border: '1px solid oklch(0.45 0.16 255 / 0.2)',
           }}
         >
           {t('order.enableNotifications')}
         </button>
       )}
       {notifStatus === 'granted' && (
-        <p className="mb-6 text-xs" style={{ color: 'oklch(0.55 0.14 145)' }}>
+        <p className="mb-6 text-xs" style={{ color: 'oklch(0.55 0.14 150)' }}>
           {t('order.notificationsEnabled')}
         </p>
       )}
@@ -82,7 +85,7 @@ export default function OrderConfirmation() {
         <button
           onClick={() => navigate('/menu')}
           className="w-full py-3 rounded-xl font-bold transition-colors"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           {t('order.newOrder')}
         </button>

@@ -19,12 +19,12 @@ export default function LanguageSwitcher() {
           style={
             currentLang === lang.code
               ? {
-                  backgroundColor: 'var(--gold)',
-                  color: 'oklch(0.15 0.012 60)',
+                  backgroundColor: 'var(--accent)',
+                  color: 'white',
                 }
               : {
-                  backgroundColor: 'oklch(0.20 0.008 60)',
-                  color: 'oklch(0.55 0.012 60)',
+                  backgroundColor: 'oklch(0.92 0.01 255)',
+                  color: 'oklch(0.45 0.04 255)',
                 }
           }
         >

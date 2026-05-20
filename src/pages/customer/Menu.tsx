@@ -80,8 +80,8 @@ export default function Menu() {
         <div
           className="text-center py-2.5 px-4 font-bold text-xs uppercase tracking-widest"
           style={{
-            backgroundColor: 'oklch(0.75 0.14 60)',
-            color: 'oklch(0.10 0.012 60)',
+            backgroundColor: 'var(--accent)',
+            color: 'white',
             letterSpacing: '0.12em',
           }}
         >
@@ -106,9 +106,9 @@ export default function Menu() {
           <div
             className="sticky top-[49px] z-20 pb-2"
             style={{
-              backgroundColor: 'oklch(0.08 0.008 60 / 0.95)',
+              backgroundColor: 'oklch(1 0 0 / 0.95)',
               backdropFilter: 'blur(20px)',
-              borderBottom: '1px solid oklch(0.20 0.01 60 / 0.3)',
+              borderBottom: '1px solid oklch(0.92 0.005 255 / 0.5)',
             }}
           >
             <CategoryTabs
@@ -140,10 +140,10 @@ export default function Menu() {
 
               {activeDishes.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
-                  <p className="text-sm font-medium mb-1" style={{ color: 'oklch(0.45 0.012 60)' }}>
+                  <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                     {t('menu.emptyCategory')}
                   </p>
-                  <p className="text-xs" style={{ color: 'oklch(0.35 0.012 60)' }}>
+                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
                     {t('menu.tryOtherCategory')}
                   </p>
                 </div>
@@ -176,11 +176,11 @@ export default function Menu() {
       {cartCount > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90${justAdded ? ' animate-pulse-gold' : ''}`}
+          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90${justAdded ? ' animate-pulse-accent' : ''}`}
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
-            color: 'oklch(0.15 0.012 60)',
-            boxShadow: '0 4px 20px oklch(0.75 0.14 60 / 0.3)',
+            backgroundColor: 'var(--accent)',
+            color: 'white',
+            boxShadow: '0 4px 20px oklch(0.45 0.16 255 / 0.3)',
           }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -189,7 +189,7 @@ export default function Menu() {
           </svg>
           <span
             className={`absolute -top-1.5 -end-1.5 w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold${justAdded ? ' animate-scale-check' : ''}`}
-            style={{ backgroundColor: 'oklch(0.55 0.22 25)', color: 'oklch(0.98 0 0)' }}
+            style={{ backgroundColor: 'oklch(0.55 0.22 25)', color: 'white' }}
             aria-label={`${cartCount} ${t('cart.items')}`}
           >
             {cartCount}

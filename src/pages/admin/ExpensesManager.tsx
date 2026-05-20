@@ -12,7 +12,7 @@ const inputClass =
   'w-full rounded-lg px-3 py-2 text-sm'
 const inputStyle = {
   backgroundColor: 'var(--dark-light)',
-  border: '1px solid oklch(0.75 0.14 60 / 0.3)',
+  border: '1px solid oklch(0.55 0.14 255 / 0.3)',
   color: 'var(--text-primary)',
 }
 const labelClass = 'block text-xs mb-1'
@@ -231,18 +231,18 @@ export default function ExpensesManager() {
     <>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('expenses.title')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--accent)' }}>{t('expenses.title')}</h1>
         <button
           onClick={tab === 'recurring' ? openAddRecurring : openAddOnetime}
           className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           + {t('expenses.add')}
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex mb-5" style={{ borderBottom: '1px solid oklch(0.30 0.008 60)' }}>
+      <div className="flex mb-5" style={{ borderBottom: '1px solid oklch(0.30 0.008 255)' }}>
         {(['recurring', 'onetime'] as Tab[]).map((key) => (
           <button
             key={key}
@@ -250,7 +250,7 @@ export default function ExpensesManager() {
             className="px-5 py-2 text-sm font-medium transition-colors"
             style={
               tab === key
-                ? { color: 'var(--gold)', borderBottom: '2px solid var(--gold)' }
+                ? { color: 'var(--accent)', borderBottom: '2px solid var(--accent)' }
                 : { color: 'var(--text-muted)' }
             }
           >
@@ -265,7 +265,7 @@ export default function ExpensesManager() {
           {recurring.length === 0 ? (
             <p className="text-center py-12" style={{ color: 'var(--text-muted)' }}>{t('expenses.noRecurring')}</p>
           ) : (
-            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
               <table className="w-full text-sm">
                 <thead>
                   <tr style={{ backgroundColor: 'var(--dark-light)' }}>
@@ -282,10 +282,10 @@ export default function ExpensesManager() {
                     <tr
                       key={exp.id}
                       className="hover:bg-white/5 transition-colors"
-                      style={{ borderTop: '1px solid oklch(0.25 0.008 60)' }}
+                      style={{ borderTop: '1px solid oklch(0.25 0.008 255)' }}
                     >
                       <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{exp.name}</td>
-                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--gold)' }}>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--accent)' }}>
                         ฿{exp.amount.toLocaleString()}
                       </td>
                       <td className="px-4 py-3" style={{ color: 'var(--text-secondary)' }}>{t(`expenses.freq_${exp.frequency}`) || exp.frequency}</td>
@@ -309,7 +309,7 @@ export default function ExpensesManager() {
                           <button
                             onClick={() => openEditRecurring(exp)}
                             className="text-xs"
-                            style={{ color: 'var(--gold)' }}
+                            style={{ color: 'var(--accent)' }}
                           >
                             {t('expenses.edit')}
                           </button>
@@ -354,7 +354,7 @@ export default function ExpensesManager() {
           {onetime.length === 0 ? (
             <p className="text-center py-12" style={{ color: 'var(--text-muted)' }}>{t('expenses.noOnetime')}</p>
           ) : (
-            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
+            <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
               <table className="w-full text-sm">
                 <thead>
                   <tr style={{ backgroundColor: 'var(--dark-light)' }}>
@@ -370,10 +370,10 @@ export default function ExpensesManager() {
                     <tr
                       key={exp.id}
                       className="hover:bg-white/5 transition-colors"
-                      style={{ borderTop: '1px solid oklch(0.25 0.008 60)' }}
+                      style={{ borderTop: '1px solid oklch(0.25 0.008 255)' }}
                     >
                       <td className="px-4 py-3" style={{ color: 'var(--text-primary)' }}>{exp.name}</td>
-                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--gold)' }}>
+                      <td className="px-4 py-3 font-medium" style={{ color: 'var(--accent)' }}>
                         ฿{exp.amount.toLocaleString()}
                       </td>
                       <td className="px-4 py-3" style={{ color: 'var(--text-muted)' }}>{exp.date}</td>
@@ -418,8 +418,8 @@ export default function ExpensesManager() {
       ══════════════════════════════════════════════ */}
       {showRecurringModal && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
-            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--gold)' }}>
+          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
+            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--accent)' }}>
               {editingRecurring ? t('expenses.edit') : t('expenses.add')} — {t('expenses.recurring')}
             </h2>
 
@@ -502,7 +502,7 @@ export default function ExpensesManager() {
                 onClick={saveRecurring}
                 disabled={saving || !recurringForm.name}
                 className="px-6 py-2 rounded-lg font-bold text-sm transition-colors disabled:opacity-50"
-                style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+                style={{ backgroundColor: 'var(--accent)', color: 'white' }}
               >
                 {saving ? '...' : t('expenses.add')}
               </button>
@@ -523,8 +523,8 @@ export default function ExpensesManager() {
       ══════════════════════════════════════════════ */}
       {showOnetimeModal && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.75 0.14 60 / 0.2)' }}>
-            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--gold)' }}>
+          <div className="rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
+            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--accent)' }}>
               {t('expenses.add')} — {t('expenses.onetime')}
             </h2>
 
@@ -588,7 +588,7 @@ export default function ExpensesManager() {
                 onClick={saveOnetime}
                 disabled={saving || !onetimeForm.name}
                 className="px-6 py-2 rounded-lg font-bold text-sm transition-colors disabled:opacity-50"
-                style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+                style={{ backgroundColor: 'var(--accent)', color: 'white' }}
               >
                 {saving ? '...' : t('expenses.add')}
               </button>

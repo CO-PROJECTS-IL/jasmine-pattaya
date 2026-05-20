@@ -93,23 +93,23 @@ export default function EmployeeDetail() {
 
   const inputStyle = {
     backgroundColor: 'var(--dark-lighter)',
-    border: '1px solid oklch(0.30 0.008 60)',
+    border: '1px solid oklch(0.30 0.008 255)',
     color: 'var(--text-primary)',
   }
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl mb-6" style={{ color: 'var(--gold)' }}>
+      <h2 className="text-xl mb-6" style={{ color: 'var(--accent)' }}>
         {isNew ? t('employees.addEmployee') : t('employees.editEmployee')}
       </h2>
 
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)' }}>
+          <div className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'oklch(0.55 0.14 255 / 0.2)' }}>
             {form.photo_url ? (
               <img src={form.photo_url} alt="" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>{form.full_name.charAt(0) || '?'}</span>
+              <span className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>{form.full_name.charAt(0) || '?'}</span>
             )}
           </div>
           <input type="file" accept="image/*" onChange={handlePhotoUpload} className="text-xs" style={{ color: 'var(--text-muted)' }} />
@@ -179,7 +179,7 @@ export default function EmployeeDetail() {
         </div>
 
         <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-          <input type="checkbox" checked={form.is_active} onChange={(e) => update('is_active', e.target.checked)} style={{ accentColor: 'var(--gold)' }} />
+          <input type="checkbox" checked={form.is_active} onChange={(e) => update('is_active', e.target.checked)} style={{ accentColor: 'var(--accent)' }} />
           {t('employees.active')}
         </label>
 
@@ -193,7 +193,7 @@ export default function EmployeeDetail() {
           <button onClick={() => navigate('/admin/employees')} className="flex-1 py-2 bg-white/5 rounded-lg hover:bg-white/10" style={{ color: 'var(--text-muted)' }}>{t('common.cancel')}</button>
           <button onClick={handleSave} disabled={saving || !form.full_name}
             className="flex-1 py-2 rounded-lg font-medium disabled:opacity-50"
-            style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}>
+            style={{ backgroundColor: 'var(--accent)', color: 'white' }}>
             {saving ? t('common.loading') : t('common.save')}
           </button>
         </div>

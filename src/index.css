@@ -2,23 +2,48 @@
 @import "tailwindcss";
 
 :root {
-  --gold: oklch(0.75 0.14 60);
-  --gold-light: oklch(0.82 0.11 60);
-  --gold-dark: oklch(0.62 0.13 60);
-  --gold-glow: oklch(0.75 0.14 60 / 0.12);
-  --dark: oklch(0.08 0.008 60);
-  --dark-light: oklch(0.12 0.008 60);
-  --dark-lighter: oklch(0.16 0.008 60);
-  --dark-surface: oklch(0.18 0.01 60);
-  --text-primary: oklch(0.95 0.008 60);
-  --text-secondary: oklch(0.60 0.015 60);
-  --text-muted: oklch(0.42 0.012 60);
+  /* Accent — Israeli flag blue */
+  --accent: oklch(0.45 0.16 255);
+  --accent-light: oklch(0.55 0.14 255);
+  --accent-dark: oklch(0.38 0.16 255);
+  --accent-glow: oklch(0.45 0.16 255 / 0.08);
+
+  /* Customer portal — light theme */
+  --bg: #ffffff;
+  --surface: oklch(0.97 0.002 255);
+  --surface-hover: oklch(0.95 0.004 255);
+  --card: #ffffff;
+  --border: oklch(0.92 0.005 255);
+
+  /* Text — warm dark on light */
+  --text-primary: oklch(0.20 0.02 60);
+  --text-secondary: oklch(0.55 0.01 255);
+  --text-muted: oklch(0.70 0.008 255);
+
+  /* Staff portal — dark theme with blue accent */
+  --staff-bg: oklch(0.08 0.008 255);
+  --staff-surface: oklch(0.12 0.008 255);
+  --staff-surface-hover: oklch(0.16 0.008 255);
+  --staff-border: oklch(0.22 0.01 255);
+  --staff-text: oklch(0.95 0.008 255);
+  --staff-text-secondary: oklch(0.60 0.015 255);
+  --staff-text-muted: oklch(0.42 0.012 255);
+
+  /* Legacy aliases for gradual migration */
+  --gold: var(--accent);
+  --gold-light: var(--accent-light);
+  --gold-dark: var(--accent-dark);
+  --gold-glow: var(--accent-glow);
+  --dark: var(--staff-bg);
+  --dark-light: var(--staff-surface);
+  --dark-lighter: var(--staff-surface-hover);
+  --dark-surface: oklch(0.18 0.01 255);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -27,8 +52,8 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
   outline: none;
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 0 1px var(--gold);
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 1px var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -42,7 +67,7 @@ select:focus-visible {
 
 body {
   font-family: 'Heebo', sans-serif;
-  background-color: var(--dark);
+  background-color: var(--bg);
   color: var(--text-primary);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -56,7 +81,7 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 3px; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -94,26 +119,26 @@ h1, h2, h3, h4, h5, h6 {
   animation: cardIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.75 0.14 60 / 0.4); }
-  50% { box-shadow: 0 0 0 10px oklch(0.75 0.14 60 / 0); }
+@keyframes pulse-accent {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.45 0.16 255 / 0.4); }
+  50% { box-shadow: 0 0 0 10px oklch(0.45 0.16 255 / 0); }
 }
 
 .animate-pulse-gold {
-  animation: pulse-gold 2s infinite;
+  animation: pulse-accent 2s infinite;
 }
 
 .warm-glow {
   background: radial-gradient(
     ellipse 60% 50% at 50% 45%,
-    oklch(0.75 0.14 60 / 0.06) 0%,
+    oklch(0.45 0.16 255 / 0.04) 0%,
     transparent 70%
   );
 }
 
 .gold-border-glow {
-  border-bottom: 1px solid oklch(0.75 0.14 60 / 0.15);
-  box-shadow: 0 1px 12px oklch(0.75 0.14 60 / 0.05);
+  border-bottom: 1px solid oklch(0.45 0.16 255 / 0.15);
+  box-shadow: 0 1px 12px oklch(0.45 0.16 255 / 0.05);
 }
 
 @keyframes scaleCheck {
@@ -149,12 +174,25 @@ h1, h2, h3, h4, h5, h6 {
   animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Light shimmer for customer portal */
 .animate-shimmer {
   background: linear-gradient(
     90deg,
-    oklch(0.18 0.008 60) 25%,
-    oklch(0.22 0.01 60) 50%,
-    oklch(0.18 0.008 60) 75%
+    oklch(0.95 0.002 255) 25%,
+    oklch(0.92 0.004 255) 50%,
+    oklch(0.95 0.002 255) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Dark shimmer for staff portal */
+.animate-shimmer-dark {
+  background: linear-gradient(
+    90deg,
+    oklch(0.18 0.008 255) 25%,
+    oklch(0.22 0.01 255) 50%,
+    oklch(0.18 0.008 255) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;

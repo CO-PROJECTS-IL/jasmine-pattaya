@@ -67,7 +67,7 @@ export default function EmployeeDashboard() {
   return (
     <div className="space-y-6">
       {/* Check-in / Check-out */}
-      <div className="rounded-xl p-6 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
+      <div className="rounded-xl p-6 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}>
         <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>{t('employee.shiftTimer')}</p>
         <p className="text-4xl font-mono mb-4" style={{ color: 'var(--text-primary)' }}>{elapsed}</p>
         {!checkedIn ? (
@@ -89,9 +89,9 @@ export default function EmployeeDashboard() {
 
       {/* Salary */}
       {settings?.show_employee_salary && salary !== null && (
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}>
+        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{t('employee.salary')}</p>
-          <p className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>{salary}฿</p>
+          <p className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>{salary}฿</p>
         </div>
       )}
 
@@ -99,7 +99,7 @@ export default function EmployeeDashboard() {
       <button
         onClick={() => navigate('/employee/new-order')}
         className="w-full py-4 rounded-xl text-lg font-medium transition-colors"
-        style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.1)', border: '1px solid oklch(0.75 0.14 60 / 0.3)', color: 'var(--gold)' }}
+        style={{ backgroundColor: 'oklch(0.55 0.14 255 / 0.1)', border: '1px solid oklch(0.55 0.14 255 / 0.3)', color: 'var(--accent)' }}
       >
         {t('employee.newOrder')}
       </button>

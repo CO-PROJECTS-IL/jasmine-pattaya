@@ -32,11 +32,11 @@ interface Order {
 }
 
 const STATUS_COLORS: Record<OrderStatus, { bg: string; text: string; border: string }> = {
-  new:       { bg: 'oklch(0.30 0.12 25 / 0.3)',  text: 'oklch(0.75 0.18 25)',  border: 'oklch(0.55 0.18 25 / 0.5)' },
-  preparing: { bg: 'oklch(0.30 0.10 60 / 0.3)',  text: 'oklch(0.80 0.14 60)',  border: 'oklch(0.60 0.14 60 / 0.5)' },
-  ready:     { bg: 'oklch(0.25 0.10 145 / 0.3)', text: 'oklch(0.70 0.15 145)', border: 'oklch(0.55 0.15 145 / 0.5)' },
-  served:    { bg: 'oklch(0.25 0.10 230 / 0.3)', text: 'oklch(0.70 0.12 230)', border: 'oklch(0.55 0.12 230 / 0.5)' },
-  paid:      { bg: 'oklch(0.22 0.008 60 / 0.3)', text: 'oklch(0.55 0.012 60)',  border: 'oklch(0.40 0.012 60 / 0.5)' },
+  new:       { bg: 'oklch(0.55 0.22 25 / 0.1)',   text: 'oklch(0.50 0.18 25)',   border: 'oklch(0.55 0.18 25 / 0.25)' },
+  preparing: { bg: 'oklch(0.70 0.14 80 / 0.12)',   text: 'oklch(0.45 0.12 80)',   border: 'oklch(0.60 0.14 80 / 0.25)' },
+  ready:     { bg: 'oklch(0.55 0.14 150 / 0.1)',   text: 'oklch(0.42 0.12 150)',  border: 'oklch(0.55 0.14 150 / 0.25)' },
+  served:    { bg: 'oklch(0.45 0.16 255 / 0.08)',   text: 'oklch(0.45 0.16 255)',  border: 'oklch(0.45 0.16 255 / 0.2)' },
+  paid:      { bg: 'oklch(0.70 0.008 255 / 0.1)',   text: 'oklch(0.55 0.01 255)',  border: 'oklch(0.70 0.008 255 / 0.2)' },
 }
 
 function getDishName(dish: Dish | null, lang: string): string {
@@ -97,7 +97,7 @@ export default function OrderHistory() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-6 text-center animate-slide-up">
         <div
           className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
-          style={{ backgroundColor: 'oklch(0.22 0.008 60)' }}
+          style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}
         >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)' }}>
             <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -112,7 +112,7 @@ export default function OrderHistory() {
         <button
           onClick={() => navigate('/')}
           className="mt-6 px-6 py-2 rounded-xl text-sm font-semibold"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           {t('common.back')}
         </button>
@@ -123,14 +123,14 @@ export default function OrderHistory() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[40vh]">
-        <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--gold)', borderTopColor: 'transparent' }} />
+        <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }} />
       </div>
     )
   }
 
   return (
     <div className="max-w-lg mx-auto p-4 pb-6 animate-slide-up">
-      <h1 className="text-2xl font-bold mb-1 text-center" style={{ color: 'var(--gold)' }}>
+      <h1 className="text-2xl font-bold mb-1 text-center" style={{ color: 'var(--accent)' }}>
         {t('orderHistory.title')}
       </h1>
       <p className="text-center text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
@@ -138,14 +138,14 @@ export default function OrderHistory() {
       </p>
 
       {error && (
-        <p className="text-center text-sm mb-4" style={{ color: 'oklch(0.65 0.15 25)' }}>{error}</p>
+        <p className="text-center text-sm mb-4" style={{ color: 'oklch(0.55 0.18 25)' }}>{error}</p>
       )}
 
       {orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
-            style={{ backgroundColor: 'oklch(0.18 0.008 60)' }}
+            style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}
           >
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)' }}>
               <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
@@ -166,8 +166,8 @@ export default function OrderHistory() {
                 key={order.id}
                 className="rounded-2xl p-4"
                 style={{
-                  backgroundColor: 'var(--dark-lighter)',
-                  border: '1px solid oklch(0.75 0.14 60 / 0.08)',
+                  backgroundColor: 'oklch(0.97 0.002 255)',
+                  border: '1px solid oklch(0.92 0.005 255)',
                 }}
               >
                 {/* Order header */}
@@ -194,7 +194,7 @@ export default function OrderHistory() {
                       <div className="flex items-center gap-2 min-w-0">
                         <span
                           className="flex-shrink-0 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold"
-                          style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.15)', color: 'var(--gold)' }}
+                          style={{ backgroundColor: 'oklch(0.45 0.16 255 / 0.1)', color: 'var(--accent)' }}
                         >
                           {item.quantity}
                         </span>
@@ -210,14 +210,14 @@ export default function OrderHistory() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px mb-3" style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.08)' }} />
+                <div className="h-px mb-3" style={{ backgroundColor: 'oklch(0.92 0.005 255)' }} />
 
                 {/* Total */}
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                     {t('orderHistory.total')}
                   </span>
-                  <span className="text-base font-bold" style={{ color: 'var(--gold)' }}>
+                  <span className="text-base font-bold" style={{ color: 'var(--accent)' }}>
                     ฿{order.total}
                   </span>
                 </div>

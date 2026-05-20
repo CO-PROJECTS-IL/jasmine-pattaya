@@ -80,11 +80,9 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 inset-x-0 z-40"
+      className="fixed bottom-0 inset-x-0 z-40 bg-white"
       style={{
-        backgroundColor: 'oklch(0.06 0.008 60 / 0.97)',
-        backdropFilter: 'blur(20px) saturate(1.2)',
-        borderTop: '1px solid oklch(0.20 0.01 60 / 0.4)',
+        borderTop: '1px solid oklch(0.92 0.005 255)',
       }}
     >
       <div className="flex justify-around max-w-lg mx-auto">
@@ -94,7 +92,7 @@ export default function BottomNav() {
             to={tab.to}
             className="relative flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3"
             style={({ isActive }) => ({
-              color: isActive ? 'oklch(0.75 0.14 60)' : 'oklch(0.40 0.012 60)',
+              color: isActive ? 'var(--accent)' : 'oklch(0.65 0.01 255)',
               transition: 'color 0.2s',
             })}
             aria-label={tab.label}
@@ -104,7 +102,7 @@ export default function BottomNav() {
                 {isActive && (
                   <span
                     className="absolute top-0 inset-x-4 h-[2px] rounded-b-full"
-                    style={{ backgroundColor: 'oklch(0.75 0.14 60)' }}
+                    style={{ backgroundColor: 'var(--accent)' }}
                   />
                 )}
                 <tab.Icon active={isActive} />
@@ -120,7 +118,7 @@ export default function BottomNav() {
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center min-w-[3rem] min-h-[3rem] py-2 px-3"
-          style={{ color: 'oklch(0.40 0.012 60)', transition: 'color 0.2s' }}
+          style={{ color: 'oklch(0.65 0.01 255)', transition: 'color 0.2s' }}
           aria-label={t('nav.navigate')}
         >
           <NavIcon />

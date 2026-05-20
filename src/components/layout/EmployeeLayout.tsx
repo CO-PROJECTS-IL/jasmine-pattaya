@@ -14,7 +14,7 @@ export default function EmployeeLayout() {
     <GeoGate>
       <div className="min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
         <OfflineBanner />
-        <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.008 60)' }}>
+        <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.008 255)' }}>
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-3">
               <NavLink
@@ -22,7 +22,7 @@ export default function EmployeeLayout() {
                 end
                 className="text-sm px-3 py-1.5 rounded-lg transition-colors"
                 style={({ isActive }) => isActive
-                  ? { backgroundColor: 'oklch(0.75 0.14 60 / 0.15)', color: 'var(--gold)' }
+                  ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.15)', color: 'var(--accent)' }
                   : { color: 'var(--text-muted)' }
                 }
               >
@@ -32,7 +32,7 @@ export default function EmployeeLayout() {
                 to="/employee/schedule"
                 className="text-sm px-3 py-1.5 rounded-lg transition-colors"
                 style={({ isActive }) => isActive
-                  ? { backgroundColor: 'oklch(0.75 0.14 60 / 0.15)', color: 'var(--gold)' }
+                  ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.15)', color: 'var(--accent)' }
                   : { color: 'var(--text-muted)' }
                 }
               >

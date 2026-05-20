@@ -21,11 +21,11 @@ export default function EmployeeManager() {
   return (
     <>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('adminHome.employees')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--accent)' }}>{t('adminHome.employees')}</h1>
         <button
           onClick={() => navigate('/admin/employees/new')}
           className="px-4 py-2 rounded-lg text-sm font-medium"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           {t('employees.addEmployee')}
         </button>
@@ -37,9 +37,9 @@ export default function EmployeeManager() {
             key={emp.id}
             onClick={() => navigate(`/admin/employees/${emp.id}`)}
             className="flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-colors"
-            style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}
+            style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}
           >
-            <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg" style={{ backgroundColor: 'oklch(0.75 0.14 60 / 0.2)', color: 'var(--gold)' }}>
+            <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg" style={{ backgroundColor: 'oklch(0.55 0.14 255 / 0.2)', color: 'var(--accent)' }}>
               {emp.full_name.charAt(0)}
             </div>
             <div className="flex-1 min-w-0">

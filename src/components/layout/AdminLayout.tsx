@@ -9,12 +9,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
-      <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.008 60)' }}>
+      <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.008 255)' }}>
         <div className="flex items-center justify-between px-4 py-3 max-w-4xl mx-auto">
           <button
             onClick={() => navigate('/admin')}
             className="text-sm transition-colors"
-            style={{ color: 'var(--gold)' }}
+            style={{ color: 'var(--accent)' }}
           >
             ← {t('common.back')}
           </button>

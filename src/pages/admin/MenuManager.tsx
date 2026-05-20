@@ -112,7 +112,7 @@ export default function MenuManager() {
     <div>
       {toast && <Toast message={toast.message} type={toast.type} />}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('adminHome.menuManage')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--accent)' }}>{t('adminHome.menuManage')}</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setShowCatForm(!showCatForm)}
@@ -124,7 +124,7 @@ export default function MenuManager() {
           <button
             onClick={() => navigate('/admin/menu/new')}
             className="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-            style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+            style={{ backgroundColor: 'var(--accent)', color: 'white' }}
           >
             {t('menuManage.addDish')}
           </button>
@@ -132,14 +132,14 @@ export default function MenuManager() {
       </div>
 
       {showCatForm && (
-        <div className="mb-6 p-4 rounded-xl space-y-3" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.008 60)' }}>
+        <div className="mb-6 p-4 rounded-xl space-y-3" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.008 255)' }}>
           <input
             type="text"
             placeholder="שם בעברית *"
             value={catName.he}
             onChange={(e) => setCatName((c) => ({ ...c, he: e.target.value }))}
             className="w-full px-3 py-2 rounded-lg text-sm"
-            style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-primary)' }}
+            style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
           />
           <div className="grid grid-cols-2 gap-3">
             <input
@@ -148,7 +148,7 @@ export default function MenuManager() {
               value={catName.en}
               onChange={(e) => setCatName((c) => ({ ...c, en: e.target.value }))}
               className="px-3 py-2 rounded-lg text-sm"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-primary)' }}
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
             />
             <input
               type="text"
@@ -156,7 +156,7 @@ export default function MenuManager() {
               value={catName.th}
               onChange={(e) => setCatName((c) => ({ ...c, th: e.target.value }))}
               className="px-3 py-2 rounded-lg text-sm"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 60)', color: 'var(--text-primary)' }}
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
             />
           </div>
           <div className="flex gap-2">
@@ -171,7 +171,7 @@ export default function MenuManager() {
               onClick={handleAddCategory}
               disabled={!catName.he || savingCat}
               className="flex-1 py-2 rounded-lg text-sm font-medium disabled:opacity-50"
-              style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+              style={{ backgroundColor: 'var(--accent)', color: 'white' }}
             >
               {savingCat ? '...' : t('common.save')}
             </button>
@@ -184,7 +184,7 @@ export default function MenuManager() {
         return (
           <div key={cat.id} className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-sm uppercase tracking-wide" style={{ color: 'oklch(0.75 0.14 60 / 0.7)' }}>
+              <h2 className="text-sm uppercase tracking-wide" style={{ color: 'oklch(0.55 0.14 255 / 0.7)' }}>
                 {(cat as any)[langKey]} ({catDishes.length})
               </h2>
               <button
@@ -199,7 +199,7 @@ export default function MenuManager() {
                 <div
                   key={dish.id}
                   className="flex items-center justify-between p-3 rounded-xl"
-                  style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 60)' }}
+                  style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0">
                     {dish.image_url && (
@@ -209,7 +209,7 @@ export default function MenuManager() {
                       <p className={`text-sm truncate ${dish.is_available ? '' : 'line-through'}`} style={{ color: dish.is_available ? 'var(--text-primary)' : 'var(--text-muted)' }}>
                         {(dish as any)[langKey]}
                       </p>
-                      <p className="text-xs" style={{ color: 'var(--gold)' }}>{dish.price}฿</p>
+                      <p className="text-xs" style={{ color: 'var(--accent)' }}>{dish.price}฿</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5">

@@ -41,17 +41,18 @@ export default function TableEntry() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
-      style={{ backgroundColor: 'oklch(0.12 0.008 60)' }}
+    <div
+      className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
+      style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: 'url(https://cdn.pixabay.com/photo/2016/07/29/14/44/pattaya-1553390_1280.jpg)',
-          filter: 'brightness(0.25) saturate(0.6)',
+          filter: 'brightness(0.92) saturate(0.4)',
+          opacity: 0.15,
         }}
       />
-      <div className="warm-glow absolute inset-0 pointer-events-none" />
 
       <div className="absolute top-5 end-5 z-10">
         <LanguageSwitcher />
@@ -66,13 +67,13 @@ export default function TableEntry() {
           />
         </div>
 
-        <p className="text-lg md:text-xl font-light" style={{ color: 'oklch(0.70 0.012 60)' }}>
+        <p className="text-lg md:text-xl font-light" style={{ color: 'var(--text-secondary)' }}>
           {t('table.subtitle')}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-5 animate-slide-up relative z-10">
-        <label htmlFor="input-table-number" className="text-sm text-center font-medium" style={{ color: 'oklch(0.55 0.012 60)' }}>
+        <label htmlFor="input-table-number" className="text-sm text-center font-medium" style={{ color: 'var(--text-secondary)' }}>
           {t('table.enterTable')}
         </label>
         <input
@@ -87,22 +88,23 @@ export default function TableEntry() {
             setError('')
           }}
           placeholder={t('table.placeholder')}
-          className="w-full px-5 py-4 rounded-2xl text-center text-2xl font-semibold placeholder-gray-500 transition-all duration-300"
+          className="w-full px-5 py-4 rounded-2xl text-center text-2xl font-semibold transition-all duration-300"
           style={{
-            backgroundColor: 'oklch(0.18 0.008 60)',
-            border: '1px solid oklch(0.75 0.14 60 / 0.2)',
+            backgroundColor: 'white',
+            border: '1.5px solid oklch(0.92 0.005 255)',
             color: 'var(--text-primary)',
+            boxShadow: '0 2px 8px oklch(0.20 0.02 60 / 0.04)',
           }}
-          onFocus={(e) => e.target.style.borderColor = 'oklch(0.75 0.14 60 / 0.6)'}
-          onBlur={(e) => e.target.style.borderColor = 'oklch(0.75 0.14 60 / 0.2)'}
+          onFocus={(e) => e.target.style.borderColor = 'var(--accent)'}
+          onBlur={(e) => e.target.style.borderColor = 'oklch(0.92 0.005 255)'}
         />
-        {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+        {error && <p className="text-sm text-center" style={{ color: 'oklch(0.55 0.18 25)' }}>{error}</p>}
         <button
           type="submit"
           className="w-full py-4 rounded-2xl text-lg font-bold tracking-wide transition-all duration-200 active:scale-[0.98]"
           style={{
-            background: 'linear-gradient(135deg, oklch(0.72 0.14 60), oklch(0.78 0.12 60))',
-            color: 'oklch(0.15 0.012 60)',
+            backgroundColor: 'var(--accent)',
+            color: 'white',
           }}
         >
           {t('table.submit')}
@@ -112,7 +114,7 @@ export default function TableEntry() {
       <button
         onClick={() => navigate('/staff')}
         className="fixed bottom-4 right-4 p-2 transition-colors"
-        style={{ color: 'oklch(0.95 0 0 / 0.15)' }}
+        style={{ color: 'oklch(0.20 0.02 60 / 0.15)' }}
         aria-label="Staff"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

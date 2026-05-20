@@ -103,7 +103,7 @@ export default function ScheduleManager() {
     <>
       {toast && <Toast message={toast.message} type={toast.type} />}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl" style={{ color: 'var(--gold)' }}>{t('schedule.title')}</h1>
+        <h1 className="text-xl" style={{ color: 'var(--accent)' }}>{t('schedule.title')}</h1>
         <div className="flex items-center gap-2">
           <button onClick={() => setWeekOffset((w) => w - 1)} className="px-3 py-1 bg-white/5 rounded-lg text-sm" style={{ color: 'var(--text-muted)' }}>◀</button>
           <span className="text-sm" style={{ color: 'var(--text-muted)' }}>

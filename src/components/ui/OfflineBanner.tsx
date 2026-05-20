@@ -11,9 +11,9 @@ export default function OfflineBanner() {
     <div
       className="px-4 py-2 text-center text-sm"
       style={{
-        backgroundColor: 'oklch(0.75 0.14 60 / 0.1)',
-        borderBottom: '1px solid oklch(0.75 0.14 60 / 0.3)',
-        color: 'var(--gold)',
+        backgroundColor: 'oklch(0.55 0.14 255 / 0.1)',
+        borderBottom: '1px solid oklch(0.55 0.14 255 / 0.3)',
+        color: 'var(--accent)',
       }}
     >
       {t('common.offline')} — {t('common.orderQueued')}

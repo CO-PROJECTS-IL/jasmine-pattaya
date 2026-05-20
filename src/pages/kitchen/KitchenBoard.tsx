@@ -15,8 +15,8 @@ export default function KitchenBoard() {
   return (
     <div className="min-h-screen p-4" style={{ backgroundColor: 'var(--dark)' }}>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold" style={{ color: 'var(--gold)' }}>{t('kitchen.title')}</h1>
-        <span className="text-xs px-3 py-1 rounded-full" style={{ backgroundColor: 'oklch(0.25 0.008 60)', color: 'var(--text-muted)' }}>
+        <h1 className="text-xl font-bold" style={{ color: 'var(--accent)' }}>{t('kitchen.title')}</h1>
+        <span className="text-xs px-3 py-1 rounded-full" style={{ backgroundColor: 'oklch(0.25 0.008 255)', color: 'var(--text-muted)' }}>
           {new Date().toLocaleDateString('he-IL')}
         </span>
       </div>

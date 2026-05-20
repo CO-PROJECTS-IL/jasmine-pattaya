@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 
 function Icon({ children }: { children: ReactNode }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--gold)' }}>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--accent)' }}>
       {children}
     </svg>
   )
@@ -36,7 +36,7 @@ export default function AdminHome() {
     <div className="min-h-screen p-4" style={{ backgroundColor: 'var(--dark)' }}>
       <div className="max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl" style={{ color: 'var(--gold)' }}>{t('admin.title')}</h1>
+          <h1 className="text-2xl" style={{ color: 'var(--accent)' }}>{t('admin.title')}</h1>
           <LanguageSwitcher />
         </div>
 
@@ -46,7 +46,7 @@ export default function AdminHome() {
               key={btn.key}
               onClick={() => navigate(btn.path)}
               className="flex flex-col items-center justify-center gap-2 p-6 rounded-xl hover:opacity-90 transition-all"
-              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.75 0.14 60 / 0.15)' }}
+              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.15)' }}
             >
               {btn.icon}
               <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{t(`adminHome.${btn.key}`)}</span>

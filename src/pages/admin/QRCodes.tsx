@@ -7,7 +7,7 @@ function getBaseUrl() {
 }
 
 function qrImageUrl(data: string, size = 200) {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&bgcolor=080808&color=c9a84c&format=svg`
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&bgcolor=080808&color=6b8aed&format=svg`
 }
 
 export default function QRCodes() {
@@ -22,11 +22,11 @@ export default function QRCodes() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6 print:hidden">
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>QR Codes</h1>
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>QR Codes</h1>
         <button
           onClick={handlePrint}
           className="px-6 py-2 rounded-lg font-bold text-sm transition-colors"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           {t('common.save')} / Print
         </button>
@@ -39,7 +39,7 @@ export default function QRCodes() {
             <div
               key={num}
               className="rounded-xl p-4 flex flex-col items-center gap-2 print:border print:border-gray-300 print:bg-white print:rounded-lg"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.25 0.008 60)' }}
+              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.25 0.008 255)' }}
             >
               <img
                 src={qrImageUrl(url)}
@@ -50,7 +50,7 @@ export default function QRCodes() {
                 loading="lazy"
               />
               <div className="text-center">
-                <p className="font-bold text-lg print:text-black" style={{ color: 'var(--gold)' }}>
+                <p className="font-bold text-lg print:text-black" style={{ color: 'var(--accent)' }}>
                   {t('cart.table')} {num}
                 </p>
                 <p className="text-[10px] font-mono break-all print:text-gray-600" style={{ color: 'var(--text-muted)' }}>

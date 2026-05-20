@@ -41,25 +41,26 @@ export default function InstallPrompt() {
     <div
       className="fixed top-0 inset-x-0 z-50 px-4 py-3 flex items-center justify-between gap-3"
       style={{
-        background: 'linear-gradient(to bottom, var(--dark-lighter), var(--dark-light))',
-        borderBottom: '1px solid oklch(0.75 0.14 60 / 0.3)',
+        background: 'oklch(0.98 0.005 255)',
+        borderBottom: '1px solid oklch(0.88 0.02 255)',
+        boxShadow: '0 2px 8px oklch(0.45 0.16 255 / 0.1)',
       }}
     >
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>{t('common.installHint')}</p>
+        <p className="text-sm font-medium truncate" style={{ color: 'oklch(0.25 0.02 255)' }}>{t('common.installHint')}</p>
       </div>
       <div className="flex gap-2 flex-shrink-0">
         <button
           onClick={handleInstall}
           className="px-4 py-1.5 rounded-lg text-sm font-bold transition-colors"
-          style={{ backgroundColor: 'var(--gold)', color: 'var(--dark)' }}
+          style={{ backgroundColor: 'var(--accent)', color: 'white' }}
         >
           {t('common.install')}
         </button>
         <button
           onClick={handleDismiss}
           className="text-xl leading-none px-1"
-          style={{ color: 'var(--text-muted)' }}
+          style={{ color: 'oklch(0.55 0.03 255)' }}
         >
           &times;
         </button>
