@@ -1,17 +1,22 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useMenu } from '../../hooks/useMenu'
 import { useCartStore } from '../../stores/cartStore'
 import { useActiveSpecialMenu } from '../../hooks/useActiveSpecialMenu'
 import { getDishName } from '../../lib/dish-utils'
-import CategoryTabs from '../../components/ui/CategoryTabs'
 import DishCard from '../../components/ui/DishCard'
 import DishDetail from '../../components/ui/DishDetail'
 import DishCardSkeleton from '../../components/ui/DishCardSkeleton'
 import CartDrawer from '../../components/ui/CartDrawer'
 import CartToast from '../../components/ui/CartToast'
 import ImageLightbox from '../../components/ui/ImageLightbox'
-import type { Dish } from '../../lib/types'
+import type { Dish, Category } from '../../lib/types'
+
+function getCategoryName(cat: Category, lang: string) {
+  if (lang === 'he') return cat.name_he
+  if (lang === 'th') return cat.name_th
+  return cat.name_en
+}
 
 export default function Menu() {
   const { t, i18n } = useTranslation()
@@ -20,13 +25,6 @@ export default function Menu() {
   const cartItems = useCartStore((s) => s.items)
   const { activeMenu } = useActiveSpecialMenu()
 
-  const [activeCategory, setActiveCategory] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (categories.length > 0 && !activeCategory) {
-      setActiveCategory(categories[0].id)
-    }
-  }, [categories, activeCategory])
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
   const [cartOpen, setCartOpen] = useState(false)
   const [toastDish, setToastDish] = useState('')
@@ -35,7 +33,6 @@ export default function Menu() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
   const [lightboxAlt, setLightboxAlt] = useState('')
 
-  const activeDishes = activeCategory ? getDishesByCategory(activeCategory) : []
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0)
 
   const showToast = useCallback((dish: Dish) => {
@@ -90,7 +87,7 @@ export default function Menu() {
       )}
 
       {activeMenu ? (
-        <div className="dish-list px-4 sm:px-6 pt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 pt-4">
           {activeMenu.menuItems.map((item) => (
             <DishCard
               key={item.id}
@@ -101,66 +98,46 @@ export default function Menu() {
             />
           ))}
         </div>
+      ) : isLoading ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 px-4 pt-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <DishCardSkeleton key={i} />
+          ))}
+        </div>
       ) : (
-        <div className="flex flex-col md:flex-row">
-          {/* Sidebar — visible on md+ */}
-          <aside
-            className="hidden md:block sticky top-[49px] self-start w-48 shrink-0 overflow-y-auto"
-            style={{
-              maxHeight: 'calc(100vh - 49px)',
-              borderInlineEnd: '1px solid oklch(0.92 0.005 255)',
-            }}
-          >
-            <CategoryTabs
-              categories={categories}
-              activeId={activeCategory}
-              onSelect={setActiveCategory}
-            />
-          </aside>
+        <div className="space-y-8 pt-4">
+          {categories.map((cat) => {
+            const dishes = getDishesByCategory(cat.id)
+            if (dishes.length === 0) return null
 
-          {/* Mobile horizontal tabs — visible below md */}
-          <div
-            className="md:hidden sticky top-[49px] z-20 w-full overflow-x-auto no-scrollbar"
-            style={{
-              backgroundColor: 'oklch(1 0 0 / 0.95)',
-              backdropFilter: 'blur(20px)',
-              borderBottom: '1px solid oklch(0.92 0.005 255 / 0.5)',
-            }}
-          >
-            <div className="flex gap-1 px-4 py-1">
-              {categories.map((cat) => {
-                const isActive = cat.id === activeCategory
-                const name = i18n.language === 'he' ? cat.name_he : i18n.language === 'th' ? cat.name_th : cat.name_en
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className="shrink-0 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-lg transition-colors"
+            return (
+              <section key={cat.id}>
+                {/* Category header */}
+                <div className="flex items-center gap-3 px-5 mb-3">
+                  <h2
+                    className="text-xl font-bold"
                     style={{
-                      color: isActive ? 'var(--accent)' : 'oklch(0.55 0.01 255)',
-                      backgroundColor: isActive ? 'oklch(0.45 0.16 255 / 0.08)' : 'transparent',
-                      fontWeight: isActive ? 600 : 400,
+                      color: 'var(--text-primary)',
+                      fontFamily: "'Frank Ruhl Libre', serif",
                     }}
                   >
-                    {name}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
+                    {getCategoryName(cat, i18n.language)}
+                  </h2>
+                  <div
+                    className="flex-1 h-px"
+                    style={{ backgroundColor: 'oklch(0.92 0.005 255)' }}
+                  />
+                  <span
+                    className="text-xs font-medium"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    {dishes.length}
+                  </span>
+                </div>
 
-          {/* Dishes */}
-          <div className="flex-1 min-w-0">
-            {isLoading ? (
-              <div className="px-4 sm:px-6 pt-4 space-y-0">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <DishCardSkeleton key={i} />
-                ))}
-              </div>
-            ) : (
-              <>
-                <div key={activeCategory} className="dish-list px-4 sm:px-6 pt-4">
-                  {activeDishes.map((dish) => (
+                {/* Dishes grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 px-4">
+                  {dishes.map((dish) => (
                     <DishCard
                       key={dish.id}
                       dish={dish}
@@ -170,20 +147,9 @@ export default function Menu() {
                     />
                   ))}
                 </div>
-
-                {activeDishes.length === 0 && (
-                  <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
-                    <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
-                      {t('menu.emptyCategory')}
-                    </p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                      {t('menu.tryOtherCategory')}
-                    </p>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+              </section>
+            )
+          })}
         </div>
       )}
 
