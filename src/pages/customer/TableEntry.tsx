@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCartStore } from '../../stores/cartStore'
 import { useSettings } from '../../hooks/useSettings'
 import LanguageSwitcher from '../../components/ui/LanguageSwitcher'
+import InstallPrompt from '../../components/ui/InstallPrompt'
 
 export default function TableEntry() {
   const { t } = useTranslation()
@@ -45,6 +46,8 @@ export default function TableEntry() {
       className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden"
       style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}
     >
+      <InstallPrompt />
+
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{

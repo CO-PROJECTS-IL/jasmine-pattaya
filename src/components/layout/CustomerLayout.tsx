@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from '../ui/LanguageSwitcher'
 import OfflineBanner from '../ui/OfflineBanner'
 import BottomNav from '../ui/BottomNav'
-import InstallPrompt from '../ui/InstallPrompt'
 import ErrorBoundary from '../ui/ErrorBoundary'
 
 interface CustomerLayoutProps {
@@ -15,7 +14,6 @@ export default function CustomerLayout({ children }: CustomerLayoutProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <InstallPrompt />
       <header
         className="sticky top-0 z-30 bg-white"
         style={{
