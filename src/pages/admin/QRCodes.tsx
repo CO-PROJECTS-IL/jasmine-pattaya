@@ -7,7 +7,7 @@ function getBaseUrl() {
 }
 
 function qrImageUrl(data: string, size = 200) {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&bgcolor=080808&color=6b8aed&format=svg`
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&bgcolor=ffffff&color=2563eb&format=svg`
 }
 
 export default function QRCodes() {
@@ -39,7 +39,7 @@ export default function QRCodes() {
             <div
               key={num}
               className="rounded-xl p-4 flex flex-col items-center gap-2 print:border print:border-gray-300 print:bg-white print:rounded-lg"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.25 0.008 255)' }}
+              style={{ backgroundColor: 'white', border: '1px solid oklch(0.93 0.004 255)', boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)' }}
             >
               <img
                 src={qrImageUrl(url)}

@@ -25,7 +25,14 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
   )
 
   return (
-    <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)' }}>
+    <div
+      className="rounded-2xl p-3"
+      style={{
+        backgroundColor: 'white',
+        border: '1px solid oklch(0.93 0.004 255)',
+        boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+      }}
+    >
       <div className="flex justify-between items-center mb-2">
         <span className="font-bold text-lg" style={{ color: 'var(--accent)' }}>#{order.table_number}</span>
         <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{minutesAgo}m</span>
@@ -39,15 +46,19 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
       ))}
 
       {order.notes && (
-        <p className="text-xs text-yellow-400/70 mt-1 italic">{order.notes}</p>
+        <p className="text-xs text-amber-600/80 mt-1 italic">{order.notes}</p>
       )}
 
       <div className="flex gap-2 mt-3">
         {canRevert && (
           <button
             onClick={() => onStatusChange(order.id, ORDER_STATUSES[currentIndex - 1] as OrderStatus)}
-            className="flex-1 py-1.5 text-xs bg-white/5 rounded hover:bg-white/10 transition-colors"
-            style={{ color: 'var(--text-muted)' }}
+            className="flex-1 py-1.5 text-xs rounded transition-colors"
+            style={{
+              backgroundColor: 'oklch(0.97 0.002 255)',
+              border: '1px solid oklch(0.92 0.005 255)',
+              color: 'var(--text-muted)',
+            }}
           >
             ◀
           </button>
@@ -55,8 +66,8 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
         {canAdvance && (
           <button
             onClick={() => onStatusChange(order.id, ORDER_STATUSES[currentIndex + 1] as OrderStatus)}
-            className="flex-1 py-1.5 text-xs rounded font-medium transition-colors"
-            style={{ backgroundColor: 'oklch(0.45 0.16 255 / 0.2)', color: 'var(--accent)' }}
+            className="flex-1 py-1.5 text-xs rounded-lg font-medium transition-colors"
+            style={{ backgroundColor: 'oklch(0.55 0.14 255 / 0.1)', border: '1px solid oklch(0.55 0.14 255 / 0.25)', color: 'var(--accent)' }}
           >
             ▶
           </button>

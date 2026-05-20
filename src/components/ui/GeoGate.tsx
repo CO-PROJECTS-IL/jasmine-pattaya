@@ -20,7 +20,7 @@ export default function GeoGate({ children }: GeoGateProps) {
 
   if (checking) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center" style={{ backgroundColor: 'var(--dark)' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center" style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}>
         <LoadingSpinner />
         <p className="mt-4" style={{ color: 'var(--text-muted)' }}>{t('employee.locationRequired')}</p>
       </div>
@@ -29,7 +29,7 @@ export default function GeoGate({ children }: GeoGateProps) {
 
   if (!within) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center" style={{ backgroundColor: 'var(--dark)' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center" style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}>
         <div className="text-4xl mb-4">📍</div>
         <h2 className="text-xl text-red-400 mb-2">{t('employee.outOfRange')}</h2>
         {error && <p className="text-red-400/60 text-xs mb-4">{error}</p>}
@@ -44,7 +44,7 @@ export default function GeoGate({ children }: GeoGateProps) {
           <button
             onClick={() => setBypassed(true)}
             className="px-6 py-2 rounded-lg transition-colors"
-            style={{ backgroundColor: 'oklch(0.25 0.008 255)', color: 'var(--text-muted)' }}
+            style={{ backgroundColor: 'oklch(0.92 0.005 255)', color: 'var(--text-muted)' }}
           >
             {t('common.close')}
           </button>

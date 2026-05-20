@@ -132,7 +132,12 @@
     "reports": "Financial Reports",
     "qrCodes": "QR Codes",
     "settings": "Settings",
-    "members": "Loyalty Club Members"
+    "members": "Loyalty Club Members",
+    "sectionOrders": "Orders",
+    "sectionMenu": "Menu",
+    "sectionTeam": "Team",
+    "sectionFinance": "Finance",
+    "sectionSettings": "Settings & System"
   },
   "admin": {
     "title": "Admin",

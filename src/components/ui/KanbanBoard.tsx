@@ -30,11 +30,15 @@ export default function KanbanBoard({ onStatusChange }: KanbanBoardProps) {
           <div key={col.status} className="flex-shrink-0 w-72 flex flex-col">
             <div
               className="flex items-center gap-2 px-3 py-2 rounded-t-lg mb-2"
-              style={{ backgroundColor: `${color}20`, borderBottom: `2px solid ${color}` }}
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid oklch(0.93 0.004 255)',
+                borderBottom: `2px solid ${color}`,
+              }}
             >
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
-              <span className="text-sm font-medium text-white">{t(col.labelKey)}</span>
-              <span className="text-xs text-gray-400 ml-auto">{colOrders.length}</span>
+              <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{t(col.labelKey)}</span>
+              <span className="text-xs ml-auto" style={{ color: 'var(--text-muted)' }}>{colOrders.length}</span>
             </div>
             <div className="flex-1 space-y-2 overflow-y-auto">
               {colOrders.map((order) => (

@@ -132,7 +132,12 @@
     "reports": "דוחות כספיים",
     "qrCodes": "קודי QR",
     "settings": "הגדרות",
-    "members": "חברי מועדון"
+    "members": "חברי מועדון",
+    "sectionOrders": "הזמנות",
+    "sectionMenu": "תפריט",
+    "sectionTeam": "צוות",
+    "sectionFinance": "כספים",
+    "sectionSettings": "הגדרות ומערכת"
   },
   "admin": {
     "title": "ניהול",

@@ -38,6 +38,18 @@ function getDateRange(range: DateRange, customStart?: string, customEnd?: string
 
 const PIE_COLORS = ['#1a56db', '#f59e0b', '#ef4444']
 
+// Light theme chart constants
+const CHART_GRID = 'oklch(0.92 0.005 255)'
+const CHART_TICK = 'oklch(0.55 0.01 255)'
+const TOOLTIP_STYLE = {
+  backgroundColor: '#ffffff',
+  border: '1px solid oklch(0.92 0.005 255)',
+  borderRadius: 10,
+  boxShadow: '0 4px 12px oklch(0.20 0.02 60 / 0.08)',
+}
+const TOOLTIP_LABEL_STYLE = { color: 'var(--accent)' }
+const TOOLTIP_ITEM_STYLE = { color: 'oklch(0.25 0.01 255)' }
+
 export default function ReportsPage() {
   const { t } = useTranslation()
   const [range, setRange] = useState<DateRange>('month')
@@ -81,8 +93,8 @@ export default function ReportsPage() {
   ]
 
   const chartInputStyle = {
-    backgroundColor: 'var(--dark-light)',
-    border: '1px solid oklch(0.55 0.14 255 / 0.3)',
+    backgroundColor: 'oklch(0.97 0.002 255)',
+    border: '1px solid oklch(0.92 0.005 255)',
     color: 'var(--text-primary)',
   }
 
@@ -94,16 +106,25 @@ export default function ReportsPage() {
       style={
         range === key
           ? { backgroundColor: 'var(--accent)', color: 'white' }
-          : { backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)', color: 'var(--text-muted)' }
+          : {
+              backgroundColor: 'white',
+              border: '1px solid oklch(0.92 0.005 255)',
+              color: 'var(--text-muted)',
+            }
       }
     >
       {label}
     </button>
   )
 
+  const cardStyle = {
+    border: '1px solid oklch(0.93 0.004 255)',
+    boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+  }
+
   return (
     <>
-      <h1 className="text-xl mb-6" style={{ color: 'var(--accent)' }}>{t('reports.title')}</h1>
+      <h1 className="text-xl font-semibold mb-6" style={{ color: 'var(--text-primary)' }}>{t('reports.title')}</h1>
 
       {/* Date range filter */}
       <div className="flex flex-wrap gap-2 mb-6 items-center">
@@ -118,7 +139,7 @@ export default function ReportsPage() {
               type="date"
               value={customStart}
               onChange={(e) => setCustomStart(e.target.value)}
-              className="rounded-lg px-3 py-1.5 text-sm"
+              className="rounded-xl px-3 py-1.5 text-sm"
               style={chartInputStyle}
             />
             <span style={{ color: 'var(--text-muted)' }}>–</span>
@@ -126,7 +147,7 @@ export default function ReportsPage() {
               type="date"
               value={customEnd}
               onChange={(e) => setCustomEnd(e.target.value)}
-              className="rounded-lg px-3 py-1.5 text-sm"
+              className="rounded-xl px-3 py-1.5 text-sm"
               style={chartInputStyle}
             />
           </div>
@@ -139,15 +160,15 @@ export default function ReportsPage() {
 
       {/* Summary cards */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
+        <div className="rounded-2xl p-4 text-center bg-white" style={cardStyle}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.revenue')}</p>
-          <p className="text-xl font-bold text-green-400">฿{reportData.revenue.toLocaleString()}</p>
+          <p className="text-xl font-bold text-green-500">฿{reportData.revenue.toLocaleString()}</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
+        <div className="rounded-2xl p-4 text-center bg-white" style={cardStyle}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.expenses')}</p>
-          <p className="text-xl font-bold text-red-400">฿{totalExpenses.toLocaleString()}</p>
+          <p className="text-xl font-bold text-red-500">฿{totalExpenses.toLocaleString()}</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
+        <div className="rounded-2xl p-4 text-center bg-white" style={cardStyle}>
           <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>{t('reports.netProfit')}</p>
           <p
             className="text-xl font-bold"
@@ -158,20 +179,20 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      {/* Charts — Recharts hex values kept as-is */}
+      {/* Charts */}
       <div className="space-y-4">
         {/* Revenue over time */}
-        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
-          <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.revenueOverTime')}</h3>
+        <div className="rounded-2xl p-4 bg-white" style={cardStyle}>
+          <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-secondary)' }}>{t('reports.revenueOverTime')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={reportData.dailyRevenue}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
-              <XAxis dataKey="date" tick={{ fill: '#888', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#888', fontSize: 10 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID} />
+              <XAxis dataKey="date" tick={{ fill: CHART_TICK, fontSize: 10 }} />
+              <YAxis tick={{ fill: CHART_TICK, fontSize: 10 }} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #1a56db33', borderRadius: 8 }}
-                labelStyle={{ color: '#1a56db' }}
-                itemStyle={{ color: '#fff' }}
+                contentStyle={TOOLTIP_STYLE}
+                labelStyle={TOOLTIP_LABEL_STYLE}
+                itemStyle={TOOLTIP_ITEM_STYLE}
               />
               <Bar dataKey="amount" fill="#1a56db" radius={[4, 4, 0, 0]} />
             </BarChart>
@@ -181,8 +202,8 @@ export default function ReportsPage() {
         {/* Expenses by category + Profit trend side by side */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Expenses by category — PieChart */}
-          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
-            <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.expensesByCategory')}</h3>
+          <div className="rounded-2xl p-4 bg-white" style={cardStyle}>
+            <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-secondary)' }}>{t('reports.expensesByCategory')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
@@ -199,30 +220,30 @@ export default function ReportsPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #1a56db33', borderRadius: 8 }}
-                  itemStyle={{ color: '#fff' }}
+                  contentStyle={TOOLTIP_STYLE}
+                  itemStyle={TOOLTIP_ITEM_STYLE}
                   formatter={(value: any) => [`฿${Number(value).toLocaleString()}`, '']}
                 />
                 <Legend
                   iconSize={10}
-                  wrapperStyle={{ fontSize: 11, color: '#888' }}
+                  wrapperStyle={{ fontSize: 11, color: CHART_TICK }}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
           {/* Profit trend — LineChart */}
-          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
-            <h3 className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>{t('reports.profitTrend')}</h3>
+          <div className="rounded-2xl p-4 bg-white" style={cardStyle}>
+            <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-secondary)' }}>{t('reports.profitTrend')}</h3>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={reportData.dailyProfit}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
-                <XAxis dataKey="date" tick={{ fill: '#888', fontSize: 10 }} />
-                <YAxis tick={{ fill: '#888', fontSize: 10 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID} />
+                <XAxis dataKey="date" tick={{ fill: CHART_TICK, fontSize: 10 }} />
+                <YAxis tick={{ fill: CHART_TICK, fontSize: 10 }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #1a56db33', borderRadius: 8 }}
-                  labelStyle={{ color: '#1a56db' }}
-                  itemStyle={{ color: '#fff' }}
+                  contentStyle={TOOLTIP_STYLE}
+                  labelStyle={TOOLTIP_LABEL_STYLE}
+                  itemStyle={TOOLTIP_ITEM_STYLE}
                 />
                 <Line
                   type="monotone"

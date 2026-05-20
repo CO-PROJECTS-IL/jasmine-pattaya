@@ -106,9 +106,9 @@ export default function MembersManager() {
             placeholder={t('members.search')}
             className="w-full ps-9 pe-3 py-2 rounded-lg text-sm outline-none"
             style={{
-              backgroundColor: 'var(--dark-lighter)',
+              backgroundColor: 'oklch(0.97 0.002 255)',
               color: 'var(--text-primary)',
-              border: '1px solid oklch(0.25 0.008 255)',
+              border: '1px solid oklch(0.92 0.005 255)',
             }}
           />
         </div>
@@ -129,7 +129,7 @@ export default function MembersManager() {
           {t('members.noMembers')}
         </div>
       ) : (
-        <div className="rounded-xl overflow-hidden" style={{ border: '1px solid oklch(0.25 0.008 255)' }}>
+        <div className="rounded-xl overflow-hidden" style={{ border: '1px solid oklch(0.92 0.005 255)' }}>
           {/* Header */}
           <div
             className="grid grid-cols-4 px-4 py-2 text-xs font-medium"
@@ -142,12 +142,12 @@ export default function MembersManager() {
           </div>
 
           {/* Rows */}
-          <div className="divide-y" style={{ borderColor: 'oklch(0.25 0.008 255)' }}>
+          <div className="divide-y" style={{ borderColor: 'oklch(0.92 0.005 255)' }}>
             {filtered.map((member) => (
               <div
                 key={member.id}
                 className="grid grid-cols-4 px-4 py-3 items-center text-sm"
-                style={{ backgroundColor: 'var(--dark-light)' }}
+                style={{ backgroundColor: 'white' }}
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <div

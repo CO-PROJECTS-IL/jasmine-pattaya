@@ -163,8 +163,8 @@ export default function SpecialMenuManager() {
             key={menu.id}
             className="p-4 rounded-xl cursor-pointer transition-colors"
             style={{
-              backgroundColor: selectedMenuId === menu.id ? 'oklch(0.14 0.015 255)' : 'var(--dark-light)',
-              border: selectedMenuId === menu.id ? '1px solid oklch(0.55 0.14 255 / 0.5)' : '1px solid oklch(0.25 0.008 255)',
+              backgroundColor: selectedMenuId === menu.id ? 'oklch(0.45 0.16 255 / 0.08)' : 'white',
+              border: selectedMenuId === menu.id ? '1px solid oklch(0.55 0.14 255 / 0.5)' : '1px solid oklch(0.92 0.005 255)',
             }}
             onClick={() => setSelectedMenuId(menu.id === selectedMenuId ? null : menu.id)}
           >
@@ -234,11 +234,11 @@ export default function SpecialMenuManager() {
           {availableDishes.length > 0 && (
             <>
               <h3 className="text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>הוסף מנה</h3>
-              <div className="space-y-1.5 max-h-60 overflow-y-auto rounded-xl p-2" style={{ backgroundColor: 'var(--dark-light)' }}>
+              <div className="space-y-1.5 max-h-60 overflow-y-auto rounded-xl p-2" style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}>
                 {availableDishes.map((dish) => (
                   <div
                     key={dish.id}
-                    className="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 cursor-pointer"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-black/[0.02] cursor-pointer"
                     onClick={() => handleAddDish(dish)}
                   >
                     <div className="flex items-center gap-2">
@@ -277,7 +277,7 @@ function MenuItemRow({ item, onRemove, onUpdatePrice, onToggle }: {
   return (
     <div
       className="flex items-center justify-between p-3 rounded-xl"
-      style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}
+      style={{ backgroundColor: 'white', border: '1px solid oklch(0.92 0.005 255)', boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)' }}
     >
       <div className="flex items-center gap-3 flex-1 min-w-0">
         {item.dish?.image_url && (
@@ -294,7 +294,7 @@ function MenuItemRow({ item, onRemove, onUpdatePrice, onToggle }: {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 className="w-20 px-2 py-1 rounded text-xs"
-                style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+                style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-primary)' }}
                 autoFocus
                 onKeyDown={(e) => e.key === 'Enter' && handleSavePrice()}
               />
@@ -366,14 +366,14 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
   }
 
   return (
-    <div className="mb-6 p-4 rounded-xl space-y-3" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.008 255)' }}>
+    <div className="mb-6 p-4 rounded-xl space-y-3" style={{ backgroundColor: 'white', border: '1px solid oklch(0.92 0.005 255)', boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)' }}>
       <input
         type="text"
         placeholder="שם התפריט בעברית *"
         value={nameHe}
         onChange={(e) => setNameHe(e.target.value)}
         className="w-full px-3 py-2 rounded-lg text-sm"
-        style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+        style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-primary)' }}
       />
       <input
         type="text"
@@ -381,7 +381,7 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
         value={nameEn}
         onChange={(e) => setNameEn(e.target.value)}
         className="w-full px-3 py-2 rounded-lg text-sm"
-        style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+        style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-primary)' }}
       />
 
       {/* Schedule type */}
@@ -390,9 +390,9 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
           onClick={() => setScheduleType('recurring')}
           className={`flex-1 py-2 rounded-lg text-sm ${scheduleType === 'recurring' ? 'font-medium' : ''}`}
           style={{
-            backgroundColor: scheduleType === 'recurring' ? 'oklch(0.55 0.14 255 / 0.2)' : 'var(--dark-lighter)',
+            backgroundColor: scheduleType === 'recurring' ? 'oklch(0.55 0.14 255 / 0.2)' : 'oklch(0.97 0.002 255)',
             color: scheduleType === 'recurring' ? 'var(--accent)' : 'var(--text-muted)',
-            border: `1px solid ${scheduleType === 'recurring' ? 'oklch(0.55 0.14 255 / 0.3)' : 'oklch(0.30 0.008 255)'}`,
+            border: `1px solid ${scheduleType === 'recurring' ? 'oklch(0.55 0.14 255 / 0.3)' : 'oklch(0.92 0.005 255)'}`,
           }}
         >
           חוזר כל שבוע
@@ -401,9 +401,9 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
           onClick={() => setScheduleType('specific_date')}
           className={`flex-1 py-2 rounded-lg text-sm ${scheduleType === 'specific_date' ? 'font-medium' : ''}`}
           style={{
-            backgroundColor: scheduleType === 'specific_date' ? 'oklch(0.55 0.14 255 / 0.2)' : 'var(--dark-lighter)',
+            backgroundColor: scheduleType === 'specific_date' ? 'oklch(0.55 0.14 255 / 0.2)' : 'oklch(0.97 0.002 255)',
             color: scheduleType === 'specific_date' ? 'var(--accent)' : 'var(--text-muted)',
-            border: `1px solid ${scheduleType === 'specific_date' ? 'oklch(0.55 0.14 255 / 0.3)' : 'oklch(0.30 0.008 255)'}`,
+            border: `1px solid ${scheduleType === 'specific_date' ? 'oklch(0.55 0.14 255 / 0.3)' : 'oklch(0.92 0.005 255)'}`,
           }}
         >
           תאריך ספציפי
@@ -420,9 +420,9 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
                 onClick={() => setDayOfWeek(i)}
                 className="px-3 py-1.5 rounded-lg text-xs"
                 style={{
-                  backgroundColor: dayOfWeek === i ? 'oklch(0.55 0.14 255 / 0.2)' : 'var(--dark-lighter)',
+                  backgroundColor: dayOfWeek === i ? 'oklch(0.55 0.14 255 / 0.2)' : 'oklch(0.97 0.002 255)',
                   color: dayOfWeek === i ? 'var(--accent)' : 'var(--text-muted)',
-                  border: `1px solid ${dayOfWeek === i ? 'oklch(0.55 0.14 255 / 0.3)' : 'oklch(0.30 0.008 255)'}`,
+                  border: `1px solid ${dayOfWeek === i ? 'oklch(0.55 0.14 255 / 0.3)' : 'oklch(0.92 0.005 255)'}`,
                 }}
               >
                 {day}
@@ -438,7 +438,7 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
             value={specificDate}
             onChange={(e) => setSpecificDate(e.target.value)}
             className="w-full px-3 py-2 rounded-lg text-sm"
-            style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+            style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-primary)' }}
           />
         </div>
       )}
@@ -451,7 +451,7 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
             value={switchTime}
             onChange={(e) => setSwitchTime(e.target.value)}
             className="w-full px-3 py-2 rounded-lg text-sm"
-            style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+            style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-primary)' }}
           />
         </div>
         <div>
@@ -462,7 +462,7 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
             onChange={(e) => setMaxGuests(e.target.value)}
             placeholder="ללא הגבלה"
             className="w-full px-3 py-2 rounded-lg text-sm"
-            style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+            style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-primary)' }}
           />
         </div>
       </div>
@@ -470,7 +470,7 @@ function CreateMenuForm({ onSave, onCancel, showToast }: {
       <div className="flex gap-2">
         <button
           onClick={onCancel}
-          className="flex-1 py-2 bg-white/5 rounded-lg text-sm"
+          className="flex-1 py-2 hover:bg-black/[0.02] rounded-lg text-sm"
           style={{ color: 'var(--text-muted)' }}
         >
           ביטול

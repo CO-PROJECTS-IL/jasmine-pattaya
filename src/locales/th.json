@@ -132,7 +132,12 @@
     "reports": "รายงานการเงิน",
     "qrCodes": "QR Codes",
     "settings": "ตั้งค่า",
-    "members": "สมาชิกคลับ"
+    "members": "สมาชิกคลับ",
+    "sectionOrders": "ออร์เดอร์",
+    "sectionMenu": "เมนู",
+    "sectionTeam": "ทีมงาน",
+    "sectionFinance": "การเงิน",
+    "sectionSettings": "ตั้งค่าและระบบ"
   },
   "admin": {
     "title": "ผู้ดูแล",

@@ -24,51 +24,68 @@ export default function Dashboard() {
   })).filter((d) => d.orders > 0)
 
   const cards = [
-    { label: t('dashboard.todayOrders'), value: orders.length, color: '#1a56db' },
-    { label: t('dashboard.todayRevenue'), value: `${totalRevenue}฿`, color: '#22c55e' },
-    { label: t('dashboard.avgOrder'), value: `${avgOrder}฿`, color: '#3b82f6' },
+    { label: t('dashboard.todayOrders'), value: orders.length, color: 'oklch(0.45 0.16 255)' },
+    { label: t('dashboard.todayRevenue'), value: `${totalRevenue}฿`, color: 'oklch(0.45 0.14 150)' },
+    { label: t('dashboard.avgOrder'), value: `${avgOrder}฿`, color: 'oklch(0.50 0.14 200)' },
   ]
 
   return (
     <>
-      <h1 className="text-xl mb-8" style={{ color: 'var(--accent)' }}>{t('adminHome.dashboard')}</h1>
-
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-3 mb-6">
         {cards.map((card) => (
           <div
             key={card.label}
-            className="rounded-xl p-4 text-center"
-            style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 255)' }}
+            className="rounded-2xl p-4 text-center bg-white"
+            style={{
+              boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+              border: '1px solid oklch(0.93 0.004 255)',
+            }}
           >
-            <p className="text-xs mb-1.5" style={{ color: 'var(--text-muted)' }}>{card.label}</p>
+            <p className="text-[11px] font-medium mb-1.5" style={{ color: 'var(--text-muted)' }}>{card.label}</p>
             <p className="text-xl font-bold" style={{ color: card.color }}>{card.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="flex gap-2.5 mb-8 flex-wrap">
+      <div className="flex gap-2 mb-6 flex-wrap">
         {Object.entries(statusCounts).map(([status, count]) => (
           <div
             key={status}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-lg"
-            style={{ backgroundColor: `${ORDER_STATUS_COLORS[status]}20` }}
+            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white"
+            style={{
+              boxShadow: '0 1px 3px oklch(0.20 0.02 60 / 0.04)',
+              border: '1px solid oklch(0.93 0.004 255)',
+            }}
           >
             <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: ORDER_STATUS_COLORS[status] }} />
-            <span className="text-xs" style={{ color: 'var(--text-primary)' }}>{t(`kanban.${status}`)}: {count}</span>
+            <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{t(`kanban.${status}`)}: {count}</span>
           </div>
         ))}
       </div>
 
       {hourlyData.length > 0 && (
-        <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark)', border: '1px solid oklch(0.25 0.008 255)' }}>
-          <h3 className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>{t('dashboard.ordersChart')}</h3>
+        <div
+          className="rounded-2xl p-5 bg-white"
+          style={{
+            boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+            border: '1px solid oklch(0.93 0.004 255)',
+          }}
+        >
+          <h3 className="text-sm font-semibold mb-4" style={{ color: 'var(--text-secondary)' }}>{t('dashboard.ordersChart')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={hourlyData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="hour" tick={{ fill: '#888', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#888', fontSize: 10 }} />
-              <Tooltip contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: 8 }} />
-              <Bar dataKey="orders" fill="#1a56db" radius={[4, 4, 0, 0]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.92 0.005 255)" />
+              <XAxis dataKey="hour" tick={{ fill: 'oklch(0.55 0.01 255)', fontSize: 10 }} />
+              <YAxis tick={{ fill: 'oklch(0.55 0.01 255)', fontSize: 10 }} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'white',
+                  border: '1px solid oklch(0.92 0.005 255)',
+                  borderRadius: 12,
+                  boxShadow: '0 4px 12px oklch(0.20 0.02 60 / 0.08)',
+                }}
+              />
+              <Bar dataKey="orders" fill="oklch(0.45 0.16 255)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

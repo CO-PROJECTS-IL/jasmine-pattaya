@@ -94,8 +94,8 @@ export default function DishEditor() {
   const update = (key: string, value: any) => setForm((f) => ({ ...f, [key]: value }))
 
   const inputStyle = {
-    backgroundColor: 'var(--dark-lighter)',
-    border: '1px solid oklch(0.30 0.008 255)',
+    backgroundColor: 'oklch(0.97 0.002 255)',
+    border: '1px solid oklch(0.92 0.005 255)',
     color: 'var(--text-primary)',
   }
 
@@ -189,8 +189,8 @@ export default function DishEditor() {
         <div className="flex gap-3 pt-4">
           <button
             onClick={() => navigate('/admin/menu')}
-            className="flex-1 py-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
-            style={{ color: 'var(--text-muted)' }}
+            className="flex-1 py-2 rounded-lg hover:opacity-80 transition-colors"
+            style={{ backgroundColor: 'oklch(0.93 0.004 255)', color: 'var(--text-muted)' }}
           >
             {t('common.cancel')}
           </button>

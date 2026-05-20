@@ -33,11 +33,11 @@ export default function EmployeeSchedule() {
   if (isLoading) return <div className="flex justify-center py-12"><LoadingSpinner /></div>
 
   const shiftTypeColors: Record<string, string> = {
-    morning: 'bg-blue-500/20 text-blue-400',
-    evening: 'bg-purple-500/20 text-purple-400',
-    full: 'bg-green-500/20 text-green-400',
-    custom: 'bg-yellow-500/20 text-yellow-400',
-    off: 'bg-gray-500/20 text-gray-500',
+    morning: 'bg-blue-50 text-blue-600',
+    evening: 'bg-purple-50 text-purple-600',
+    full: 'bg-green-50 text-green-700',
+    custom: 'bg-amber-50 text-amber-700',
+    off: 'bg-gray-100 text-gray-500',
   }
 
   return (
@@ -53,7 +53,7 @@ export default function EmployeeSchedule() {
             const dayName = DAYS[date.getDay()]
             const dateStr = date.toLocaleDateString()
             return (
-              <div key={shift.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}>
+              <div key={shift.id} className="flex items-center justify-between p-3 rounded-2xl" style={{ backgroundColor: 'white', border: '1px solid oklch(0.93 0.004 255)', boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)' }}>
                 <div>
                   <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{dayName} {dateStr}</p>
                   {shift.shift_type === 'custom' && shift.custom_start && shift.custom_end && (

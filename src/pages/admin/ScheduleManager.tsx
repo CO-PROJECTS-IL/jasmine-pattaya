@@ -10,11 +10,11 @@ import { SHIFT_TYPES } from '../../lib/constants'
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 const SHIFT_COLORS: Record<string, string> = {
-  morning: 'bg-blue-500/30 text-blue-300',
-  evening: 'bg-purple-500/30 text-purple-300',
-  full: 'bg-green-500/30 text-green-300',
-  custom: 'bg-yellow-500/30 text-yellow-300',
-  off: 'bg-gray-500/20 text-gray-500',
+  morning: 'bg-blue-100 text-blue-600',
+  evening: 'bg-purple-100 text-purple-600',
+  full: 'bg-green-100 text-green-600',
+  custom: 'bg-yellow-100 text-yellow-700',
+  off: 'bg-gray-100 text-gray-400',
 }
 
 export default function ScheduleManager() {
@@ -105,15 +105,15 @@ export default function ScheduleManager() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl" style={{ color: 'var(--accent)' }}>{t('schedule.title')}</h1>
         <div className="flex items-center gap-2">
-          <button onClick={() => setWeekOffset((w) => w - 1)} className="px-3 py-1 bg-white/5 rounded-lg text-sm" style={{ color: 'var(--text-muted)' }}>◀</button>
+          <button onClick={() => setWeekOffset((w) => w - 1)} className="px-3 py-1 rounded-lg text-sm hover:opacity-80" style={{ backgroundColor: 'oklch(0.93 0.004 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-muted)' }}>◀</button>
           <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
             {weekDates[0].toLocaleDateString()} - {weekDates[6].toLocaleDateString()}
           </span>
-          <button onClick={() => setWeekOffset((w) => w + 1)} className="px-3 py-1 bg-white/5 rounded-lg text-sm" style={{ color: 'var(--text-muted)' }}>▶</button>
+          <button onClick={() => setWeekOffset((w) => w + 1)} className="px-3 py-1 rounded-lg text-sm hover:opacity-80" style={{ backgroundColor: 'oklch(0.93 0.004 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-muted)' }}>▶</button>
         </div>
       </div>
 
-      <button onClick={copyPreviousWeek} className="mb-4 px-4 py-2 bg-white/5 rounded-lg text-sm hover:bg-white/10" style={{ color: 'var(--text-muted)' }}>
+      <button onClick={copyPreviousWeek} className="mb-4 px-4 py-2 rounded-lg text-sm hover:opacity-80" style={{ backgroundColor: 'oklch(0.93 0.004 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-muted)' }}>
         {t('schedule.copyWeek')}
       </button>
 

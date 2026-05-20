@@ -35,8 +35,13 @@ export default function EmployeeNewOrder() {
             <button
               key={num}
               onClick={() => setSelectedTable(num)}
-              className="py-3 rounded-lg text-lg transition-colors"
-              style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.30 0.008 255)', color: 'var(--text-primary)' }}
+              className="py-3 rounded-xl text-lg transition-colors"
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid oklch(0.93 0.004 255)',
+                color: 'var(--text-primary)',
+                boxShadow: '0 1px 2px oklch(0.20 0.02 60 / 0.06)',
+              }}
             >
               {num}
             </button>
@@ -101,8 +106,8 @@ export default function EmployeeNewOrder() {
             className="whitespace-nowrap px-3 py-1.5 rounded-lg text-sm transition-colors"
             style={
               currentCategory === cat.id
-                ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.2)', color: 'var(--accent)', border: '1px solid oklch(0.55 0.14 255 / 0.3)' }
-                : { backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', border: '1px solid transparent' }
+                ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.10)', color: 'var(--accent)', border: '1px solid oklch(0.55 0.14 255 / 0.25)' }
+                : { backgroundColor: 'white', color: 'var(--text-muted)', border: '1px solid oklch(0.93 0.004 255)' }
             }
           >
             {(cat as any)[langKey]}
@@ -113,7 +118,7 @@ export default function EmployeeNewOrder() {
       {/* Dishes */}
       <div className="space-y-2 mb-4">
         {currentDishes.map((dish) => (
-          <div key={dish.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.25 0.008 255)' }}>
+          <div key={dish.id} className="flex items-center justify-between p-3 rounded-xl" style={{ backgroundColor: 'white', border: '1px solid oklch(0.93 0.004 255)', boxShadow: '0 1px 2px oklch(0.20 0.02 60 / 0.06)' }}>
             <div>
               <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{(dish as any)[langKey]}</p>
               <p className="text-sm" style={{ color: 'var(--accent)' }}>{dish.price}฿</p>
@@ -131,7 +136,7 @@ export default function EmployeeNewOrder() {
 
       {/* Cart summary */}
       {items.length > 0 && (
-        <div className="fixed bottom-0 inset-x-0 p-4 z-40" style={{ backgroundColor: 'var(--dark-light)', borderTop: '1px solid oklch(0.55 0.14 255 / 0.2)' }}>
+        <div className="fixed bottom-0 inset-x-0 p-4 z-40" style={{ backgroundColor: 'white', borderTop: '1px solid oklch(0.93 0.004 255)', boxShadow: '0 -2px 8px oklch(0.20 0.02 60 / 0.06)' }}>
           <div className="max-w-lg mx-auto">
             <div className="flex items-center justify-between mb-3">
               <span style={{ color: 'var(--text-muted)' }}>{items.length} {t('cart.quantity')}</span>
@@ -140,8 +145,8 @@ export default function EmployeeNewOrder() {
             <div className="flex gap-2">
               <button
                 onClick={clear}
-                className="flex-1 py-2 bg-white/5 rounded-lg text-sm"
-                style={{ color: 'var(--text-muted)' }}
+                className="flex-1 py-2 rounded-lg text-sm"
+              style={{ backgroundColor: 'oklch(0.97 0.002 255)', border: '1px solid oklch(0.92 0.005 255)', color: 'var(--text-muted)' }}
               >
                 {t('cart.clear')}
               </button>

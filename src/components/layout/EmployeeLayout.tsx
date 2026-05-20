@@ -13,9 +13,16 @@ export default function EmployeeLayout() {
 
   return (
     <GeoGate>
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--dark)' }}>
+      <div className="min-h-screen" style={{ backgroundColor: 'oklch(0.97 0.002 255)' }}>
         <OfflineBanner />
-        <header className="sticky top-0 z-30" style={{ backgroundColor: 'var(--dark-light)', borderBottom: '1px solid oklch(0.25 0.008 255)' }}>
+        <header
+          className="sticky top-0 z-30"
+          style={{
+            backgroundColor: 'white',
+            borderBottom: '1px solid oklch(0.93 0.004 255)',
+            boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+          }}
+        >
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-3">
               <NavLink
@@ -23,7 +30,7 @@ export default function EmployeeLayout() {
                 end
                 className="text-sm px-3 py-1.5 rounded-lg transition-colors"
                 style={({ isActive }) => isActive
-                  ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.15)', color: 'var(--accent)' }
+                  ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.10)', color: 'var(--accent)' }
                   : { color: 'var(--text-muted)' }
                 }
               >
@@ -33,7 +40,7 @@ export default function EmployeeLayout() {
                 to="/employee/schedule"
                 className="text-sm px-3 py-1.5 rounded-lg transition-colors"
                 style={({ isActive }) => isActive
-                  ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.15)', color: 'var(--accent)' }
+                  ? { backgroundColor: 'oklch(0.55 0.14 255 / 0.10)', color: 'var(--accent)' }
                   : { color: 'var(--text-muted)' }
                 }
               >
@@ -45,7 +52,7 @@ export default function EmployeeLayout() {
               <button
                 onClick={() => { logout(); navigate('/') }}
                 className="text-xs px-2 py-1 transition-colors"
-                style={{ color: 'oklch(0.55 0.15 25 / 0.6)' }}
+                style={{ color: 'var(--text-muted)' }}
               >
                 {t('common.back')}
               </button>

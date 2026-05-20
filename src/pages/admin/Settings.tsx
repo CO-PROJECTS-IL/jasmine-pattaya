@@ -53,7 +53,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200"
-      style={{ backgroundColor: checked ? 'var(--accent)' : '#4a4a4a' }}
+      style={{ backgroundColor: checked ? 'var(--accent)' : 'oklch(0.88 0.005 255)' }}
     >
       <span
         className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
@@ -67,8 +67,18 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 // ─── Section Wrapper ──────────────────────────────────────────────────────────
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--dark-light)', border: '1px solid oklch(0.55 0.14 255 / 0.1)' }}>
-      <h2 className="text-lg font-semibold pb-3 mb-4" style={{ color: 'var(--accent)', borderBottom: '1px solid oklch(0.55 0.14 255 / 0.15)' }}>
+    <div
+      className="rounded-2xl p-5"
+      style={{
+        backgroundColor: 'white',
+        boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+        border: '1px solid oklch(0.93 0.004 255)',
+      }}
+    >
+      <h2
+        className="text-base font-semibold pb-3 mb-4"
+        style={{ color: 'var(--text-primary)', borderBottom: '1px solid oklch(0.93 0.004 255)' }}
+      >
         {title}
       </h2>
       {children}
@@ -78,26 +88,11 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 // ─── Input ────────────────────────────────────────────────────────────────────
 const inputCls =
-  'rounded-lg px-3 py-2 transition-colors'
+  'rounded-xl px-3 py-2 transition-colors'
 const inputStyle = {
-  backgroundColor: 'var(--dark-lighter)',
-  border: '1px solid oklch(0.55 0.14 255 / 0.3)',
+  backgroundColor: 'oklch(0.97 0.002 255)',
+  border: '1px solid oklch(0.92 0.005 255)',
   color: 'var(--text-primary)',
-}
-
-// ─── Toast ────────────────────────────────────────────────────────────────────
-function Toast({ message, type }: { message: string; type: 'success' | 'error' }) {
-  return (
-    <div
-      className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-xl font-semibold text-sm shadow-lg transition-all ${
-        type === 'success'
-          ? 'bg-green-700 text-white'
-          : 'bg-red-700 text-white'
-      }`}
-    >
-      {message}
-    </div>
-  )
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
@@ -242,7 +237,7 @@ export default function Settings() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="max-w-2xl mx-auto pb-10">
-      <h1 className="text-2xl font-bold mb-6" style={{ color: 'var(--accent)' }}>{t('settings.title')}</h1>
+      <h1 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>{t('settings.title')}</h1>
 
       <div className="space-y-4">
 
@@ -308,8 +303,8 @@ export default function Settings() {
               type="button"
               onClick={handleSetLocation}
               disabled={locating}
-              className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
-              style={{ backgroundColor: 'var(--dark-lighter)', border: '1px solid oklch(0.55 0.14 255 / 0.3)', color: 'var(--accent)' }}
+              className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 hover:bg-black/5"
+              style={{ border: '1px solid oklch(0.92 0.005 255)', color: 'var(--accent)' }}
             >
               <IconMapPin />
               {locating ? '…' : t('settings.setLocation')}
@@ -367,8 +362,8 @@ export default function Settings() {
             <button
               type="button"
               onClick={() => navigate('/admin/qr-codes')}
-              className="flex items-center gap-2 text-sm rounded-lg px-4 py-2 transition-colors"
-              style={{ color: 'var(--accent)', border: '1px solid oklch(0.55 0.14 255 / 0.3)' }}
+              className="flex items-center gap-2 text-sm rounded-xl px-4 py-2 transition-colors hover:bg-black/5"
+              style={{ color: 'var(--accent)', border: '1px solid oklch(0.92 0.005 255)' }}
             >
               <IconQrCode />
               {t('settings.generateQR')}
@@ -409,7 +404,7 @@ export default function Settings() {
           <div className="space-y-4">
             {/* Morning */}
             <div>
-              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>{t('settings.morningShift')}</p>
+              <p className="text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>{t('settings.morningShift')}</p>
               <div className="flex items-center gap-3 flex-wrap">
                 <div>
                   <label htmlFor="input-morning-start" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.start')}</label>
@@ -438,7 +433,7 @@ export default function Settings() {
 
             {/* Evening */}
             <div>
-              <p className="text-sm mb-2" style={{ color: 'var(--text-muted)' }}>{t('settings.eveningShift')}</p>
+              <p className="text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>{t('settings.eveningShift')}</p>
               <div className="flex items-center gap-3 flex-wrap">
                 <div>
                   <label htmlFor="input-evening-start" className="text-xs mb-1 block" style={{ color: 'var(--text-muted)' }}>{t('settings.start')}</label>
@@ -534,7 +529,24 @@ export default function Settings() {
       </div>
 
       {/* ── Toast ── */}
-      {toast && <Toast message={toast.message} type={toast.type} />}
+      {toast && (
+        <div
+          className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
+            toast.type === 'success'
+              ? 'text-green-800'
+              : 'text-red-800'
+          }`}
+          style={{
+            backgroundColor: 'white',
+            boxShadow: '0 4px 16px oklch(0.20 0.02 60 / 0.12)',
+            border: toast.type === 'success'
+              ? '1px solid oklch(0.88 0.06 155)'
+              : '1px solid oklch(0.88 0.06 25)',
+          }}
+        >
+          {toast.message}
+        </div>
+      )}
     </div>
   )
 }

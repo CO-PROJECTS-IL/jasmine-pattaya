@@ -35,7 +35,11 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
           <div
             key={i}
             className="w-12 h-12 rounded-lg flex items-center justify-center text-xl"
-            style={{ border: '2px solid oklch(0.45 0.16 255 / 0.4)', backgroundColor: 'var(--dark-lighter)' }}
+            style={{
+              border: pin[i] ? '2px solid var(--accent)' : '2px solid oklch(0.92 0.005 255)',
+              backgroundColor: 'oklch(0.97 0.002 255)',
+              color: 'var(--accent)',
+            }}
           >
             {pin[i] ? '•' : ''}
           </div>
@@ -56,7 +60,11 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
                 onClick={handleDelete}
                 disabled={loading}
                 className="h-14 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
-                style={{ backgroundColor: 'var(--dark-lighter)', color: 'var(--text-muted)' }}
+                style={{
+                  backgroundColor: 'oklch(0.94 0.004 255)',
+                  border: '1px solid oklch(0.92 0.005 255)',
+                  color: 'var(--text-muted)',
+                }}
               >
                 &#9003;
               </button>
@@ -68,7 +76,12 @@ export default function PinInput({ onSubmit, title, loading }: PinInputProps) {
               onClick={() => handleDigit(d)}
               disabled={loading}
               className="h-14 rounded-xl text-xl font-medium transition-colors disabled:opacity-50"
-              style={{ backgroundColor: 'var(--dark-lighter)', color: 'var(--text-primary)' }}
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid oklch(0.92 0.005 255)',
+                color: 'var(--text-primary)',
+                boxShadow: '0 1px 2px oklch(0.20 0.02 60 / 0.06)',
+              }}
             >
               {d}
             </button>
