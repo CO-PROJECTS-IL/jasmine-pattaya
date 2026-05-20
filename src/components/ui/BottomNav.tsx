@@ -99,14 +99,19 @@ export default function BottomNav() {
           >
             {({ isActive }) => (
               <>
-                {isActive && (
-                  <span
-                    className="absolute top-0 inset-x-4 h-[2px] rounded-b-full"
-                    style={{ backgroundColor: 'var(--accent)' }}
-                  />
-                )}
-                <tab.Icon active={isActive} />
-                <span className={`mt-1 text-[10px] tracking-wide ${isActive ? 'font-bold' : 'font-medium'}`}>
+                <span
+                  className="absolute top-0 inset-x-4 h-[2px] rounded-b-full"
+                  style={{
+                    backgroundColor: 'var(--accent)',
+                    transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                    opacity: isActive ? 1 : 0,
+                    transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s',
+                  }}
+                />
+                <span className="transition-transform duration-200" style={{ transform: isActive ? 'scale(1.08)' : 'scale(1)' }}>
+                  <tab.Icon active={isActive} />
+                </span>
+                <span className={`mt-1 text-[10px] tracking-wide transition-all duration-200 ${isActive ? 'font-bold' : 'font-medium'}`}>
                   {tab.label}
                 </span>
               </>

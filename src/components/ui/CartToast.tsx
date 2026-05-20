@@ -24,7 +24,7 @@ export default function CartToast({ visible, dishName, onHide }: CartToastProps)
       style={{ maxWidth: '400px', marginInline: 'auto' }}
     >
       <div
-        className="px-5 py-3 rounded-2xl text-sm font-semibold animate-slide-up pointer-events-auto"
+        className="px-5 py-3 rounded-2xl text-sm font-semibold animate-toast-in pointer-events-auto"
         style={{
           backgroundColor: 'var(--accent)',
           color: 'white',

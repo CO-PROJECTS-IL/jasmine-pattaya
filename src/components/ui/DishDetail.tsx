@@ -41,12 +41,12 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 animate-backdrop"
         style={{ backgroundColor: 'oklch(0.20 0.01 255 / 0.5)', backdropFilter: 'blur(4px)' }}
         onClick={onClose}
       />
       <div
-        className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto animate-slide-up bg-white"
+        className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto animate-modal-up bg-white"
         style={{
           boxShadow: '0 -8px 40px oklch(0.20 0.02 60 / 0.15)',
         }}

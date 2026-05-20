@@ -117,17 +117,21 @@ export default function CategoryTabs({ categories, activeId, onSelect }: Categor
               onKeyDown={(e) => handleKeyDown(e, index)}
               className="shrink-0 px-4 py-3 text-sm font-medium whitespace-nowrap relative"
               style={{
-                transition: 'color 0.2s',
+                transition: 'color 0.2s, font-weight 0.2s',
                 color: isActive ? 'var(--accent)' : 'oklch(0.55 0.01 255)',
+                fontWeight: isActive ? 600 : 500,
               }}
             >
               {getCategoryName(cat, i18n.language)}
-              {isActive && (
-                <span
-                  className="absolute bottom-0 inset-x-2 h-[2px] rounded-t-full"
-                  style={{ backgroundColor: 'var(--accent)' }}
-                />
-              )}
+              <span
+                className="absolute bottom-0 inset-x-2 h-[2px] rounded-t-full"
+                style={{
+                  backgroundColor: 'var(--accent)',
+                  transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+                  opacity: isActive ? 1 : 0,
+                  transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s',
+                }}
+              />
             </button>
           )
         })}

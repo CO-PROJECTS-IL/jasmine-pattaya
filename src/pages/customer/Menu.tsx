@@ -90,7 +90,7 @@ export default function Menu() {
       )}
 
       {activeMenu ? (
-        <div className="px-4 sm:px-6 pt-4">
+        <div className="dish-list px-4 sm:px-6 pt-4">
           {activeMenu.menuItems.map((item) => (
             <DishCard
               key={item.id}
@@ -126,7 +126,7 @@ export default function Menu() {
             </div>
           ) : (
             <>
-              <div className="px-4 sm:px-6 pt-4">
+              <div key={activeCategory} className="dish-list px-4 sm:px-6 pt-4">
                 {activeDishes.map((dish) => (
                   <DishCard
                     key={dish.id}
@@ -176,7 +176,7 @@ export default function Menu() {
       {cartCount > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90${justAdded ? ' animate-pulse-accent' : ''}`}
+          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90 animate-fab-in${justAdded ? ' animate-pulse-accent' : ''}`}
           style={{
             backgroundColor: 'var(--accent)',
             color: 'white',

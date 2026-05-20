@@ -34,10 +34,10 @@ export default function DishCard({ dish, onSelect, onQuickAdd, onImageZoom }: Di
 
   return (
     <div
-      className="flex gap-4 px-4 py-4 cursor-pointer group"
+      className="flex gap-4 px-4 py-4 cursor-pointer group active:scale-[0.99]"
       style={{
         borderBottom: '1px solid oklch(0.95 0.002 255)',
-        transition: 'background-color 0.15s',
+        transition: 'background-color 0.15s, transform 0.15s',
       }}
       onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'oklch(0.98 0.002 255)' }}
       onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent' }}
