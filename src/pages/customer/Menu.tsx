@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useMenu } from '../../hooks/useMenu'
 import { useCartStore } from '../../stores/cartStore'
@@ -39,6 +39,26 @@ export default function Menu() {
 
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0)
 
+  // Memoize category thumbnails — compute once, not per render
+  const categoryThumbnails = useMemo(() => {
+    const map: Record<string, string | null> = {}
+    for (const cat of categories) {
+      const dishes = getDishesByCategory(cat.id)
+      const withImage = dishes.find((d) => d.image_url)
+      map[cat.id] = withImage?.image_url || null
+    }
+    return map
+  }, [categories, getDishesByCategory])
+
+  // Memoize dishes per category to avoid duplicate filtering
+  const dishesByCategory = useMemo(() => {
+    const map: Record<string, Dish[]> = {}
+    for (const cat of categories) {
+      map[cat.id] = getDishesByCategory(cat.id)
+    }
+    return map
+  }, [categories, getDishesByCategory])
+
   const showToast = useCallback((dish: Dish) => {
     setToastDish(getDishName(dish, i18n.language))
     setToastVisible(true)
@@ -75,13 +95,6 @@ export default function Menu() {
     setLightboxAlt(alt)
   }
 
-  // Get first dish image for each category (used as category thumbnail)
-  const getCategoryImage = (catId: string): string | null => {
-    const dishes = getDishesByCategory(catId)
-    const withImage = dishes.find((d) => d.image_url)
-    return withImage?.image_url || null
-  }
-
   // Filter dishes by active category or show all
   const visibleCategories = activeCategory
     ? categories.filter((c) => c.id === activeCategory)
@@ -104,7 +117,7 @@ export default function Menu() {
           className="text-center py-2.5 px-4 font-bold text-xs uppercase tracking-widest"
           style={{
             backgroundColor: 'var(--accent)',
-            color: 'white',
+            color: 'oklch(0.995 0.002 255)',
             letterSpacing: '0.12em',
           }}
         >
@@ -145,16 +158,18 @@ export default function Menu() {
         </>
       ) : (
         <>
-          {/* Category circles - Wolt style */}
+          {/* Category circles */}
           <div className="relative px-2 pt-5 pb-3">
-            {/* Scroll arrows */}
+            {/* Scroll arrows — 44px touch target */}
             <button
               onClick={() => scrollCategories('right')}
-              className="absolute start-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center"
+              aria-label={i18n.language === 'he' ? 'גלול קטגוריות ימינה' : 'Scroll categories right'}
+              className="absolute start-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full flex items-center justify-center focus-visible:outline-none focus-visible:ring-2"
               style={{
-                backgroundColor: 'white',
+                backgroundColor: 'oklch(0.995 0.002 255)',
                 boxShadow: '0 2px 8px oklch(0.20 0.02 60 / 0.15)',
-              }}
+                '--tw-ring-color': 'var(--accent)',
+              } as React.CSSProperties}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(0.35 0.02 255)" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6" />
@@ -162,11 +177,13 @@ export default function Menu() {
             </button>
             <button
               onClick={() => scrollCategories('left')}
-              className="absolute end-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center"
+              aria-label={i18n.language === 'he' ? 'גלול קטגוריות שמאלה' : 'Scroll categories left'}
+              className="absolute end-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full flex items-center justify-center focus-visible:outline-none focus-visible:ring-2"
               style={{
-                backgroundColor: 'white',
+                backgroundColor: 'oklch(0.995 0.002 255)',
                 boxShadow: '0 2px 8px oklch(0.20 0.02 60 / 0.15)',
-              }}
+                '--tw-ring-color': 'var(--accent)',
+              } as React.CSSProperties}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(0.35 0.02 255)" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6" />
@@ -175,13 +192,18 @@ export default function Menu() {
 
             <div
               ref={scrollRef}
+              role="tablist"
+              aria-label={i18n.language === 'he' ? 'קטגוריות' : 'Categories'}
               className="flex gap-4 overflow-x-auto px-6 scrollbar-hide"
               style={{ scrollSnapType: 'x mandatory' }}
             >
-              {/* "All" circle */}
+              {/* "All" tab */}
               <button
+                role="tab"
+                aria-selected={!activeCategory}
+                tabIndex={!activeCategory ? 0 : -1}
                 onClick={() => setActiveCategory(null)}
-                className="flex flex-col items-center gap-1.5 flex-shrink-0 group"
+                className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none"
                 style={{ scrollSnapAlign: 'start' }}
               >
                 <div
@@ -189,6 +211,7 @@ export default function Menu() {
                   style={{
                     backgroundColor: !activeCategory ? 'oklch(0.45 0.16 255 / 0.1)' : 'oklch(0.96 0.003 255)',
                     border: !activeCategory ? '2.5px solid var(--accent)' : '2.5px solid transparent',
+                    outline: 'none',
                   }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={!activeCategory ? 'var(--accent)' : 'oklch(0.55 0.01 255)'} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -210,13 +233,16 @@ export default function Menu() {
               </button>
 
               {categories.map((cat) => {
-                const imgUrl = getCategoryImage(cat.id)
+                const imgUrl = categoryThumbnails[cat.id]
                 const isActive = activeCategory === cat.id
                 return (
                   <button
                     key={cat.id}
+                    role="tab"
+                    aria-selected={isActive}
+                    tabIndex={isActive ? 0 : -1}
                     onClick={() => setActiveCategory(isActive ? null : cat.id)}
-                    className="flex flex-col items-center gap-1.5 flex-shrink-0 group"
+                    className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none"
                     style={{ scrollSnapAlign: 'start' }}
                   >
                     <div
@@ -230,6 +256,7 @@ export default function Menu() {
                         <img
                           src={enhanceDishImage(imgUrl, 160)}
                           alt={getCategoryName(cat, i18n.language)}
+                          loading="lazy"
                           className="w-full h-full object-cover"
                         />
                       ) : (
@@ -264,11 +291,11 @@ export default function Menu() {
           {/* Dishes */}
           <div className="space-y-8 pt-4">
             {visibleCategories.map((cat) => {
-              const dishes = getDishesByCategory(cat.id)
+              const dishes = dishesByCategory[cat.id] || []
               if (dishes.length === 0) return null
 
               return (
-                <section key={cat.id}>
+                <section key={cat.id} aria-label={getCategoryName(cat, i18n.language)}>
                   {/* Category header */}
                   <div className="flex items-center gap-3 px-5 mb-3">
                     <h2
@@ -334,12 +361,14 @@ export default function Menu() {
       {cartCount > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90 animate-fab-in${justAdded ? ' animate-pulse-accent' : ''}`}
+          aria-label={`${t('cart.openCart', 'פתח עגלה')} — ${cartCount} ${t('cart.items')}`}
+          className={`fixed bottom-20 end-4 z-30 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 active:scale-90 animate-fab-in focus-visible:outline-none focus-visible:ring-2${justAdded ? ' animate-pulse-accent' : ''}`}
           style={{
             backgroundColor: 'var(--accent)',
-            color: 'white',
+            color: 'oklch(0.995 0.002 255)',
             boxShadow: '0 4px 20px oklch(0.45 0.16 255 / 0.3)',
-          }}
+            '--tw-ring-color': 'var(--accent)',
+          } as React.CSSProperties}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" />
@@ -347,8 +376,7 @@ export default function Menu() {
           </svg>
           <span
             className={`absolute -top-1.5 -end-1.5 w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold${justAdded ? ' animate-scale-check' : ''}`}
-            style={{ backgroundColor: 'oklch(0.55 0.22 25)', color: 'white' }}
-            aria-label={`${cartCount} ${t('cart.items')}`}
+            style={{ backgroundColor: 'oklch(0.55 0.22 25)', color: 'oklch(0.995 0.002 255)' }}
           >
             {cartCount}
           </span>
