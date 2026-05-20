@@ -117,7 +117,7 @@ export default function FridayDinner() {
   }
 
   return (
-    <div className="p-4 pb-24 max-w-lg mx-auto">
+    <div className="p-4 pb-24 max-w-lg mx-auto animate-slide-up">
       <h1 className="text-2xl mb-6 text-center" style={{ color: 'var(--accent)' }}>{t('friday.bookTitle')}</h1>
 
       <div className="space-y-3 mb-6">

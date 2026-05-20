@@ -13,19 +13,28 @@ interface DishDetailProps {
 export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailProps) {
   const { i18n, t } = useTranslation()
   const [quantity, setQuantity] = useState(1)
+  const [isClosing, setIsClosing] = useState(false)
+
+  const handleClose = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setIsClosing(false)
+      onClose()
+    }, 300)
+  }
 
   useEffect(() => {
     if (!dish) return
     document.body.style.overflow = 'hidden'
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') handleClose()
     }
     document.addEventListener('keydown', handleKey)
     return () => {
       document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKey)
     }
-  }, [dish, onClose])
+  }, [dish])
 
   if (!dish) return null
 
@@ -35,18 +44,18 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
   const handleAdd = () => {
     onAddToCart(dish, quantity)
     setQuantity(1)
-    onClose()
+    handleClose()
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
       <div
-        className="absolute inset-0 animate-backdrop"
+        className={`absolute inset-0 ${isClosing ? 'animate-backdrop-out' : 'animate-backdrop'}`}
         style={{ backgroundColor: 'oklch(0.20 0.01 255 / 0.5)', backdropFilter: 'blur(4px)' }}
-        onClick={onClose}
+        onClick={handleClose}
       />
       <div
-        className="relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto animate-modal-up bg-white"
+        className={`relative w-full max-w-lg rounded-t-2xl sm:rounded-2xl z-10 max-h-[90vh] overflow-y-auto ${isClosing ? 'animate-modal-out' : 'animate-modal-up'} bg-white`}
         style={{
           boxShadow: '0 -8px 40px oklch(0.20 0.02 60 / 0.15)',
         }}
@@ -63,7 +72,7 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
               style={{ background: 'linear-gradient(to top, white 0%, oklch(1 0 0 / 0.3) 40%, transparent 70%)' }}
             />
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="absolute top-3 end-3 w-8 h-8 rounded-full flex items-center justify-center text-lg"
               style={{
                 backgroundColor: 'oklch(1 0 0 / 0.8)',
@@ -85,7 +94,7 @@ export default function DishDetail({ dish, onClose, onAddToCart }: DishDetailPro
         ) : (
           <div className="flex justify-end p-4">
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="w-8 h-8 rounded-full flex items-center justify-center text-lg"
               style={{ backgroundColor: 'oklch(0.95 0.004 255)', color: 'oklch(0.55 0.01 255)' }}
             >

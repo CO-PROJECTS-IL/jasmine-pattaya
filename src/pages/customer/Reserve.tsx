@@ -70,7 +70,7 @@ export default function Reserve() {
   }
 
   return (
-    <div className="px-4 py-6 max-w-lg mx-auto">
+    <div className="px-4 py-6 max-w-lg mx-auto animate-slide-up">
       <h1 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--accent)' }}>
         {t('reserve.title')}
       </h1>

@@ -65,7 +65,7 @@ export default function LoyaltyClub() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6">
+    <div className="max-w-md mx-auto p-6 animate-slide-up">
       <h1 className="text-2xl font-bold mb-2 text-center" style={{ color: 'var(--accent)' }}>
         {t('loyalty.title')}
       </h1>

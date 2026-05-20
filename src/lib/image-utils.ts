@@ -2,12 +2,12 @@ const CLOUD_NAME = 'drfbiuokx'
 
 export function enhanceDishImage(url: string, width = 600): string {
   if (!url) return ''
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/fetch/w_${width},c_fill,q_auto,f_auto,e_improve,e_vibrance:25,e_sharpen:60/${encodeURIComponent(url)}`
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/fetch/w_${width},c_fill,q_auto,f_auto,dpr_auto,e_improve,e_vibrance:25,e_sharpen:60/${encodeURIComponent(url)}`
 }
 
 export function categoryThumbnail(url: string): string {
   if (!url) return ''
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/fetch/w_120,h_120,c_fill,g_center,q_auto,f_auto,e_improve,e_vibrance:30/${encodeURIComponent(url)}`
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/fetch/w_120,h_120,c_fill,g_center,q_auto,f_auto,dpr_auto,e_improve,e_vibrance:30/${encodeURIComponent(url)}`
 }
 
 const CATEGORY_IMAGES: Record<string, string> = {

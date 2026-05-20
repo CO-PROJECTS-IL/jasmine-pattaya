@@ -226,6 +226,40 @@ h1, h2, h3, h4, h5, h6 {
   animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Modal exit animations */
+@keyframes backdropFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-backdrop-out {
+  animation: backdropFadeOut 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+}
+
+.animate-modal-out {
+  animation: modalSlideOut 0.3s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+@keyframes lightboxOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+.animate-lightbox-out {
+  animation: lightboxOut 0.25s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
 /* Cart FAB pop in */
 @keyframes fabPopIn {
   0% {
@@ -283,4 +317,37 @@ h1, h2, h3, h4, h5, h6 {
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* ─── Dark mode: customer portal overrides ─── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: oklch(0.13 0.008 255);
+    --surface: oklch(0.17 0.008 255);
+    --surface-hover: oklch(0.20 0.008 255);
+    --card: oklch(0.15 0.008 255);
+    --border: oklch(0.25 0.01 255);
+    --text-primary: oklch(0.92 0.008 255);
+    --text-secondary: oklch(0.65 0.012 255);
+    --text-muted: oklch(0.45 0.008 255);
+  }
+
+  body {
+    color-scheme: dark;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.17 0.008 255) 25%,
+      oklch(0.22 0.01 255) 50%,
+      oklch(0.17 0.008 255) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.35 0.01 255);
+  }
 }
