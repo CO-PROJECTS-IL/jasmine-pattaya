@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { lazy, Suspense, type ReactNode } from 'react'
 import { useAuthStore } from './stores/authStore'
+import NotificationListener from './components/NotificationListener'
 import CustomerLayout from './components/layout/CustomerLayout'
 import TableEntry from './pages/customer/TableEntry'
 import Menu from './pages/customer/Menu'
@@ -65,6 +66,7 @@ function AdminPage({ children }: { children: ReactNode }) {
 export default function App() {
   return (
     <HashRouter>
+      <NotificationListener />
       <Suspense fallback={<LazyFallback />}>
         <Routes>
           {/* Customer */}

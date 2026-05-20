@@ -63,7 +63,9 @@
     "thankYou": "ขอบคุณสำหรับออร์เดอร์!",
     "total": "รวม",
     "excludingService": "ไม่รวมค่าบริการ",
-    "newOrder": "ออร์เดอร์ใหม่"
+    "newOrder": "ออร์เดอร์ใหม่",
+    "enableNotifications": "รับอัปเดตออร์เดอร์",
+    "notificationsEnabled": "เราจะแจ้งเตือนเมื่อออร์เดอร์คืบหน้า"
   },
   "staff": {
     "title": "เข้าสู่ระบบพนักงาน",

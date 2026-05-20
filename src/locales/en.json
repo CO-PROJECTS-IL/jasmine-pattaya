@@ -63,7 +63,9 @@
     "thankYou": "Thank you for your order!",
     "total": "Total",
     "excludingService": "Excluding service",
-    "newOrder": "New Order"
+    "newOrder": "New Order",
+    "enableNotifications": "Get order updates",
+    "notificationsEnabled": "We'll notify you as your order progresses"
   },
   "staff": {
     "title": "Staff Login",

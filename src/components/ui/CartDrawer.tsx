@@ -4,6 +4,7 @@ import { useCartStore } from '../../stores/cartStore'
 import { useNavigate } from 'react-router-dom'
 import { callEdgeFunction } from '../../lib/supabase'
 import { queueOrder } from '../../lib/offline-queue'
+import { setActiveOrder } from '../../hooks/useOrderNotifications'
 
 interface CartDrawerProps {
   isOpen: boolean
@@ -69,6 +70,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         return
       }
       const result = await callEdgeFunction('submit-order', orderData)
+      if (result.order_id) setActiveOrder(result.order_id)
       onClose()
       navigate('/order-confirmation', { state: { orderId: result.order_id, total: result.total } })
     } catch (err) {

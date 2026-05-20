@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCartStore } from '../../stores/cartStore'
@@ -8,6 +8,7 @@ export default function OrderConfirmation() {
   const navigate = useNavigate()
   const location = useLocation()
   const { tableNumber, clear } = useCartStore()
+  const [notifStatus, setNotifStatus] = useState<'idle' | 'granted' | 'denied'>('idle')
 
   const state = location.state as { orderId?: string; total?: number } | null
   const rawId = state?.orderId || ''
@@ -17,6 +18,21 @@ export default function OrderConfirmation() {
   useEffect(() => {
     clear()
   }, [])
+
+  useEffect(() => {
+    if (!('Notification' in window)) return
+    if (Notification.permission === 'granted') {
+      setNotifStatus('granted')
+    } else if (Notification.permission === 'denied') {
+      setNotifStatus('denied')
+    }
+  }, [])
+
+  const handleEnableNotifications = async () => {
+    if (!('Notification' in window)) return
+    const result = await Notification.requestPermission()
+    setNotifStatus(result === 'granted' ? 'granted' : 'denied')
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] p-6 text-center animate-slide-up">
@@ -41,6 +57,25 @@ export default function OrderConfirmation() {
           <p className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>฿{total}</p>
           <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t('order.excludingService')}</p>
         </div>
+      )}
+
+      {notifStatus === 'idle' && 'Notification' in window && (
+        <button
+          onClick={handleEnableNotifications}
+          className="mb-6 px-5 py-3 rounded-xl text-sm font-medium transition-colors"
+          style={{
+            backgroundColor: 'oklch(0.75 0.14 60 / 0.15)',
+            color: 'var(--gold)',
+            border: '1px solid oklch(0.75 0.14 60 / 0.3)',
+          }}
+        >
+          {t('order.enableNotifications')}
+        </button>
+      )}
+      {notifStatus === 'granted' && (
+        <p className="mb-6 text-xs" style={{ color: 'oklch(0.55 0.14 145)' }}>
+          {t('order.notificationsEnabled')}
+        </p>
       )}
 
       <div className="space-y-3 w-full max-w-xs">

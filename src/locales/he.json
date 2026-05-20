@@ -63,7 +63,9 @@
     "thankYou": "תודה על הזמנתך!",
     "total": "סה\"כ",
     "excludingService": "לא כולל שירות",
-    "newOrder": "הזמנה חדשה"
+    "newOrder": "הזמנה חדשה",
+    "enableNotifications": "קבל עדכונים על ההזמנה",
+    "notificationsEnabled": "נעדכן אותך כשההזמנה תתקדם"
   },
   "staff": {
     "title": "כניסת צוות",
