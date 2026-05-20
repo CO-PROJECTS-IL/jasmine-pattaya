@@ -1,0 +1,1 @@
+var e=`drfbiuokx`,t=`jasmine_unsigned`;async function n(n){let r=new FormData;r.append(`file`,n),r.append(`upload_preset`,t);let i=await fetch(`https://api.cloudinary.com/v1_1/${e}/image/upload`,{method:`POST`,body:r});if(!i.ok)throw Error(`Image upload failed`);return(await i.json()).secure_url}export{n as t};

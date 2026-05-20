@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c69038"/>
+      <stop offset="50%" stop-color="#d5a858"/>
+      <stop offset="100%" stop-color="#9c7428"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#d5a858" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="96" fill="#0a0a0a"/>
+  <rect width="512" height="512" rx="96" fill="url(#glow)"/>
+
+  <!-- Jasmine flower - centered, larger -->
+  <g transform="translate(256, 230)">
+    <path d="M0,-110 C26,-97 39,-58 32,-26 C26,6 13,19 0,23 C-13,19 -26,6 -32,-26 C-39,-58 -26,-97 0,-110Z" fill="url(#gold)" opacity="0.95"/>
+    <path d="M0,-110 C26,-97 39,-58 32,-26 C26,6 13,19 0,23 C-13,19 -26,6 -32,-26 C-39,-58 -26,-97 0,-110Z" fill="url(#gold)" opacity="0.85" transform="rotate(72)"/>
+    <path d="M0,-110 C26,-97 39,-58 32,-26 C26,6 13,19 0,23 C-13,19 -26,6 -32,-26 C-39,-58 -26,-97 0,-110Z" fill="url(#gold)" opacity="0.75" transform="rotate(144)"/>
+    <path d="M0,-110 C26,-97 39,-58 32,-26 C26,6 13,19 0,23 C-13,19 -26,6 -32,-26 C-39,-58 -26,-97 0,-110Z" fill="url(#gold)" opacity="0.80" transform="rotate(216)"/>
+    <path d="M0,-110 C26,-97 39,-58 32,-26 C26,6 13,19 0,23 C-13,19 -26,6 -32,-26 C-39,-58 -26,-97 0,-110Z" fill="url(#gold)" opacity="0.90" transform="rotate(288)"/>
+
+    <circle cx="0" cy="0" r="18" fill="#d5a858"/>
+    <circle cx="0" cy="0" r="10" fill="#9c7428"/>
+    <circle cx="0" cy="-10" r="3" fill="#e0be70"/>
+    <circle cx="9.5" cy="-3" r="3" fill="#e0be70"/>
+    <circle cx="5.9" cy="8" r="3" fill="#e0be70"/>
+    <circle cx="-5.9" cy="8" r="3" fill="#e0be70"/>
+    <circle cx="-9.5" cy="-3" r="3" fill="#e0be70"/>
+  </g>
+
+  <!-- "jasmine" text below flower -->
+  <text x="256" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="700" letter-spacing="4" fill="url(#gold)">jasmine</text>
+</svg>

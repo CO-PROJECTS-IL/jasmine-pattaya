@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#080808"/>
+  <g transform="translate(256,240)">
+    <!-- Jasmine petals -->
+    <ellipse cx="0" cy="-65" rx="28" ry="55" fill="#c69038" opacity="0.9"/>
+    <ellipse cx="0" cy="-65" rx="28" ry="55" fill="#c69038" opacity="0.9" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-65" rx="28" ry="55" fill="#c69038" opacity="0.9" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-65" rx="28" ry="55" fill="#c69038" opacity="0.9" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-65" rx="28" ry="55" fill="#c69038" opacity="0.9" transform="rotate(288)"/>
+    <!-- Center -->
+    <circle cx="0" cy="0" r="22" fill="#d5a858"/>
+    <circle cx="0" cy="0" r="12" fill="#9c7428"/>
+  </g>
+  <!-- Text -->
+  <text x="256" y="400" text-anchor="middle" font-family="serif" font-size="72" font-weight="bold" fill="#c69038">יסמין</text>
+</svg>

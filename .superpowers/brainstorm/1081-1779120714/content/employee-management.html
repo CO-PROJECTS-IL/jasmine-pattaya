@@ -1,0 +1,57 @@
+<h2>מה המנהל רואה על כל עובד?</h2>
+<p class="subtitle">ביקשת קליטת עובדים עם פרטים מלאים, שכר שעתי/יומי, כפתורי WhatsApp וטלפון. בוא נוודא שזה מכסה הכל.</p>
+
+<h3 style="margin-top: 24px; color: #c9a84c;">פרטי עובד — מה לשמור?</h3>
+<div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; color: #ccc; font-size: 13px;">
+    <div>✅ שם מלא</div>
+    <div>✅ טלפון</div>
+    <div>✅ תאריך התחלה</div>
+    <div>✅ סוג שכר (שעתי / יומי)</div>
+    <div>✅ סכום שכר</div>
+    <div>✅ כפתור WhatsApp</div>
+    <div>✅ כפתור חיוג</div>
+    <div>✅ סטטוס (פעיל / לא פעיל)</div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="basic" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>הפרטים האלה מספיקים</h3>
+      <p>שם, טלפון, תאריך התחלה, סוג שכר, סכום, סטטוס. פשוט ותכליתי.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="extended" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>רוצה להוסיף עוד פרטים</h3>
+      <p>למשל: תמונת פרופיל, תפקיד (טבח/מלצר/ברמן), הערות, מסמכים (דרכון/ויזה), ימי חופש.</p>
+      <p style="color: #888; font-size: 12px;">יותר מקיף — שימושי אם יש צוות גדול או דרישות חוקיות.</p>
+    </div>
+  </div>
+</div>
+
+<h3 style="margin-top: 32px; color: #c9a84c;">תצוגת רשימת עובדים</h3>
+
+<div class="options">
+  <div class="option" data-choice="cards-view" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>כרטיסים</h3>
+      <p>כל עובד ככרטיס עם שם, תפקיד, כפתורי WhatsApp/טלפון, ומצב (פעיל/לא). לחיצה פותחת פרטים מלאים + היסטוריית נוכחות + סיכום שכר.</p>
+      <p style="color: #888; font-size: 12px;">ויזואלי ונוח. מתאים לצוות קטן-בינוני.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="table-view" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>טבלה</h3>
+      <p>טבלה עם עמודות: שם, טלפון, סוג שכר, סטטוס, פעולות. סינון וחיפוש. לחיצה פותחת פרטים.</p>
+      <p style="color: #888; font-size: 12px;">קומפקטי ויעיל. מתאים לצוות גדול.</p>
+    </div>
+  </div>
+</div>

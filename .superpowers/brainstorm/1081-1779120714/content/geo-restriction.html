@@ -1,0 +1,37 @@
+<h2>הגבלת צ'ק-אין לפי מיקום</h2>
+<p class="subtitle">איך מוודאים שהעובד נמצא במסעדה כשהוא מדווח נוכחות?</p>
+
+<div class="options">
+  <div class="option" data-choice="gps" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>GPS — מיקום גיאוגרפי</h3>
+      <p>האפליקציה בודקת את מיקום הטלפון של העובד. אם הוא בטווח של 50 מטר מהמסעדה — מאשרת צ'ק-אין. אם לא — חוסמת.</p>
+      <p style="color: #888; font-size: 12px;">✅ אמין מאוד. צריך שהעובד יאשר גישה למיקום בטלפון (חד פעמי). דיוק של כ-5 מטר.</p>
+      <p style="color: #c9a84c; font-size: 12px;">⭐ מומלץ — הפתרון הכי מקובל באפליקציות שעון נוכחות</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="gps-plus-override" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>GPS + אפשרות עקיפה למנהל</h3>
+      <p>כמו A, אבל המנהל יכול לאשר צ'ק-אין ידני לעובד שלא הצליח (למשל בעיית GPS בטלפון ישן).</p>
+      <p style="color: #888; font-size: 12px;">✅ אמין + גמיש. המנהל רואה בדוח אם הצ'ק-אין היה ידני או אוטומטי.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="no-restriction" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>בלי הגבלה</h3>
+      <p>העובד יכול לעשות צ'ק-אין מכל מקום. סומכים על העובדים.</p>
+      <p style="color: #888; font-size: 12px;">פשוט למימוש. אבל אין אכיפה אם עובד שוכח או מדווח מהבית.</p>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 24px; padding: 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px;">
+  <div style="color: #c9a84c; font-size: 13px; font-weight: 600; margin-bottom: 6px;">📍 איך זה עובד טכנית:</div>
+  <div style="color: #aaa; font-size: 12px;">המנהל מגדיר את הקואורדינטות של המסעדה פעם אחת (לחיצה על "הגדר מיקום" כשהוא במסעדה). מאותו רגע — כל צ'ק-אין נבדק מול המיקום הזה.</div>
+</div>

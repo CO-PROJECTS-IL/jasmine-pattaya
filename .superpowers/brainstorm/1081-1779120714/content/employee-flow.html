@@ -1,0 +1,31 @@
+<h2>מה העובד רואה אחרי שנכנס?</h2>
+<p class="subtitle">העובד מכניס PIN ונכנס. מה קורה אחר כך?</p>
+
+<div class="options">
+  <div class="option" data-choice="checkin-first" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>מסך צ'ק-אין ראשון</h3>
+      <p>העובד רואה כפתור גדול <strong>"เข้างาน" (התחל משמרת)</strong>. אחרי לחיצה — עובר לדשבורד הזמנות. בסוף המשמרת לוחץ <strong>"ออกงาน" (סיים משמרת)</strong>.</p>
+      <p style="color: #888; font-size: 12px;">מכריח את העובד לדווח נוכחות לפני שרואה הזמנות. לא ישכח.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="dashboard-with-clock" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>דשבורד עם שעון נוכחות בצד</h3>
+      <p>העובד נכנס ישר לדשבורד ההזמנות. בראש המסך — כפתור צ'ק-אין/צ'ק-אאוט + טיימר שמראה כמה זמן הוא במשמרת.</p>
+      <p style="color: #888; font-size: 12px;">גמיש יותר — העובד יכול לראות הזמנות גם בלי לעשות צ'ק-אין (אם הוא רק בודק משהו).</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="tabs-separate" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>שני טאבים נפרדים</h3>
+      <p>ניווט עליון עם שני טאבים: <strong>"הזמנות"</strong> ו-<strong>"נוכחות"</strong>. בטאב נוכחות — צ'ק-אין/אאוט + היסטוריית משמרות של העובד.</p>
+      <p style="color: #888; font-size: 12px;">הפרדה ברורה. העובד רואה את היסטוריית המשמרות שלו בעצמו.</p>
+    </div>
+  </div>
+</div>

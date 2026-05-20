@@ -1,0 +1,42 @@
+<h2>איך דשבורד ההזמנות נראה?</h2>
+<p class="subtitle">זה המסך שבו עובדים ומנהלים רואים את ההזמנות הפתוחות ומעדכנים סטטוס</p>
+
+<div class="options">
+  <div class="option" data-choice="kanban" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>לוח קנבן — עמודות לפי סטטוס</h3>
+      <p>3 עמודות זו-לצד-זו: <strong>חדשה</strong> → <strong>בהכנה</strong> → <strong>מוכנה</strong>. כל הזמנה היא כרטיס עם מספר שולחן, פריטים וזמן. לחיצה מעבירה לסטטוס הבא.</p>
+      <p style="color: #888; font-size: 12px;">קלאסי למטבחים. רואים הכל במבט אחד. עובד טוב במסך רחב אבל צפוף בנייד.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="list-tabs" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>רשימה עם פילטר טאבים</h3>
+      <p>טאבים בראש: <strong>הכל</strong> | <strong>חדשות</strong> | <strong>בהכנה</strong> | <strong>מוכנות</strong>. מתחת — רשימת הזמנות מלמעלה למטה. כל הזמנה עם כפתורי פעולה.</p>
+      <p style="color: #888; font-size: 12px;">מושלם לנייד. קל לגלול. פשוט לשימוש.</p>
+      <p style="color: #c9a84c; font-size: 12px;">⭐ מומלץ לשימוש בטלפון</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="table-grid" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>תצוגת שולחנות</h3>
+      <p>מפת שולחנות 1-30 כמשבצות. כל משבצת מראה צבע לפי סטטוס (אדום=חדשה, כתום=בהכנה, ירוק=מוכנה, אפור=ריק). לחיצה פותחת פרטי ההזמנה.</p>
+      <p style="color: #888; font-size: 12px;">ויזואלי ואינטואיטיבי. רואים מיד איזה שולחן צריך תשומת לב.</p>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 24px; padding: 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px;">
+  <div style="color: #c9a84c; font-size: 13px; font-weight: 600; margin-bottom: 6px;">💡 בכל האפשרויות:</div>
+  <div style="color: #aaa; font-size: 12px; line-height: 1.6;">
+    • הזמנה חדשה → צליל התראה + הבהוב<br>
+    • לחיצה על הזמנה → פרטים מלאים (פריטים, הערות, זמן)<br>
+    • כפתורי סטטוס: חדשה → בהכנה → מוכנה → הוגשה<br>
+    • עדכון בזמן אמת (Supabase Realtime)
+  </div>
+</div>
