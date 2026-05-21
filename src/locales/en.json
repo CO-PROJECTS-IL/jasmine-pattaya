@@ -262,6 +262,9 @@
     "error": "Error saving",
     "loyaltyClub": "Loyalty Club",
     "loyaltyEnabled": "Loyalty Club Active",
+    "orderAlert": "Order Time Alert",
+    "orderAlertDesc": "Orders waiting beyond this time will be highlighted in red on the kitchen screen",
+    "minutes": "minutes",
     "days": {
       "sunday": "Sunday",
       "monday": "Monday",

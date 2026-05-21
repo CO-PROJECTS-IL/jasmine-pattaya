@@ -185,4 +185,5 @@ export interface Settings {
   friday_max_guests: number | null
   friday_enabled: boolean
   loyalty_enabled: boolean
+  order_alert_minutes: number | null
 }

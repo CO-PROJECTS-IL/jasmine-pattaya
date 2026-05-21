@@ -133,6 +133,9 @@ export default function Settings() {
   const [fridaySwitchTime, setFridaySwitchTime] = useState('14:00')
   const [fridayMaxGuests, setFridayMaxGuests] = useState<number>(50)
 
+  // Order alert
+  const [orderAlertMinutes, setOrderAlertMinutes] = useState<number>(15)
+
   // Loyalty
   const [loyaltyEnabled, setLoyaltyEnabled] = useState(false)
 
@@ -173,6 +176,7 @@ export default function Settings() {
     setFridayMaxGuests(settings.friday_max_guests ?? 50)
     setShowSalary(settings.show_employee_salary ?? true)
     setLoyaltyEnabled(settings.loyalty_enabled ?? false)
+    setOrderAlertMinutes(settings.order_alert_minutes ?? 15)
   }, [settings])
 
   // ── Helpers ────────────────────────────────────────────────────────────────
@@ -221,6 +225,7 @@ export default function Settings() {
         friday_max_guests: fridayMaxGuests,
         show_employee_salary: showSalary,
         loyalty_enabled: loyaltyEnabled,
+        order_alert_minutes: orderAlertMinutes,
       }
 
       const { error } = await supabase.functions.invoke('admin-settings', { body })
@@ -368,6 +373,28 @@ export default function Settings() {
               <IconQrCode />
               {t('settings.generateQR')}
             </button>
+          </div>
+        </Section>
+
+        {/* ── Order Alert ── */}
+        <Section title={t('settings.orderAlert')}>
+          <div className="space-y-3">
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              {t('settings.orderAlertDesc')}
+            </p>
+            <div className="flex items-center gap-3">
+              <input
+                id="input-order-alert"
+                type="number"
+                value={orderAlertMinutes}
+                onChange={(e) => setOrderAlertMinutes(Math.max(1, Number(e.target.value)))}
+                min={1}
+                max={120}
+                className={`${inputCls} w-24 text-center`}
+                style={inputStyle}
+              />
+              <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{t('settings.minutes')}</span>
+            </div>
           </div>
         </Section>
 

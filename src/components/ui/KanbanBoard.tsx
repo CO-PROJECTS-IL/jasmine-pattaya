@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useRealtimeOrders } from '../../hooks/useRealtimeOrders'
+import { useSettings } from '../../hooks/useSettings'
 import { ORDER_STATUS_COLORS } from '../../lib/constants'
 import OrderKanbanCard from './OrderKanbanCard'
 import type { OrderStatus } from '../../lib/types'
@@ -18,6 +19,8 @@ interface KanbanBoardProps {
 export default function KanbanBoard({ onStatusChange }: KanbanBoardProps) {
   const { t } = useTranslation()
   const { isLoading, getOrdersByStatus } = useRealtimeOrders()
+  const { data: settings } = useSettings()
+  const alertMinutes = settings?.order_alert_minutes ?? 15
 
   if (isLoading) return <div className="text-center text-gray-500 py-8">...</div>
 
@@ -54,6 +57,7 @@ export default function KanbanBoard({ onStatusChange }: KanbanBoardProps) {
                   key={order.id}
                   order={order}
                   onStatusChange={onStatusChange}
+                  alertMinutes={alertMinutes}
                 />
               ))}
             </div>

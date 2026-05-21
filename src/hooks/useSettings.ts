@@ -19,6 +19,7 @@ const DEFAULT_SETTINGS: Settings = {
   friday_max_guests: null,
   friday_enabled: true,
   loyalty_enabled: false,
+  order_alert_minutes: 15,
 }
 
 async function fetchSettings(): Promise<Settings> {

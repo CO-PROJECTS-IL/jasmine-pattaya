@@ -37,9 +37,10 @@ const NEXT_STATUS_COLORS: Record<string, { bg: string; text: string; border: str
 interface Props {
   order: Order
   onStatusChange: (orderId: string, newStatus: OrderStatus) => void
+  alertMinutes?: number
 }
 
-export default function OrderKanbanCard({ order, onStatusChange }: Props) {
+export default function OrderKanbanCard({ order, onStatusChange, alertMinutes = 15 }: Props) {
   const { i18n } = useTranslation()
   const [busy, setBusy] = useState(false)
   const lang = i18n.language as 'he' | 'en' | 'th'
@@ -53,6 +54,7 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
     (Date.now() - new Date(order.created_at).getTime()) / 60000
   )
 
+  const isOverdue = minutesAgo >= alertMinutes && (order.status === 'new' || order.status === 'preparing')
   const statusColor = ORDER_STATUS_COLORS[order.status]
 
   const handleClick = async (newStatus: OrderStatus) => {
@@ -69,17 +71,19 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
     <div
       className="rounded-2xl overflow-hidden"
       style={{
-        backgroundColor: 'white',
-        border: '1px solid oklch(0.93 0.004 255)',
-        boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+        backgroundColor: isOverdue ? 'oklch(0.97 0.015 25)' : 'white',
+        border: isOverdue ? '2px solid oklch(0.65 0.22 25)' : '1px solid oklch(0.93 0.004 255)',
+        boxShadow: isOverdue
+          ? '0 0 12px oklch(0.65 0.22 25 / 0.2)'
+          : '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
         opacity: busy ? 0.6 : 1,
-        transition: 'opacity 0.2s',
+        transition: 'opacity 0.2s, border-color 0.3s, box-shadow 0.3s',
       }}
     >
       {/* Header */}
       <div
         className="flex justify-between items-center px-3.5 py-2.5"
-        style={{ borderBottom: `2px solid ${statusColor}` }}
+        style={{ borderBottom: `2px solid ${isOverdue ? 'oklch(0.65 0.22 25)' : statusColor}` }}
       >
         <div className="flex items-center gap-2">
           <span className="text-lg font-bold" style={{ color: 'var(--accent)' }}>
@@ -87,13 +91,14 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
           </span>
         </div>
         <span
-          className="text-xs px-2 py-0.5 rounded-full font-medium"
+          className={`text-xs px-2 py-0.5 rounded-full font-medium ${isOverdue ? 'animate-pulse' : ''}`}
           style={{
-            backgroundColor: minutesAgo > 15 ? 'oklch(0.55 0.18 25 / 0.12)' : 'oklch(0.95 0.003 255)',
-            color: minutesAgo > 15 ? 'oklch(0.45 0.18 25)' : 'var(--text-muted)',
+            backgroundColor: isOverdue ? 'oklch(0.55 0.22 25 / 0.15)' : 'oklch(0.95 0.003 255)',
+            color: isOverdue ? 'oklch(0.45 0.22 25)' : 'var(--text-muted)',
+            fontWeight: isOverdue ? 700 : 500,
           }}
         >
-          {minutesAgo} {lang === 'he' ? 'ד׳' : lang === 'th' ? 'นาที' : 'min'}
+          {isOverdue ? '⚠ ' : ''}{minutesAgo} {lang === 'he' ? 'ד׳' : lang === 'th' ? 'นาที' : 'min'}
         </span>
       </div>
 
