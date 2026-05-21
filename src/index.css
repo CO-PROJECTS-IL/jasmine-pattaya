@@ -20,24 +20,6 @@
   --text-secondary: oklch(0.55 0.01 255);
   --text-muted: oklch(0.70 0.008 255);
 
-  /* Staff portal — dark theme with blue accent */
-  --staff-bg: oklch(0.08 0.008 255);
-  --staff-surface: oklch(0.12 0.008 255);
-  --staff-surface-hover: oklch(0.16 0.008 255);
-  --staff-border: oklch(0.22 0.01 255);
-  --staff-text: oklch(0.95 0.008 255);
-  --staff-text-secondary: oklch(0.60 0.015 255);
-  --staff-text-muted: oklch(0.42 0.012 255);
-
-  /* Legacy aliases for gradual migration */
-  --gold: var(--accent);
-  --gold-light: var(--accent-light);
-  --gold-dark: var(--accent-dark);
-  --gold-glow: var(--accent-glow);
-  --dark: var(--staff-bg);
-  --dark-light: var(--staff-surface);
-  --dark-lighter: var(--staff-surface-hover);
-  --dark-surface: oklch(0.18 0.01 255);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -307,47 +289,3 @@ h1, h2, h3, h4, h5, h6 {
   animation: shimmer 1.5s infinite;
 }
 
-/* Dark shimmer for staff portal */
-.animate-shimmer-dark {
-  background: linear-gradient(
-    90deg,
-    oklch(0.18 0.008 255) 25%,
-    oklch(0.22 0.01 255) 50%,
-    oklch(0.18 0.008 255) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-/* ─── Dark mode: customer portal overrides ─── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: oklch(0.13 0.008 255);
-    --surface: oklch(0.17 0.008 255);
-    --surface-hover: oklch(0.20 0.008 255);
-    --card: oklch(0.15 0.008 255);
-    --border: oklch(0.25 0.01 255);
-    --text-primary: oklch(0.92 0.008 255);
-    --text-secondary: oklch(0.65 0.012 255);
-    --text-muted: oklch(0.45 0.008 255);
-  }
-
-  body {
-    color-scheme: dark;
-  }
-
-  .animate-shimmer {
-    background: linear-gradient(
-      90deg,
-      oklch(0.17 0.008 255) 25%,
-      oklch(0.22 0.01 255) 50%,
-      oklch(0.17 0.008 255) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: oklch(0.35 0.01 255);
-  }
-}

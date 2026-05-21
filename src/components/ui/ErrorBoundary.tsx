@@ -42,13 +42,13 @@ export default class ErrorBoundary extends Component<Props, State> {
           </div>
           <h2
             className="text-lg font-semibold mb-2"
-            style={{ color: 'var(--staff-text, var(--text-primary))' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             משהו השתבש
           </h2>
           <p
             className="text-sm mb-6 max-w-xs"
-            style={{ color: 'var(--staff-text-secondary, var(--text-secondary))' }}
+            style={{ color: 'var(--text-secondary)' }}
           >
             אירעה שגיאה בטעינת העמוד. שאר המערכת ממשיכה לעבוד כרגיל.
           </p>
