@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ORDER_STATUSES, ORDER_STATUS_COLORS } from '../../lib/constants'
 import type { Order, OrderStatus, OrderItem } from '../../lib/types'
@@ -40,6 +41,7 @@ interface Props {
 
 export default function OrderKanbanCard({ order, onStatusChange }: Props) {
   const { i18n } = useTranslation()
+  const [busy, setBusy] = useState(false)
   const lang = i18n.language as 'he' | 'en' | 'th'
   const currentIndex = ORDER_STATUSES.indexOf(order.status as any)
   const canAdvance = currentIndex < ORDER_STATUSES.length - 1
@@ -53,6 +55,16 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
 
   const statusColor = ORDER_STATUS_COLORS[order.status]
 
+  const handleClick = async (newStatus: OrderStatus) => {
+    if (busy) return
+    setBusy(true)
+    try {
+      await onStatusChange(order.id, newStatus)
+    } finally {
+      setBusy(false)
+    }
+  }
+
   return (
     <div
       className="rounded-2xl overflow-hidden"
@@ -60,6 +72,8 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
         backgroundColor: 'white',
         border: '1px solid oklch(0.93 0.004 255)',
         boxShadow: '0 1px 4px oklch(0.20 0.02 60 / 0.06)',
+        opacity: busy ? 0.6 : 1,
+        transition: 'opacity 0.2s',
       }}
     >
       {/* Header */}
@@ -119,8 +133,9 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
         >
           {canRevert && prevStatus && (
             <button
-              onClick={() => onStatusChange(order.id, prevStatus as OrderStatus)}
-              className="px-3 py-2 text-xs rounded-lg transition-colors"
+              onClick={() => handleClick(prevStatus as OrderStatus)}
+              disabled={busy}
+              className="px-3 py-2 text-xs rounded-lg transition-colors disabled:opacity-40"
               style={{
                 backgroundColor: 'oklch(0.97 0.002 255)',
                 border: '1px solid oklch(0.92 0.005 255)',
@@ -132,15 +147,16 @@ export default function OrderKanbanCard({ order, onStatusChange }: Props) {
           )}
           {canAdvance && nextStatus && (
             <button
-              onClick={() => onStatusChange(order.id, nextStatus as OrderStatus)}
-              className="flex-1 py-2.5 text-sm rounded-xl font-bold transition-colors"
+              onClick={() => handleClick(nextStatus as OrderStatus)}
+              disabled={busy}
+              className="flex-1 py-2.5 text-sm rounded-xl font-bold transition-colors disabled:opacity-40"
               style={{
                 backgroundColor: NEXT_STATUS_COLORS[nextStatus]?.bg || 'oklch(0.55 0.14 255 / 0.1)',
                 border: `1px solid ${NEXT_STATUS_COLORS[nextStatus]?.border || 'oklch(0.55 0.14 255 / 0.25)'}`,
                 color: NEXT_STATUS_COLORS[nextStatus]?.text || 'var(--accent)',
               }}
             >
-              {NEXT_STATUS_LABELS[nextStatus]?.[lang] || nextStatus}
+              {busy ? '...' : NEXT_STATUS_LABELS[nextStatus]?.[lang] || nextStatus}
             </button>
           )}
         </div>
