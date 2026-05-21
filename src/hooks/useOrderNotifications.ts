@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
 
 const NOTIFICATION_MESSAGES: Record<string, { he: string; en: string; th: string }> = {
@@ -8,9 +8,9 @@ const NOTIFICATION_MESSAGES: Record<string, { he: string; en: string; th: string
     th: 'ออเดอร์ของคุณกำลังเตรียมในครัว 👨‍🍳',
   },
   served: {
-    he: 'בתיאבון! 🍽️',
-    en: 'Bon appétit! 🍽️',
-    th: 'ทานให้อร่อย! 🍽️',
+    he: 'ההזמנה שלך מוכנה! בתיאבון 🍽️',
+    en: 'Your order is ready! Bon appétit 🍽️',
+    th: 'ออเดอร์พร้อมแล้ว! ทานให้อร่อย 🍽️',
   },
   paid: {
     he: 'תודה שסעדתם אצלנו! נשמח לביקורת ⭐',
@@ -21,12 +21,12 @@ const NOTIFICATION_MESSAGES: Record<string, { he: string; en: string; th: string
 
 const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJ88nAUgmWAjER09Qwva2f6Sg'
 
-function getStoredOrderId(): string | null {
-  return sessionStorage.getItem('jasmine-active-order')
-}
+// Use a simple event target to notify the hook when the order ID changes
+const orderEvents = new EventTarget()
 
 export function setActiveOrder(orderId: string) {
   sessionStorage.setItem('jasmine-active-order', orderId)
+  orderEvents.dispatchEvent(new CustomEvent('order-change', { detail: orderId }))
 }
 
 function clearActiveOrder() {
@@ -72,44 +72,71 @@ function showNotification(status: string) {
   }
 }
 
+function subscribeToOrder(orderId: string) {
+  const channel = supabase
+    .channel(`order-${orderId}`)
+    .on(
+      'postgres_changes',
+      {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'orders',
+        filter: `id=eq.${orderId}`,
+      },
+      (payload) => {
+        const newStatus = payload.new?.status
+        if (newStatus && NOTIFICATION_MESSAGES[newStatus]) {
+          showNotification(newStatus)
+        }
+        if (newStatus === 'paid') {
+          clearActiveOrder()
+          channel.unsubscribe()
+        }
+      }
+    )
+    .subscribe()
+
+  return channel
+}
+
 export function useOrderNotifications() {
   const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null)
+
+  const startListening = useCallback((orderId: string) => {
+    // Clean up previous subscription
+    if (channelRef.current) {
+      channelRef.current.unsubscribe()
+      channelRef.current = null
+    }
+
+    requestNotificationPermission()
+    channelRef.current = subscribeToOrder(orderId)
+  }, [])
 
   useEffect(() => {
     if (!isSupabaseConfigured) return
 
-    const orderId = getStoredOrderId()
-    if (!orderId) return
+    // Check if there's already an active order at mount time
+    const existingOrderId = sessionStorage.getItem('jasmine-active-order')
+    if (existingOrderId) {
+      startListening(existingOrderId)
+    }
 
-    requestNotificationPermission()
+    // Listen for new orders set via setActiveOrder()
+    const handleOrderChange = (e: Event) => {
+      const orderId = (e as CustomEvent).detail
+      if (orderId) {
+        startListening(orderId)
+      }
+    }
 
-    const channel = supabase
-      .channel(`order-${orderId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'orders',
-          filter: `id=eq.${orderId}`,
-        },
-        (payload) => {
-          const newStatus = payload.new?.status
-          if (newStatus && NOTIFICATION_MESSAGES[newStatus]) {
-            showNotification(newStatus)
-          }
-          if (newStatus === 'paid') {
-            clearActiveOrder()
-            channel.unsubscribe()
-          }
-        }
-      )
-      .subscribe()
-
-    channelRef.current = channel
+    orderEvents.addEventListener('order-change', handleOrderChange)
 
     return () => {
-      channel.unsubscribe()
+      orderEvents.removeEventListener('order-change', handleOrderChange)
+      if (channelRef.current) {
+        channelRef.current.unsubscribe()
+      }
     }
-  }, [])
+  }, [startListening])
 }
